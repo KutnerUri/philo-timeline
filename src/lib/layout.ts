@@ -283,8 +283,12 @@ export const branchHL = Object.fromEntries(people.map((p) => {
     return 'none';
   };
   const rel = Object.fromEntries(people.map((q) => [q.id, relationTo(q)]).filter(([, r]) => r !== 'none'));
+  // Their lifespan on their own branch, from birth to death.
+  const x = brX(own);
   return [p.id, {
     path, after,
+    life: `M${x},${yOf(p.born)}V${yOf(p.died)}`,
+    xf: x / SVG_W, // branch position as a fraction of the graph width, for the HTML labels
     influence: mine.map((m) => m.d).join(''),
     along: mine.map((m) => m.along).join(''),
     onPath: [...onPath],

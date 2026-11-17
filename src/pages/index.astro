@@ -80,6 +80,7 @@ const data = {
             {merges.map((m) => <path class="merge" d={m.d} />)}
           </g>
           <g>
+            <path id="bh-life" class="gl life p-low a-lifespan" />
             <path id="bh-after" class="gl after p-normal a-accent" />
             <path id="bh-along" class="gl along p-high a-accent" />
             <path id="bh-influence" class="gl infl p-high a-accent" />
@@ -175,7 +176,7 @@ const data = {
         const ids = selected.length ? selected : hovered ? [hovered] : [];
         tl.classList.toggle('focusing', ids.length > 0);
         tl.classList.remove('packed');
-        labelSpan(ids.length === 1 && !branchView ? ids[0] : null);
+        labelSpan(ids.length === 1 ? ids[0] : null);
         const svg = ids.length === 1 ? focusOne(ids[0])
           : ids.length > data.maxCompare ? packed(ids) : ids.length ? compare(ids) : '';
         // The marks above apply in both views; the branch view has its own drawing.
@@ -227,15 +228,19 @@ const data = {
           return `<g class="${slots[i]}"><path class="leader" d="${data.leaders[id]}"/><path class="bar" d="M${x},${b.y1}V${b.y2}"/>${tick(x, b.ya, 4)}</g>`;
         }).join('');
       }
-      // Birth and death years beside the ends of the single selected span.
+      // Birth and death years beside the ends of the single selected span: next to the axis,
+      // or in the branch view next to the person's own branch.
       const spanFrom = document.getElementById('span-from');
       const spanTo = document.getElementById('span-to');
       function labelSpan(id) {
         spanFrom.hidden = spanTo.hidden = !id;
         if (!id) return;
         const p = data.people[id], b = data.spans[id];
-        spanFrom.textContent = p.from; spanFrom.style.top = b.y1 + 'px';
-        spanTo.textContent = p.to; spanTo.style.top = b.y2 + 'px';
+        const left = branchView ? `calc(var(--tick-w) + var(--svg-w) * ${data.branchHL[id].xf} + 6px)` : '';
+        for (const [el, text, y] of [[spanFrom, p.from, b.y1], [spanTo, p.to, b.y2]]) {
+          el.textContent = text; el.style.top = y + 'px'; el.style.left = left;
+          el.classList.toggle('a-lifespan', branchView);
+        }
       }
 
       const slots = Array.from({ length: data.maxCompare }, (_, i) => `s${i}`);
@@ -244,7 +249,7 @@ const data = {
       // at build time) and a lifespan relative to theirs; the profile functions below turn
       // those into a priority and an accent per part. The colours live in the styles.
       let branchView = false;
-      const bLine = Object.fromEntries(['after', 'along', 'influence', 'path'].map((k) => [k, document.getElementById(`bh-${k}`)]));
+      const bLine = Object.fromEntries(['life', 'after', 'along', 'influence', 'path'].map((k) => [k, document.getElementById(`bh-${k}`)]));
       const bSlotLines = [...document.querySelectorAll('#branch [data-slot]')];
       const bLeaders = Object.fromEntries([...document.querySelectorAll('#branch .leader')].map((e) => [e.dataset.id, e]));
       const bDots = Object.fromEntries([...document.querySelectorAll('#branch .bd')].map((e) => [e.dataset.id, e]));
@@ -429,7 +434,7 @@ const data = {
 
     <style is:global>
       :root {
-        --fg: #1d1d1b; --muted: #7a776f; --faint: #e4e0d7; --bg: #faf9f6; --accent: #2f5d8a;
+        --fg: #1d1d1b; --muted: #7a776f; --faint: #e4e0d7; --bg: #faf9f6; --accent: #2f5d8a; --lifespan: #3d8a5f;
         --tick-w: 64px; --svg-w: 200px; --school-w: 250px;
       }
       * { box-sizing: border-box; }
@@ -473,6 +478,7 @@ const data = {
       .p-normal { --w: var(--w-normal); } .p-high { --w: var(--w-high); } .p-max { --w: var(--w-max); }
       .a-neutral { --hue: var(--fg); }
       .a-accent { --hue: var(--c, var(--accent)); } /* --c: a compare slot's colour */
+      .a-lifespan { --hue: var(--lifespan); } /* time alive, as opposed to lineage: a cool green, so it sits behind the blue */
       .p-faint, .p-subtle, .p-weak, .p-low, .p-normal, .p-high, .p-max { --tone: color-mix(in oklch, var(--hue) var(--w), var(--bg)); }
 
       /* Branch view graph lines: neutral low, influences neutral weak (dashed); both drop to faint
@@ -486,6 +492,8 @@ const data = {
       #branch .after { stroke-width: 2; }
       #branch .along { stroke-width: 1.5; }
       #branch .infl { stroke-width: 1.5; stroke-dasharray: 4 3; }
+      #branch .life { stroke-width: 7; stroke-linecap: round; }
+      .spanlabel.a-lifespan { color: color-mix(in oklch, var(--lifespan) var(--w-high), var(--bg)); }
       #branch .bdot { stroke: var(--tone); stroke-width: 6; stroke-linecap: round; }
       #branch .hole { display: none; stroke: var(--bg); stroke-width: 3; stroke-linecap: round; }
       #branch .bd.empty .hole { display: inline; }
