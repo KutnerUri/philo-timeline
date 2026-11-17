@@ -45,6 +45,8 @@ The earlier axis view (one shared time axis, lifespan lanes, compare lanes) is k
 
 Every push to `main` builds the site and publishes it to GitHub Pages (`.github/workflows/deploy.yml`), served at [philo.nefzen.dev](https://philo.nefzen.dev). In the repository settings, Pages must use **GitHub Actions** as its source, with `philo.nefzen.dev` as the custom domain.
 
+For search and sharing, the page has a title and description, a canonical URL, Open Graph and Twitter tags, and JSON-LD listing every philosopher (built from the data), plus `public/sitemap.xml` and `robots.txt`. The share image `public/og.png` (1200×630) is a screenshot of the timeline around Socrates and Plato with the title beside it; it doesn't update by itself, so retake it after big visual changes.
+
 ## Ideas for later
 
 - Extend past Plotinus (late antiquity, Islamic and medieval philosophy).
