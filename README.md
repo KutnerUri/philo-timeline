@@ -41,6 +41,10 @@ bun run dev
 
 The earlier axis view (one shared time axis, lifespan lanes, compare lanes) is kept in git under the tag `axis-view`.
 
+## Deploy
+
+Every push to `main` builds the site and publishes it to GitHub Pages (`.github/workflows/deploy.yml`), served at [philo.nefzen.dev](https://philo.nefzen.dev). In the repository settings, Pages must use **GitHub Actions** as its source, with `philo.nefzen.dev` as the custom domain.
+
 ## Ideas for later
 
 - Extend past Plotinus (late antiquity, Islamic and medieval philosophy).
