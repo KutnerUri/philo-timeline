@@ -20,7 +20,7 @@ const homeOf = new Map([...schoolHome.entries()].map(([s, p]) => [p, s]));
 const data = {
   people: Object.fromEntries(
     people.map((p) => [p.id, {
-      name: p.name, span: fmtSpan(p), active: fmtYear(anchorOf(p)), note: p.note, school: p.school,
+      name: p.name, span: fmtSpan(p), active: fmtYear(anchorOf(p)), from: fmtYear(p.born), to: fmtYear(p.died), note: p.note, school: p.school,
       studentOf: p.studentOf ?? [], influence: p.influence ?? [],
       students: people.filter((q) => q.studentOf?.includes(p.id)).map((q) => q.id),
       influenced: people.filter((q) => q.influence?.includes(p.id)).map((q) => q.id),
@@ -74,6 +74,9 @@ const data = {
         </g>
         <g id="hl"></g>
       </svg>
+      {['from', 'to'].map((end) => (
+        <div class="spanlabel" id={`span-${end}`} style={`--axis-f:${AXIS_X / SVG_W}`} hidden></div>
+      ))}
 
       {spines.map((s) => (
         <div class="spine" data-school={s.id} style={`top:${s.top}px;height:${s.bottom - s.top}px`}></div>
@@ -86,7 +89,7 @@ const data = {
           <div class="row" id={p.id} data-id={p.id} style={`top:${rowY.get(p.id)}px;height:${ROW_H}px`}>
             <span class="dot"></span>
             <div class="person">
-              <div class="l1"><b>{p.name}</b> <span class="dates">{fmtSpan(p)}</span></div>
+              <div class="l1"><b>{p.name}</b></div>
               <div class="note">{p.note}</div>
             </div>
             <div class="school">
@@ -149,6 +152,7 @@ const data = {
         const ids = selected.length ? selected : hovered ? [hovered] : [];
         tl.classList.toggle('focusing', ids.length > 0);
         tl.classList.remove('packed');
+        labelSpan(ids.length === 1 ? ids[0] : null);
         hl.innerHTML = ids.length === 1 ? focusOne(ids[0])
           : ids.length > data.maxCompare ? packed(ids) : ids.length ? compare(ids) : '';
         showPanel(selected.length === 1 && !selectMode ? selected[0] : null);
@@ -195,6 +199,17 @@ const data = {
           return `<g class="${slots[i]}"><path class="leader" d="${data.leaders[id]}"/><path class="bar" d="M${x},${b.y1}V${b.y2}"/>${tick(x, b.ya, 4)}</g>`;
         }).join('');
       }
+      // Birth and death years beside the ends of the single selected span.
+      const spanFrom = document.getElementById('span-from');
+      const spanTo = document.getElementById('span-to');
+      function labelSpan(id) {
+        spanFrom.hidden = spanTo.hidden = !id;
+        if (!id) return;
+        const p = data.people[id], b = data.spans[id];
+        spanFrom.textContent = p.from; spanFrom.style.top = b.y1 + 'px';
+        spanTo.textContent = p.to; spanTo.style.top = b.y2 + 'px';
+      }
+
       const slots = Array.from({ length: data.maxCompare }, (_, i) => `s${i}`);
 
       // Many people: the packed lanes, with the base leaders left as they are.
@@ -370,7 +385,7 @@ const data = {
       .l1, .note, .sphil, .member, .sname { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
       .l1 b { font-size: 16px; font-weight: 600; }
       .dates, .note, .sphil, .member, .founded { font: 12.5px system-ui, sans-serif; color: var(--muted); }
-      .dates { margin-left: 4px; }
+      .spanlabel { position: absolute; left: calc(var(--tick-w) + var(--svg-w) * var(--axis-f) + 6px); transform: translateY(-50%); font: 600 11px system-ui, sans-serif; color: var(--accent); background: var(--bg); padding: 0 3px; white-space: nowrap; pointer-events: none; z-index: 1; }
       .sname { font-weight: 600; color: var(--accent); }
       .member { display: none; padding-left: 10px; }
       .spine { position: absolute; right: calc(16px + var(--school-w) + 2px); width: 2px; background: var(--accent); opacity: .5; display: none; pointer-events: none; }
@@ -421,7 +436,6 @@ const data = {
         .tick span, .era span { left: 2px; font-size: 9.5px; }
         .school, .spine { display: none !important; }
         .row { grid-template-columns: 1fr; right: 8px; }
-        .dates { display: block; margin: 0; }
         .l1 { white-space: normal; line-height: 1.15; }
         .note { display: none; }
         #panel { left: 34px; right: 8px; bottom: 8px; width: auto; max-height: 45vh; }
