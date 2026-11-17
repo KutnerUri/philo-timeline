@@ -1,0 +1,298 @@
+{
+ "people": {
+  "thales": {
+   "about": "Tales de Mileto Mileto, c. 624 a. C.-Mileto, c. 546 a. C.) fue un filósofo, matemático, geómetra, físico y legislador griego.",
+   "url": "https://es.wikipedia.org/wiki/Tales_de_Mileto"
+  },
+  "anaximander": {
+   "about": "Anaximandro fue un filósofo y geógrafo de la Antigua Grecia. Discípulo y sucesor de Tales, además compañero y maestro de Anaxímenes, consideró que el principio de todas las cosas era lo ápeiron.",
+   "url": "https://es.wikipedia.org/wiki/Anaximandro"
+  },
+  "pythagoras": {
+   "about": "Pitágoras de Samos, a menudo conocido simplemente como Pitágoras, fue un filósofo y polímata griego jonio, y fundador epónimo del pitagorismo. Sus enseñanzas políticas y religiosas fueron bien conocidas en la Magna Grecia e influyeron en las filosofías de Platón, Aristóteles y, a través de ellos, en Occidente en general.",
+   "url": "https://es.wikipedia.org/wiki/Pit%C3%A1goras"
+  },
+  "xenophanes": {
+   "about": "Jenófanes de Colofón fue un poeta elegíaco y filósofo griego.",
+   "url": "https://es.wikipedia.org/wiki/Jen%C3%B3fanes"
+  },
+  "anaximenes": {
+   "about": "Anaxímenes de Mileto fue un filósofo griego, discípulo de Tales y compañero de Anaximandro.",
+   "url": "https://es.wikipedia.org/wiki/Anax%C3%ADmenes"
+  },
+  "heraclitus": {
+   "about": "Heráclito de Éfeso, fue un filósofo griego presocrático nativo de Éfeso, ciudad de Jonia, en la costa occidental del Asia Menor.",
+   "url": "https://es.wikipedia.org/wiki/Her%C3%A1clito"
+  },
+  "parmenides": {
+   "about": "Parménides de Elea fue un filósofo griego. Nació entre el 530 a. C. y el 515 a. C. en la ciudad de Elea, colonia griega de Magna Grecia.",
+   "url": "https://es.wikipedia.org/wiki/Parm%C3%A9nides_de_Elea"
+  },
+  "anaxagoras": {
+   "about": "Anaxágoras fue un filósofo presocrático que introdujo la noción de nous como elemento fundamental de su concepción filosófica.",
+   "url": "https://es.wikipedia.org/wiki/Anax%C3%A1goras"
+  },
+  "empedocles": {
+   "about": "Empédocles de Agrigento (griego Ἐμπεδοκλής, fue un filósofo y político griego.",
+   "url": "https://es.wikipedia.org/wiki/Emp%C3%A9docles"
+  },
+  "zeno-elea": {
+   "about": "Zenón de Elea fue un filósofo griego nacido en Elea, perteneciente a la escuela eleática. Fue discípulo directo de Parménides de Elea. No estableció ni conformó ninguna doctrina positiva de su propia mano. Famoso por sus intrincadas paradojas que discuten la pluralidad de entes y en algunos casos el movimiento —entre otras cosas—.",
+   "url": "https://es.wikipedia.org/wiki/Zen%C3%B3n_de_Elea"
+  },
+  "protagoras": {
+   "about": "Protágoras de Abdera fue un sofista griego. Admirado experto en retórica que recorría el mundo griego cobrando elevadas tarifas por sus conocimientos acerca del correcto uso de las palabras u ortoepía. Platón lo acredita como el inventor del papel del sofista profesional o profesor de \"virtud\".",
+   "url": "https://es.wikipedia.org/wiki/Prot%C3%A1goras"
+  },
+  "gorgias": {
+   "about": "Gorgias fue un filósofo sofista de Leontinos, del período antropológico de la filosofía griega.",
+   "url": "https://es.wikipedia.org/wiki/Gorgias"
+  },
+  "leucippus": {
+   "about": "Leucipo de Mileto fue un filósofo griego presocrático del siglo V a. C. fundador del atomismo. Se trasladó a Elea, donde habría sido discípulo de Zenón y maestro de Demócrito.",
+   "url": "https://es.wikipedia.org/wiki/Leucipo_de_Mileto"
+  },
+  "melissus": {
+   "about": "Meliso de Samos fue un estadista y comandante naval (navarco) que contribuyó también a la filosofía y ejerció cierta influencia sobre el atomismo de Leucipo y Demócrito.",
+   "url": "https://es.wikipedia.org/wiki/Meliso_de_Samos"
+  },
+  "philolaus": {
+   "about": "Filolao, fue un filósofo griego pitagórico presocrático, matemático, astrónomo, político, teórico de la música y escritor.",
+   "url": "https://es.wikipedia.org/wiki/Filolao"
+  },
+  "socrates": {
+   "about": "Sócrates, también llamado Sócrates de Atenas, fue un filósofo clásico griego considerado como uno de los más grandes, tanto de la filosofía occidental como de la universal. Fue maestro de Platón, quien a su vez fue maestro de Aristóteles, siendo estos tres los representantes fundamentales de la filosofía de la Antigua Grecia. Otros discípulos suyos son Antístenes, Aristipo, Fedón y Esquines.",
+   "url": "https://es.wikipedia.org/wiki/S%C3%B3crates"
+  },
+  "democritus": {
+   "about": "Demócrito de Abdera fue un filósofo y polímata griego discípulo de Leucipo, fundador del atomismo y maestro de Protágoras que vivió entre los siglos V y IV a. C. Perteneció a la Escuela de Abdera y tuvo un amplio campo de intereses, pero es especialmente recordado por su concepción atomista de un universo compuesto únicamente por átomos y vacío.",
+   "url": "https://es.wikipedia.org/wiki/Dem%C3%B3crito"
+  },
+  "antisthenes": {
+   "about": "Antístenes fue un filósofo griego que estudió con el sofista Gorgias antes de convertirse en un ardiente seguidor de Sócrates. De las enseñanzas socráticas hizo suyas sobre todo las relativas a la ética. Fue partidario de un estilo de vida ascético centrado en el cultivo de la virtud. Los escritores posteriores lo consideraron fundador de la escuela cínica de filosofía, algo que hoy discuten los especialistas.",
+   "url": "https://es.wikipedia.org/wiki/Ant%C3%ADstenes"
+  },
+  "aristippus": {
+   "about": "Aristipo fue un filósofo griego fundador de la escuela cirenaica. Era un alumno de Sócrates, pero adoptó una perspectiva filosófica muy diferente. Sostuvo una teoría del conocimiento escéptica y empirista. Enseñó que el objetivo de la vida era buscar placer como bien supremo y mantener un control adecuado sobre la adversidad y la prosperidad. Entre sus alumnos estaba su hija Areta y nieto Aristipo.",
+   "url": "https://es.wikipedia.org/wiki/Aristipo"
+  },
+  "euclid-megara": {
+   "about": "Euclides de Mégara fue un filósofo socrático griego que aproximadamente nació entre el 450 y 430 a. C. y murió alrededor del 365 a. C.. Fundó la escuela megárica. Los traductores medievales a menudo lo confundieron con el matemático Euclides de Alejandría.",
+   "url": "https://es.wikipedia.org/wiki/Euclides_de_M%C3%A9gara"
+  },
+  "archytas": {
+   "about": "Arquitas de Tarento fue un filósofo, matemático, astrónomo, estadista, general y contemporáneo de Platón.",
+   "url": "https://es.wikipedia.org/wiki/Arquitas"
+  },
+  "plato": {
+   "about": "Platón fue un filósofo griego seguidor de Sócrates y maestro de Aristóteles. En 387 a. C. fundó la Academia de Atenas, institución que continuaría a lo largo de más de novecientos años y a la que Aristóteles acudiría desde Estagira a estudiar filosofía alrededor del 367 a. C., compartiendo unos veinte años de amistad y trabajo con su maestro.",
+   "url": "https://es.wikipedia.org/wiki/Plat%C3%B3n"
+  },
+  "diogenes": {
+   "about": "Diógenes de Sinope, también llamado Diógenes el Cínico o Diógenes el Perro fue un filósofo griego perteneciente a la escuela cínica. Nació en Sinope, una colonia jonia del mar Negro, hacia 412 a. C. y murió en Corinto en 323 a. C.",
+   "url": "https://es.wikipedia.org/wiki/Di%C3%B3genes_de_Sinope"
+  },
+  "speusippus": {
+   "about": "Espeusipo fue un filósofo griego que llegó a ser escolarca de la Academia de Atenas.",
+   "url": "https://es.wikipedia.org/wiki/Espeusipo"
+  },
+  "xenocrates": {
+   "about": "Jenócrates fue un filósofo y matemático griego.",
+   "url": "https://es.wikipedia.org/wiki/Jen%C3%B3crates"
+  },
+  "aristotle": {
+   "about": "Aristóteles fue un filósofo, polímata y científico griego nacido en la ciudad de Estagira, al norte de la Antigua Grecia. Es considerado, junto a Platón, el padre de la filosofía occidental. Sus ideas han ejercido una enorme influencia sobre la historia intelectual de Occidente por más de dos milenios.",
+   "url": "https://es.wikipedia.org/wiki/Arist%C3%B3teles"
+  },
+  "anaxarchus": {
+   "about": "Anaxarco, fue un filósofo griego del siglo IV a. C. en Abdera. Junto con su aprendiz Pirrón, formó parte del séquito de Alejandro Magno, del que fue amigo personal. Por su frescura y entereza, se le conoció como el Eudaimónico.",
+   "url": "https://es.wikipedia.org/wiki/Anaxarco"
+  },
+  "theophrastus": {
+   "about": "Teofrasto fue un filósofo y botánico griego. Marchó a Atenas a una edad temprana, e inicialmente estudió en la escuela de Platón. Después de la muerte de Platón se relacionó con Aristóteles. Su nombre era Tyrtamos, pero se lo conoce por su apodo Teofrasto, el cual le fue puesto por Aristóteles —según se dice— para indicar la gracia de sus disertaciones.",
+   "url": "https://es.wikipedia.org/wiki/Teofrasto"
+  },
+  "crates": {
+   "about": "Crates de Tebas fue un filósofo griego discípulo de Diógenes de Sinope y seguidor, como él, de la escuela cínica.",
+   "url": "https://es.wikipedia.org/wiki/Crates_de_Tebas"
+  },
+  "pyrrho": {
+   "about": "Pirrón de Elis fue un filósofo griego de la Antigüedad clásica reconocido como el primer escéptico griego y figura inspiradora del pirronismo.",
+   "url": "https://es.wikipedia.org/wiki/Pirr%C3%B3n"
+  },
+  "stilpo": {
+   "about": "Estilpón fue un discípulo de Diógenes de Sinope y el representante de la escuela megárica, que criticaba la teoría platónica que enunciaba la imitación mutua entre la realidad sensible y el ser. Antes de encabezar la escuela megárica había pasado por la escuela cínica, probablemente por influencia de Diógenes de Sinope.",
+   "url": "https://es.wikipedia.org/wiki/Estilp%C3%B3n_de_M%C3%A9gara"
+  },
+  "epicurus": {
+   "about": "Epicuro también conocido como Epicuro de Samos, fue un filósofo griego, fundador de la escuela que lleva su nombre (epicureísmo). Los aspectos más destacados de su doctrina son el hedonismo racional y el atomismo.",
+   "url": "https://es.wikipedia.org/wiki/Epicuro"
+  },
+  "strato": {
+   "about": "Estratón fue un filósofo griego peripatético, natural de la polis de Lámpsaco, que vivió de 340 a. C. a 268 a. C. Sucedió a Teofrasto en la dirección del Liceo, academia fundada por Aristóteles.",
+   "url": "https://es.wikipedia.org/wiki/Estrat%C3%B3n_de_L%C3%A1mpsaco"
+  },
+  "zeno-citium": {
+   "about": "Zenón de Citio, el Estoico, fue un filósofo helenístico de origen étnico fenicio. Nació en Citio, Chipre, en aquel tiempo colonia griega. Se le considera el fundador de la escuela filosófica estoica, que inició hacia el 300 a. C. en Atenas, donde desarrolló su vida intelectual. Su base fue la moral de los filósofos cínicos.",
+   "url": "https://es.wikipedia.org/wiki/Zen%C3%B3n_de_Citio"
+  },
+  "cleanthes": {
+   "about": "Cleantes de Aso fue un filósofo de la escuela estoica y discípulo y sucesor de Zenón de Citio.",
+   "url": "https://es.wikipedia.org/wiki/Cleantes"
+  },
+  "timon": {
+   "about": "Timón el Silógrafo o Timón de Fliunte fue un filósofo escéptico griego, así como un poeta satírico. Era discípulo de Estilpón de Megara y de Pirrón. Escribió poemas filosóficos satíricos llamados Silloi (Σίλλοι), de donde viene su sobrenombre.",
+   "url": "https://es.wikipedia.org/wiki/Tim%C3%B3n_el_Sil%C3%B3grafo"
+  },
+  "arcesilaus": {
+   "about": "Arcesilao, natural de Pitane, en la Eólida, fue un filósofo griego y uno de los fundadores de la denominada Academia platónica media o segunda.",
+   "url": "https://es.wikipedia.org/wiki/Arcesilao"
+  },
+  "chrysippus": {
+   "about": "Crisipo de Solos nació c. 281/78 a. C. en Tarso o Solos (Cilicia) y murió c. 208/05 a. C., en Atenas. Fue un filósofo griego, máxima figura de la escuela estoica antigua. Nacido en Cilicia, se mudó en su juventud a Atenas, donde se hizo estudiante del filósofo estoico Cleantes. A la muerte de este, alrededor del 230 a. C., Crisipo se convirtió en el tercer maestro de la escuela estoica.",
+   "url": "https://es.wikipedia.org/wiki/Crisipo_de_Solos"
+  },
+  "carneades": {
+   "about": "Carnéades fue un filósofo y orador de la Antigua Grecia. Nació en la colonia griega de Cirene, convirtiéndose más tarde en ciudadano de Atenas. Fue director de la Academia desde ca. 160 a. C. hasta ca. 137 a. C., fundando la tercera Academia después de haber oído las lecciones de Hegésino. Formó parte de una embajada ateniense a Roma en el año 155 a. C.",
+   "url": "https://es.wikipedia.org/wiki/Carn%C3%A9ades"
+  },
+  "panaetius": {
+   "about": "Panecio de Rodas fue un filósofo griego, maestro de la escuela estoica durante su periodo medio. De 144 a 129 a. C. vivió en Roma, donde tuvo escuela, introduciendo grandes modificaciones en la doctrina estoica con elementos tomados del platonismo y del aristotelismo, a fin de adecuarla al pensamiento romano, iniciando así la tendencia ecléctica.",
+   "url": "https://es.wikipedia.org/wiki/Panecio_de_Rodas"
+  },
+  "philo-larissa": {
+   "about": "Filón de Larisa, en realidad llamado Filión, filósofo griego y escolarca sucesor de Clitómaco de la Academia de Atenas fundada por Platón, desde 110 a. C. hasta 88 a. C. Durante la guerra del rey del Ponto, Mitrídates VI, contra los romanos, se refugió en Roma, donde fue maestro de Cicerón.",
+   "url": "https://es.wikipedia.org/wiki/Fil%C3%B3n_de_Larisa"
+  },
+  "posidonius": {
+   "about": "Posidonio fue un político, astrónomo, geógrafo, historiador y filósofo estoico griego, nativo de Apamea, Siria. Fue aclamado como el mayor polímata de su tiempo, aunque ninguna de sus numerosas obras puede leerse hoy en día, puesto que solo han sobrevivido fragmentos.",
+   "url": "https://es.wikipedia.org/wiki/Posidonio"
+  },
+  "antiochus": {
+   "about": "Antíoco de Ascalón fue el último filósofo de la Tercera Academia (Platón); enseñó primero en Atenas y marchó después a Alejandría.",
+   "url": "https://es.wikipedia.org/wiki/Ant%C3%ADoco_de_Ascal%C3%B3n"
+  },
+  "philodemus": {
+   "about": "Filodemo de Gadara fue un filósofo epicúreo y poeta. Estudió con Zenón de Sidón en Atenas, antes de trasladarse a Roma y luego a Herculano. Fue conocido principalmente por su poesía conservada en la Antología griega pero, desde el siglo XVIII, muchos escritos suyos han sido descubiertos entre los rollos de papiro carbonizados en la Villa de los Papiros en Herculano.",
+   "url": "https://es.wikipedia.org/wiki/Filodemo_de_Gadara"
+  },
+  "cicero": {
+   "about": "Marco Tulio Cicerón fue un político, filósofo, escritor, jurista y orador romano. Se le considera uno de los más grandes retóricos y estilistas de la prosa en latín de la República romana.",
+   "url": "https://es.wikipedia.org/wiki/Cicer%C3%B3n"
+  },
+  "andronicus": {
+   "about": "Andrónico de Rodas (Ἀνδρόνικος) fue un filósofo griego. Dirigió la escuela peripatética desde el año 78 a. C. al 47 a. C., contándose como el undécimo sucesor de Aristóteles en dicha dirección.",
+   "url": "https://es.wikipedia.org/wiki/Andr%C3%B3nico_de_Rodas"
+  },
+  "aenesidemus": {
+   "about": "Enesidemo fue un filósofo griego que revitalizó el pirronismo en el siglo I a. C.",
+   "url": "https://es.wikipedia.org/wiki/Enesidemo"
+  },
+  "lucretius": {
+   "about": "Tito Lucrecio Caro fue un poeta y filósofo romano. Su única obra conocida es el poema didáctico De rerum natura, una obra filosófica que defiende las doctrinas del epicureísmo y la física atomista. Se sabe muy poco sobre la vida de Lucrecio. Las tres principales fuentes de su vida son los tres autores: San Jerónimo, Donato y Cicerón; la única certeza es que era amigo de Cayo Memio, a quien le dedicó el poema.",
+   "url": "https://es.wikipedia.org/wiki/Lucrecio"
+  },
+  "seneca": {
+   "about": "Lucio Anneo Séneca, llamado Séneca el Joven para distinguirlo de su padre, fue un filósofo, político, orador y escritor romano conocido por sus obras de carácter moral. Hijo del orador Marco Anneo Séneca, más conocido como Séneca el Viejo, fue cuestor, pretor, senador y cónsul sufecto durante los gobiernos de Tiberio, Calígula, Claudio y Nerón, además de tutor y consejero de este último emperador.",
+   "url": "https://es.wikipedia.org/wiki/S%C3%A9neca"
+  },
+  "musonius": {
+   "about": "Cayo o Gayo Musonio Rufo fue un filósofo estoico romano que vivió en el siglo I d. C. Enseñó filosofía en Roma durante el reinado de Nerón, causa por la que fue condenado al exilio en el año 65, pudiendo volver a Roma bajo Galba. No dejó ninguna obra escrita, lo conocido de él ha sido recogido fragmentariamente de las obras de Estobeo, Plutarco, Gelio y su discípulo Epicteto.",
+   "url": "https://es.wikipedia.org/wiki/Musonio_Rufo"
+  },
+  "plutarch": {
+   "about": "Plutarco, también conocido como Plutarco de Queronea o, tras serle concedida la ciudadanía romana, como Lucio Mestrio Plutarco, fue un historiador, biógrafo y filósofo moralista griego.",
+   "url": "https://es.wikipedia.org/wiki/Plutarco"
+  },
+  "epictetus": {
+   "about": "Epicteto, o Epícteto, fue un filósofo griego de la escuela estoica que vivió parte de su vida como esclavo en Roma. Hasta donde se sabe, no dejó obra escrita, pero de sus enseñanzas se conservan un Enquiridión (Ἐγχειρίδιον) o Manual y sus Disertaciones (Διατριβαί), escritos ambos por su discípulo Flavio Arriano, así como algunos fragmentos.",
+   "url": "https://es.wikipedia.org/wiki/Epicteto"
+  },
+  "marcus": {
+   "about": "Marco Aurelio Antonino, conocido como Marco Aurelio, fue un emperador del Imperio romano desde el año 161 hasta el año de su muerte en 180. Fue el último de los llamados Cinco Buenos Emperadores, tercero de los emperadores procedentes de una familia de antiguos colonos itálicos asentados en la provincia de Baetica, y está considerado como una de las figuras más representativas de la filosofía estoica.",
+   "url": "https://es.wikipedia.org/wiki/Marco_Aurelio"
+  },
+  "alexander": {
+   "about": "Alejandro de Afrodisias fue el más célebre de los comentaristas griegos de las obras de Aristóteles. Fue apodado, por su preeminencia, «el exégeta».",
+   "url": "https://es.wikipedia.org/wiki/Alejandro_de_Afrodisias"
+  },
+  "sextus": {
+   "about": "Sexto Empírico, médico y filósofo griego, es uno de los más importantes representantes del escepticismo pirroniano y fuente de la mayoría de datos referentes a esta corriente filosófica.",
+   "url": "https://es.wikipedia.org/wiki/Sexto_Emp%C3%ADrico"
+  },
+  "ammonius": {
+   "about": "Amonio Saccas o Amonio Sacas fue un filósofo de Alejandría del siglo III considerado con frecuencia como fundador del neoplatonismo.",
+   "url": "https://es.wikipedia.org/wiki/Amonio_Saccas"
+  },
+  "plotinus": {
+   "about": "Plotino fue un filósofo helenístico, autor de las Enéadas, y fundador del neoplatonismo, corriente que integró también Numenio de Apamea, Porfirio, Jámblico y Proclo. Nació en Egipto y se educó en Alejandría, siendo alumno de Amonio Saccas. Finalmente se estableció en Roma.",
+   "url": "https://es.wikipedia.org/wiki/Plotino"
+  },
+  "polemon": {
+   "about": "Polemón, conocido como El Escolarca, fue un filósofo platónico de la Antigua Grecia. Ejerció como el cuarto escolarca de la Academia Platónica en 315 a. C.",
+   "url": "https://es.wikipedia.org/wiki/Polem%C3%B3n_(escolarca)"
+  }
+ },
+ "schools": {
+  "pythagorean": {
+   "about": "El pitagorismo fue un movimiento filosófico-religioso de mediados del siglo VI a. C. fundado por Pitágoras de Samos, siendo ésta la razón por la cual sus seguidores recibían el nombre pitagóricos. Estos formaban la escuela pitagórica, agrupación o secta conformada por astrólogos, músicos, matemáticos y filósofos cuya creencia más destacada era que todas las cosas son, en esencia, números.",
+   "url": "https://es.wikipedia.org/wiki/Pitag%C3%B3ricos"
+  },
+  "eleatic": {
+   "about": "Se denomina escuela eleática a la corriente filosófica de la Antigua Grecia que surgió en los siglos VI-V a. C. y sostiene que las cosas sensibles son en su esencia una única sustancia inmutable.",
+   "url": "https://es.wikipedia.org/wiki/Escuela_ele%C3%A1tica"
+  },
+  "pluralist": {
+   "about": "Los filósofos pluralistas eran aquellos filósofos con una norma de principios como lo hacía Empédocles que hablaba de que su arjé eran los cuatro elementos y también ponía otros dos: el amor y el odio porque, había algo que atraía (amor) y algo que separaba (odio).",
+   "url": "https://es.wikipedia.org/wiki/Fil%C3%B3sofos_pluralistas"
+  },
+  "atomist": {
+   "about": "El atomismo es una teoría filosófica que apareció en la Antigua Grecia durante el siglo V a. C. y en la India —aunque tal vez surgiera mucho antes —, según la cual el universo está constituido por combinaciones de pequeñas partículas indivisibles denominadas átomos.",
+   "url": "https://es.wikipedia.org/wiki/Atomismo"
+  },
+  "sophist": {
+   "about": "Los sofistas eran estudiantes y maestros de retórica, que desarrollaron su actividad en la Atenas democrática del siglo V y IV a. C. Se enfocaban en el relativismo, la naturaleza, creación de leyes, la moralidad, conocimiento del lenguaje, la concepción gnoseológica constructivista y el escepticismo respecto al valor absoluto del conocimiento.",
+   "url": "https://es.wikipedia.org/wiki/Sofista"
+  },
+  "academy": {
+   "about": "La Academia fue la escuela filosófica fundada por Platón alrededor de 387 a. C. en los jardines de Academo fuera de los muros de Atenas. Destruida durante la primera guerra mitridática y refundada en 410 d. C., fue clausurada definitivamente por el emperador Justiniano en 529. Dedicada a investigar y a profundizar en el conocimiento, en ella se desarrolló casi todo el trabajo matemático de la época.",
+   "url": "https://es.wikipedia.org/wiki/Academia_de_Atenas"
+  },
+  "lyceum": {
+   "about": "La escuela peripatética fue un círculo filosófico de la Grecia antigua. Seguía las enseñanzas de Aristóteles, su fundador.",
+   "url": "https://es.wikipedia.org/wiki/Escuela_peripat%C3%A9tica"
+  },
+  "cynic": {
+   "about": "Se denomina escuela cínica a la fundada en la Antigua Grecia durante la segunda mitad del siglo IV a. C. El griego Antístenes fue su fundador y Diógenes de Sinope uno de sus filósofos más reconocidos y representativos de su época. Reinterpretaron la doctrina socrática considerando que la civilización y su forma de vida eran un mal y que la felicidad venía dada siguiendo una vida simple y acorde con la naturaleza.",
+   "url": "https://es.wikipedia.org/wiki/Escuela_c%C3%ADnica"
+  },
+  "cyrenaic": {
+   "about": "La escuela cirenaica o cirenaísmo fue una escuela filosófica fundada en el siglo IV a. C. por Aristipo, discípulo de Sócrates. Su hija, Areta de Cirene, formó a su hijo Aristipo el Joven en el marco de la filosofía hedonista. Se cree que muchos de los principios de la escuela fueron formalizados por Aristipo el Joven. La escuela fue llamada así por Cirene, lugar de nacimiento de Aristipo.",
+   "url": "https://es.wikipedia.org/wiki/Escuela_cirenaica"
+  },
+  "megarian": {
+   "about": "La escuela megárica fue una escuela filosófica del siglo IV a. C. fundada por Euclides de Mégara, discípulo de Sócrates.",
+   "url": "https://es.wikipedia.org/wiki/Escuela_meg%C3%A1rica"
+  },
+  "pyrrhonist": {
+   "about": "El pirronismo fue una escuela de escepticismo fundada por Pirrón en el siglo IV a. C. Es principalmente conocida a través de las obras que Sexto Empírico escribió a fines del siglo II o principios del siglo III.",
+   "url": "https://es.wikipedia.org/wiki/Pirronismo"
+  },
+  "garden": {
+   "about": "El epicureísmo es un movimiento filosófico fundado alrededor del 307 a. C. basado en las enseñanzas del antiguo filósofo griego Epicuro de Samos, el cual fundó una escuela llamada \"El Jardín\" y cuyas ideas fueron seguidas por otros filósofos, llamados \"epicúreos\".",
+   "url": "https://es.wikipedia.org/wiki/Epicure%C3%ADsmo"
+  },
+  "stoa": {
+   "about": "El estoicismo es una escuela filosófica fundada por Zenón de Citio en Atenas a principios del siglo III a. C. Es una filosofía de ética personal basada en su sistema lógico y sus puntos de vista sobre el mundo natural.",
+   "url": "https://es.wikipedia.org/wiki/Estoicismo"
+  },
+  "platonist": {
+   "about": "El platonismo medio, o mesoplatonismo, es una denominación, «una categoría historiográfica, no una escuela de pensamiento» reciente dada a la etapa en el desarrollo de filosofía platónica. Dura desde aproximadamente el año 80-90 a. C. –cuándo Antioco de Ascalón rechazó el escepticismo de la Academia de Atenas– hasta el desarrollo de neoplatonismo bajo Plotino a mediados siglo III.",
+   "url": "https://es.wikipedia.org/wiki/Platonismo_medio"
+  },
+  "neoplatonist": {
+   "about": "El término neoplatonismo es la denominación historiográfica de diferentes momentos de la historia de la filosofía occidental en que se produjo una revitalización del platonismo. En general, el término se refiere a una versión de filosofía platónica que surgió en el Imperio romano en el siglo III d. C. en el contexto de la filosofía y religión helenísticas, y que se extendió hasta mediados del siglo VII.",
+   "url": "https://es.wikipedia.org/wiki/Neoplatonismo"
+  }
+ }
+}

@@ -1,0 +1,294 @@
+{
+ "people": {
+  "thales": {
+   "about": "Tales z Miletu – starogrecki uczony: filozof, matematyk i astronom okresu przedsokratejskiego, przedstawiciel jońskiej filozofii przyrody. Uznawany jest przez niektórych za pierwszego filozofa i matematyka cywilizacji zachodniej oraz za inicjatora badań nad przyrodą jako nauki. Należy do kanonu siedmiu mędrców.",
+   "url": "https://pl.wikipedia.org/wiki/Tales_z_Miletu"
+  },
+  "anaximander": {
+   "about": "Anaksymander z Miletu – starogrecki filozof i polityk, jeden z pierwszych jońskich filozofów przyrody, reprezentant szkoły milezyjskiej jako prawdopodobny uczeń Talesa i nauczyciel Anaksymenesa. Podejrzewa się, że był autorem pierwszego w historii ludzkości dzieła filozoficznego, znanego pod tytułem O naturze lub O przyrodzie.",
+   "url": "https://pl.wikipedia.org/wiki/Anaksymander"
+  },
+  "pythagoras": {
+   "about": "Pitagoras – grecki matematyk, filozof, mistyk kojarzony ze słynnym twierdzeniem matematycznym nazwanym jego imieniem.",
+   "url": "https://pl.wikipedia.org/wiki/Pitagoras"
+  },
+  "xenophanes": {
+   "about": "Ksenofanes z Kolofonu – starożytny grecki filozof okresu przedsokratejskiego, wędrowny rapsod.",
+   "url": "https://pl.wikipedia.org/wiki/Ksenofanes"
+  },
+  "anaximenes": {
+   "about": "Anaksymenes z Miletu – presokratejski joński filozof przyrody, uczeń Anaksymandra, należący do szkoły milezyjskiej.",
+   "url": "https://pl.wikipedia.org/wiki/Anaksymenes"
+  },
+  "heraclitus": {
+   "about": "Heraklit z Efezu, – presokratyczny filozof grecki, zaliczany do jońskich filozofów przyrody, urodzony w mieście Efez, w Jonii, u wybrzeży Azji Mniejszej. Autor pism kosmologicznych, politycznych i teologicznych. Pochodził ze szlachetnego rodu. Mało wiadomo o jego dziecięcych latach i edukacji, on sam uważał siebie za samouka i mędrca.",
+   "url": "https://pl.wikipedia.org/wiki/Heraklit"
+  },
+  "parmenides": {
+   "about": "Parmenides z Elei – grecki filozof, twórca szkoły elejskiej w Elei, wedle tradycji – słuchacz Ksenofanesa.",
+   "url": "https://pl.wikipedia.org/wiki/Parmenides"
+  },
+  "anaxagoras": {
+   "about": "Anaksagoras – grecki filozof.",
+   "url": "https://pl.wikipedia.org/wiki/Anaksagoras"
+  },
+  "empedocles": {
+   "about": "Empedokles z Akragas – starogrecki uczony: uzdrowiciel, filozof, poeta i polityk. Twórca koncepcji czterech żywiołów.",
+   "url": "https://pl.wikipedia.org/wiki/Empedokles"
+  },
+  "zeno-elea": {
+   "about": "Zenon z Elei – filozof grecki.",
+   "url": "https://pl.wikipedia.org/wiki/Zenon_z_Elei"
+  },
+  "protagoras": {
+   "about": "Protagoras z Abdery – grecki filozof, zaliczany do sofistów.",
+   "url": "https://pl.wikipedia.org/wiki/Protagoras"
+  },
+  "gorgias": {
+   "about": "Gorgiasz z Leontinoi – grecki filozof, retor, teoretyk wymowy należący do 10 najwybitniejszych mówców w Starożytnej Grecji, prekursor teorii sztuki, jeden z czołowych sofistów.",
+   "url": "https://pl.wikipedia.org/wiki/Gorgiasz"
+  },
+  "leucippus": {
+   "about": "Leukippos z Miletu – filozof grecki z V w. p.n.e., uznawany za twórcę atomizmu – teorii budowy materii, głoszącej, że jest ona zbudowana z małych, niepodzielnych, niezmiennych i nieprzenikliwych cząstek (atomów), otoczonych próżnią i różniących się między sobą kształtem, położeniem i porządkiem.",
+   "url": "https://pl.wikipedia.org/wiki/Leukippos"
+  },
+  "melissus": {
+   "about": "Melissos z Samos – samijski dowódca, amatorski filozof eleacki nawiązujący do atomizmu Demokryta i Leucypa.",
+   "url": "https://pl.wikipedia.org/wiki/Melissos_z_Samos"
+  },
+  "philolaus": {
+   "about": "Filolaos z Krotony albo z Tarentu, gr. Φιλόλαος ο Κροτωνιάτης – jeden z pitagorejczyków, jako pierwszy udostępnił w księgach publicznie nauki szkoły. Miejsce urodzenia nie jest znane, Diogenes Laertios podaje, że była to Krotona, inne źródła wskazują, że mógł pochodzić z Tarentu.",
+   "url": "https://pl.wikipedia.org/wiki/Filolaos_z_Tarentu"
+  },
+  "socrates": {
+   "about": "Sokrates, stgr. Σωκράτης – grecki filozof starożytny, nauczyciel Platona, jedna z najważniejszych postaci filozofii zachodniej. Obok Platona i Arystotelesa zaliczany do najwybitniejszych filozofów starożytności.",
+   "url": "https://pl.wikipedia.org/wiki/Sokrates"
+  },
+  "democritus": {
+   "about": "Demokryt z Abdery – myśliciel i podróżnik, uczeń Leukipposa, naukowiec, znany jako „śmiejący się filozof”. Prace Demokryta, których stworzył 70, dotyczyły wielu różnych dziedzin w większości nie zachowały się, przetrwały z nich nieliczne fragmenty, głównie dzięki Epikurowi i poematowi Lukrecjusza „De rerum natura”. Według części historyków był jednym z nauczycieli Hipokratesa.",
+   "url": "https://pl.wikipedia.org/wiki/Demokryt"
+  },
+  "antisthenes": {
+   "about": "Antystenes z Aten – filozof grecki, twórca cynizmu. Jego najbardziej znanym uczniem był Diogenes z Synopy.",
+   "url": "https://pl.wikipedia.org/wiki/Antystenes"
+  },
+  "aristippus": {
+   "about": "Arystyp z Cyreny – filozof grecki, założyciel szkoły cyrenaików.",
+   "url": "https://pl.wikipedia.org/wiki/Arystyp"
+  },
+  "euclid-megara": {
+   "about": "Euklides z Megary – grecki filozof, założyciel szkoły megarejskiej. Był uczniem Parmenidesa i Sokratesa, przy którego śmierci miał być obecny. Podobnie jak Parmenides, pojmował najwyższe dobro jako jeden, niezmienny byt. Znany był z krytyki Platona w której twierdził, że jedynymi poprawnymi sądami są sądy tautologiczne oraz że nie można rozumować przez analogię.",
+   "url": "https://pl.wikipedia.org/wiki/Euklides_z_Megary"
+  },
+  "archytas": {
+   "about": "Archytas z Tarentu – grecki uczony: filozof, matematyk, astronom, polityk i strateg.",
+   "url": "https://pl.wikipedia.org/wiki/Archytas_z_Tarentu"
+  },
+  "plato": {
+   "about": "Platon – filozof grecki, Ateńczyk, twórca tradycji intelektualnej znanej jako platonizm. Sformułował podstawy idealizmu i racjonalizmu, a poprzez swą działalność literacką i pedagogiczną wprowadził takie zagadnienia jak teoria dobra, metoda dialektyczna, teoria idei, teoria sprawiedliwości czy matematyczna teoria atomów.",
+   "url": "https://pl.wikipedia.org/wiki/Platon"
+  },
+  "diogenes": {
+   "about": "Diogenes z Synopy, gr. Διογένης της Σινώπης Diogenes tes Sinopes – grecki filozof, przedstawiciel szkoły cyników i uczeń Antystenesa.",
+   "url": "https://pl.wikipedia.org/wiki/Diogenes_z_Synopy"
+  },
+  "speusippus": {
+   "about": "Speuzyp z Aten – starożytny filozof i matematyk, siostrzeniec Platona i drugi scholarcha jego Akademii.",
+   "url": "https://pl.wikipedia.org/wiki/Speuzyp"
+  },
+  "xenocrates": {
+   "about": "Ksenokrates z Chalcedonu – grecki filozof, trzeci po Platonie i Speuzypie scholarcha Akademii. Kierował Akademią w latach 339–315/4 p.n.e. Był autorem licznych pism, z których zachowały się jedynie fragmenty. Nauki Ksenokratesa cenił Cyceron – stawiał go na równi z Platonem i Arystotelesem.",
+   "url": "https://pl.wikipedia.org/wiki/Ksenokrates_z_Chalcedonu"
+  },
+  "aristotle": {
+   "about": "Arystoteles – filozof, jeden z trzech – obok Sokratesa i Platona – najsławniejszych filozofów starożytnej Grecji. Nazywany też Stagirytą lub po prostu Filozofem.",
+   "url": "https://pl.wikipedia.org/wiki/Arystoteles"
+  },
+  "anaxarchus": {
+   "about": "Anaksarchos z Abdery grecki filozof ze szkoły Demokryta.",
+   "url": "https://pl.wikipedia.org/wiki/Anaksarchos_z_Abdery"
+  },
+  "theophrastus": {
+   "about": "Teofrast z Eresos, – grecki uczony i filozof. Uczeń i przyjaciel Arystotelesa, w latach 322-287 p.n.e., jako jego następca, był scholarchą Lýkeionu w szkole perypatetyków. Był nauczycielem Demetriusza z Faleronu.",
+   "url": "https://pl.wikipedia.org/wiki/Teofrast_z_Eresos"
+  },
+  "crates": {
+   "about": "Krates z Teb – grecki filozof, przedstawiciel nurtu cynickiego.",
+   "url": "https://pl.wikipedia.org/wiki/Krates_z_Teb"
+  },
+  "pyrrho": {
+   "about": "Pyrron z Elidy – filozof grecki, założyciel szkoły sceptyckiej.",
+   "url": "https://pl.wikipedia.org/wiki/Pyrron_z_Elidy"
+  },
+  "stilpo": {
+   "about": "Stilpon – filozof grecki. Zaliczany do tak zwanych sokratyków mniejszych. Pochodził z Megary w Helladzie. Słuchał wykładów uczniów Euklidesa z Megary, założyciela szkoły megarejskiej i ucznia Sokratesa. Diogenes Laertios napisał, że przewyższał innych filozofów inwencją i talentem, tak że przyciągnął do siebie wielu ówczesnych sofistów, dialektyków, mówców. Wśród nich miał być sam Zenon z Kition.",
+   "url": "https://pl.wikipedia.org/wiki/Stilpon"
+  },
+  "epicurus": {
+   "about": "Epikur – grecki filozof, twórca epikureizmu. Epikur był jednym z najważniejszych filozofów tzw. drugiej fazy greckiej filozofii klasycznej, w której dominowały zagadnienia filozofii życia – czyli rozważania na temat jak osiągnąć pełne szczęście.",
+   "url": "https://pl.wikipedia.org/wiki/Epikur"
+  },
+  "strato": {
+   "about": "Straton z Lampsaku – grecki filozof, perypatetyk, zainteresowany przede wszystkim fizyką. Pochodził z Lampsakos.",
+   "url": "https://pl.wikipedia.org/wiki/Straton_z_Lampsaku"
+  },
+  "zeno-citium": {
+   "about": "Zenon z Kition, Zenon z Kitionu – grecki filozof, założyciel szkoły stoików.",
+   "url": "https://pl.wikipedia.org/wiki/Zenon_z_Kition"
+  },
+  "cleanthes": {
+   "about": "Kleantes z Assos – grecki filozof, pisarz i poeta, przedstawiciel stoicyzmu.",
+   "url": "https://pl.wikipedia.org/wiki/Kleantes"
+  },
+  "timon": {
+   "about": "Tymon z Fliuntu, gr. Τίμων ὁ Φλιάσιος – grecki filozof, przedstawiciel szkoły sceptyków, uczeń Pyrrona.",
+   "url": "https://pl.wikipedia.org/wiki/Tymon_z_Fliuntu"
+  },
+  "arcesilaus": {
+   "about": "Arkesilaos (Ἀρκεσίλαος) z Pitane (Eolia) – grecki filozof, twórca Średniej Akademii. Łączył dziedzictwo platońskie z wpływami sceptyckimi.",
+   "url": "https://pl.wikipedia.org/wiki/Arkesilaos"
+  },
+  "chrysippus": {
+   "about": "Chryzyp z Soloi – ateński filozof i myśliciel, czołowy przedstawiciel i obrońca stoicyzmu.",
+   "url": "https://pl.wikipedia.org/wiki/Chryzyp"
+  },
+  "carneades": {
+   "about": "Karneades z Cyreny – filozof, jeden z wybitnych przedstawicieli sceptycyzmu, scholarcha Akademii Platońskiej od roku 156 p.n.e. aż do śmierci.",
+   "url": "https://pl.wikipedia.org/wiki/Karneades_z_Cyreny"
+  },
+  "panaetius": {
+   "about": "Panajtios – pochodzący z Rodosu grecki filozof mediostoicki, uważany za twórcę rzymskiego stoicyzmu.",
+   "url": "https://pl.wikipedia.org/wiki/Panajtios"
+  },
+  "philo-larissa": {
+   "about": "Filon z Laryssy - – filozof platońskiej Akademii doby eklektyzmu.",
+   "url": "https://pl.wikipedia.org/wiki/Filon_z_Laryssy"
+  },
+  "posidonius": {
+   "about": "Posejdonios z Apamei – starogrecki uczony: filozof mediostoicki, astronom, geodeta, geograf, historyk i badacz kultury, nauczyciel Cycerona.",
+   "url": "https://pl.wikipedia.org/wiki/Posejdonios_z_Rodos"
+  },
+  "antiochus": {
+   "about": "Antiochos z Askalonu – starożytny filozof platońskiej Akademii doby eklektyzmu. Do naszych czasów nie zachowało się żadne z pism Antiochosa.",
+   "url": "https://pl.wikipedia.org/wiki/Antiochos_z_Askalonu"
+  },
+  "philodemus": {
+   "about": "Filodemos z Gadary – grecki poeta i filozof ze szkoły epikurejskiej. Przez ponad 30 lat mieszkał w Italii, gdzie założył własną szkołę, opartą na naukach Epikura.",
+   "url": "https://pl.wikipedia.org/wiki/Filodemos_z_Gadary"
+  },
+  "cicero": {
+   "about": "Marek Tulliusz Cyceron, inaczej Marek Tulliusz Cycero – pisarz, polityk, dowódca wojskowy, filozof, mówca sądowy i kapłan rzymski. Jako polityk i wódz stojący na czele stronnictwa broniącego republiki rzymskiej przeciw Cezarowi, Antoniuszowi i Oktawianowi, poniósł klęskę. Jako mówca i pisarz, podziwiany nawet przez wrogów, już za życia odniósł wielki sukces.",
+   "url": "https://pl.wikipedia.org/wiki/Cyceron"
+  },
+  "andronicus": {
+   "about": "Andronikos z Rodos – filozof grecki, arystotelik, dziesiąty po Arystotelesie scholarcha Lykeionu.",
+   "url": "https://pl.wikipedia.org/wiki/Andronikos_z_Rodos"
+  },
+  "aenesidemus": {
+   "about": "Ainesidemos – grecki filozof pochodzący z Knossos.",
+   "url": "https://pl.wikipedia.org/wiki/Ajnesidemos"
+  },
+  "lucretius": {
+   "about": "Lukrecjusz, Titus Lucretius Carus – rzymski poeta i filozof, jeden z nielicznej grupy poetów republikańskiego Rzymu, których utwory zachowały się do naszych czasów.",
+   "url": "https://pl.wikipedia.org/wiki/Lukrecjusz"
+  },
+  "seneca": {
+   "about": "Lucius Annaeus Seneca (Minor) (ur. ok. 4 p.n.e. w Kordobie, zm. 65 r. n.e.), Lucjusz Anneusz Seneka (Młodszy) – retor, pisarz, poeta, filozof rzymski, zwany Filozofem, syn Seneki Starszego (Seneca Maior) zwanego Retorem (Seneca Rhetor). Stoik, piewca heroicznej etyki. Jego filozofia wywarła znaczny wpływ na chrześcijaństwo.",
+   "url": "https://pl.wikipedia.org/wiki/Seneka_M%C5%82odszy"
+  },
+  "musonius": {
+   "about": "Muzoniusz Rufus – rzymski filozof stoicki urodzony około 30 roku n.e. Pozostawał pod wpływem filozofii cynickiej. Był mocno skupiony na praktyce, ograniczał teoretyczne rozważania. Uważał, że filozofia jest naprawdę użyteczna jedynie w takiej mierze, w jakiej potrafi przejawić się w praktyce.",
+   "url": "https://pl.wikipedia.org/wiki/Muzoniusz_Rufus"
+  },
+  "plutarch": {
+   "about": "Plutarch z Cheronei – jeden z największych pisarzy starożytnej Grecji, biograf, filozof-moralista oraz orator.",
+   "url": "https://pl.wikipedia.org/wiki/Plutarch"
+  },
+  "epictetus": {
+   "about": "Epiktet z Hierapolis – grecko-rzymski filozof, jeden z reprezentantów (kontynuator) stoicyzmu. Uczeń stoika Muzoniusza Rufusa. Twórca szkoły w Nikopolis w Epirze. Był wyzwoleńcem.",
+   "url": "https://pl.wikipedia.org/wiki/Epiktet"
+  },
+  "marcus": {
+   "about": "Marek Aureliusz, Marek Aureliusz Antoninus, po adopcji Marek Anniusz Aureliusz Werus – pisarz, filozof, cesarz rzymski od 7 marca 161 do swojej śmierci.",
+   "url": "https://pl.wikipedia.org/wiki/Marek_Aureliusz"
+  },
+  "alexander": {
+   "about": "Aleksander z Afrodyzji – filozof z tradycji arystotelejskiej, komentator pism Arystotelesa, zajmujący katedrę filozofii w Atenach w latach 198–211.",
+   "url": "https://pl.wikipedia.org/wiki/Aleksander_z_Afrodyzji"
+  },
+  "sextus": {
+   "about": "Sekstus Empiryk – starożytny lekarz i filozof działający na przełomie II i III wieku n.e. w Atenach i Aleksandrii. Był przedstawicielem sceptycyzmu.",
+   "url": "https://pl.wikipedia.org/wiki/Sekstus_Empiryk"
+  },
+  "ammonius": {
+   "about": "Ammonios Sakkas, Amoniusz Sakkas – założyciel neoplatońskiej szkoły filaletejczyków. Żył w Aleksandrii. Zwany Theodidaktos.",
+   "url": "https://pl.wikipedia.org/wiki/Ammonios_Sakkas"
+  },
+  "plotinus": {
+   "about": "Plotyn – filozof starożytny, twórca systemu filozoficznego zwanego neoplatonizmem.",
+   "url": "https://pl.wikipedia.org/wiki/Plotyn"
+  },
+  "polemon": {
+   "about": "Polemon z Aten – grecki filozof ateński, czwarty scholarcha Starej Akademii, założonej przez Platona, w latach 314/313 do 270/269 p.n.e., uczeń i następca Ksenokratesa z Chalcedonu.",
+   "url": "https://pl.wikipedia.org/wiki/Polemon_z_Aten"
+  }
+ },
+ "schools": {
+  "milesian": {
+   "about": "Jońska filozofia przyrody – nurt greckiej filozofii okresu przedsokratejskiego, rozwijany w Jonii w VI i V w. p.n.e., zajmujący się filozofią przyrody.",
+   "url": "https://pl.wikipedia.org/wiki/Jo%C5%84ska_filozofia_przyrody"
+  },
+  "pythagorean": {
+   "about": "Pitagorejczycy – wyznawcy doktryny rozwiniętej przez Pitagorasa i jego następców w szkole religijno-filozoficznej, którą założył w Krotonie w Wielkiej Grecji, w południowych Włoszech. Część z poglądów może być jedynie przypisywana Pitagorasowi, natomiast szereg innych osób związanych ze szkołą opublikowało własne dzieła lub przeszło do historii z powodu swych osiągnięć.",
+   "url": "https://pl.wikipedia.org/wiki/Pitagorejczycy"
+  },
+  "eleatic": {
+   "about": "Szkoła eleacka – starożytna szkoła filozoficzna, biorąca swoją nazwę od greckiej kolonii w Elei. Powstała jako reakcja na antropomorfizm greckiej religii. Eleaci wierzyli w jednorodność materii, odrzucali istnienie czasu i ruchu, co wykazywał między innymi Zenon z Elei.",
+   "url": "https://pl.wikipedia.org/wiki/Szko%C5%82a_elejska"
+  },
+  "atomist": {
+   "about": "Atomizm fizykalny – teoria o ziarnistej, nieciągłej strukturze materii, twierdzenie, że materia składa się z niepodzielnych elementów, niegdyś atomów, a współcześnie: cząstek elementarnych.",
+   "url": "https://pl.wikipedia.org/wiki/Atomizm"
+  },
+  "sophist": {
+   "about": "Sofiści – wędrowni nauczyciele greccy przygotowujący uczniów do życia publicznego poprzez nauczanie retoryki, polityki, filozofii oraz etyki. Także określenie nurtu filozoficznego występującego w Grecji w V i IV w. p.n.e., o orientacji humanistycznej i relatywistycznej.",
+   "url": "https://pl.wikipedia.org/wiki/Sofi%C5%9Bci"
+  },
+  "academy": {
+   "about": "Akademia – szkoła założona w Atenach ok. 387 p.n.e. przez Platona, istniała aż do splądrowania Aten przez wodza rzymskiego Sullę w 86 p.n.e. Część platońskich filozofów została potem w Atenach, inni działali w Aleksandrii i w Syrii. Akademia reaktywowana została pod koniec IV wieku n.e. i zlikwidowana 529 przez cesarza bizantyjskiego Justyniana.",
+   "url": "https://pl.wikipedia.org/wiki/Akademia_(staro%C5%BCytno%C5%9B%C4%87)"
+  },
+  "cynic": {
+   "about": "Filozofia cynicka – zespół poglądów właściwych grupie filozofów antycznej Grecji, powstały w V wieku p.n.e., a gasnący dopiero pod koniec starożytności. Trudno rozstrzygnąć, czy filozofia cyników była sposobem życia, czy właściwą szkołą filozoficzną.",
+   "url": "https://pl.wikipedia.org/wiki/Filozofia_cynicka"
+  },
+  "cyrenaic": {
+   "about": "Cyrenaicy – szkoła filozoficzna w Starożytnej Grecji założona przez Arystypa z Cyreny.",
+   "url": "https://pl.wikipedia.org/wiki/Cyrenaicy"
+  },
+  "megarian": {
+   "about": "Szkoła megarejska, szkoła erystyków – szkoła filozoficzna w starożytnej Grecji, działająca w V w. p.n.e.). Zaliczana do mniejszych szkół sokratycznych.",
+   "url": "https://pl.wikipedia.org/wiki/Szko%C5%82a_megarejska"
+  },
+  "pyrrhonist": {
+   "about": "Sceptycyzm — prąd filozofii, który rozwijał się w okresie od IV do III wieku p.n.e., a następnie od I wieku p.n.e. do II wieku n.e. Twórcą sceptycyzmu był Pyrron z Elidy, którego zasadnicze tezy zostały dalej rozwinięte w teoriach jego kontynuatorów: Tymona z Fliuntu, Ainezydemosa z Knossos oraz Agryppy i Sekstusa Empiryka.",
+   "url": "https://pl.wikipedia.org/wiki/Sceptycy"
+  },
+  "garden": {
+   "about": "Epikureizm – kierunek filozoficzny zapoczątkowany w starożytności przez Epikura, ok. 306 r. p.n.e., kontynuowany także w czasach nowożytnych. Podobnie jak w większości kierunków filozoficznych hellenizmu dla epikurejczyków najważniejszą dziedziną filozofii była etyka – uważali oni, że podstawowym zagadnieniem filozoficznym jest szczęście, które upatrywali w przyjemności.",
+   "url": "https://pl.wikipedia.org/wiki/Epikureizm"
+  },
+  "stoa": {
+   "about": "Stoicyzm – szkoła filozoficzna, która powstała pod koniec IV wieku p.n.e. i przetrwała aż do zamknięcia wszystkich szkół filozoficznych przez cesarza Justyniana w 529 roku. Szkołę tę zapoczątkował w Atenach Zenon z Kition. Do ostatecznej formy doprowadził ją Chryzyp.",
+   "url": "https://pl.wikipedia.org/wiki/Stoicyzm"
+  },
+  "platonist": {
+   "about": "Medioplatonizm – starożytny nurt filozofii platońskiej, rozwijający się pomiędzy I w. p.n.e. a II w n.e.",
+   "url": "https://pl.wikipedia.org/wiki/Medioplatonizm"
+  },
+  "neoplatonist": {
+   "about": "Neoplatonizm – filozofia powstała w II wieku n.e. w Aleksandrii pod wpływem myśli Platona oraz politeizmu grecko-rzymskiego. Najwybitniejszymi przedstawicielami neoplatonizmu byli Plotyn, Porfiriusz, Syryjczyk Jamblich i przywódca ateńskiej szkoły neoplatońskiej Proklos.",
+   "url": "https://pl.wikipedia.org/wiki/Neoplatonizm"
+  }
+ }
+}

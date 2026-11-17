@@ -1,0 +1,294 @@
+{
+ "people": {
+  "thales": {
+   "about": "Thalès de Milet, appelé communément Thalès, est un philosophe et savant grec, né vers 625-620 av. J.-C. dans la ville de Milet où il meurt vers 548-545 av. J.-C..",
+   "url": "https://fr.wikipedia.org/wiki/Thal%C3%A8s"
+  },
+  "anaximander": {
+   "about": "Anaximandre de Milet en grec ancien : Ἀναξίμανδρος / Anaxímandros) est un philosophe et savant grec présocratique. On suppose qu'il succéda à Thalès comme maître de l'école milésienne, et il aurait eu Xénophane, Pythagore et Anaximène parmi ses élèves.",
+   "url": "https://fr.wikipedia.org/wiki/Anaximandre"
+  },
+  "pythagoras": {
+   "about": "Pythagore est un philosophe présocratique qui serait né aux environs de 580 av. J.-C. à Samos, une île du sud-est de la mer Égée ; on situe sa mort vers 495 av. J.-C., à l'âge de 85 ans.",
+   "url": "https://fr.wikipedia.org/wiki/Pythagore"
+  },
+  "xenophanes": {
+   "about": "Xénophane, en grec ancien : Ξενοφάνης est un philosophe présocratique, poète et scientifique grec. Exilé de Colophon tombé sous la domination perse, il semble avoir émigré en Sicile et s'être réfugié d'abord à Zancle et à Catane, avant de se rendre à Élée, où il fonde probablement l'école éléatique. Les données attestées ne permettent pas de déterminer s'il mourut à Élée, ou s'il retourna finalement à Colophon.",
+   "url": "https://fr.wikipedia.org/wiki/X%C3%A9nophane"
+  },
+  "anaximenes": {
+   "about": "Anaximène est un philosophe grec né vers -585, mort vers -525.",
+   "url": "https://fr.wikipedia.org/wiki/Anaxim%C3%A8ne"
+  },
+  "heraclitus": {
+   "about": "Héraclite d'Éphèse est un des principaux philosophes grecs dits présocratiques.",
+   "url": "https://fr.wikipedia.org/wiki/H%C3%A9raclite"
+  },
+  "parmenides": {
+   "about": "Parménide d'Élée est un philosophe grec présocratique, pythagoricien, puis éléate, né à Élée à la fin du VIe siècle av. J.-C. et mort au milieu du Ve siècle av. J.-C.. Il est célèbre pour un poème en vers, De la nature, qui exerça une influence notable sur la pensée de son époque.",
+   "url": "https://fr.wikipedia.org/wiki/Parm%C3%A9nide"
+  },
+  "anaxagoras": {
+   "about": "Anaxagore, dit « de Clazomènes » né dans cette cité d’Ionie vers 500 av. J.-C., est un philosophe présocratique grec ; il est mort en 428 à Lampsaque.",
+   "url": "https://fr.wikipedia.org/wiki/Anaxagore"
+  },
+  "empedocles": {
+   "about": "Empédocle est un philosophe, poète, ingénieur et médecin grec de Sicile, du Ve siècle av. J.-C. Il fait partie des philosophes présocratiques, ces premiers penseurs qui ont tenté de découvrir l'arkhè du cosmos, son « schéma ». L'originalité d'Empédocle est de poser deux principes qui règnent cycliquement sur l'univers, l'Amour qui attire et la Haine qui divise.",
+   "url": "https://fr.wikipedia.org/wiki/Emp%C3%A9docle"
+  },
+  "zeno-elea": {
+   "about": "Zénon d'Élée, né vers 490 et mort vers 430 av. J.-C., est un philosophe grec présocratique.",
+   "url": "https://fr.wikipedia.org/wiki/Z%C3%A9non_d'%C3%89l%C3%A9e"
+  },
+  "protagoras": {
+   "about": "Protagoras est un philosophe présocratique et professeur grec du Ve siècle av. J.-C.. Considéré par Platon comme un sophiste, il est reconnu comme tel par la tradition antique et récente. Renommé de son vivant, Protagoras est resté célèbre pour son agnosticisme avoué et un certain relativisme : « Des dieux, je ne sais ni s'ils sont ni s'ils ne sont pas » et « L'homme est la mesure de toute chose ».",
+   "url": "https://fr.wikipedia.org/wiki/Protagoras"
+  },
+  "gorgias": {
+   "about": "Gorgias de Léontinoi est un philosophe présocratique, né à Léontinoi en Sicile. Contemporain de Socrate, il apparaît dans plusieurs dialogues de Platon.",
+   "url": "https://fr.wikipedia.org/wiki/Gorgias"
+  },
+  "leucippus": {
+   "about": "Leucippe est un philosophe présocratique grec du Ve siècle av. J.-C. et maître de Démocrite.",
+   "url": "https://fr.wikipedia.org/wiki/Leucippe"
+  },
+  "melissus": {
+   "about": "Mélissos de Samos est un philosophe présocratique, un homme politique et un trièrarque ionien de Grèce antique, dernier représentant de l'école éléatique.",
+   "url": "https://fr.wikipedia.org/wiki/M%C3%A9lissos"
+  },
+  "philolaus": {
+   "about": "Philolaos (en grec ancien : Φιλόλαος / Philólaos, latinisé en Philolaus est un philosophe, astronome et mathématicien grec du Ve siècle av. J.-C., et l'une des figures de la tradition pythagoricienne, avec Pythagore lui-même, et Archytas de Tarente.",
+   "url": "https://fr.wikipedia.org/wiki/Philolaos_de_Crotone"
+  },
+  "socrates": {
+   "about": "Socrate est un philosophe grec du Ve siècle av. J.-C., né vers -470/469 et mort empoisonné en -399 à Athènes. Il est connu comme l'un des « fondateurs » de la philosophie. Socrate n'a laissé aucun écrit, sa pensée et sa réputation se sont transmises par des témoignages indirects.",
+   "url": "https://fr.wikipedia.org/wiki/Socrate"
+  },
+  "democritus": {
+   "about": "Démocrite d'Abdère, né vers 460 av. J.-C. à Abdère et mort en 370 av. J.-C., est un philosophe grec considéré comme matérialiste en raison de sa conception d'un Univers constitué d'atomes et de vide.",
+   "url": "https://fr.wikipedia.org/wiki/D%C3%A9mocrite"
+  },
+  "antisthenes": {
+   "about": "Antisthène, en grec ancien Ἀντισθένης / Antisthénês, est un philosophe grec, considéré comme le fondateur de l'école cynique vers 390 av. J.-C.",
+   "url": "https://fr.wikipedia.org/wiki/Antisth%C3%A8ne"
+  },
+  "aristippus": {
+   "about": "Aristippe de Cyrène est un philosophe grec. Disciple de Socrate à Athènes, il est le fondateur en 399 av. J.-C. de l'école dite cyrénaïque, d'abord localisée à Cyrène (Libye), dont l'orientation principale est l'hédonisme. Il eut une fille, Arété de Cyrène, qui fut disciple de son école et lui succéda.",
+   "url": "https://fr.wikipedia.org/wiki/Aristippe_de_Cyr%C3%A8ne"
+  },
+  "euclid-megara": {
+   "about": "Euclide de Mégare était un philosophe de la Grèce antique de l'école socratique. Il est principalement connu pour avoir fondé l'école philosophique de Mégare, vers -405. Il fut confondu avec son homonyme, le célèbre mathématicien Euclide, par les éditeurs et traducteurs des Éléments au Moyen Âge et à la Renaissance.",
+   "url": "https://fr.wikipedia.org/wiki/Euclide_de_M%C3%A9gare"
+  },
+  "archytas": {
+   "about": "Archytas de Tarente est un philosophe pythagoricien, mathématicien, astronome, homme politique, stratège et général grec, fils de Mnésagore ou Histiée. Fait unique dans l’histoire, il fut sept fois stratège et gouverna la cité de Tarente durant sept années consécutives, incarnant ainsi le philosophe roi éclairé tel que l'envisageaient les philosophes ; la cité connut alors une époque de prospérité.",
+   "url": "https://fr.wikipedia.org/wiki/Archytas_de_Tarente"
+  },
+  "plato": {
+   "about": "Platon, dont le nom de naissance serait Aristoclès, né en 428 / 427 av. J.-C. et mort en 348 / 347 av. J.-C. à Athènes, est un philosophe antique de la Grèce classique, contemporain de la démocratie athénienne et des sophistes qu'il critiqua vigoureusement.",
+   "url": "https://fr.wikipedia.org/wiki/Platon"
+  },
+  "diogenes": {
+   "about": "Diogène de Sinope, également appelé Diogène le Cynique et Diogène le Chien, né à Sinope vers 413 av. J.-C. et mort vers 323 av. J.-C. à Corinthe, est un philosophe de la Grèce antique, le plus célèbre représentant de l'école cynique. Il est contemporain de Philippe II de Macédoine et de son fils Alexandre le Grand, qu'il a rencontré.",
+   "url": "https://fr.wikipedia.org/wiki/Diog%C3%A8ne_de_Sinope"
+  },
+  "speusippus": {
+   "about": "Neveu de Platon, scholarque de l'Académie de Platon, Speusippe est un platonicien, mais convaincu de la nécessité de reconstruire la philosophie de Platon. Il a critiqué l'hédonisme et a été lui-même réfuté par Aristote parce qu’il abandonnait la notion de forme et la relation au monde sensible.",
+   "url": "https://fr.wikipedia.org/wiki/Speusippe"
+  },
+  "xenocrates": {
+   "about": "Xénocrate de Chalcédoine est un philosophe platonicien grec, deuxième scholarque de l'Académie de Platon, après Speusippe, de 339 à sa mort, en 315 av. J.-C. Il fut à la tête de l'Académie pendant 25 ans. On lui connaît quatre maîtres dans sa vie : Eschine de Sphettos, Platon, Speusippe et Aristote.",
+   "url": "https://fr.wikipedia.org/wiki/X%C3%A9nocrate"
+  },
+  "aristotle": {
+   "about": "Aristote, né en 384 et mort en 322 av. J.-C. est un philosophe et polymathe grec de l'Antiquité. Il est avec Platon, dont il a été le disciple à l'Académie, l'un des penseurs les plus influents que le monde occidental ait connus.",
+   "url": "https://fr.wikipedia.org/wiki/Aristote"
+  },
+  "anaxarchus": {
+   "about": "Anaxarque d'Abdère est un philosophe grec.",
+   "url": "https://fr.wikipedia.org/wiki/Anaxarque"
+  },
+  "theophrastus": {
+   "about": "Théophraste est un philosophe de la Grèce antique né vers 372 av. J.-C. à Eresós (Lesbos) et mort vers 288 av. J.-C. à Athènes. Élève d’Aristote, il est le premier scholarque du Lycée, de 322 à sa mort ; botaniste et naturaliste, polygraphe ou encore alchimiste.",
+   "url": "https://fr.wikipedia.org/wiki/Th%C3%A9ophraste"
+  },
+  "crates": {
+   "about": "Cratès de Thèbes, né vers 365 av. J.-C. à Thèbes et mort vers 285 av. J.-C., est un philosophe cynique de l'Antiquité. Il donna tout son argent pour vivre une vie de misère dans les rues d'Athènes. Il épousa Hipparchia, qui vécut avec lui de la même manière. Cratès est connu pour avoir été l'un des maîtres de Zénon de Kition, le fondateur du stoïcisme.",
+   "url": "https://fr.wikipedia.org/wiki/Crat%C3%A8s_de_Th%C3%A8bes"
+  },
+  "pyrrho": {
+   "about": "Pyrrhon d'Élis est un philosophe sceptique originaire d'Élis, ville provinciale du nord-ouest du Péloponnèse. Son activité philosophique se situe vers 320 av. J.-C., avec, pour disciples, Onésicrite, Philon d'Athènes et Timon de Phlionte, un poète-philosophe qui vécut dans sa familiarité pendant vingt ans. Il est considéré par les sceptiques anciens comme le fondateur de ce que l'on a appelé le pyrrhonisme.",
+   "url": "https://fr.wikipedia.org/wiki/Pyrrhon_d'%C3%89lis"
+  },
+  "stilpo": {
+   "about": "Stilpon, en grec Στίλπων, est un philosophe grec du IVe siècle av. J.-C.. Il appartenait à l'école mégarique, spécialisée dans la dialectique de type éristique. Connu dans toute la Grèce, c'est lui qui a popularisé l'art de la joute oratoire.",
+   "url": "https://fr.wikipedia.org/wiki/Stilpon_de_M%C3%A9gare"
+  },
+  "epicurus": {
+   "about": "Épicure est un philosophe grec, né à la fin de l'année 342 av. J.-C. ou au début de l'année 341 av. J.-C. et mort en 270 av. J.-C. Il est le fondateur, en 306 av. J.-C., de l'épicurisme, l'une des plus importantes écoles philosophiques de l'Antiquité.",
+   "url": "https://fr.wikipedia.org/wiki/%C3%89picure"
+  },
+  "strato": {
+   "about": "Straton est un philosophe aristotélicien de la Grèce antique. Il fut le deuxième scholarque du Lycée, de 288 à 270 av. J.-C., après Théophraste. Son surnom, le « Physicien », semble provenir moins de l’importance relative de la physique dans son œuvre que de l'originalité qu'il a su montrer dans ce domaine par sa doctrine et surtout par sa méthode d'examen.",
+   "url": "https://fr.wikipedia.org/wiki/Straton_de_Lampsaque"
+  },
+  "zeno-citium": {
+   "about": "Zénon de Kition ou Zénon de Citium, né vers 334 av. J.-C. et mort en 262, est un philosophe grec d'origine phénicienne, fondateur en -301 du stoïcisme. Il est originaire de Kition, actuelle Larnaca, le foyer principal de la colonisation phénicienne à Chypre.",
+   "url": "https://fr.wikipedia.org/wiki/Z%C3%A9non_de_Kition"
+  },
+  "cleanthes": {
+   "about": "Cléanthe, en grec ancien Κλεάνθης / Kleánthês, est un philosophe grec stoïcien, successeur de Zénon de Kition comme premier scholarque de l'école stoïcienne, de 262 à sa mort par inanition volontaire dans sa 99e année, en 232.",
+   "url": "https://fr.wikipedia.org/wiki/Cl%C3%A9anthe"
+  },
+  "timon": {
+   "about": "Timon de Phlionte était un philosophe sceptique héritier de la pensée de Pyrrhon, considéré comme le théoricien de ce dernier, organisant l'école sceptique là où son maître n'avait fait que donner l'exemple par sa manière de vivre. Il eut Aratos de Soles pour disciple.",
+   "url": "https://fr.wikipedia.org/wiki/Timon_de_Phlionte"
+  },
+  "arcesilaus": {
+   "about": "Arcésilas était un philosophe grec, créateur de la Nouvelle Académie, né à Pitane vers 315 av. J.-C. et mort en 241 av. J.-C., compagnon du philosophe Crantor. À la mort de Cratès, en 264, et après l'intérim de Socratidès, il devint, en -244/-243, le cinquième scholarque de l'Académie, le seul représentant de la Moyenne Académie.",
+   "url": "https://fr.wikipedia.org/wiki/Arc%C3%A9silas_de_Pitane"
+  },
+  "chrysippus": {
+   "about": "Chrysippe de Soles est un philosophe stoïcien né vers -280 à Soles, en Cilicie et mort en -206. Il fut le deuxième scholarque du Portique, après Cléanthe, de -232 à sa mort.",
+   "url": "https://fr.wikipedia.org/wiki/Chrysippe_de_Soles"
+  },
+  "carneades": {
+   "about": "Carnéade, en grec ancien Καρνεάδης / Karneádês, né à Cyrène, vers 219 av. J.-C. et mort à Athènes en 128 av. J.-C., fut le plus grand philosophe de la Nouvelle Académie, probabiliste. Il fut le dixième scolarque de l'Académie en 186 av. J.-C.",
+   "url": "https://fr.wikipedia.org/wiki/Carn%C3%A9ade"
+  },
+  "panaetius": {
+   "about": "Panétios de Rhodes est un philosophe stoïcien. Il relève, dans le mouvement stoïcien, du moyen-stoïcisme, qu'il instaure : Panétios mettait la physique au début de la philosophie. Il sera suivi par son disciple Posidonios.",
+   "url": "https://fr.wikipedia.org/wiki/Pan%C3%A9tios_de_Rhodes"
+  },
+  "philo-larissa": {
+   "about": "Philon de Larissa était un philosophe antique, platonicien néo-dogmatique. Il fut le douzième scolarque de l'Académie de Platon, vers 110 av. J.-C.",
+   "url": "https://fr.wikipedia.org/wiki/Philon_de_Larissa"
+  },
+  "posidonius": {
+   "about": "Poseidonios ou Posidonios d'Apamée, en grec ancien Ὁ Ποσειδώνιος ὀ Ἀπαμεύς, surnommé « l'Athlète », né vers 135 av. J.-C. à Apamée en Syrie et mort après 60 av. J.-C. à Rome, est un philosophe stoïcien grec doublé d'un savant, à la fois astronome, mathématicien, géographe, historien, philologue et météorologue.",
+   "url": "https://fr.wikipedia.org/wiki/Posidonios"
+  },
+  "antiochus": {
+   "about": "Antiochos d'Ascalon, en grec ancien Ἀντίοχος, philosophe grec d'abord académicien, puis critique de l'école de Philon de Larissa. En latin : Antiochus Ascalonius. Il est le fondateur du moyen-platonisme et de la 5e Académie platonicienne, éclectique.",
+   "url": "https://fr.wikipedia.org/wiki/Antiochos_d'Ascalon"
+  },
+  "philodemus": {
+   "about": "Philodème de Gadara, né vers 110 av. J.-C. et mort vers 40 av. J.-C., est un philosophe épicurien originaire de Gadara, dans l'ancienne Syrie. D’origine orientale mais fortement hellénisé, il romanise la pensée épicurienne.",
+   "url": "https://fr.wikipedia.org/wiki/Philod%C3%A8me_de_Gadara"
+  },
+  "cicero": {
+   "about": "Cicéron, dont le nom romain est Marcus Tullius Cicero, né le 3 janvier 106 av. J.-C. à Arpinum en Italie et mort assassiné le 7 décembre 43 av. J.-C. à Formies, est un avocat, homme d'État, philosophe et écrivain romain. Il intervient dans les crises de la fin de la République romaine et finit victime des proscriptions en -43.",
+   "url": "https://fr.wikipedia.org/wiki/Cic%C3%A9ron"
+  },
+  "andronicus": {
+   "about": "Andronicos de Rhodes fut un philosophe péripatéticien du Ier siècle av. J.-C., natif de Rhodes. Il aurait été le dernier scholarque (recteur) du Lycée, de 58 à 47 av. J.-C., et l’éditeur probable des œuvres d’Aristote, attribution sujette à caution. On lui attribue un traité Sur les passions, édité par A. Gilbert-Thirry en 1977 : De passionibus.",
+   "url": "https://fr.wikipedia.org/wiki/Andronicos_de_Rhodes"
+  },
+  "aenesidemus": {
+   "about": "Énésidème ou Ænésidème est l'un des plus grands philosophes sceptiques de l'Antiquité, fondateur du néo-pyrrhonisme. Il vécut entre 80 av. J.-C. et 10 av. J.-C.",
+   "url": "https://fr.wikipedia.org/wiki/%C3%89n%C3%A9sid%C3%A8me"
+  },
+  "lucretius": {
+   "about": "Lucrèce est un poète et philosophe latin du Ier siècle av. J.-C., auteur d'un seul ouvrage en six parties, le De rerum natura, un long poème en style épique qui décrit le monde selon les principes d'Épicure.",
+   "url": "https://fr.wikipedia.org/wiki/Lucr%C3%A8ce"
+  },
+  "seneca": {
+   "about": "Sénèque, parfois nommé Sénèque le Jeune, Sénèque le Philosophe ou Sénèque le Tragique, né vers l'an 4 av. J.-C. à Corduba et mort le 12 avril 65 à Rome, est un homme d'État romain, un philosophe et un dramaturge.",
+   "url": "https://fr.wikipedia.org/wiki/S%C3%A9n%C3%A8que"
+  },
+  "musonius": {
+   "about": "Gaius Musonius Rufus est un philosophe stoïcien romain du Ier siècle apr. J.-C. Il enseigna la philosophie à Rome sous le règne de Néron, en conséquence de quoi, il fut exilé en 65 apr. J.-C., pour ne revenir à Rome que sous le règne de Galba. Il fut autorisé à y rester alors que Vespasien avait banni tous les autres philosophes de la ville en 71 apr. J.-C.",
+   "url": "https://fr.wikipedia.org/wiki/Musonius_Rufus"
+  },
+  "plutarch": {
+   "about": "Plutarque, de son nom de citoyen romain Lucius Mestrius Plutarchus, né vers 46 à Chéronée en Béotie et mort vers 125, est un philosophe, biographe, moraliste, polygraphe et penseur majeur de la Rome antique. Grec d'origine, il est considéré comme un médio-platoniste.",
+   "url": "https://fr.wikipedia.org/wiki/Plutarque"
+  },
+  "epictetus": {
+   "about": "Épictète est un philosophe de l’école stoïcienne.",
+   "url": "https://fr.wikipedia.org/wiki/%C3%89pict%C3%A8te"
+  },
+  "marcus": {
+   "about": "Marc Aurèle, né le 26 avril 121 à Rome et mort le 17 mars 180 à Sirmium ou à Vindobona, est un empereur et philosophe romain de la dynastie des Antonins, consul en 140, 145 et 161, régnant de 161 à 180.",
+   "url": "https://fr.wikipedia.org/wiki/Marc_Aur%C3%A8le"
+  },
+  "alexander": {
+   "about": "Alexandre d’Aphrodise ou d’Aphrodisias, né à Aphrodisias en Carie vers 150 et mort vers 215, est un philosophe péripatéticien grec du IIe siècle, commentateur d’Aristote. Son nom complet, Titus Aurelius Alexander, nous est connu grâce à une inscription découverte à Aphrodisias.",
+   "url": "https://fr.wikipedia.org/wiki/Alexandre_d'Aphrodise"
+  },
+  "sextus": {
+   "about": "Sextus Empiricus est un philosophe sceptique et médecin de l'école de médecine antique dite « empirique », qui fut actif à la fin du IIe siècle. Il écrivait en grec, mais nous ne savons ni où il naquit ni où il fut professeur, et ignorons donc pratiquement tout de sa vie.",
+   "url": "https://fr.wikipedia.org/wiki/Sextus_Empiricus"
+  },
+  "ammonius": {
+   "about": "Ammonios Saccas est un philosophe égyptien d'Alexandrie, souvent considéré, en tant que maître de Plotin de 232 à 242, comme le fondateur de l'école néoplatonicienne de Rome.",
+   "url": "https://fr.wikipedia.org/wiki/Ammonios_Saccas"
+  },
+  "plotinus": {
+   "about": "Plotin, né en 205 à Lycopolis et mort en 270 à Naples, philosophe gréco-romain de l'Antiquité tardive, est le représentant principal du courant philosophique appelé « néoplatonisme » : à travers lui, la pensée grecque classique affronte désormais les mouvements gnostiques plus ou moins proches du christianisme et du manichéisme.",
+   "url": "https://fr.wikipedia.org/wiki/Plotin"
+  },
+  "polemon": {
+   "about": "Polémon d'Athènes est un éminent philosophe platonicien et troisième successeur de Platon comme scholarque à la tête de l'Académie de 314 ou 313 av. J.-C. à 270 ou 269 av. J.-C.",
+   "url": "https://fr.wikipedia.org/wiki/Pol%C3%A9mon_d'Ath%C3%A8nes"
+  }
+ },
+ "schools": {
+  "milesian": {
+   "about": "L'école de philosophie ionienne est une école de pensée de la Grèce antique, incluant l'École milésienne ainsi que notamment Héraclite.",
+   "url": "https://fr.wikipedia.org/wiki/%C3%89cole_ionienne_(philosophie)"
+  },
+  "pythagorean": {
+   "about": "L’école pythagoricienne fondée par Pythagore en Grande-Grèce constitue une confrérie à la fois scientifique et religieuse : le pythagorisme repose en effet sur une initiation et propose à ses adeptes un mode de vie éthique et alimentaire, ainsi que des recherches scientifiques sur le cosmos.",
+   "url": "https://fr.wikipedia.org/wiki/%C3%89cole_pythagoricienne"
+  },
+  "eleatic": {
+   "about": "L’école éléatique est une école de pensée philosophique fondée par Xénophane de Colophon à Élée, dans le sud de l'actuelle Italie. Élée était une colonie de Phocée, cité d'Ionie. Les principaux représentants de cette école sont Parménide et Zénon, tous deux d'Élée, et Mélissos. Cette école s'est principalement intéressée à la métaphysique.",
+   "url": "https://fr.wikipedia.org/wiki/%C3%89cole_%C3%A9l%C3%A9atique"
+  },
+  "atomist": {
+   "about": "L'atomisme est un courant philosophique et physicien affirmant que la matière est discontinue et composée d'éléments insécables. Leucippe et son élève Démocrite sont les Grecs considérés comme les fondateurs de l'atomisme au Ve siècle avant notre ère, doctrine reprise par Épicure, puis à Rome par Lucrèce au Ier siècle avant notre ère.",
+   "url": "https://fr.wikipedia.org/wiki/Atomisme"
+  },
+  "sophist": {
+   "about": "Un sophiste est à l'origine un orateur et un professeur d'éloquence de la Grèce antique, considéré par sa culture et sa maîtrise du discours comme un personnage éminent dès le Ve siècle av. J.-C., et type d'homme contre lequel la philosophie va en partie se développer. De nos jours, un sophiste est une « personne utilisant des sophismes, des arguments ou des raisonnements spécieux pour tromper ou faire illusion ».",
+   "url": "https://fr.wikipedia.org/wiki/Sophiste"
+  },
+  "academy": {
+   "about": "L’Académie est l'école philosophique fondée à Athènes par Platon vers 387 av. J.-C. Elle disparaît en 86 av. J.-C.",
+   "url": "https://fr.wikipedia.org/wiki/Acad%C3%A9mie_de_Platon"
+  },
+  "lyceum": {
+   "about": "L’école péripatéticienne, ou école péripatétique, est l'école philosophique fondée par Aristote en 335 av. J.-C. au Lycée d'Athènes.",
+   "url": "https://fr.wikipedia.org/wiki/%C3%89cole_p%C3%A9ripat%C3%A9ticienne"
+  },
+  "cynic": {
+   "about": "Le cynisme est une attitude face à la vie provenant d'une école philosophique de la Grèce antique, fondée ou du moins inspirée par Antisthène et connue principalement pour les propos et les actions spectaculaires de son disciple le plus célèbre, Diogène de Sinope.",
+   "url": "https://fr.wikipedia.org/wiki/Cynisme"
+  },
+  "cyrenaic": {
+   "about": "Le cyrénaïsme est une école de philosophie grecque du IVe siècle av. J.-C., fondée par Aristippe de Cyrène, un des « socratiques », c'est-à-dire un des disciples de Socrate. L'école est surtout associée à l'hédonisme en éthique. L'école demeura surtout dans la cité de Cyrène, en Libye, ce qui explique qu'on les appelle Cyrénaïques.",
+   "url": "https://fr.wikipedia.org/wiki/Cyr%C3%A9na%C3%AFsme"
+  },
+  "megarian": {
+   "about": "L’École mégarique est une école de philosophie grecque fondée entre les Ve et IVe siècles av. J.-C., qui tire son nom du lieu d'origine de son fondateur, Euclide de Mégare. Ses membres se réclament des enseignements de Socrate.",
+   "url": "https://fr.wikipedia.org/wiki/%C3%89cole_m%C3%A9garique"
+  },
+  "garden": {
+   "about": "L'épicurisme est un courant issu de la philosophie antique ayant pour objectif principal l'atteinte du bonheur par la satisfaction des seuls désirs « naturels et nécessaires ». C'est une doctrine matérialiste et atomiste qui peut être soit qualifiée d'hédonisme raisonné, soit d'eudémonisme.",
+   "url": "https://fr.wikipedia.org/wiki/%C3%89picurisme"
+  },
+  "stoa": {
+   "about": "Le stoïcisme est une école de philosophie hellénistique fondée par Zénon de Kition à la fin du IVe siècle avant notre ère à Athènes. Le stoïcisme est une philosophie de l'éthique personnelle influencée par son système logique et ses vues sur le monde naturel.",
+   "url": "https://fr.wikipedia.org/wiki/Sto%C3%AFcisme"
+  },
+  "platonist": {
+   "about": "Le moyen-platonisme ou médio-platonisme ou platonisme éclectique regroupe des penseurs qui se réclament de Platon, depuis le Ier siècle av. J.-C. jusqu'au IIe siècle.",
+   "url": "https://fr.wikipedia.org/wiki/Moyen-platonisme"
+  },
+  "neoplatonist": {
+   "about": "Le néoplatonisme est une doctrine philosophique, élaborée par des platoniciens de l'Antiquité tardive à la suite du médio-platonisme. Philon d'Alexandrie est le précurseur de ce mouvement vers 40, puis il se développe à Rome à partir de 232 par Ammonios Saccas, maître de Plotin, et les élèves de ce dernier, Porphyre et Jamblique.",
+   "url": "https://fr.wikipedia.org/wiki/N%C3%A9oplatonisme"
+  }
+ }
+}

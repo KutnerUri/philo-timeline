@@ -1,0 +1,294 @@
+{
+ "people": {
+  "thales": {
+   "about": "Talete di Mileto è stato un filosofo, astronomo e matematico greco antico.",
+   "url": "https://it.wikipedia.org/wiki/Talete"
+  },
+  "anaximander": {
+   "about": "Anassimandro è stato un filosofo e astronomo greco antico presocratico e il primo cartografo della storia. Anassimandro fece parte della scuola di Mileto dove apprese gli insegnamenti del suo maestro Talete a cui successe divenendo il secondo maestro di quell'istituto che annoverò anche Anassimene e, probabilmente, ebbe Pitagora tra i suoi allievi.",
+   "url": "https://it.wikipedia.org/wiki/Anassimandro"
+  },
+  "pythagoras": {
+   "about": "Pitagora è stato un filosofo, matematico, scienziato e legislatore greco antico.",
+   "url": "https://it.wikipedia.org/wiki/Pitagora"
+  },
+  "xenophanes": {
+   "about": "Senòfane è stato un filosofo e poeta greco antico presocratico.",
+   "url": "https://it.wikipedia.org/wiki/Senofane"
+  },
+  "anaximenes": {
+   "about": "Anassimène o Anassìmene è stato un filosofo e astronomo greco antico.",
+   "url": "https://it.wikipedia.org/wiki/Anassimene_di_Mileto"
+  },
+  "heraclitus": {
+   "about": "Eraclito di Efeso è stato un filosofo greco antico, uno dei maggiori pensatori presocratici.",
+   "url": "https://it.wikipedia.org/wiki/Eraclito"
+  },
+  "parmenides": {
+   "about": "Parmènide di Elea è stato un filosofo greco antico, autore del poema Sulla natura.",
+   "url": "https://it.wikipedia.org/wiki/Parmenide"
+  },
+  "anaxagoras": {
+   "about": "Anassàgora è stato un filosofo greco antico. Anassagora è un filosofo presocratico, annoverato tra i fisici pluralisti insieme con Empedocle, Leucippo e poi Democrito. Fu il primo filosofo a \"importare\" la filosofia nella penisola greca, più precisamente ad Atene, nata nella Ionia delle polis greche site sulla costa ovest del mar Egeo.",
+   "url": "https://it.wikipedia.org/wiki/Anassagora"
+  },
+  "empedocles": {
+   "about": "Empedocle è stato un filosofo e politico siceliota, vissuto nel V-IV secolo a.C. ad Akragas.",
+   "url": "https://it.wikipedia.org/wiki/Empedocle"
+  },
+  "zeno-elea": {
+   "about": "Zenone di Elea è stato un filosofo greco antico presocratico della Magna Grecia e un membro della Scuola eleatica fondata da Parmenide. Aristotele lo definisce inventore della dialettica. È conosciuto soprattutto per i suoi paradossi, che Bertrand Russell definì come «smisuratamente sottili e profondi».",
+   "url": "https://it.wikipedia.org/wiki/Zenone_di_Elea"
+  },
+  "protagoras": {
+   "about": "Protagora è stato un retore e filosofo greco antico, considerato il padre della sofistica.",
+   "url": "https://it.wikipedia.org/wiki/Protagora"
+  },
+  "gorgias": {
+   "about": "Gorgia è stato un retore e filosofo siceliota.",
+   "url": "https://it.wikipedia.org/wiki/Gorgia"
+  },
+  "leucippus": {
+   "about": "Leucippo è stato un filosofo greco antico.",
+   "url": "https://it.wikipedia.org/wiki/Leucippo"
+  },
+  "melissus": {
+   "about": "Melisso di Samo è stato un filosofo e militare greco antico.",
+   "url": "https://it.wikipedia.org/wiki/Melisso_di_Samo"
+  },
+  "philolaus": {
+   "about": "Filolào è stato un filosofo, astronomo e matematico greco antico.",
+   "url": "https://it.wikipedia.org/wiki/Filolao"
+  },
+  "socrates": {
+   "about": "Socrate è stato un filosofo greco antico, uno dei più importanti esponenti della tradizione filosofica occidentale.",
+   "url": "https://it.wikipedia.org/wiki/Socrate"
+  },
+  "democritus": {
+   "about": "Democrito è stato un filosofo greco antico. Allievo di Leucippo, fu tra i fondatori dell'atomismo. È praticamente impossibile distinguere le idee attribuibili a Democrito da quelle del suo maestro. Democrito fu il più prolifico scrittore tra i presocratici, considerato uno di loro anche se, effettivamente, nacque dopo Socrate, per morire, forse centenario, durante la vita di Platone e Aristotele.",
+   "url": "https://it.wikipedia.org/wiki/Democrito"
+  },
+  "antisthenes": {
+   "about": "Antistene di Atene è stato un filosofo greco antico.",
+   "url": "https://it.wikipedia.org/wiki/Antistene"
+  },
+  "aristippus": {
+   "about": "Aristippo è stato un filosofo greco antico, fondatore della scuola cirenaica.",
+   "url": "https://it.wikipedia.org/wiki/Aristippo"
+  },
+  "euclid-megara": {
+   "about": "Euclide è stato un filosofo socratico greco antico fondatore della scuola megarica.",
+   "url": "https://it.wikipedia.org/wiki/Euclide_di_Megara"
+  },
+  "archytas": {
+   "about": "Archita è stato un filosofo, matematico e politico greco antico. Appartenente alla \"seconda generazione\" della scuola pitagorica, ne incarnò i massimi principi secondo l'insegnamento dei suoi maestri Filolao ed Eurito. È considerato il creatore della meccanica razionale e il fondatore della meccanica.",
+   "url": "https://it.wikipedia.org/wiki/Archita"
+  },
+  "plato": {
+   "about": "Platone, pseudonimo di Aristocle, figlio di Aristone del demo di Collito e di Perictione, è stato un filosofo, scrittore e politico greco antico, comunemente ritenuto il fondatore della tradizione filosofica occidentale.",
+   "url": "https://it.wikipedia.org/wiki/Platone"
+  },
+  "diogenes": {
+   "about": "Diogene di Sinope, detto il Cinico, è stato un filosofo greco antico. Considerato uno dei fondatori della scuola cinica insieme al suo maestro Antistene, secondo l'antico storico Diogene Laerzio, morì nello stesso giorno di Alessandro Magno a Babilonia.",
+   "url": "https://it.wikipedia.org/wiki/Diogene_di_Sinope"
+  },
+  "speusippus": {
+   "about": "Speusippo è stato un filosofo greco antico, che succedette verso il 347 a.C. a suo zio Platone come scolarca dell'Accademia di Atene.",
+   "url": "https://it.wikipedia.org/wiki/Speusippo"
+  },
+  "xenocrates": {
+   "about": "Senocrate è stato un filosofo greco antico.",
+   "url": "https://it.wikipedia.org/wiki/Senocrate"
+  },
+  "aristotle": {
+   "about": "Aristotele è stato un filosofo greco antico, ritenuto una delle menti più universali, innovative, prolifiche e influenti di tutti i tempi, sia per la vastità che per la profondità dei suoi campi di conoscenza.",
+   "url": "https://it.wikipedia.org/wiki/Aristotele"
+  },
+  "anaxarchus": {
+   "about": "Anassarco l'Eudemònico è stato un filosofo greco antico del IV secolo a.C., di cui si hanno scarse notizie.",
+   "url": "https://it.wikipedia.org/wiki/Anassarco"
+  },
+  "theophrastus": {
+   "about": "Teofrasto è stato un filosofo e botanico greco antico. Fu discepolo di Aristotele, al quale succedette come scolarca nella direzione del Liceo nel 322 a.C.",
+   "url": "https://it.wikipedia.org/wiki/Teofrasto"
+  },
+  "crates": {
+   "about": "Cratete di Tebe è stato un filosofo greco antico della scuola cinica.",
+   "url": "https://it.wikipedia.org/wiki/Cratete_di_Tebe"
+  },
+  "pyrrho": {
+   "about": "Pirrone è stato un filosofo scettico greco antico dell'Elide orientale.",
+   "url": "https://it.wikipedia.org/wiki/Pirrone"
+  },
+  "stilpo": {
+   "about": "Stilpone di Megara è stato un filosofo greco antico, appartenente alla scuola socratica minore di Megara che con lui raggiunse il suo culmine per poi dissolversi rapidamente con l'avanzare delle nuove filosofia ellenistiche.",
+   "url": "https://it.wikipedia.org/wiki/Stilpone_di_Megara"
+  },
+  "epicurus": {
+   "about": "Epicuro è stato un filosofo greco antico. Fu discepolo dello scettico democriteo Nausifane e fondatore di una delle maggiori scuole filosofiche dell'età ellenistica e romana, l'epicureismo, che si diffuse dal IV secolo a.C. fino al II secolo d.C.",
+   "url": "https://it.wikipedia.org/wiki/Epicuro"
+  },
+  "strato": {
+   "about": "Stratone di Lampsaco è stato un filosofo e scienziato greco antico.",
+   "url": "https://it.wikipedia.org/wiki/Stratone_di_Lampsaco"
+  },
+  "zeno-citium": {
+   "about": "Zenone di Cizio è stato un filosofo greco antico di origine fenicia, nativo di Cipro e considerato il fondatore dello stoicismo, della cui scuola fu il primo capo.",
+   "url": "https://it.wikipedia.org/wiki/Zenone_di_Cizio"
+  },
+  "cleanthes": {
+   "about": "Cleante è stato un filosofo greco antico, esponente dello stoicismo.",
+   "url": "https://it.wikipedia.org/wiki/Cleante"
+  },
+  "timon": {
+   "about": "Timone di Fliunte è stato un filosofo scettico e poeta greco antico, allievo di Stilpone di Megara e del fondatore della scuola scettica Pirrone di Elide.",
+   "url": "https://it.wikipedia.org/wiki/Timone_di_Fliunte"
+  },
+  "arcesilaus": {
+   "about": "Arcesilao è stato un filosofo greco antico.",
+   "url": "https://it.wikipedia.org/wiki/Arcesilao"
+  },
+  "chrysippus": {
+   "about": "Crisippo di Soli è stato un filosofo e matematico greco antico.",
+   "url": "https://it.wikipedia.org/wiki/Crisippo_di_Soli"
+  },
+  "carneades": {
+   "about": "Carneade di Cirene è stato un filosofo greco antico della corrente degli scettici. Viene considerato come il fondatore della terza Accademia di Atene.",
+   "url": "https://it.wikipedia.org/wiki/Carneade"
+  },
+  "panaetius": {
+   "about": "Panezio è stato un filosofo greco antico. Allievo di Diogene di Seleucia e Antipatro di Tarso, contribuì a rinvigorire lo stoicismo, inaugurando il periodo noto come \"media Stoà\".",
+   "url": "https://it.wikipedia.org/wiki/Panezio_di_Rodi"
+  },
+  "philo-larissa": {
+   "about": "Filone di Larissa è stato un filosofo greco antico, allievo di Clitomaco, al quale succedette come scolarca dell'Accademia di Atene. Fu un filosofo scettico, ma seguì un indirizzo più moderato rispetto a quello del suo maestro e di Carneade.",
+   "url": "https://it.wikipedia.org/wiki/Filone_di_Larissa"
+  },
+  "posidonius": {
+   "about": "Posidonio di Apamea, detto di Rodi, è stato un filosofo, geografo e storico greco antico.",
+   "url": "https://it.wikipedia.org/wiki/Posidonio"
+  },
+  "antiochus": {
+   "about": "Antioco di Ascalona è stato un filosofo greco antico, di origine siriana, considerato il fondatore della cosiddetta Quinta Accademia.",
+   "url": "https://it.wikipedia.org/wiki/Antioco_di_Ascalona"
+  },
+  "philodemus": {
+   "about": "Filodemo di Gadara è stato un filosofo epicureo greco antico.",
+   "url": "https://it.wikipedia.org/wiki/Filodemo_di_Gadara"
+  },
+  "cicero": {
+   "about": "Marco Tullio Cicerone è stato un avvocato, politico, scrittore, oratore e filosofo romano.",
+   "url": "https://it.wikipedia.org/wiki/Marco_Tullio_Cicerone"
+  },
+  "andronicus": {
+   "about": "Andronico di Rodi è stato un filosofo greco antico.",
+   "url": "https://it.wikipedia.org/wiki/Andronico_di_Rodi"
+  },
+  "aenesidemus": {
+   "about": "Enesidemo di Cnosso è stato un filosofo scettico greco antico.",
+   "url": "https://it.wikipedia.org/wiki/Enesidemo"
+  },
+  "lucretius": {
+   "about": "Tito Lucrezio Caro è stato un poeta e filosofo romano, seguace dell'epicureismo.",
+   "url": "https://it.wikipedia.org/wiki/Tito_Lucrezio_Caro"
+  },
+  "seneca": {
+   "about": "Lucio Anneo Seneca è stato un filosofo, drammaturgo e politico romano. Noto anche come Seneca il Giovane o semplicemente come Seneca, fu tra i massimi esponenti dello stoicismo eclettico di età imperiale. Attivo in molti campi, compresa la vita pubblica, fu senatore e questore durante l'età giulio-claudia.",
+   "url": "https://it.wikipedia.org/wiki/Lucio_Anneo_Seneca"
+  },
+  "musonius": {
+   "about": "Gaio Musonio Rufo è stato un filosofo romano.",
+   "url": "https://it.wikipedia.org/wiki/Gaio_Musonio_Rufo"
+  },
+  "plutarch": {
+   "about": "Plutarco è stato uno storico, sacerdote e filosofo greco antico, vissuto sotto l'Impero romano: ebbe anche la cittadinanza romana, con il nome Lucio Mestrio Plutarco, e ricoprì incarichi amministrativi.",
+   "url": "https://it.wikipedia.org/wiki/Plutarco"
+  },
+  "epictetus": {
+   "about": "Epittèto è stato un filosofo greco, esponente dello stoicismo di epoca romana.",
+   "url": "https://it.wikipedia.org/wiki/Epitteto"
+  },
+  "marcus": {
+   "about": "Cesare Marco Aurelio Antonino Augusto, meglio conosciuto semplicemente come Marco Aurelio, è stato un imperatore, filosofo e scrittore romano. Su indicazione dell'imperatore Adriano, fu adottato nel 138 dal futuro suocero e zio Antonino Pio, che lo nominò co-erede al trono imperiale.",
+   "url": "https://it.wikipedia.org/wiki/Marco_Aurelio"
+  },
+  "alexander": {
+   "about": "Alessandro di Afrodisia è stato un filosofo greco antico, uno dei maggiori commentatori aristotelici dell'antichità.",
+   "url": "https://it.wikipedia.org/wiki/Alessandro_di_Afrodisia"
+  },
+  "sextus": {
+   "about": "Sesto Empirico è stato un filosofo scettico greco antico vissuto nel II secolo.",
+   "url": "https://it.wikipedia.org/wiki/Sesto_Empirico"
+  },
+  "ammonius": {
+   "about": "Ammonio Sacca è stato un filosofo alessandrino, fondatore del Neoplatonismo e maestro sia di Plotino che di Origene, da non confondere con l'Origene cristiano, e di Cassio Longino.",
+   "url": "https://it.wikipedia.org/wiki/Ammonio_Sacca"
+  },
+  "plotinus": {
+   "about": "Plotino è stato un filosofo greco antico. È considerato uno dei più importanti filosofi dell'antichità, erede di Platone e padre del neoplatonismo, a volte identificato in toto col suo pensiero.",
+   "url": "https://it.wikipedia.org/wiki/Plotino"
+  },
+  "polemon": {
+   "about": "Polemone è stato un filosofo greco antico platonico.",
+   "url": "https://it.wikipedia.org/wiki/Polemone_(filosofo)"
+  }
+ },
+ "schools": {
+  "pythagorean": {
+   "about": "La Scuola pitagorica o Scuola italica, appartenente al periodo presocratico, fu fondata da Pitagora a Crotone intorno al 530 a.C., sull'esempio delle comunità orfiche e delle sette religiose d'Egitto e di Babilonia, terre che, secondo la tradizione, egli avrebbe conosciuto in occasione dei suoi precedenti viaggi di studio.",
+   "url": "https://it.wikipedia.org/wiki/Scuola_pitagorica"
+  },
+  "eleatic": {
+   "about": "La scuola eleatica è un'antica scuola presocratica di filosofia attiva ad Elea, città greca dell'antica Lucania, il cui esponente principale fu Parmenide.",
+   "url": "https://it.wikipedia.org/wiki/Scuola_eleatica"
+  },
+  "atomist": {
+   "about": "L'atomismo è una teoria filosofica che presuppone una pluralità di costituenti fondamentali all'origine della materia fisica, che tenderebbero ad aggregarsi e disgregarsi prevalentemente per cause meccaniche. Perché questo modello sia valido, gli atomisti ritengono che il mondo naturale sia da separare in due aspetti: gli atomi indivisibili e il vuoto in cui si muovono incessantemente.",
+   "url": "https://it.wikipedia.org/wiki/Atomismo"
+  },
+  "sophist": {
+   "about": "La sofistica è stata una corrente filosofica sviluppatasi nell'antica Grecia, ad Atene in particolare, a partire dalla seconda metà del V secolo a.C., la quale, in polemica con la scuola eleatica e avvalendosi del metodo dialettico di Zenone di Elea, pose al centro della propria riflessione l'uomo e le problematiche relative alla morale e alla vita sociale e politica.",
+   "url": "https://it.wikipedia.org/wiki/Sofistica"
+  },
+  "academy": {
+   "about": "Accademia fu il nome con il quale fu conosciuta la scuola fondata da Platone ad Atene.",
+   "url": "https://it.wikipedia.org/wiki/Accademia_di_Atene"
+  },
+  "lyceum": {
+   "about": "La scuola peripatetica fu una delle grandi scuole filosofiche greche, fondata da Aristotele. I suoi membri erano detti peripatetici.",
+   "url": "https://it.wikipedia.org/wiki/Scuola_peripatetica"
+  },
+  "cynic": {
+   "about": "Il cinismo fu una corrente filosofica della cui origine vi sono differenti tesi:per alcuni, i cinici furono i seguaci della scuola filosofica fondata dai pensatori socratici Antistene di Atene e Diogene di Sinope nel IV secolo a.C. ; per altri, come Farrand Sayre, ne va ricercata l'origine a dopo il II secolo a.C.",
+   "url": "https://it.wikipedia.org/wiki/Cinismo"
+  },
+  "cyrenaic": {
+   "about": "La scuola cirenaica si sviluppa a Cirene, città greca del Nord Africa, nella prima metà del IV secolo a.C. La scuola si forma alcuni decenni dopo la morte del suo iniziatore Aristippo, un cirenaico emigrato ad Atene, allievo di Socrate e Protagora, poi rientrato in patria a diffondere il proprio pensiero. Più che di una vera e propria scuola si dovrebbe parlare di un indirizzo filosofico variegato e non univoco.",
+   "url": "https://it.wikipedia.org/wiki/Scuola_cirenaica"
+  },
+  "megarian": {
+   "about": "La scuola megarica, che fiorì nel IV secolo a.C., venne fondata da Euclide di Megara, uno degli allievi di Socrate. Gli insegnamenti etici della scuola sono stati ricavati da Socrate, riconoscendo un singolo bene, apparentemente associato alla dottrina eleatica dell'Unità. Alcuni successori di Euclide svilupparono a tal punto la logica da divenire una scuola separata, nota come Scuola dialettica.",
+   "url": "https://it.wikipedia.org/wiki/Scuola_megarica"
+  },
+  "pyrrhonist": {
+   "about": "Il pirronismo è una scuola di scetticismo filosofico fondata da Pirro nel IV secolo a.C. È meglio conosciuto attraverso le opere sopravvissute di Sesto Empirico, che scrisse alla fine del II secolo o all'inizio del III secolo d.C.",
+   "url": "https://it.wikipedia.org/wiki/Pirronismo"
+  },
+  "garden": {
+   "about": "L'epicureismo è la filosofia della scuola di Epicuro. Il termine ha nella storiografia filosofica due significati sovrapponibili, ma non coincidenti. Da un lato esso sta a indicare \"la filosofia originaria di Epicuro\", da un altro \"la storia dei pensatori che, dalla sua enunciazione dal IV secolo a.C.",
+   "url": "https://it.wikipedia.org/wiki/Epicureismo"
+  },
+  "stoa": {
+   "about": "Lo stoicismo è una corrente filosofica e spirituale, di impronta razionale, panteista, determinista, e dogmatica, con un forte orientamento etico e tendenzialmente ottimista, fondata intorno al 300 a.C. ad Atene da Zenone di Cizio. La morale stoica risente di quella dei cinici, mentre la fisica si muove su una concezione del cosmo simile a quella di Eraclito.",
+   "url": "https://it.wikipedia.org/wiki/Stoicismo"
+  },
+  "platonist": {
+   "about": "Gli studiosi parlano di medioplatonismo per caratterizzare l'interpretazione data alla filosofia di Platone durante i primi secoli dell'età imperiale. Il prefisso medio- cela un pregiudizio nei confronti dei pensatori di quest'epoca, considerata una semplice età di transizione tra il platonismo scettico di epoca ellenistica e il neoplatonismo, sviluppatosi a partire dal III secolo.",
+   "url": "https://it.wikipedia.org/wiki/Medioplatonismo"
+  },
+  "neoplatonist": {
+   "about": "Il neoplatonismo è quella particolare interpretazione del pensiero di Platone che venne data in età ellenistica, e che riassume in sé diversi altri elementi della filosofia greca, diventando la principale scuola filosofica antica a partire dal III secolo d.C.",
+   "url": "https://it.wikipedia.org/wiki/Neoplatonismo"
+  }
+ }
+}

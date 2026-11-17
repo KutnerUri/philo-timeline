@@ -14,7 +14,7 @@ const titles: Record<'people' | 'schools', Record<string, string>> = {
     democritus: 'Democritus', antisthenes: 'Antisthenes', aristippus: 'Aristippus', 'euclid-megara': 'Euclid of Megara',
     archytas: 'Archytas', plato: 'Plato', diogenes: 'Diogenes', speusippus: 'Speusippus', xenocrates: 'Xenocrates',
     aristotle: 'Aristotle', anaxarchus: 'Anaxarchus', theophrastus: 'Theophrastus', crates: 'Crates of Thebes',
-    pyrrho: 'Pyrrho', stilpo: 'Stilpo', polemon: 'Polemon (scholarch)', epicurus: 'Epicurus',
+    pyrrho: 'Pyrrho', stilpo: 'Stilpo', polemon: 'Polemon of Athens', epicurus: 'Epicurus',
     strato: 'Strato of Lampsacus', 'zeno-citium': 'Zeno of Citium', cleanthes: 'Cleanthes', timon: 'Timon of Phlius',
     arcesilaus: 'Arcesilaus', chrysippus: 'Chrysippus', carneades: 'Carneades', panaetius: 'Panaetius',
     'philo-larissa': 'Philo of Larissa', posidonius: 'Posidonius', antiochus: 'Antiochus of Ascalon',

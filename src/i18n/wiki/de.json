@@ -1,0 +1,294 @@
+{
+ "people": {
+  "thales": {
+   "about": "Thales von Milet war ein vorsokratischer Naturphilosoph, Geometer und Astronom des archaischen Griechenlands. Er ist der früheste namentlich bekannte Philosoph und Mathematiker.",
+   "url": "https://de.wikipedia.org/wiki/Thales"
+  },
+  "anaximander": {
+   "about": "Anaximander oder Anaximandros war ein vorsokratischer griechischer Philosoph. Er gehört neben Thales und Anaximenes zu den wichtigsten Vertretern jenes philosophischen Aufbruchs, der mit Sammelbegriffen wie „ionische Aufklärung“ und „ionische Naturphilosophie“ bezeichnet wird.",
+   "url": "https://de.wikipedia.org/wiki/Anaximander"
+  },
+  "pythagoras": {
+   "about": "Pythagoras von Samos war ein antiker griechischer Philosoph (Vorsokratiker), Mathematiker und Gründer einer einflussreichen religiös-philosophischen Bewegung. Als Vierzigjähriger verließ er seine griechische Heimat und wanderte nach Süditalien aus. Dort gründete er eine Schule und betätigte sich auch politisch.",
+   "url": "https://de.wikipedia.org/wiki/Pythagoras"
+  },
+  "xenophanes": {
+   "about": "Xenophanes von Kolophon war ein antiker griechischer Philosoph und Dichter. Er wird zu den Vorsokratikern gezählt und war einer der führenden Naturphilosophen seiner Zeit.",
+   "url": "https://de.wikipedia.org/wiki/Xenophanes"
+  },
+  "anaximenes": {
+   "about": "Anaximenes war ein antiker griechischer Philosoph und Astronom. Er wird zu den Vorsokratikern gezählt.",
+   "url": "https://de.wikipedia.org/wiki/Anaximenes"
+  },
+  "heraclitus": {
+   "about": "Heraklit von Ephesos war ein vorsokratischer Philosoph aus dem ionischen Ephesos.",
+   "url": "https://de.wikipedia.org/wiki/Heraklit"
+  },
+  "parmenides": {
+   "about": "Parmenides von Elea war einer derjenigen griechischen Philosophen, für die Hermann Diels die Bezeichnung Vorsokratiker prägte. Er lebte in Elea, einer von Griechen gegründeten Stadt in Süditalien, und gilt als ein Hauptvertreter der eleatischen Schule.",
+   "url": "https://de.wikipedia.org/wiki/Parmenides"
+  },
+  "anaxagoras": {
+   "about": "Anaxagoras war ein griechischer Philosoph (Vorsokratiker) aus Klazomenai in Kleinasien. Sein nur in Fragmenten und hauptsächlich von Aristoteles überliefertes philosophisches Denken wird als Zusammenführung der Ansätze Heraklits und der Eleaten gedeutet.",
+   "url": "https://de.wikipedia.org/wiki/Anaxagoras"
+  },
+  "empedocles": {
+   "about": "Empedokles, genannt auch Empedokles von Agrigent, war ein antiker griechischer Philosoph, Naturforscher, Politiker, Redner und Dichter. Unklar ist, ob die Behauptungen zutreffen, wonach er sich auch als Arzt, Magier und Wahrsager betätigte. Zahlreiche Geschichten über sein Leben und seinen Tod tragen legendenhafte Züge.",
+   "url": "https://de.wikipedia.org/wiki/Empedokles"
+  },
+  "zeno-elea": {
+   "about": "Zenon von Elea war ein antiker griechischer Philosoph. Er wird zu den Vorsokratikern gezählt. Es gibt starke Hinweise, dass er Freund und Schüler des Parmenides von Elea war. Allerdings ist dies nicht zweifelsfrei geklärt.",
+   "url": "https://de.wikipedia.org/wiki/Zenon_von_Elea"
+  },
+  "protagoras": {
+   "about": "Protagoras war ein antiker griechischer Philosoph. Er zählt zu den bedeutendsten Sophisten. Für ihn war der Mensch das Maß aller Dinge und die Existenz der Götter bezweifelte er. Seine Schriften sind nicht erhalten.",
+   "url": "https://de.wikipedia.org/wiki/Protagoras"
+  },
+  "gorgias": {
+   "about": "Gorgias von Leontinoi war ein griechischer Rhetor, Rhetoriklehrer und Philosoph. Er wurde schon in der Antike mitunter zu den Sophisten gezählt, doch in der Forschung ist diese Einordnung, die von der Bestimmung des Begriffs Sophistik abhängt, umstritten.",
+   "url": "https://de.wikipedia.org/wiki/Gorgias_von_Leontinoi"
+  },
+  "leucippus": {
+   "about": "Leukipp, genannt auch Leukipp von Milet, war ein griechischer Philosoph. Er wird zu den Vorsokratikern gezählt und gilt als Mitbegründer der atomistischen Weltanschauung.",
+   "url": "https://de.wikipedia.org/wiki/Leukipp"
+  },
+  "melissus": {
+   "about": "Melissos von Samos war ein antiker griechischer Philosoph und Flottenbefehlshaber. Er lebte um die Mitte des 5. Jahrhunderts v. Chr. und wird zu den Vorsokratikern gezählt.",
+   "url": "https://de.wikipedia.org/wiki/Melissos"
+  },
+  "philolaus": {
+   "about": "Philolaos war ein antiker griechischer Philosoph (Pythagoreer). Er war ein Zeitgenosse des Sokrates, wird aber wegen seiner Denkweise zu den Vorsokratikern gezählt.",
+   "url": "https://de.wikipedia.org/wiki/Philolaos"
+  },
+  "socrates": {
+   "about": "Sokrates war ein für das abendländische Denken grundlegender griechischer Philosoph, der in Athen zur Zeit der Attischen Demokratie lebte und wirkte. Zur Erlangung von Menschenkenntnis, ethischen Grundsätzen und Weltverstehen entwickelte er die philosophische Methode eines strukturierten Dialogs, die er Maieutik („Hebammenkunst“) nannte.",
+   "url": "https://de.wikipedia.org/wiki/Sokrates"
+  },
+  "democritus": {
+   "about": "Demokrit war ein frühgriechischer Philosoph, der, obwohl ein jüngerer Zeitgenosse des Sokrates, den Vorsokratikern zugeordnet wird, weil er noch nicht von diesem beeinflusst ist. Als Schüler des Leukipp wirkte und lehrte er in seiner Heimatstadt Abdera. Er selbst beeinflusste den hellenistischen Philosophen Epikur.",
+   "url": "https://de.wikipedia.org/wiki/Demokrit"
+  },
+  "antisthenes": {
+   "about": "Antisthenes war ein griechischer Philosoph der Antike. Er lebte in Athen und war Begründer sowie einer der Hauptvertreter der Lehre des Kynismus.",
+   "url": "https://de.wikipedia.org/wiki/Antisthenes"
+  },
+  "aristippus": {
+   "about": "Aristippos von Kyrene war ein griechischer antiker Philosoph. Er gilt als Begründer der kyrenaischen Schule und des Hedonismus.",
+   "url": "https://de.wikipedia.org/wiki/Aristippos_von_Kyrene"
+  },
+  "euclid-megara": {
+   "about": "Euklid von Megara war ein antiker griechischer Philosoph.",
+   "url": "https://de.wikipedia.org/wiki/Euklid_von_Megara"
+  },
+  "archytas": {
+   "about": "Archytas von Tarent war ein antiker griechischer Philosoph, Mathematiker, Musiktheoretiker, Physiker, Ingenieur, Staatsmann und Feldherr.",
+   "url": "https://de.wikipedia.org/wiki/Archytas_von_Tarent"
+  },
+  "plato": {
+   "about": "Platon war ein antiker griechischer Philosoph.",
+   "url": "https://de.wikipedia.org/wiki/Platon"
+  },
+  "diogenes": {
+   "about": "Diogenes von Sinope war ein antiker griechischer Philosoph. Er zählt zur Strömung des Kynismus.",
+   "url": "https://de.wikipedia.org/wiki/Diogenes_von_Sinope"
+  },
+  "speusippus": {
+   "about": "Speusippos war ein antiker griechischer Philosoph. Er war ein Neffe und Schüler Platons und dessen Nachfolger als Leiter der Platonischen Akademie (Scholarch). Da von seinen philosophischen Werken nur kleine Bruchstücke erhalten sind, gestaltet sich die Rekonstruktion seiner Lehren schwierig. Dank der Erschließung neuer Quellen seit der Mitte des 20.",
+   "url": "https://de.wikipedia.org/wiki/Speusippos"
+  },
+  "xenocrates": {
+   "about": "Xenokrates von Chalkedon war ein griechischer Philosoph der Antike. Als Schüler Platons gehörte er der Platonischen Akademie an. 339/338 übernahm er die Leitung dieser Philosophenschule, die er dann ein Vierteljahrhundert lang innehatte. Als langjähriges Schuloberhaupt und Verfasser zahlreicher Schriften beeinflusste er die Entwicklung des Platonismus nachhaltig.",
+   "url": "https://de.wikipedia.org/wiki/Xenokrates"
+  },
+  "aristotle": {
+   "about": "Aristoteles war ein griechischer Universalgelehrter. Er gehört zu den bekanntesten und einflussreichsten Philosophen und Naturforschern der Geschichte. Sein Lehrer war Platon, doch hat Aristoteles zahlreiche Disziplinen entweder selbst begründet oder maßgeblich beeinflusst, darunter Wissenschaftstheorie, Naturphilosophie, Logik, Biologie, Medizin, Physik, Ethik, Staatstheorie und Dichtungstheorie.",
+   "url": "https://de.wikipedia.org/wiki/Aristoteles"
+  },
+  "anaxarchus": {
+   "about": "Anaxarch war ein griechischer Philosoph, der der Schule Demokrits angehörte.",
+   "url": "https://de.wikipedia.org/wiki/Anaxarch"
+  },
+  "theophrastus": {
+   "about": "Theophrastos von Eresos, deutsch auch Theophrast, war ein griechischer Philosoph und Naturforscher. Er war ein bedeutender Schüler des Aristoteles und als dessen Nachfolger Leiter der peripatetischen Schule.",
+   "url": "https://de.wikipedia.org/wiki/Theophrastos_von_Eresos"
+  },
+  "crates": {
+   "about": "Krates von Theben war ein antiker griechischer Philosoph. Man zählt ihn zu den Kynikern.",
+   "url": "https://de.wikipedia.org/wiki/Krates_von_Theben"
+  },
+  "pyrrho": {
+   "about": "Pyrrhon von Elis war ein antiker griechischer Philosoph. Er war der Stifter der älteren skeptischen Schule.",
+   "url": "https://de.wikipedia.org/wiki/Pyrrhon_von_Elis"
+  },
+  "stilpo": {
+   "about": "Stilpon war ein griechischer Philosoph der Antike. Innerhalb der Philosophiegeschichte wird er zu den Megarikern gezählt.",
+   "url": "https://de.wikipedia.org/wiki/Stilpon"
+  },
+  "epicurus": {
+   "about": "Epikur war ein griechischer Philosoph, Begründer des Epikureismus und der epikureischen Schule. Diese im Hellenismus parallel zur Stoa entstandene philosophische Schule hat durch die von Epikur entwickelte hedonistische Lehre seit ihren Anfängen zwischen Anhängern und Gegnern polarisierend gewirkt. Sie war und ist durch ein verbreitetes Missverständnis des epikureischen Lustbegriffs Fehldeutungen ausgesetzt.",
+   "url": "https://de.wikipedia.org/wiki/Epikur"
+  },
+  "strato": {
+   "about": "Straton von Lampsakos war ein antiker griechischer Philosoph.",
+   "url": "https://de.wikipedia.org/wiki/Straton_von_Lampsakos"
+  },
+  "zeno-citium": {
+   "about": "Zenon von Kition, auch Zenon der Jüngere genannt, war ein hellenistischer Philosoph und Begründer der Stoa.",
+   "url": "https://de.wikipedia.org/wiki/Zenon_von_Kition"
+  },
+  "cleanthes": {
+   "about": "Kleanthes war ein antiker griechischer Philosoph der Stoa, die er nach Zenon von Kitions Tod im Jahr 262 v. Chr. leitete.",
+   "url": "https://de.wikipedia.org/wiki/Kleanthes"
+  },
+  "timon": {
+   "about": "Timon von Phleius war ein antiker griechischer Philosoph, satirischer Dichter und Wanderredner.",
+   "url": "https://de.wikipedia.org/wiki/Timon_von_Phleius"
+  },
+  "arcesilaus": {
+   "about": "Arkesilaos war ein antiker griechischer Philosoph. Nach seiner Heimatstadt wird er auch Arkesilaos von Pitane genannt. Er lebte in Athen und gehörte der Platonischen Akademie an, die er jahrzehntelang als Scholarch leitete und der er eine neue Ausrichtung gab. Mit ihm begann die Epoche der später so bezeichneten Jüngeren („skeptischen“) Akademie, die auch „Mittlere Akademie“ genannt wird.",
+   "url": "https://de.wikipedia.org/wiki/Arkesilaos"
+  },
+  "chrysippus": {
+   "about": "Chrysippos von Soloi, im Deutschen üblicherweise Chrysipp genannt, war ein griechischer Philosoph, der nach dem Tod seines Lehrers Kleanthes 232/231 v. Chr. Schulhaupt der Stoa wurde und sie als einer ihrer bedeutendsten Vertreter erneuerte. Die berühmtesten Schüler von Chrysippos waren Diogenes von Babylon und Zenon von Tarsos, die später die Stoa leiteten.",
+   "url": "https://de.wikipedia.org/wiki/Chrysippos_von_Soloi"
+  },
+  "carneades": {
+   "about": "Karneades von Kyrene war ein berühmter griechischer Philosoph im Hellenismus. Die früher mitunter genutzte Bezeichnung Karneades der Ältere ist obsolet, da seit 2019 bekannt ist, dass sein mutmaßlicher gleichnamiger Schüler und Nachfolger „Karneades der Jüngere“ nicht existiert hat.",
+   "url": "https://de.wikipedia.org/wiki/Karneades_von_Kyrene"
+  },
+  "panaetius": {
+   "about": "Panaitios war ein stoischer Philosoph des späten Hellenismus.",
+   "url": "https://de.wikipedia.org/wiki/Panaitios_von_Rhodos"
+  },
+  "philo-larissa": {
+   "about": "Philon von Larisa war ein antiker griechischer Philosoph. Er gehörte der Platonischen Akademie in Athen an, die er von 110/109 bis 88 als Scholarch (Schuloberhaupt) leitete. Sein tatsächlicher Name lautete mit hoher Wahrscheinlichkeit Philion von Larisa – mit einem zweiten Iota bzw. „i“.",
+   "url": "https://de.wikipedia.org/wiki/Philon_von_Larisa"
+  },
+  "posidonius": {
+   "about": "Poseidonios war ein bedeutender griechischer Philosoph, Geschichtsschreiber und Universalgelehrter des späten Hellenismus aus dem syrischen Apameia. Obwohl in Syrien geboren, war er ein Grieche, denn Apameia am Orontes war eine Polis, die einst von den Seleukiden gegründet worden war.",
+   "url": "https://de.wikipedia.org/wiki/Poseidonios"
+  },
+  "antiochus": {
+   "about": "Antiochos von Askalon war ein antiker griechischer Philosoph im Zeitalter des Hellenismus.",
+   "url": "https://de.wikipedia.org/wiki/Antiochos_von_Askalon"
+  },
+  "philodemus": {
+   "about": "Philodemos von Gadara, deutsch meist Philodem war ein hellenistischer epikureischer Philosoph und Dichter.",
+   "url": "https://de.wikipedia.org/wiki/Philodemos_von_Gadara"
+  },
+  "cicero": {
+   "about": "Marcus Tullius Cicero war der berühmteste Redner des alten Rom, zudem Anwalt, Schriftsteller, Philosoph und Politiker, der als Homo novus im Jahr 63 v. Chr. das Konsulat bekleidete. Als oberster Magistrat der Römischen Republik rettete er diese ein letztes Mal, indem er die Verschwörung des Catilina niederschlug. Der Senat ehrte ihn dafür mit dem Titel pater patriae.",
+   "url": "https://de.wikipedia.org/wiki/Marcus_Tullius_Cicero"
+  },
+  "andronicus": {
+   "about": "Andronikos von Rhodos war ein Erneuerer der aristotelischen Philosophie. Er lebte im 1. Jahrhundert v. Chr. Es ist nicht sicher, ob er in Athen – möglicherweise als Leiter des Peripatos – oder in Rom lehrte.",
+   "url": "https://de.wikipedia.org/wiki/Andronikos_von_Rhodos"
+  },
+  "aenesidemus": {
+   "about": "Ainesidemos war ein antiker griechischer Philosoph. Er lebte im 1. Jahrhundert v. Chr. und gilt als Begründer des Neupyrrhonismus.",
+   "url": "https://de.wikipedia.org/wiki/Ainesidemos"
+  },
+  "lucretius": {
+   "about": "Titus Lucretius Carus war ein römischer Dichter und Philosoph in der Tradition des Epikureismus. Sein wahrscheinlich unvollendetes Werk De rerum natura (Über die Natur der Dinge) ist eine der Hauptquellen zur Philosophie Epikurs, die ansonsten nur in Fragmenten überliefert ist.",
+   "url": "https://de.wikipedia.org/wiki/Lukrez"
+  },
+  "seneca": {
+   "about": "Lucius Annaeus Seneca, genannt Seneca der Jüngere, war ein römischer Philosoph, Dramatiker, Naturforscher, Politiker und als Stoiker einer der meistgelesenen Schriftsteller seiner Zeit. Seine Reden, die ihn bekannt gemacht hatten, sind verloren gegangen.",
+   "url": "https://de.wikipedia.org/wiki/Seneca"
+  },
+  "musonius": {
+   "about": "Gaius Musonius Rufus war ein römischer Philosoph. Er zählt zu den Vertretern der späten Stoa.",
+   "url": "https://de.wikipedia.org/wiki/Gaius_Musonius_Rufus"
+  },
+  "plutarch": {
+   "about": "Plutarch war ein antiker griechischer Schriftsteller. Er verfasste zahlreiche biographische und philosophische Schriften, die seine umfassende Bildung und Gelehrsamkeit zeigen und zu einem ungewöhnlich großen Teil bis heute erhalten sind. In der griechischen Literaturgeschichte gilt Plutarch als einer der wichtigsten Vertreter des Attizismus und der Zweiten Sophistik.",
+   "url": "https://de.wikipedia.org/wiki/Plutarch"
+  },
+  "epictetus": {
+   "about": "Epiktet war ein antiker Philosoph während der römischen Kaiserzeit. Er zählt zu den einflussreichsten Vertretern der späten Stoa.",
+   "url": "https://de.wikipedia.org/wiki/Epiktet"
+  },
+  "marcus": {
+   "about": "Mark Aurel, auch Marc Aurel oder Marcus Aurelius, war von 161 bis 180 römischer Kaiser und als Philosoph der letzte bedeutende Vertreter der jüngeren Stoa. Als Princeps und Nachfolger seines Adoptivvaters Antoninus Pius nannte er sich selbst Marcus Aurelius Antoninus Augustus.",
+   "url": "https://de.wikipedia.org/wiki/Mark_Aurel"
+  },
+  "alexander": {
+   "about": "Alexander von Aphrodisias war ein antiker Philosoph, der um 200 n. Chr. lebte. Er gehörte der Richtung der Peripatetiker an.",
+   "url": "https://de.wikipedia.org/wiki/Alexander_von_Aphrodisias"
+  },
+  "sextus": {
+   "about": "Sextus Empiricus war ein Arzt und Philosoph im 2. Jahrhundert, der mehrere Werke in griechischer Sprache verfasst hat. Er war ein Vertreter des Pyrrhonismus.",
+   "url": "https://de.wikipedia.org/wiki/Sextus_Empiricus"
+  },
+  "ammonius": {
+   "about": "Ammonios Sakkas war ein antiker Philosoph, der sich zur platonischen Tradition bekannte. Schon früh scheint er mit Ammonios von Alexandria verwechselt worden zu sein, denn er gründete in Alexandria eine Philosophenschule, aus deren Gedankengut die heute mit dem modernen Begriff Neuplatonismus bezeichnete Richtung entstand. Bekannt ist Ammonios Sakkas in erster Linie als Lehrer Plotins.",
+   "url": "https://de.wikipedia.org/wiki/Ammonios_Sakkas"
+  },
+  "plotinus": {
+   "about": "Plotin war ein antiker Philosoph.",
+   "url": "https://de.wikipedia.org/wiki/Plotin"
+  },
+  "polemon": {
+   "about": "Polemon von Athen war ein antiker griechischer Philosoph. Er war Platoniker und leitete jahrzehntelang als Scholarch die Platonische Akademie in Athen.",
+   "url": "https://de.wikipedia.org/wiki/Polemon_von_Athen"
+  }
+ },
+ "schools": {
+  "pythagorean": {
+   "about": "Als Pythagoreer bezeichnet man im engeren Sinne die Angehörigen einer religiös-philosophischen, auch politisch aktiven Schule, die Pythagoras von Samos in den zwanziger Jahren des 6. Jahrhunderts v. Chr. in Süditalien gründete und die nach seinem Tod noch einige Jahrzehnte fortbestand.",
+   "url": "https://de.wikipedia.org/wiki/Pythagoreer"
+  },
+  "eleatic": {
+   "about": "Die Eleaten stellten eine der ältesten philosophischen Schulen der griechischen Antike dar. Benannt ist die Schule nach der von Griechen gegründeten, an der westitalienischen Küste gelegenen Stadt Elea. Die Eleaten gehören zur Gruppe der Vorsokratiker.",
+   "url": "https://de.wikipedia.org/wiki/Eleaten"
+  },
+  "atomist": {
+   "about": "Der Ausdruck Atomismus bezeichnet entsprechend seiner griechischen Etymologie ganz allgemein die Annahme, dass ein Bereich aus kleinsten, fundamentalen, nicht teilbaren oder auf andere Elemente reduzierbaren Elementen besteht.",
+   "url": "https://de.wikipedia.org/wiki/Atomismus"
+  },
+  "sophist": {
+   "about": "Als Sophisten wird eine Gruppe von Personen aus der griechischen Antike bezeichnet, die über besondere Kenntnisse auf theoretischem oder praktischem Gebiet verfügten, im engeren Sinne vor allem Didaktiker und Rhetoriker, und die mit dem Vermitteln ihrer Kenntnisse ihren Lebensunterhalt verdienten. Sie wirkten von etwa 450 v. Chr. bis etwa 380 v. Chr.",
+   "url": "https://de.wikipedia.org/wiki/Sophisten"
+  },
+  "academy": {
+   "about": "Die Platonische Akademie war die von Platon gegründete antike Philosophenschule in Athen.",
+   "url": "https://de.wikipedia.org/wiki/Platonische_Akademie"
+  },
+  "lyceum": {
+   "about": "Peripatos ist der Name der philosophischen Schule des Aristoteles. Wie die anderen philosophischen Schulen Athens leitet sich ihr Name von dem Ort ab, an dem der Unterricht stattfand, in diesem Fall vom Peripatos. Entsprechend hießen die Angehörigen der Schule Peripatetiker.",
+   "url": "https://de.wikipedia.org/wiki/Peripatos"
+  },
+  "cynic": {
+   "about": "Der Kynismus [kyˈnɪsmʊs] war eine Strömung der antiken Philosophie mit den Schwerpunkten auf ethischem Skeptizismus und Bedürfnislosigkeit. Der moderne Begriff Zynismus ist von dem ursprünglichen Wort abgeleitet, hat jedoch im heutigen Sprachgebrauch eine andere Bedeutung.",
+   "url": "https://de.wikipedia.org/wiki/Kynismus"
+  },
+  "cyrenaic": {
+   "about": "Die Kyrenaiker waren Anhänger und Nachfahren einer antiken philosophischen Schule im Griechenland des 4. und 3. Jahrhunderts v. Chr. Begründet wurde die Schule von Aristippos von Kyrene.",
+   "url": "https://de.wikipedia.org/wiki/Kyrenaiker"
+  },
+  "megarian": {
+   "about": "Die Megariker waren eine Gruppe von griechischen Philosophen der Antike, die im Zeitraum vom 5. bis zum 3. Jahrhundert v. Chr. lebten.",
+   "url": "https://de.wikipedia.org/wiki/Megariker"
+  },
+  "pyrrhonist": {
+   "about": "Pyrrhonismus ist die Bezeichnung für eine historische Variante des Skeptizismus, die auf den antiken griechischen Philosophen Pyrrhon von Elis zurückgeht. Der Pyrrhonismus, auch „pyrrhonische Skepsis“ genannt, ist die älteste in Europa entstandene Form des Skeptizismus. Seine Anhänger werden Pyrrhoneer genannt.",
+   "url": "https://de.wikipedia.org/wiki/Pyrrhonismus"
+  },
+  "garden": {
+   "about": "Der Epikureismus ist die philosophische Denkrichtung, die auf den Lehren des antiken griechischen Philosophen Epikur basiert. Sie entstand im ausgehenden 4. Jahrhundert v. Chr. und war bis ins 3. Jahrhundert n. Chr. in Griechenland und der römischen Welt verbreitet.",
+   "url": "https://de.wikipedia.org/wiki/Epikureismus"
+  },
+  "stoa": {
+   "about": "Die Stoa ist eine der einflussreichsten Richtungen der hellenistischen und römischen Philosophie. Sie wurde um 300 v. Chr. von Zenon von Kition in Athen begründet. Logik und Ethik der stoischen Lehre sind bis in die Gegenwart Teil des jeweiligen philosophischen Diskurses. Der Name leitet sich von der Stoa Poikile ab, dem Ort der öffentlichen Lehrtätigkeit Zenons auf der Agora von Athen.",
+   "url": "https://de.wikipedia.org/wiki/Stoa"
+  },
+  "platonist": {
+   "about": "Mittelplatonismus ist eine moderne, von Karl Praechter eingeführte Bezeichnung für eine Entwicklungsphase des Platonismus, die im 1. Jahrhundert v. Chr. begann und bis zum späten 3. Jahrhundert dauerte. Der Mittelplatonismus wurde vom Neuplatonismus abgelöst.",
+   "url": "https://de.wikipedia.org/wiki/Mittelplatonismus"
+  },
+  "neoplatonist": {
+   "about": "Neuplatonismus ist eine moderne Bezeichnung für die jüngste Schulrichtung im antiken Platonismus, der eine der bedeutendsten Strömungen der griechischen Philosophie war. Der Neuplatonismus entstand im 3. Jahrhundert n. Chr. aus dem Mittelplatonismus. Von Rom aus, wo der Philosoph Plotin eine neuplatonische Philosophenschule gegründet hatte, breitete sich die neuplatonische Bewegung über das Römische Reich aus.",
+   "url": "https://de.wikipedia.org/wiki/Neuplatonismus"
+  }
+ }
+}
