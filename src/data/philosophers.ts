@@ -41,7 +41,7 @@ export type Person = {
   major?: true;
   /** Year of peak activity (floruit). Defaults to the school's founding year for founders, else born + 40. */
   active?: number;
-  /** Direct teachers ("student of"). */
+  /** Direct teachers ("student of"). The first one is where a founder's branch forks from. */
   studentOf?: string[];
   /** Main influences that were not direct teachers. */
   influence?: string[];
@@ -68,7 +68,7 @@ export const people: Person[] = [
   // Classical
   { id: 'socrates', name: 'Socrates', major: true, born: -470, died: -399, active: -430, school: null, note: 'Questioning everything; virtue is knowledge', influence: ['anaxagoras'] },
   { id: 'democritus', name: 'Democritus', major: true, born: -460, died: -370, school: 'atomist', note: 'Everything is atoms moving in the void', studentOf: ['leucippus'] },
-  { id: 'antisthenes', name: 'Antisthenes', born: -446, died: -366, school: 'cynic', note: 'Virtue alone is enough for happiness', studentOf: ['gorgias', 'socrates'] },
+  { id: 'antisthenes', name: 'Antisthenes', born: -446, died: -366, school: 'cynic', note: 'Virtue alone is enough for happiness', studentOf: ['socrates', 'gorgias'] },
   { id: 'aristippus', name: 'Aristippus', born: -435, died: -356, school: 'cyrenaic', note: 'The pleasure of the moment is the good', studentOf: ['socrates'] },
   { id: 'euclid-megara', name: 'Euclid of Megara', born: -435, died: -365, school: 'megarian', note: 'The Good is one, under many names', studentOf: ['socrates'], influence: ['parmenides'] },
   { id: 'archytas', name: 'Archytas', born: -428, died: -347, school: 'pythagorean', note: 'Mathematician and statesman; friend of Plato', influence: ['philolaus'] },

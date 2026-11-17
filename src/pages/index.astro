@@ -3,7 +3,7 @@ import { people, schools } from '../data/philosophers';
 import {
   sorted, rowY, spans, leaders, links, spines, schoolHome, ticks, eraMarks,
   height, yOf, SVG_W, ROW_H, fmtYear, fmtSpan, anchorOf, miniCol,
-  AXIS_X, LANE_W, MAX_COMPARE,
+  AXIS_X, LANE_W, MAX_COMPARE, branches, merges, branchOf, branchDots, branchLeaders,
 } from '../lib/layout';
 
 // Minimap: periods as bands, people as dots at their active year
@@ -36,6 +36,11 @@ const data = {
   links, leaders: Object.fromEntries(leaders.map((l) => [l.id, l.d])),
   spans: Object.fromEntries(spans.map((b) => [b.id, b])),
   axisX: AXIS_X, laneW: LANE_W, maxCompare: MAX_COMPARE,
+  branches: Object.fromEntries(branches.map(({ id, d, ...b }) => [id, b])),
+  branchOf: Object.fromEntries(branchOf),
+  branchLeaders: Object.fromEntries(branchLeaders.map((l) => [l.id, l.d])),
+  branchDots: Object.fromEntries(branchDots.map((t) => [t.id, t])),
+  merges,
 };
 ---
 
@@ -71,6 +76,12 @@ const data = {
           {leaders.map((l) => <path class="leader" d={l.d} />)}
           {spans.map((b) => <path class="atick" d={`M${AXIS_X - 3},${b.ya}H${AXIS_X + 3}`} />)}
           {links.filter((l) => l.type === 'student').map((l) => <path class="student" d={l.d} />)}
+        </g>
+        <g id="branch">
+          {branchLeaders.map((l) => <path class="leader" d={l.d} />)}
+          {branches.map((b) => <path class="branch" d={b.d} />)}
+          {merges.map((m) => <path class="merge" d={m.d} />)}
+          {branchDots.map((t) => <path class="bdot" d={`M${t.x},${t.y}h0`} />)}
         </g>
         <g id="hl"></g>
       </svg>
@@ -108,6 +119,7 @@ const data = {
     <aside id="panel" hidden></aside>
     <div id="tools">
       <button id="all" type="button" hidden>Select all</button>
+      <button id="view-branches" type="button" aria-pressed="false">Branches</button>
       <button id="select" type="button" aria-pressed="false">Select</button>
     </div>
 
@@ -150,9 +162,13 @@ const data = {
         const ids = selected.length ? selected : hovered ? [hovered] : [];
         tl.classList.toggle('focusing', ids.length > 0);
         tl.classList.remove('packed');
-        labelSpan(ids.length === 1 ? ids[0] : null);
-        hl.innerHTML = ids.length === 1 ? focusOne(ids[0])
+        labelSpan(ids.length === 1 && !branchView ? ids[0] : null);
+        const svg = ids.length === 1 ? focusOne(ids[0])
           : ids.length > data.maxCompare ? packed(ids) : ids.length ? compare(ids) : '';
+        // The marks above apply in both views; the branch view swaps in its own drawing.
+        hl.innerHTML = !branchView ? svg
+          : ids.length === 1 ? restOnBranches(ids[0]) + trail(ids[0])
+          : ids.length <= data.maxCompare ? ids.map((id, i) => trail(id, slots[i])).join('') : '';
         showPanel(selected.length === 1 && !selectMode ? selected[0] : null);
         allBtn.textContent = selected.length === allIds.length ? 'Deselect all' : 'Select all';
       }
@@ -166,8 +182,10 @@ const data = {
         // They stay at their resting look; everyone else fades.
         const related = new Set();
         for (const l of linksBy[id] ?? []) related.add(l.from), related.add(l.to);
-        for (const [o, s] of Object.entries(data.spans)) if (s.ya >= b.y1 && s.ya <= b.y2) related.add(o);
+        lastContemp = new Set();
+        for (const [o, s] of Object.entries(data.spans)) if (s.ya >= b.y1 && s.ya <= b.y2) related.add(o), lastContemp.add(o);
         related.delete(id);
+        lastRelated = related;
 
         let svg = '<g class="rest">';
         for (const r of related) {
@@ -212,6 +230,76 @@ const data = {
       const slots = Array.from({ length: data.maxCompare }, (_, i) => `s${i}`);
 
       // Many people: the packed lanes, with the base leaders left as they are.
+      // Branch view: the path that led to this person: their branch down to their dot, then
+      // each parent branch down to where the next one forked off it, back to a root.
+      // Everyone on that path gets a dot and keeps their resting row.
+      let branchView = false;
+      let lastRelated = new Set(); // set by focusOne: the people kept at their resting look
+      let lastContemp = new Set(); // ...and which of them were active during the person's life
+
+      // Everyone else on the branch graph: a full gray dot if they were active during the
+      // person's life, an empty circle otherwise; related people also get a gray leader.
+      // (The path and the highlighted lines draw their own blue dots on top.)
+      function restOnBranches(id) {
+        let svg = '';
+        for (const r of lastRelated) svg += `<path class="leader" d="${data.branchLeaders[r]}"/>`;
+        for (const [r, t] of Object.entries(data.branchDots)) {
+          if (r === id) continue;
+          const at = `d="M${t.x},${t.y}h0"`;
+          svg += `<path class="ring" ${at}/>` + (lastContemp.has(r) ? '' : `<path class="hole" ${at}/>`);
+        }
+        return `<g class="rest">${svg}</g>`;
+      }
+      function trail(id, cls = '') {
+        let d = '', dots = '';
+        let to = data.branchDots[id].y;
+        for (let bid = data.branchOf[id]; bid; ) {
+          const b = data.branches[bid];
+          d += b.forkD + (to > b.lineTop ? `M${b.x},${b.lineTop}V${to}` : '');
+          for (const m of b.members) {
+            const t = data.branchDots[m];
+            if (t.y > to) continue;
+            dots += `<path class="bdot" d="M${t.x},${t.y}h0"/>`;
+            if (m !== id) mark(rows[m], 'rel');
+          }
+          to = b.forkY;
+          bid = b.parent;
+        }
+        return `<g class="trail ${cls}"><path class="branch" d="${d}"/><path class="leader" d="${data.branchLeaders[id]}"/>${dots}</g>`
+          + (cls ? '' : after(id));
+      }
+
+      // What came after the person: their own line continuing below them, the branches
+      // their disciples started (down to each disciple), and dashed influences in and out.
+      function after(id) {
+        const own = data.branches[data.branchOf[id]];
+        const y = data.branchDots[id].y;
+        let d = own.bottom > y && !data.branchOf[id].startsWith('solo:') ? `M${own.x},${y}V${own.bottom}` : '';
+        let dots = '', merges = '';
+        const dot = (m) => { const t = data.branchDots[m]; dots += `<path class="bdot" d="M${t.x},${t.y}h0"/>`; mark(rows[m], 'rel'); };
+        for (const m of own.members) if (data.branchDots[m].y > y) dot(m);
+        for (const c of Object.values(data.branches)) {
+          if (c.teacher !== id) continue;
+          const first = data.branchDots[c.members[0]];
+          d += c.forkD + (first.y > c.lineTop ? `M${c.x},${c.lineTop}V${first.y}` : '');
+          dot(c.members[0]);
+        }
+        for (const m of data.merges) {
+          const out = m.fromIds.includes(id);
+          if (!out && m.to !== id) continue;
+          merges += `<path class="merge" d="${m.d}"/>`;
+          if (out) dot(m.to); else m.fromIds.forEach(dot);
+        }
+        return `<g class="after"><path class="branch" d="${d}"/>${dots}${merges}</g>`;
+      }
+      const branchBtn = document.getElementById('view-branches');
+      branchBtn.addEventListener('click', () => {
+        branchView = !branchView;
+        branchBtn.setAttribute('aria-pressed', branchView);
+        tl.classList.toggle('branchview', branchView);
+        render();
+      });
+
       function packed(ids) {
         tl.classList.add('packed');
         return ids.map((id) => {
@@ -365,6 +453,18 @@ const data = {
       .student { stroke: #9a968c; stroke-width: 1.2; }
       .influence { stroke-dasharray: 4 3; }
       .focusing #base { opacity: .18; }
+      #branch { display: none; }
+      .branchview #base { display: none; }
+      .branchview #branch { display: inline; }
+      .focusing #branch { opacity: .25; }
+      .branch { stroke: #a9a49a; stroke-width: 2; }
+      .bdot { stroke: var(--fg); stroke-width: 6; stroke-linecap: round; }
+      .merge { stroke: #b9b3a5; stroke-width: 1.2; stroke-dasharray: 4 3; }
+      #hl .trail .branch { stroke-width: 2.5; }
+      #hl .trail .bdot { stroke-width: 6; }
+      #hl .after { opacity: .55; }
+      #hl .after .branch { stroke-width: 2.5; }
+      #hl .merge { stroke-width: 1.5; }
       #hl path { stroke: var(--accent); }
       #hl .bar { stroke-width: 3; }
       #hl .student { stroke-width: 2; }
@@ -373,8 +473,11 @@ const data = {
       #hl .atick { stroke: var(--fg); }
       #hl .rest .leader { stroke: #c9c4b8; opacity: 1; }
       #hl .rest .atick { stroke: #a9a49a; stroke-width: 1.5; }
+      /* Others on the branch graph while someone is highlighted: contemporaries a full gray dot, everyone else an empty gray circle. */
+      #hl .rest .ring { stroke: #a9a49a; stroke-width: 6; stroke-linecap: round; }
+      #hl .rest .hole { stroke: var(--bg); stroke-width: 3; stroke-linecap: round; }
       #hl .bar + .atick { stroke: var(--accent); }
-      #hl g path { stroke: var(--c); }
+      #hl g path { stroke: var(--c, var(--accent)); }
       #hl g .leader { opacity: .8; }
 
       /* Compare colours, one per selected person (slot order). */
@@ -419,7 +522,7 @@ const data = {
 
       #tools { position: fixed; top: 12px; right: 12px; z-index: 11; display: flex; gap: 6px; }
       #tools button { font: 600 13px system-ui, sans-serif; color: var(--accent); background: #fff; border: 1px solid var(--faint); border-radius: 999px; padding: 6px 14px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
-      #select[aria-pressed="true"] { background: var(--accent); color: #fff; border-color: var(--accent); }
+      #tools [aria-pressed="true"] { background: var(--accent); color: #fff; border-color: var(--accent); }
       .selecting .row:not(.on) .dot { border-style: dashed; }
 
       #mini { position: fixed; top: 16px; bottom: 16px; left: 12px; width: 48px; background: #f3f1ec; border: 1px solid var(--faint); border-radius: 4px; cursor: pointer; touch-action: none; user-select: none; z-index: 5; }

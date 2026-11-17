@@ -19,13 +19,14 @@ It started from the Socrates → Plato → Aristotle line and the schools that b
 - **Compare.** Shift+click (or the Select button, for touch) selects several people. Up to 5 each get a coloured lane beside the axis, so overlapping lifetimes show up as lanes running side by side. Beyond that, lifespans switch to fixed packed lanes; *Select all* (in Select mode) shows every lifespan at once. The info card shows only for a single selection.
 - **Navigation.** A minimap on the left shows the eras and a dot per person, with a box for the current view; click or drag to jump. Clicking a person pins them and opens an info card (school, teachers, students, influences).
 - **Performance.** All geometry is computed at build time. The browser never measures or re-lays out; hovering only toggles a few classes and draws the handful of highlighted lines.
+- **Branches (toggle).** The Branches button swaps the axis for a git-style branch graph on the same time scale. Every school is a branch; a person with no school is a single dot. A branch forks (a short 45° bevel, only ever rightwards) from the branch of its founder's first direct teacher, just before it starts; a school that starts where its parent school ended carries straight on in the same column. The founder's other teachers and influences flow in as dashed merges (Pythagoreans and Eleatics → Academy). Long-lived lines take the leftmost columns. Selecting someone highlights the path that led to them (their branch down to their dot, then each parent branch down to its fork) and, more lightly, what came after: their own line continuing below them, the branches their disciples started, and the dashed influences in and out. Everyone on those lines is marked.
 - **Main figures stand out.** About two dozen people everyone should know are flagged `major` and set at full size; the rest are set at 0.85.
 - **Minimal styling.**
 
 ## Structure
 
 - `src/data/philosophers.ts`: schools and people. To add someone, give them `born`, `died`, `school`, `note`, plus optional `major` (a main figure, shown at full size), `studentOf` (direct teachers), `influence` (main influences) and `active` (floruit year). Negative years are BCE. Most ancient dates are approximate; uncertain teacher relationships are recorded as influences.
-- `src/lib/layout.ts`: build-time layout (time scale, row nudging, axis leaders, lifespan spans, link curves, school lines, minimap packing).
+- `src/lib/layout.ts`: build-time layout (time scale, row nudging, axis leaders, lifespan spans, link curves, school lines, minimap packing, branches).
 - `src/pages/index.astro`: the page, interaction script and styles.
 
 ## Run
