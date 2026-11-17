@@ -28,7 +28,7 @@ It started from the Socrates → Plato → Aristotle line and the schools that b
 
 ## Structure
 
-- `src/data/philosophers.ts`: schools (`name`, `philosophy`, `note`, optional `founder` and `founded`) and people. To add someone, give them `born`, `died`, `school`, `note`, plus optional `priority` (`grand` or `high`; omitted = low), `studentOf` (direct teachers), `influence` (main influences) and `active` (floruit year). Negative years are BCE. Most ancient dates are approximate; uncertain teacher relationships are recorded as influences.
+- `src/data/philosophers.ts`: schools (`name`, `philosophy`, `note`, optional `founder` and `founded`) and people. To add someone, give them `born`, `died`, `school`, `note` (a short punchline, shown on their row), `about` (a short paragraph for the info card), plus optional `priority` (`grand` or `high`; omitted = low), `studentOf` (direct teachers), `influence` (main influences) and `active` (floruit year). Negative years are BCE. Most ancient dates are approximate; uncertain teacher relationships are recorded as influences.
 - `src/lib/layout.ts`: build-time layout (time scale, row nudging, minimap packing, branches, school tags and spans, merges, and each person's highlight).
 - `src/pages/index.astro`: the page, interaction script and styles.
 

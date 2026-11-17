@@ -21,7 +21,7 @@ const tagOf = new Map(schoolTags.map((t) => [t.founder, t]));
 const data = {
   people: Object.fromEntries(
     people.map((p) => [p.id, {
-      name: p.name, span: fmtSpan(p), active: fmtYear(anchorOf(p)), from: fmtYear(p.born), to: fmtYear(p.died), note: p.note, school: p.school,
+      name: p.name, span: fmtSpan(p), active: fmtYear(anchorOf(p)), from: fmtYear(p.born), to: fmtYear(p.died), note: p.note, about: p.about, school: p.school,
       studentOf: p.studentOf ?? [], influence: p.influence ?? [],
       students: people.filter((q) => q.studentOf?.includes(p.id)).map((q) => q.id),
       influenced: people.filter((q) => q.influence?.includes(p.id)).map((q) => q.id),
@@ -285,7 +285,7 @@ const data = {
           p.influence.length && `<dt>Influenced by</dt><dd>${link(p.influence)}</dd>`,
           p.influenced.length && `<dt>Influenced</dt><dd>${link(p.influenced)}</dd>`,
         ].filter(Boolean).join('');
-        panel.innerHTML = `<button class="x" aria-label="Close">×</button><h2>${p.name}</h2><div class="dates">${p.span} · active c. ${p.active}</div><p>${p.note}</p><dl>${lines}</dl>`;
+        panel.innerHTML = `<button class="x" aria-label="Close">×</button><h2>${p.name}</h2><div class="dates">${p.span} · active c. ${p.active}</div><p class="lead">${p.note}</p><p>${p.about}</p><dl>${lines}</dl>`;
         panel.hidden = false;
       }
 
@@ -493,6 +493,7 @@ const data = {
       #panel { position: fixed; right: 16px; bottom: 16px; width: 300px; max-height: 70vh; overflow: auto; background: #fff; border: 1px solid var(--faint); box-shadow: 0 6px 24px rgba(0,0,0,.08); padding: 14px 16px; font: 13px/1.45 system-ui, sans-serif; z-index: 10; }
       #panel h2 { font: 600 19px ui-serif, Georgia, serif; margin: 0; }
       #panel p { margin: 6px 0 10px; }
+      #panel .lead { font: italic 15px/1.35 ui-serif, Georgia, serif; margin-bottom: 6px; } /* the punchline, then the paragraph */
       #panel dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 4px 10px; }
       #panel dt { color: var(--muted); }
       #panel dd { margin: 0; }
