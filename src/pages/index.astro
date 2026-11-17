@@ -507,10 +507,12 @@ const data = {
       .row { position: absolute; left: calc(var(--tick-w) + var(--svg-w)); right: 16px; display: grid; grid-template-columns: 1fr var(--school-w); gap: 16px; padding-left: 14px; cursor: pointer; }
       .dot { position: absolute; left: -5px; top: 7px; width: 10px; height: 10px; border-radius: 50%; background: var(--bg); border: 2px solid var(--fg); }
       .person, .school { min-width: 0; }
-      .l1, .note, .sphil, .sname { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-      .l1 b { font-size: 16px; font-weight: 600; }
+      .note, .sphil, .sname { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      /* Always flex, so adding the founder line on highlight doesn't move the name. */
+      .l1 { display: flex; align-items: center; white-space: nowrap; }
+      .l1 b { font-size: 16px; font-weight: 600; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
       /* Everyone but the main figures is set at 0.85 size. */
-      .row.minor .l1 b { font-size: 13.6px; }
+      .row.minor .l1 b { font-size: 13.6px; font-weight: 400; }
       .row.minor .note { font-size: 10.6px; }
       .row.minor .dot { width: 8px; height: 8px; left: -4px; top: 8px; } /* whole pixels keep it round */
       .dates, .note, .sphil, .founded { font: 12.5px system-ui, sans-serif; color: var(--muted); }
@@ -528,7 +530,6 @@ const data = {
       .row.on .dot { border-color: var(--c, var(--accent)); background: var(--c, var(--accent)); }
       .row.on[class*=" s"] b { color: var(--c); }
       .spine.on { display: block; }
-      .row.founds .l1 { display: flex; align-items: center; }
       .row.founds .l1::after { content: ''; flex: 1; margin-left: 10px; border-top: 1.5px solid var(--muted); opacity: .6; }
 
       #panel { position: fixed; right: 16px; bottom: 16px; width: 300px; max-height: 70vh; overflow: auto; background: #fff; border: 1px solid var(--faint); box-shadow: 0 6px 24px rgba(0,0,0,.08); padding: 14px 16px; font: 13px/1.45 system-ui, sans-serif; z-index: 10; }
