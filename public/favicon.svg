@@ -1,6 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <style>.c { stroke: #2f5d8a; } .f { fill: #2f5d8a; } .h { fill: #faf9f6; }
+    @media (prefers-color-scheme: dark) { .c { stroke: #8db2dc; } .f { fill: #8db2dc; } .h { fill: #191917; } }</style>
   <!-- A branch forking off a line, like the timeline's school branches -->
-  <path d="M11 4V28M11 12L21 20V28" fill="none" stroke="#2f5d8a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="11" cy="12" r="3.5" fill="#2f5d8a"/>
-  <circle cx="21" cy="22" r="3.5" fill="#faf9f6" stroke="#2f5d8a" stroke-width="2.5"/>
+  <path d="M11 4V28M11 12L21 20V28" fill="none" class="c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="11" cy="12" r="3.5" class="f"/>
+  <circle cx="21" cy="22" r="3.5" class="h c" stroke-width="2.5"/>
 </svg>
