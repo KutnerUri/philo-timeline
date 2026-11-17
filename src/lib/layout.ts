@@ -203,34 +203,37 @@ export const branches = allBranches.map((b) => ({
 }));
 
 const dotsAt = sorted.map((p) => ({ x: brX(branchMap.get(laneOfPerson(p))!), y: yOf(anchorOf(p)) }));
-// Merges: the founder's other teachers and influences. Each starts at the influencer's own
-// dot, rides their branch (the solid `along` part) until it has to leave, then runs as a
-// dashed line to the founder.
-export const merges = allBranches.flatMap((b) => {
-  const f = b.members[0];
+// Merges: teachers and influences on another branch, for anyone (not only founders).
+// A founder's first teacher is already shown by the fork, so it is skipped. Each merge
+// starts at the influencer's own dot, rides their branch (the solid `along` part) until it
+// has to leave, then runs as a dashed line to the person.
+export const merges = sorted.flatMap((f) => {
+  const b = branchMap.get(laneOfPerson(f))!;
+  const founder = b.members[0] === f;
   const bySource = new Map<string, string[]>(); // source branch → the people in it
   for (const q of [...(f.studentOf ?? []), ...(f.influence ?? [])].map((id) => byId.get(id)!)) {
     const l = laneOfPerson(q);
-    if (l !== b.id && l !== b.parent) bySource.set(l, [...(bySource.get(l) ?? []), q.id]);
+    if (l !== b.id && !(founder && l === b.parent)) bySource.set(l, [...(bySource.get(l) ?? []), q.id]);
   }
   return [...bySource].flatMap(([sid, fromIds]) => {
     const s = branchMap.get(sid)!;
-    if (s.top >= b.top) return [];
     const sx = brX(s), tx = brX(b), dx = Math.abs(tx - sx);
+    const ty = yOf(anchorOf(f));
     const iy = Math.min(...fromIds.map((id) => yOf(anchorOf(byId.get(id)!))));
-    const y0 = Math.max(iy, Math.min(s.bottom, b.top - dx));
+    if (iy >= ty) return [];
+    const y0 = Math.max(iy, Math.min(s.bottom, ty - dx));
     const along = y0 > iy ? `M${sx},${iy}V${y0}` : '';
-    const y1 = Math.max(y0, b.top - dx);
+    const y1 = Math.max(y0, ty - dx);
     // The long vertical stretch runs down the source column (bevel at the end) or the
     // target column (bevel first), whichever has nobody in the way.
     const blocked = (x: number, a: number, z: number) =>
       dotsAt.filter((t) => t.x === x && t.y > a + 1 && t.y < z - 1).length;
-    const viaSource = `M${sx},${y0}V${y1}L${tx},${b.top}`;
-    const viaTarget = `M${sx},${y0}L${tx},${y0 + dx}V${b.top}`;
+    const viaSource = `M${sx},${y0}V${y1}L${tx},${ty}`;
+    const viaTarget = `M${sx},${y0}L${tx},${y0 + dx}V${ty}`;
     // If both have people in the way, run between two columns, where there are no dots.
     const h = BR_GAP / 2, side = tx >= sx ? 1 : -1, mx = sx + side * h, mdx = Math.abs(tx - mx);
-    const viaGap = `M${sx},${y0}L${mx},${y0 + h}V${Math.max(y0 + h, b.top - mdx)}L${tx},${b.top}`;
-    const bs = blocked(sx, y0, y1), bt = blocked(tx, y0 + dx, b.top);
+    const viaGap = `M${sx},${y0}L${mx},${y0 + h}V${Math.max(y0 + h, ty - mdx)}L${tx},${ty}`;
+    const bs = blocked(sx, y0, y1), bt = blocked(tx, y0 + dx, ty);
     const d = bs === 0 ? viaSource : bt === 0 ? viaTarget : viaGap;
     return [{ to: f.id, fromIds, along, d }];
   });
