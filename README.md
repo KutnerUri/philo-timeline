@@ -30,7 +30,16 @@ It started from the Socrates → Plato → Aristotle line and the schools that b
 
 - `src/data/philosophers.ts`: schools (`name`, `philosophy`, `note`, optional `founder` and `founded`) and people. To add someone, give them `born`, `died`, `school`, `note` (a short punchline, shown on their row), `about` (a short paragraph for the info card), plus optional `priority` (`grand` or `high`; omitted = low), `studentOf` (direct teachers), `influence` (main influences) and `active` (floruit year). Negative years are BCE. Most ancient dates are approximate; uncertain teacher relationships are recorded as influences.
 - `src/lib/layout.ts`: build-time layout (time scale, row nudging, minimap packing, branches, school tags and spans, merges, and each person's highlight).
-- `src/pages/index.astro`: the page, interaction script and styles.
+- `src/components/Timeline.astro`: the page, interaction script and styles, for one language; `src/pages/` has a route per language.
+
+## Languages
+
+English is the source, built from the data files. Each other language is `src/i18n/lang/<code>.ts`, holding the interface strings, era names, schools (name, philosophy, description) and people (name, punchline, paragraph), keyed by the same ids; anything missing falls back to English. A language appears on the site, at `/<code>/`, as soon as its file exists, with `hreflang` links and a sitemap entry. The languages are listed in `src/i18n/core.ts`.
+
+- `bun scripts/i18n.ts source` prints the English source as JSON.
+- `bun scripts/i18n.ts check [code]` checks a translation: missing entries, broken `{placeholders}`, unknown ids.
+
+Right-to-left languages (Hebrew, Arabic) read right to left in the header and info card; the timeline itself keeps its left-to-right layout for now (mirroring it is phase 2).
 
 ## Run
 

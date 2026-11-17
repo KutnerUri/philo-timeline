@@ -15,10 +15,6 @@ export const GRAPH_X0 = 10; // the leftmost branch column
 export const MAX_COMPARE = 5; // people compared at once, each in their own colour
 
 export const yOf = (year: number) => Math.round((year - START) * PX_PER_YEAR);
-export const fmtYear = (y: number) => (y < 0 ? `${-y} BCE` : `${y} CE`);
-export const fmtSpan = (p: Person) =>
-  p.born < 0 && p.died > 0 ? `c. ${-p.born} BCE – ${p.died} CE` : `c. ${Math.abs(p.born)}–${fmtYear(p.died)}`;
-
 
 // Anchor = floruit: when the person was active. Ancient chronologers dated people by
 // their akmē (~age 40); many birth dates are back-calculated from it.
@@ -175,7 +171,7 @@ export const schoolHL = Object.fromEntries(allBranches.filter((b) => !b.solo).ma
   return [b.id, {
     path: b.forkD + segment(b, b.lineTop, b.bottom),
     life: `M${x},${yOf(start)}V${yOf(end)}`,
-    xf: x / SVG_W, y1: yOf(start), y2: yOf(end), from: fmtYear(start), to: fmtYear(end),
+    xf: x / SVG_W, y1: yOf(start), y2: yOf(end), start, end, // years; the page formats them per language
     members: b.members.map((m) => m.id),
   }];
 }));
