@@ -110,7 +110,7 @@ const data = {
         const founds = homeOf.get(p.id);
         const s = founds && schools[founds];
         return (
-          <div class={p.major ? 'row' : 'row minor'} id={p.id} data-id={p.id} style={`top:${rowY.get(p.id)}px;height:${ROW_H}px`}>
+          <div class:list={['row', p.priority === 'grand' && 'grand', !p.priority && 'minor']} id={p.id} data-id={p.id} style={`top:${rowY.get(p.id)}px;height:${ROW_H}px`}>
             <span class="dot"></span>
             <div class="person">
               <div class="l1"><b>{p.name}</b></div>
@@ -511,7 +511,9 @@ const data = {
       /* Always flex, so adding the founder line on highlight doesn't move the name. */
       .l1 { display: flex; align-items: center; white-space: nowrap; }
       .l1 b { font-size: 16px; font-weight: 600; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
-      /* Everyone but the main figures is set at 0.85 size. */
+      /* Three tiers: grand (Socrates, Plato, Aristotle) larger, main figures as is, everyone else at 0.85 in regular weight. */
+      .row.grand .l1 b { font-size: 18px; }
+      .row.grand .dot { width: 12px; height: 12px; left: -6px; top: 6px; }
       .row.minor .l1 b { font-size: 13.6px; font-weight: 400; }
       .row.minor .note { font-size: 10.6px; }
       .row.minor .dot { width: 8px; height: 8px; left: -4px; top: 8px; } /* whole pixels keep it round */
