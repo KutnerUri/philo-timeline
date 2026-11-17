@@ -12,9 +12,11 @@ It started from the Socrates → Plato → Aristotle line and the schools that b
 
 - **People first.** Three columns: timeline, person, school.
 - **Linear time.** The vertical axis is true to scale (7px per year). Rows are pushed down only when they would overlap, and a line runs back to the real date.
-- **Floruit, not birth.** Each person is anchored where they were active: their school's founding year if they founded one, an explicit `active` year if known, otherwise birth + 40 (the ancient *akmē* convention). Lifespan bars still show birth to death, with a tick at the active year.
+- **Floruit, not birth.** Each person is anchored where they were active: their school's founding year if they founded one, an explicit `active` year if known, otherwise birth + 40 (the ancient *akmē* convention). Everyone's leader line points to their active year on a single shared time axis; there are no permanent lifespan bars.
 - **Schools appear once**, on the founder's row, with the philosophy as secondary text. School membership (a vertical line from the founder to the members) appears only on hover/select. Later labels or movements with no founder (Pluralists, Sophists, Middle Platonists) are marked as such. People with no school (Heraclitus, Xenophanes, Socrates, Cicero) have none.
-- **Few lines by default.** "Student of" lines are always shown. "Main influence" lines appear only for the selected person. Highlighting affects only the selected person's lifespan bar; related people stay readable but secondary.
+- **Few lines by default.** "Student of" lines are always shown. "Main influence" lines appear only for the selected person.
+- **Lifespans on demand.** Hovering or selecting one person draws their birth-to-death span on the axis; the axis ticks inside it show who else was active during that life. Those contemporaries, plus teachers, students and influences, keep their resting look; everyone else fades.
+- **Compare.** Shift+click (or the Select button, for touch) selects several people. Up to 5 each get a coloured lane beside the axis, so overlapping lifetimes show up as lanes running side by side. Beyond that, lifespans switch to fixed packed lanes; *Select all* (in Select mode) shows every lifespan at once. The info card shows only for a single selection.
 - **Navigation.** A minimap on the left shows the eras and a dot per person, with a box for the current view; click or drag to jump. Clicking a person pins them and opens an info card (school, teachers, students, influences).
 - **Performance.** All geometry is computed at build time. The browser never measures or re-lays out; hovering only toggles a few classes and draws the handful of highlighted lines.
 - **Minimal styling.**
@@ -22,7 +24,7 @@ It started from the Socrates → Plato → Aristotle line and the schools that b
 ## Structure
 
 - `src/data/philosophers.ts`: schools and people. To add someone, give them `born`, `died`, `school`, `note`, plus optional `studentOf` (direct teachers), `influence` (main influences) and `active` (floruit year). Negative years are BCE. Most ancient dates are approximate; uncertain teacher relationships are recorded as influences.
-- `src/lib/layout.ts`: build-time layout (time scale, row nudging, lifespan lanes, link curves, school lines).
+- `src/lib/layout.ts`: build-time layout (time scale, row nudging, axis leaders, lifespan spans, link curves, school lines, minimap packing).
 - `src/pages/index.astro`: the page, interaction script and styles.
 
 ## Run

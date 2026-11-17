@@ -1,11 +1,12 @@
 ---
 import { people, schools } from '../data/philosophers';
 import {
-  sorted, rowY, bars, leaders, links, spines, schoolHome, ticks, eraMarks,
-  height, yOf, SVG_W, ROW_H, fmtYear, fmtSpan, barX, anchorOf,
+  sorted, rowY, spans, leaders, links, spines, schoolHome, ticks, eraMarks,
+  height, yOf, SVG_W, ROW_H, fmtYear, fmtSpan, anchorOf, miniCol,
+  AXIS_X, LANE_W, MAX_COMPARE,
 } from '../lib/layout';
 
-// Minimap: periods as bands, people as dots at their birth year (lane = lifespan lane)
+// Minimap: periods as bands, people as dots at their active year
 const pct = (y: number) => ((y / height) * 100).toFixed(2);
 const eraBands = eraMarks.map((e, i) => ({
   name: e.name,
@@ -33,7 +34,8 @@ const data = {
     }]),
   ),
   links, leaders: Object.fromEntries(leaders.map((l) => [l.id, l.d])),
-  bars: Object.fromEntries(bars.map((b) => [b.id, b])),
+  spans: Object.fromEntries(spans.map((b) => [b.id, b])),
+  axisX: AXIS_X, laneW: LANE_W, maxCompare: MAX_COMPARE,
 };
 ---
 
@@ -48,10 +50,10 @@ const data = {
     <header>
       <h1>Greek Philosophers</h1>
       <p class="legend">
-        <span><i class="k-bar"></i>lifespan (tick = when active)</span>
+        <span><i class="k-bar"></i>lifespan, on select (tick = when active)</span>
         <span><svg width="26" height="8"><path d="M0,4H26" class="k-student" /></svg>student of</span>
         <span><svg width="26" height="8"><path d="M0,4H26" class="k-influence" /></svg>main influence (on select)</span>
-        <span class="hint">Hover or tap a person.</span>
+        <span class="hint">Hover or tap a person. Shift+click, or Select, to compare several.</span>
       </p>
     </header>
 
@@ -65,9 +67,9 @@ const data = {
 
       <svg id="lines" viewBox={`0 0 ${SVG_W} ${height}`} preserveAspectRatio="none" aria-hidden="true">
         <g id="base">
+          <path class="axis" d={`M${AXIS_X},0V${height}`} />
           {leaders.map((l) => <path class="leader" d={l.d} />)}
-          {bars.map((b) => <path class="bar" d={`M${b.x},${b.y1}V${b.y2}`} />)}
-          {bars.map((b) => <path class="atick" d={`M${b.x - 3},${b.ya}H${b.x + 3}`} />)}
+          {spans.map((b) => <path class="atick" d={`M${AXIS_X - 3},${b.ya}H${AXIS_X + 3}`} />)}
           {links.filter((l) => l.type === 'student').map((l) => <path class="student" d={l.d} />)}
         </g>
         <g id="hl"></g>
@@ -103,6 +105,10 @@ const data = {
     </main>
 
     <aside id="panel" hidden></aside>
+    <div id="tools">
+      <button id="all" type="button" hidden>Select all</button>
+      <button id="select" type="button" aria-pressed="false">Select</button>
+    </div>
 
     <nav id="mini" aria-label="Timeline overview">
       {eraBands.map((b) => (
@@ -110,7 +116,7 @@ const data = {
       ))}
       {sorted.map((p) => (
         <i class="mdot" data-id={p.id} title={p.name}
-          style={`top:${pct(yOf(anchorOf(p)))}%;left:${14 + ((barX.get(p.id)! - 6) / 7) * 2.2}px`}></i>
+          style={`top:${pct(yOf(anchorOf(p)))}%;left:${14 + miniCol.get(p.id)! * 4}px`}></i>
       ))}
       <div id="view"></div>
     </nav>
@@ -128,39 +134,79 @@ const data = {
       for (const l of data.links) (linksBy[l.from] ??= []).push(l), (linksBy[l.to] ??= []).push(l);
 
       let marked = [];
-      let current = null;
+      const mark = (el, ...cls) => { el.classList.add(...cls); marked.push(el); };
+      const tick = (x, y, w) => `<path class="atick" d="M${x - w},${y}H${x + w}"/>`;
 
-      function focus(id) {
-        if (id === current) return;
-        current = id;
-        for (const el of marked) el.classList.remove('on', 'mate', 'rel');
+      // Selection: an ordered list of ids. One = pinned person (info card, lifespan on the axis).
+      // A few = compare: one coloured lane each. More = everyone's fixed packed lane. No info card for either.
+      let selected = [];
+      let selectMode = false;
+      let hovered = null;
+
+      function render() {
+        for (const el of marked) el.classList.remove('on', 'mate', 'rel', ...slots);
         marked = [];
-        if (!id) { tl.classList.remove('focusing'); hl.innerHTML = ''; return; }
-
-        const p = data.people[id];
-        const related = new Set([id]);
-        let svg = '';
-        for (const l of linksBy[id] ?? []) {
-          related.add(l.from); related.add(l.to);
-          svg += `<path class="${l.type}" d="${l.d}"/>`;
-        }
-        const b = data.bars[id];
-        svg += `<path class="leader" d="${data.leaders[id]}"/><path class="bar" d="M${b.x},${b.y1}V${b.y2}"/><path class="atick" d="M${b.x - 4},${b.ya}H${b.x + 4}"/>`;
-        hl.innerHTML = svg;
-
-        for (const r of related) {
-          const cls = r === id ? 'on' : 'rel';
-          rows[r].classList.add(cls); mdots[r].classList.add(cls);
-          marked.push(rows[r], mdots[r]);
-        }
-        if (p.school) {
-          for (const m of data.schools[p.school].members) { rows[m].classList.add('mate'); marked.push(rows[m]); }
-          const home = data.schools[p.school].home;
-          if (home) { rows[home].classList.add('mate'); marked.push(rows[home]); }
-          if (spines[p.school]) { spines[p.school].classList.add('on'); marked.push(spines[p.school]); }
-        }
-        tl.classList.add('focusing');
+        const ids = selected.length ? selected : hovered ? [hovered] : [];
+        tl.classList.toggle('focusing', ids.length > 0);
+        tl.classList.remove('packed');
+        hl.innerHTML = ids.length === 1 ? focusOne(ids[0])
+          : ids.length > data.maxCompare ? packed(ids) : ids.length ? compare(ids) : '';
+        showPanel(selected.length === 1 && !selectMode ? selected[0] : null);
+        allBtn.textContent = selected.length === allIds.length ? 'Deselect all' : 'Select all';
       }
+
+      // One person: their lifespan on the axis, with a tick wherever someone else was active within it.
+      function focusOne(id) {
+        const p = data.people[id];
+        const b = data.spans[id];
+        const x = data.axisX;
+        // Related = teachers, students, influences, influenced, and anyone active during this life.
+        // They stay at their resting look; everyone else fades.
+        const related = new Set();
+        for (const l of linksBy[id] ?? []) related.add(l.from), related.add(l.to);
+        for (const [o, s] of Object.entries(data.spans)) if (s.ya >= b.y1 && s.ya <= b.y2) related.add(o);
+        related.delete(id);
+
+        let svg = '<g class="rest">';
+        for (const r of related) {
+          svg += `<path class="leader" d="${data.leaders[r]}"/>` + tick(x, data.spans[r].ya, 3);
+          mark(rows[r], 'rel'); mark(mdots[r], 'rel');
+        }
+        svg += '</g>';
+        for (const l of linksBy[id] ?? []) svg += `<path class="${l.type}" d="${l.d}"/>`;
+        svg += `<path class="leader" d="${data.leaders[id]}"/><path class="bar" d="M${x},${b.y1}V${b.y2}"/>` + tick(x, b.ya, 5);
+        mark(rows[id], 'on'); mark(mdots[id], 'on');
+
+        if (p.school) {
+          const s = data.schools[p.school];
+          for (const m of s.members) mark(rows[m], 'mate');
+          if (s.home) mark(rows[s.home], 'mate');
+          if (spines[p.school]) mark(spines[p.school], 'on');
+        }
+        return svg;
+      }
+
+      // Several people: a lane each beside the axis; lanes side by side = lifetimes overlap.
+      function compare(ids) {
+        return ids.map((id, i) => {
+          const b = data.spans[id];
+          const x = data.axisX + (i + 1) * data.laneW;
+          mark(rows[id], 'on', slots[i]); mark(mdots[id], 'on', slots[i]);
+          return `<g class="${slots[i]}"><path class="leader" d="${data.leaders[id]}"/><path class="bar" d="M${x},${b.y1}V${b.y2}"/>${tick(x, b.ya, 4)}</g>`;
+        }).join('');
+      }
+      const slots = Array.from({ length: data.maxCompare }, (_, i) => `s${i}`);
+
+      // Many people: the packed lanes, with the base leaders left as they are.
+      function packed(ids) {
+        tl.classList.add('packed');
+        return ids.map((id) => {
+          const b = data.spans[id];
+          mark(rows[id], 'on');
+          return `<path class="bar" d="M${b.x},${b.y1}V${b.y2}"/>${tick(b.x, b.ya, 3)}`;
+        }).join('');
+      }
+      const allIds = Object.keys(data.spans);
 
       const link = (ids) => ids.map((i) => `<a href="#${i}">${data.people[i].name}</a>`).join(', ');
       function showPanel(id) {
@@ -181,34 +227,58 @@ const data = {
         panel.hidden = false;
       }
 
-      let pinned = null;
-      function pin(id) {
-        pinned = id;
-        focus(id);
-        showPanel(id);
+      // Plain click: select just this one (or clear it). Shift+click or Select mode: add/remove.
+      function choose(id, multi) {
+        if (!id) selected = [];
+        else if (multi) {
+          if (selected.includes(id)) selected = selected.filter((s) => s !== id);
+          else selected = [...selected, id];
+        } else selected = selected.length === 1 && selected[0] === id ? [] : [id];
+        render();
       }
 
-      tl.addEventListener('mouseover', (e) => {
-        if (pinned) return;
-        const r = e.target.closest('.row');
-        focus(r ? r.dataset.id : null);
+      const selectBtn = document.getElementById('select');
+      const allBtn = document.getElementById('all');
+      allBtn.addEventListener('click', () => {
+        selected = selected.length === allIds.length ? [] : [...allIds];
+        render();
       });
-      tl.addEventListener('mouseleave', () => !pinned && focus(null));
+      function setSelectMode(on) {
+        selectMode = on;
+        selectBtn.textContent = on ? 'Done' : 'Select';
+        selectBtn.setAttribute('aria-pressed', on);
+        document.body.classList.toggle('selecting', on);
+        allBtn.hidden = !on;
+        render();
+      }
+      selectBtn.addEventListener('click', () => setSelectMode(!selectMode));
+
+      tl.addEventListener('mouseover', (e) => {
+        const id = e.target.closest('.row')?.dataset.id ?? null;
+        if (id !== hovered) { hovered = id; if (!selected.length) render(); }
+      });
+      tl.addEventListener('mouseleave', () => { hovered = null; if (!selected.length) render(); });
       tl.addEventListener('click', (e) => {
-        const r = e.target.closest('.row');
-        if (!r) return pin(null);
-        pin(pinned === r.dataset.id ? null : r.dataset.id);
+        const id = e.target.closest('.row')?.dataset.id ?? null;
+        const multi = e.shiftKey || selectMode;
+        if (!id && multi) return; // a stray tap shouldn't wipe a comparison
+        if (e.shiftKey) getSelection()?.removeAllRanges();
+        choose(id, multi);
       });
       panel.addEventListener('click', (e) => {
-        if (e.target.closest('.x')) return pin(null);
+        if (e.target.closest('.x')) return choose(null);
         const a = e.target.closest('a');
         if (!a) return;
         e.preventDefault();
         const id = a.getAttribute('href').slice(1);
         rows[id].scrollIntoView({ behavior: 'smooth', block: 'center' });
-        pin(id);
+        selected = [id]; render();
       });
-      document.addEventListener('keydown', (e) => e.key === 'Escape' && pin(null));
+      document.addEventListener('keydown', (e) => {
+        if (e.key !== 'Escape') return;
+        if (selectMode) setSelectMode(false);
+        choose(null);
+      });
 
       // Minimap: viewport box follows scroll; click or drag to jump; click a dot to select.
       let tlTop = 0, tlH = 1, ticking = false;
@@ -235,7 +305,7 @@ const data = {
         const dot = e.target.closest('.mdot');
         if (dot) {
           rows[dot.dataset.id].scrollIntoView({ block: 'center' });
-          return pin(dot.dataset.id);
+          return choose(dot.dataset.id, e.shiftKey || selectMode);
         }
         dragging = true;
         mini.setPointerCapture(e.pointerId);
@@ -257,7 +327,7 @@ const data = {
       h1 { font-size: 28px; margin: 0 0 8px; font-weight: 600; }
       .legend { display: flex; flex-wrap: wrap; gap: 6px 18px; color: var(--muted); font: 13px system-ui, sans-serif; margin: 0; align-items: center; }
       .legend svg, .k-bar { vertical-align: middle; margin-right: 5px; }
-      .k-bar { display: inline-block; width: 3px; height: 14px; background: #c9c4b8; }
+      .k-bar { display: inline-block; width: 3px; height: 14px; background: var(--accent); }
       .k-student { stroke: #8a867d; stroke-width: 1.4; }
       .k-influence { stroke: var(--accent); stroke-width: 1.4; stroke-dasharray: 4 3; }
 
@@ -271,7 +341,8 @@ const data = {
 
       #lines { position: absolute; top: 0; left: var(--tick-w); width: var(--svg-w); height: 100%; overflow: visible; pointer-events: none; }
       #lines path { fill: none; vector-effect: non-scaling-stroke; }
-      .bar { stroke: #cfcabd; stroke-width: 3; stroke-linecap: round; }
+      .axis { stroke: #cfcabd; stroke-width: 1.5; }
+      .bar { stroke-width: 3; stroke-linecap: round; }
       .leader { stroke: #e3dfd5; stroke-width: 1; }
       .atick { stroke: #a9a49a; stroke-width: 1.5; }
       #hl .atick { stroke-width: 2; }
@@ -283,6 +354,15 @@ const data = {
       #hl .student { stroke-width: 2; }
       #hl .influence { stroke-width: 1.5; }
       #hl .leader { stroke-width: 1; opacity: .6; }
+      #hl .atick { stroke: var(--fg); }
+      #hl .rest .leader { stroke: #c9c4b8; opacity: 1; }
+      #hl .rest .atick { stroke: #a9a49a; stroke-width: 1.5; }
+      #hl .bar + .atick { stroke: var(--accent); }
+      #hl g path { stroke: var(--c); }
+      #hl g .leader { opacity: .8; }
+
+      /* Compare colours, one per selected person (slot order). */
+      .s0 { --c: #2f5d8a; } .s1 { --c: #b5562c; } .s2 { --c: #3f7d4e; } .s3 { --c: #7a4a8c; } .s4 { --c: #b08a1e; }
 
       .row { position: absolute; left: calc(var(--tick-w) + var(--svg-w)); right: 16px; display: grid; grid-template-columns: 1fr var(--school-w); gap: 16px; padding-left: 14px; cursor: pointer; }
       .dot { position: absolute; left: -5px; top: 7px; width: 10px; height: 10px; border-radius: 50%; background: var(--bg); border: 2px solid var(--fg); }
@@ -296,11 +376,14 @@ const data = {
       .spine { position: absolute; right: calc(16px + var(--school-w) + 2px); width: 2px; background: var(--accent); opacity: .5; display: none; pointer-events: none; }
 
       .focusing .row { opacity: .3; }
+      .packed #base { opacity: 1; }
+      .packed #hl .bar, .packed #hl .atick { stroke: #b9b3a5; }
+      .packed .row.on .dot { background: var(--bg); border-color: var(--fg); }
       .focusing .row.mate { opacity: .6; }
-      .focusing .row.rel { opacity: .8; }
+      .focusing .row.rel { opacity: 1; }
       .focusing .row.on { opacity: 1; }
-      .row.rel .dot { border-color: var(--accent); }
-      .row.on .dot { border-color: var(--accent); background: var(--accent); }
+      .row.on .dot { border-color: var(--c, var(--accent)); background: var(--c, var(--accent)); }
+      .row.on[class*=" s"] b { color: var(--c); }
       .row.mate .member, .spine.on { display: block; }
 
       #panel { position: fixed; right: 16px; bottom: 16px; width: 300px; max-height: 70vh; overflow: auto; background: #fff; border: 1px solid var(--faint); box-shadow: 0 6px 24px rgba(0,0,0,.08); padding: 14px 16px; font: 13px/1.45 system-ui, sans-serif; z-index: 10; }
@@ -313,13 +396,18 @@ const data = {
       #panel a { color: var(--accent); text-decoration: none; }
       #panel .x { position: absolute; top: 6px; right: 8px; border: 0; background: none; font-size: 20px; color: var(--muted); cursor: pointer; }
 
+      #tools { position: fixed; top: 12px; right: 12px; z-index: 11; display: flex; gap: 6px; }
+      #tools button { font: 600 13px system-ui, sans-serif; color: var(--accent); background: #fff; border: 1px solid var(--faint); border-radius: 999px; padding: 6px 14px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+      #select[aria-pressed="true"] { background: var(--accent); color: #fff; border-color: var(--accent); }
+      .selecting .row:not(.on) .dot { border-style: dashed; }
+
       #mini { position: fixed; top: 16px; bottom: 16px; left: 12px; width: 48px; background: #f3f1ec; border: 1px solid var(--faint); border-radius: 4px; cursor: pointer; touch-action: none; user-select: none; z-index: 5; }
       .band { position: absolute; left: 0; right: 0; border-top: 1px solid #c8d5e2; }
       .band:nth-of-type(even) { background: #eae7df; }
       .band span { position: absolute; left: 1px; top: 4px; writing-mode: vertical-rl; font: 600 8.5px system-ui, sans-serif; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); white-space: nowrap; pointer-events: none; }
       .mdot { position: absolute; width: 4px; height: 4px; margin: -2px 0 0 -2px; border-radius: 50%; background: #8f8b81; }
       .mdot.rel { background: var(--accent); opacity: .55; }
-      .mdot.on { background: var(--accent); width: 7px; height: 7px; margin: -3.5px 0 0 -3.5px; z-index: 1; }
+      .mdot.on { background: var(--c, var(--accent)); width: 7px; height: 7px; margin: -3.5px 0 0 -3.5px; z-index: 1; }
       #view { position: absolute; left: -1px; right: -1px; border: 1.5px solid var(--accent); background: rgba(47, 93, 138, .08); border-radius: 3px; pointer-events: none; }
       @media (max-width: 1160px) { body { padding-left: 64px; } }
 
