@@ -19,11 +19,12 @@ It started from the Socrates → Plato → Aristotle line and the schools that b
 - **Compare.** Shift+click (or the Select button, for touch) selects several people. Up to 5 each get a coloured lane beside the axis, so overlapping lifetimes show up as lanes running side by side. Beyond that, lifespans switch to fixed packed lanes; *Select all* (in Select mode) shows every lifespan at once. The info card shows only for a single selection.
 - **Navigation.** A minimap on the left shows the eras and a dot per person, with a box for the current view; click or drag to jump. Clicking a person pins them and opens an info card (school, teachers, students, influences).
 - **Performance.** All geometry is computed at build time. The browser never measures or re-lays out; hovering only toggles a few classes and draws the handful of highlighted lines.
+- **Main figures stand out.** About two dozen people everyone should know are flagged `major` and set at full size; the rest are set at 0.85.
 - **Minimal styling.**
 
 ## Structure
 
-- `src/data/philosophers.ts`: schools and people. To add someone, give them `born`, `died`, `school`, `note`, plus optional `studentOf` (direct teachers), `influence` (main influences) and `active` (floruit year). Negative years are BCE. Most ancient dates are approximate; uncertain teacher relationships are recorded as influences.
+- `src/data/philosophers.ts`: schools and people. To add someone, give them `born`, `died`, `school`, `note`, plus optional `major` (a main figure, shown at full size), `studentOf` (direct teachers), `influence` (main influences) and `active` (floruit year). Negative years are BCE. Most ancient dates are approximate; uncertain teacher relationships are recorded as influences.
 - `src/lib/layout.ts`: build-time layout (time scale, row nudging, axis leaders, lifespan spans, link curves, school lines, minimap packing).
 - `src/pages/index.astro`: the page, interaction script and styles.
 

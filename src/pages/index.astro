@@ -86,7 +86,7 @@ const data = {
         const founds = homeOf.get(p.id);
         const s = founds && schools[founds];
         return (
-          <div class="row" id={p.id} data-id={p.id} style={`top:${rowY.get(p.id)}px;height:${ROW_H}px`}>
+          <div class={p.major ? 'row' : 'row minor'} id={p.id} data-id={p.id} style={`top:${rowY.get(p.id)}px;height:${ROW_H}px`}>
             <span class="dot"></span>
             <div class="person">
               <div class="l1"><b>{p.name}</b></div>
@@ -145,7 +145,7 @@ const data = {
       let hovered = null;
 
       function render() {
-        for (const el of marked) el.classList.remove('on', 'mate', 'rel', ...slots);
+        for (const el of marked) el.classList.remove('on', 'mate', 'rel', 'founds', ...slots);
         marked = [];
         const ids = selected.length ? selected : hovered ? [hovered] : [];
         tl.classList.toggle('focusing', ids.length > 0);
@@ -183,6 +183,7 @@ const data = {
           const s = data.schools[p.school];
           for (const m of s.members) mark(rows[m], 'mate');
           if (s.home) mark(rows[s.home], 'mate');
+          if (s.home && s.founded) mark(rows[s.home], 'founds'); // line from founder to the school's name
           if (spines[p.school]) mark(spines[p.school], 'on');
         }
         return svg;
@@ -384,6 +385,10 @@ const data = {
       .person, .school { min-width: 0; }
       .l1, .note, .sphil, .sname { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
       .l1 b { font-size: 16px; font-weight: 600; }
+      /* Everyone but the main figures is set at 0.85 size. */
+      .row.minor .l1 b { font-size: 13.6px; }
+      .row.minor .note { font-size: 10.6px; }
+      .row.minor .dot { width: 8.5px; height: 8.5px; left: -4.25px; top: 7.75px; }
       .dates, .note, .sphil, .founded { font: 12.5px system-ui, sans-serif; color: var(--muted); }
       .spanlabel { position: absolute; left: var(--axis-left); transform: translateY(-50%); font: 600 11px system-ui, sans-serif; color: var(--accent); background: var(--bg); padding: 0 3px; white-space: nowrap; pointer-events: none; z-index: 1; }
       .sname { font-weight: 600; color: var(--accent); }
@@ -399,6 +404,8 @@ const data = {
       .row.on .dot { border-color: var(--c, var(--accent)); background: var(--c, var(--accent)); }
       .row.on[class*=" s"] b { color: var(--c); }
       .spine.on { display: block; }
+      .row.founds .l1 { display: flex; align-items: center; }
+      .row.founds .l1::after { content: ''; flex: 1; margin-left: 10px; border-top: 1.5px solid var(--muted); opacity: .6; }
 
       #panel { position: fixed; right: 16px; bottom: 16px; width: 300px; max-height: 70vh; overflow: auto; background: #fff; border: 1px solid var(--faint); box-shadow: 0 6px 24px rgba(0,0,0,.08); padding: 14px 16px; font: 13px/1.45 system-ui, sans-serif; z-index: 10; }
       #panel h2 { font: 600 19px ui-serif, Georgia, serif; margin: 0; }
@@ -435,6 +442,7 @@ const data = {
         .tick span { left: 2px; font-size: 9.5px; }
         .era span { font-size: 9.5px; }
         .school, .spine { display: none !important; }
+        .row.founds .l1::after { display: none; }
         .row { grid-template-columns: 1fr; right: 8px; }
         .l1 { white-space: normal; line-height: 1.15; }
         .note { display: none; }
