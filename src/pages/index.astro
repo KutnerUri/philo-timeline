@@ -90,13 +90,9 @@ const data = {
   </head>
   <body>
     <header>
-      <h1>Greek Philosophers</h1>
-      <p class="legend">
-        <span><svg width="26" height="8"><path d="M0,4H26" class="k-branch" /></svg>school (forks from the founder's teacher)</span>
-        <span><svg width="26" height="8"><path d="M0,4H26" class="k-merge" /></svg>teacher or influence</span>
-        <span><svg width="26" height="8"><path d="M0,4H26" class="k-life" /></svg>lifespan (on select)</span>
-        <span class="hint">Hover or tap a person. Shift+click, or Select, to compare several.</span>
-      </p>
+      <p class="overline">A timeline · c. 600 BCE – 270 CE</p>
+      <h1>Greek <em>Philosophers</em></h1>
+      <p class="subtitle">Who taught whom, and which schools branched from which, from Thales to Plotinus.</p>
     </header>
 
     <main id="tl" style={`height:${height}px;--graph-f:${GRAPH_X0 / SVG_W}`}>
@@ -446,13 +442,11 @@ const data = {
       }
       * { box-sizing: border-box; }
       body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.35 ui-serif, Georgia, serif; }
-      header { max-width: 1000px; margin: 0 auto; padding: 32px 16px 24px; }
-      h1 { font-size: 28px; margin: 0 0 8px; font-weight: 600; }
-      .legend { display: flex; flex-wrap: wrap; gap: 6px 18px; color: var(--muted); font: 13px system-ui, sans-serif; margin: 0; align-items: center; }
-      .legend svg { vertical-align: middle; margin-right: 5px; }
-      .k-branch { stroke: color-mix(in oklch, var(--fg) var(--w-low), var(--bg)); stroke-width: 2; }
-      .k-merge { stroke: color-mix(in oklch, var(--fg) var(--w-low), var(--bg)); stroke-width: 1.4; stroke-dasharray: 4 3; }
-      .k-life { stroke: color-mix(in oklch, var(--lifespan) var(--w-low), var(--bg)); stroke-width: 7; }
+      header { max-width: 1000px; margin: 0 auto; padding: 40px 16px 36px; }
+      .overline { margin: 0 0 10px; font: 600 11px system-ui, sans-serif; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+      h1 { margin: 0; font: 700 48px/1 ui-serif, Georgia, serif; letter-spacing: -.02em; }
+      h1 em { font-weight: 400; font-style: italic; color: color-mix(in oklch, var(--fg) var(--w-high), var(--bg)); }
+      .subtitle { margin: 12px 0 0; max-width: 42em; font: italic 17px/1.4 ui-serif, Georgia, serif; color: var(--muted); }
 
       /* Era labels sit just right of the graph's first column. */
       #tl { --graph-left: calc(var(--tick-w) + var(--svg-w) * var(--graph-f) + 6px); }
@@ -564,7 +558,9 @@ const data = {
         :root { --tick-w: 0px; --svg-w: 140px; }
         .btag { display: none; } /* no room for the tag column on a phone: */
         .rtag { display: inline-block; } /* the tag sits after the founder's name instead */
-        header { padding: 20px 14px 16px; }
+        header { padding: 52px 14px 22px; } /* clear of the floating Select button */
+        h1 { font-size: 34px; }
+        .subtitle { font-size: 15px; }
         .tick span { left: 2px; font-size: 9.5px; }
         .era span { font-size: 9.5px; }
         .row { right: 8px; }
