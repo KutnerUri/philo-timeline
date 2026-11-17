@@ -10,6 +10,7 @@ export type Lang = {
   hreflang?: string; // for search engines; left out where there's no standard code
   dir: 'ltr' | 'rtl';
   ogLocale?: string;
+  unspaced?: true; // no space between words (Japanese, Chinese)
 };
 
 export const LANGS: Lang[] = [
@@ -24,8 +25,8 @@ export const LANGS: Lang[] = [
   { code: 'pl', name: 'Polski', htmlLang: 'pl', hreflang: 'pl', dir: 'ltr', ogLocale: 'pl_PL' },
   // Interslavic has no ISO code; this is the conventional private-use tag.
   { code: 'isv', name: 'Medžuslovjansky', htmlLang: 'art-x-interslv', dir: 'ltr' },
-  { code: 'ja', name: '日本語', htmlLang: 'ja', hreflang: 'ja', dir: 'ltr', ogLocale: 'ja_JP' },
-  { code: 'zh', name: '中文', htmlLang: 'zh-Hans', hreflang: 'zh-Hans', dir: 'ltr', ogLocale: 'zh_CN' },
+  { code: 'ja', name: '日本語', htmlLang: 'ja', hreflang: 'ja', dir: 'ltr', ogLocale: 'ja_JP', unspaced: true },
+  { code: 'zh', name: '中文', htmlLang: 'zh-Hans', hreflang: 'zh-Hans', dir: 'ltr', ogLocale: 'zh_CN', unspaced: true },
   { code: 'hi', name: 'हिन्दी', htmlLang: 'hi', hreflang: 'hi', dir: 'ltr', ogLocale: 'hi_IN' },
 ];
 
@@ -35,7 +36,7 @@ const enUi = {
   title: 'Greek Philosophers Timeline: who taught whom, from Thales to Plotinus',
   description: 'A true-to-scale timeline of Greek philosophers, from Thales to Plotinus: who taught whom, which schools branched from which, and who influenced whom.',
   overline: 'A timeline · c. 600 BCE – 270 CE',
-  titleA: 'Greek', // the title is set as "{titleA} {titleB}", the second word in italic
+  titleA: 'Greek', // the title is "{titleA} {titleB}" (no space in Japanese, Chinese), the second part in italic
   titleB: 'Philosophers',
   subtitle: 'Who taught whom, and which schools branched from which, from Thales to Plotinus.',
   ogAlt: 'The timeline around Socrates and Plato: school branches on the left, philosophers on the right.',

@@ -1,0 +1,417 @@
+import type { Translation } from '../core';
+
+export default {
+  ui: {
+    siteName: 'Filozofowie greccy',
+    title: 'Oś czasu filozofów greckich: kto kogo uczył, od Talesa do Plotyna',
+    description: 'Oś czasu filozofów greckich w prawdziwej skali, od Talesa do Plotyna: kto kogo uczył, które szkoły z których wyrosły i kto na kogo wpłynął.',
+    overline: 'Oś czasu · ok. 600 p.n.e. – 270 n.e.',
+    titleA: 'Filozofowie',
+    titleB: 'greccy',
+    subtitle: 'Kto kogo uczył i które szkoły z których wyrosły, od Talesa do Plotyna.',
+    ogAlt: 'Oś czasu wokół Sokratesa i Platona: gałęzie szkół po lewej, filozofowie po prawej.',
+    listName: 'Filozofowie greccy w porządku chronologicznym',
+    language: 'Język',
+    overview: 'Przegląd osi czasu',
+    bce: '{n} p.n.e.',
+    ce: '{n} n.e.',
+    spanBce: 'ok. {a}–{b} p.n.e.',
+    spanCe: 'ok. {a}–{b} n.e.',
+    spanCross: 'ok. {a} p.n.e. – {b} n.e.',
+    active: 'działał ok. {year}',
+    founded: 'Założona',
+    foundedBy: '{year}, założyciel: {name}',
+    school: 'Szkoła',
+    none: 'Brak',
+    studentOf: 'Uczeń',
+    teacherOf: 'Nauczyciel',
+    influencedBy: 'Pod wpływem',
+    influenced: 'Wpłynął na',
+    members: 'Członkowie',
+    close: 'Zamknij',
+    select: 'Wybierz',
+    done: 'Gotowe',
+    selectAll: 'Zaznacz wszystko',
+    deselectAll: 'Odznacz wszystko',
+  },
+  eras: {
+    'Pre-Socratics': 'Presokratycy',
+    'Classical Athens': 'Ateny klasyczne',
+    Hellenistic: 'Hellenizm',
+    Roman: 'Okres rzymski',
+  },
+  schools: {
+    milesian: {
+      name: 'Szkoła milezyjska',
+      philosophy: 'Jedno materialne źródło wszystkiego',
+      note: 'Pierwsi filozofowie greccy, działający w Milecie, szukali jednej substancji, z której zbudowane jest wszystko: wody u Talesa, bezkresu u Anaksymandra, powietrza u Anaksymenesa.',
+    },
+    pythagorean: {
+      name: 'Pitagorejczycy',
+      philosophy: 'Liczba i harmonia',
+      note: 'Bractwo założone przez Pitagorasa w Krotonie, na poły religijne, na poły filozoficzne. Światem rządzą liczba i harmonia, a dusza odradza się w nowych ciałach.',
+    },
+    eleatic: {
+      name: 'Szkoła eleacka',
+      philosophy: 'Byt jest jeden i niezmienny',
+      note: 'Z Elei w południowych Włoszech. Rozum pokazuje, że to, co jest, musi być jedno, całe i niezmienne, więc zmiana i wielość są złudzeniem; broni tego paradoksy Zenona.',
+    },
+    pluralist: {
+      name: 'Pluraliści',
+      philosophy: 'Późniejsza etykieta, nie prawdziwa szkoła',
+      note: 'Późniejsza nazwa myślicieli, którzy odpowiedzieli Parmenidesowi, przyjmując kilka niezmiennych pierwiastków: cztery korzenie Empedoklesa poruszane przez Miłość i Niezgodę, niezliczone nasiona Anaksagorasa porządkowane przez Umysł.',
+    },
+    atomist: {
+      name: 'Atomiści',
+      philosophy: 'Atomizm: atomy i próżnia',
+      note: 'Wszystko składa się z drobnych, niepodzielnych atomów poruszających się w pustej przestrzeni. Zmiana to łączenie się i rozdzielanie atomów, bez potrzeby bogów ani celu.',
+    },
+    sophist: {
+      name: 'Sofiści',
+      philosophy: 'Ruch płatnych nauczycieli, nie szkoła',
+      note: 'Wędrowni nauczyciele, którzy za opłatą uczyli retoryki i sztuki odnoszenia sukcesów w życiu publicznym. Pytali, czy prawda i sprawiedliwość to coś więcej niż ludzka umowa.',
+    },
+    academy: {
+      name: 'Akademia',
+      philosophy: 'Platonizm',
+      note: 'Szkoła Platona w gaju Akademosa pod Atenami. Uczyła teorii idei, później za Arkezylaosa i Karneadesa stała się sceptyczna i przetrwała prawie trzy wieki.',
+    },
+    lyceum: {
+      name: 'Likejon',
+      philosophy: 'Arystotelizm (perypatetycy)',
+      note: 'Szkoła Arystotelesa w gimnazjonie Likejon; jej członków zwano perypatetykami od krytego portyku. Badali logikę, przyrodę, etykę i politykę, a później redagowali i objaśniali Arystotelesa.',
+    },
+    cynic: {
+      name: 'Cynicy',
+      philosophy: 'Cynizm: żyć zgodnie z naturą, odrzucić konwencje',
+      note: 'Żyć skromnie i zgodnie z naturą, gardzić bogactwem, pozycją i konwencją. Diogenes uczynił z tego publiczną prowokację, a cynizm ukształtował stoików.',
+    },
+    cyrenaic: {
+      name: 'Cyrenaicy',
+      philosophy: 'Hedonizm: dobrem jest przyjemność cielesna',
+      note: 'Z Cyreny w Afryce Północnej. Jedynym dobrem jest przyjemność chwili obecnej, a pewni możemy być tylko własnych doznań.',
+    },
+    megarian: {
+      name: 'Szkoła megarejska',
+      philosophy: 'Logika i dialektyka',
+      note: 'Euklides z Megary połączył etykę Sokratesa z eleacką ideą Jedni: Dobro jest jedno, choć ma wiele imion. Znani z dialektyki i łamigłówek logicznych.',
+    },
+    pyrrhonist: {
+      name: 'Pirroniści',
+      philosophy: 'Sceptycyzm pirrloński',
+      note: 'Wstrzymać się od sądu: każdemu argumentowi można przeciwstawić równie mocny, a powstrzymanie się od przekonań daje spokój ducha (ataraksję).',
+    },
+    garden: {
+      name: 'Ogród',
+      philosophy: 'Epikureizm',
+      note: 'Wspólnota Epikura w jego ogrodzie w Atenach. Celem życia jest przyjemność rozumiana jako wolność od bólu i lęku; nie trzeba bać się ani bogów, ani śmierci.',
+    },
+    stoa: {
+      name: 'Stoa',
+      philosophy: 'Stoicyzm',
+      note: 'Nazwana od Malowanego Portyku w Atenach, gdzie nauczał Zenon. Cnota jest jedynym dobrem: żyj w zgodzie z rozumną naturą i spokojnie przyjmuj to, na co nie masz wpływu.',
+    },
+    platonist: {
+      name: 'Platończycy średni',
+      philosophy: 'Późniejsza etykieta: platonizm po zamknięciu Akademii',
+      note: 'Późniejsza nazwa platoników po zamknięciu Akademii. Czytali Platona jako nauczającego o transcendentnym bogu i czerpali z Arystotelesa oraz stoików.',
+    },
+    neoplatonist: {
+      name: 'Neoplatonizm',
+      philosophy: 'Szkoła Plotyna w Rzymie',
+      note: 'Szkoła Plotyna w Rzymie. Cała rzeczywistość wypływa z Jedni przez Intelekt i Duszę, a dusza może zawrócić i wznieść się ku niej. Ukształtowała myśl chrześcijańską i islamską średniowiecza.',
+    },
+  },
+  people: {
+    thales: {
+      name: 'Tales',
+      note: 'Wszystko jest wodą',
+      about: 'Arystoteles uznał go za pierwszego filozofa. Kupiec i inżynier z Miletu, który miał przewidzieć zaćmienie Słońca w 585 r. p.n.e., szukał naturalnego wyjaśnienia świata zamiast mitu i uznał, że wszystko pochodzi z wody. Nic z jego pism nie przetrwało.',
+    },
+    anaximander: {
+      name: 'Anaksymander',
+      note: 'Bezkres (apejron) jest źródłem wszystkiego',
+      about: 'Następca Talesa w Milecie. Zamiast znanej substancji uczynił źródłem rzeczy apejron, bezkres i nieokreśloność, z którego wydzielają się przeciwieństwa, jak gorące i zimne. Narysował jedną z pierwszych map świata i wyobrażał sobie Ziemię swobodnie zawieszoną w środku wszechświata.',
+    },
+    pythagoras: {
+      name: 'Pitagoras',
+      note: 'Liczba i harmonia leżą u podstaw rzeczywistości',
+      about: 'Założył w Krotonie, w południowych Włoszech, wspólnotę będącą po trosze szkołą, po trosze zakonem, z majątkiem wspólnym i surowymi regułami. Nauczał, że dusza jest nieśmiertelna i odradza się, a jego uczniowie odkryli, że harmonie muzyczne odpowiadają prostym stosunkom liczb. Wiele z tego, co mu przypisywano, łącznie ze słynnym twierdzeniem, mogło być dziełem późniejszych pitagorejczyków.',
+    },
+    xenophanes: {
+      name: 'Ksenofanes',
+      note: 'Jeden bóg, niepodobny do ludzi; krytyk mitów',
+      about: 'Wędrowny poeta, który wyśmiewał bogów Homera i Hezjoda za to, że zachowują się jak ludzie: gdyby konie umiały rysować, mówił, rysowałyby bogów podobnych do koni. Głosił jednego boga, niepodobnego do nas, który wszystkim porusza samą myślą, i ostrożnie oceniał, ile człowiek może poznać.',
+    },
+    anaximenes: {
+      name: 'Anaksymenes',
+      note: 'Wszystko jest powietrzem',
+      about: 'Trzeci z Milezyjczyków. Za podstawową substancję uznał powietrze i podał mechanizm zmiany: powietrze rozrzedza się w ogień, a zagęszcza w wiatr, chmurę, wodę, ziemię i kamień. Wyjaśnianie różnic jakościowych różnicami gęstości okazało się ideą trwałą.',
+    },
+    heraclitus: {
+      name: 'Heraklit',
+      note: 'Wszystko płynie; Logos porządkuje zmianę',
+      about: 'Z Efezu, słynny z zagadkowych sentencji. Wszystko jest w ciągłym ruchu i nie można dwa razy wejść do tej samej rzeki, a jednak zmiana podlega ukrytej mierze, Logosowi. Przeciwieństwa należą do siebie: droga w górę i droga w dół są jedną i tą samą. Starożytni nazywali go Ciemnym.',
+    },
+    parmenides: {
+      name: 'Parmenides',
+      note: 'To, co jest, jest; zmiana jest niemożliwa',
+      about: 'W jego poemacie bogini wskazuje mu drogę prawdy: to, co jest, jest, a tego, czego nie ma, nie sposób nawet pomyśleć. Wywnioskował stąd, że prawdziwy byt jest jeden, cały, wieczny i niezmienny, a zmienny świat zmysłów to tylko mniemanie. Każdy późniejszy filozof przyrody musiał mu odpowiedzieć.',
+    },
+    anaxagoras: {
+      name: 'Anaksagoras',
+      note: 'Umysł (nus) porządkuje materię',
+      about: 'Pierwszy filozof, który osiadł w Atenach, gdzie przyjaźnił się z Peryklesem. Wszystko zawiera cząstkę wszystkiego, a Umysł (nus) wprawił mieszaninę w ruch wirowy i samoczynne porządkowanie. Nazwał Słońce rozżarzonym kamieniem, został oskarżony o bezbożność i opuścił miasto.',
+    },
+    empedocles: {
+      name: 'Empedokles',
+      note: 'Cztery żywioły poruszane przez Miłość i Niezgodę',
+      about: 'Poeta, lekarz i cudotwórca z Sycylii. Wszystko jest mieszaniną czterech korzeni, ziemi, wody, powietrza i ognia, łączonych przez Miłość i rozdzielanych przez Niezgodę w niekończącym się cyklu. Według legendy rzucił się do krateru Etny, by dowieść, że jest bogiem.',
+    },
+    'zeno-elea': {
+      name: 'Zenon z Elei',
+      note: 'Paradoksy przeciw ruchowi (Achilles i żółw)',
+      about: 'Uczeń Parmenidesa, który bronił go, pokazując, że ruch i wielość prowadzą do absurdów. Szybki Achilles nigdy nie dogoni żółwia, a lecąca strzała w każdej chwili spoczywa. Jego zagadki dotyczące nieskończoności doczekały się pełnej odpowiedzi dopiero w nowoczesnej matematyce.',
+    },
+    protagoras: {
+      name: 'Protagoras',
+      note: 'Człowiek jest miarą wszystkich rzeczy',
+      about: 'Pierwszy i najsłynniejszy sofista, który za wysokie opłaty uczył młodych ludzi, jak odnosić sukcesy. Człowiek jest miarą wszystkich rzeczy: co wydaje się prawdziwe każdemu, jest dla niego prawdziwe. Mówił też, że nie może wiedzieć, czy bogowie istnieją. Platon nazwał jego imieniem jeden ze swoich dialogów.',
+    },
+    gorgias: {
+      name: 'Gorgiasz',
+      note: 'Nic nie istnieje; a gdyby istniało, nie dałoby się tego poznać',
+      about: 'Poseł z Sycylii i mistrz retoryki, który olśnił Ateny swoimi mowami. W prowokacyjnym traktacie dowodził, że nic nie istnieje; że gdyby istniało, nie dałoby się tego poznać; a gdyby się dało poznać, nie dałoby się tego nikomu przekazać. Dożył ponad stu lat.',
+    },
+    leucippus: {
+      name: 'Leukippos',
+      note: 'Pierwszy zaproponował atomy i próżnię',
+      about: 'Niewiele wiadomo o jego życiu; niektórzy starożytni wątpili, czy w ogóle istniał. Odpowiadając eleatom, uznał, że świat składa się z niezliczonych niepodzielnych ciał poruszających się w pustej przestrzeni, a zmiana to tylko przegrupowanie atomów. Jego uczeń Demokryt rozwinął tę teorię.',
+    },
+    melissus: {
+      name: 'Melissos',
+      note: 'Byt jest nieskończony i niezmienny',
+      about: 'Eleata z Samos, który był też admirałem i pokonał flotę ateńską. Przedstawił naukę Parmenidesa prostą prozą, dowodząc, że byt jest jeden, niezmienny i nieograniczony. Arystoteles uważał jego rozumowanie za nieudolne, ale wpłynęło ono na to, jak późniejsi myśliciele czytali eleatów.',
+    },
+    philolaus: {
+      name: 'Filolaos',
+      note: 'Ziemia krąży wokół centralnego ognia',
+      about: 'Pitagorejczyk i jeden z pierwszych, którzy spisali idee pitagorejskie. Kosmos składa się z rzeczy ograniczających i nieograniczonych, zespolonych w harmonię, a Ziemia nie jest jego środkiem: wraz ze Słońcem i planetami krąży wokół centralnego ognia. Wspomina o nim Kopernik.',
+    },
+    socrates: {
+      name: 'Sokrates',
+      note: 'Kwestionował wszystko; cnota jest wiedzą',
+      about: 'Nic nie napisał i znamy go dzięki uczniom, przede wszystkim Platonowi. Wypytywał Ateńczyków na agorze, pokazując, że ci, którzy twierdzili, iż wiedzą, czym jest odwaga czy sprawiedliwość, w rzeczywistości tego nie wiedzą; jego jedyną mądrością było to, że wiedział, iż nie wie. Życie nieprzebadane, mówił, nie jest warte życia. Ateny osądziły go za bezbożność i deprawowanie młodzieży, a on wypił cykutę.',
+    },
+    democritus: {
+      name: 'Demokryt',
+      note: 'Wszystko to atomy poruszające się w próżni',
+      about: 'Śmiejący się filozof z Abdery, który przekształcił ideę Leukipposa w pełny system. Realne są tylko atomy i próżnia; słodkie, gorzkie, ciepłe i zimne istnieją jedynie z umowy. Pisał o wielu sprawach, także o etyce, w której celem jest pogoda ducha. Prawie żadna z jego licznych ksiąg nie przetrwała.',
+    },
+    antisthenes: {
+      name: 'Antystenes',
+      note: 'Sama cnota wystarcza do szczęścia',
+      about: 'Uczeń Gorgiasza, potem oddany zwolennik Sokratesa, obecny przy jego śmierci. Nauczał, że cnoty można się nauczyć i że wystarcza ona do szczęścia, a przyjemnością i bogactwem należy gardzić. Wykładał w gimnazjonie Kynosarges, co mogło dać cynikom ich nazwę.',
+    },
+    aristippus: {
+      name: 'Arystyp',
+      note: 'Dobrem jest przyjemność chwili',
+      about: 'Zwolennik Sokratesa z Cyreny i pierwszy z nich, który brał opłaty. Cieszył się luksusem, nie dając się mu zniewolić: posiadam, mówił, ale nie jestem posiadany. Jego szkoła głosiła, że jedynym dobrem jest przyjemność chwili obecnej.',
+    },
+    'euclid-megara': {
+      name: 'Euklides z Megary',
+      note: 'Dobro jest jedno, choć ma wiele imion',
+      about: 'Bliski uczeń Sokratesa, który połączył jego etykę z Parmenidesowym jednym, niezmiennym bytem: Dobro jest jedną rzeczą, czy nazwiemy je mądrością, bogiem czy umysłem. Po śmierci Sokratesa Platon znalazł u niego schronienie w Megarze. Nie ten sam, co matematyk Euklides.',
+    },
+    archytas: {
+      name: 'Archytas',
+      note: 'Matematyk i mąż stanu; przyjaciel Platona',
+      about: 'Pitagorejski matematyk i czołowy mąż stanu Tarentu, wielokrotnie wybierany na stratega. Rozwiązał odwieczny problem podwojenia sześcianu i położył podwaliny pod mechanikę matematyczną. Jako przyjaciel Platona wysłał okręt, by uratować go od tyrana Syrakuz.',
+    },
+    plato: {
+      name: 'Platon',
+      note: 'Idee są prawdziwą rzeczywistością',
+      about: 'Uczeń Sokratesa, który pisał filozofię w formie dialogów z Sokratesem w roli bohatera. Rzeczy, które widzimy, są niedoskonałymi kopiami wiecznych idei, dostępnych tylko rozumowi; dusza jest nieśmiertelna, a sprawiedliwym państwem rządzą filozofowie. Założył Akademię, a pewien nowożytny filozof nazwał całą tradycję zachodnią serią przypisów do niego.',
+    },
+    diogenes: {
+      name: 'Diogenes z Synopy',
+      note: 'Mieszkał w beczce i wyśmiewał wszelkie konwencje',
+      about: 'Wygnany z Synopy, mieszkał w Atenach w wielkim glinianym pithosie, nie posiadając prawie nic. Żył jak pies, bez wstydu i zgodnie z naturą, i wyśmiewał konwencje publicznymi wyczynami, jak szukanie z latarnią w biały dzień uczciwego człowieka. Gdy Aleksander Wielki zaproponował mu, czego zechce, poprosił, by nie zasłaniał mu słońca.',
+    },
+    speusippus: {
+      name: 'Speuzyp',
+      note: 'Bratanek Platona; kierował Akademią po nim',
+      about: 'Bratanek Platona, który kierował Akademią po nim. Odsunął Platońskie idee i uczynił pierwszymi rzeczywistościami przedmioty matematyczne, a rośliny i zwierzęta katalogował według podobieństw.',
+    },
+    xenocrates: {
+      name: 'Ksenokrates',
+      note: 'Usystematyzował naukę Platona',
+      about: 'Trzeci scholarcha Akademii, znany z powagi. Uporządkował naukę Platona w system i podzielił filozofię na fizykę, etykę i logikę, co później przejęli stoicy.',
+    },
+    aristotle: {
+      name: 'Arystoteles',
+      note: 'Logika, cztery przyczyny, cnota jako złoty środek',
+      about: 'Uczeń Platona przez dwadzieścia lat, potem nauczyciel młodego Aleksandra Wielkiego, a w końcu założyciel Likejonu. Stworzył logikę formalną i pisał o niemal wszystkim: fizyce, biologii, duszy, etyce, polityce i poezji. W przeciwieństwie do Platona uważał, że formy rzeczy istnieją w samych rzeczach. Dla średniowiecznych myślicieli był po prostu Filozofem.',
+    },
+    anaxarchus: {
+      name: 'Anaksarchos',
+      note: 'Podróżował z Aleksandrem do Indii',
+      about: 'Atomista, który udał się z Aleksandrem Wielkim do Indii, gdzie wraz z uczniem Pirronem spotkał indyjskich mędrców. Znany był z obojętności na ból i pochlebstw wobec Aleksandra, a przezywano go Szczęśliwcem.',
+    },
+    theophrastus: {
+      name: 'Teofrast',
+      note: 'Kierował Likejonem; twórca botaniki',
+      about: 'Współpracownik i następca Arystotelesa w Likejonie, który za jego rządów rozkwitł i skupiał około dwóch tysięcy uczniów. Napisał pierwsze systematyczne dzieła o roślinach oraz dowcipne Charaktery, krótkie szkice typów ludzkich.',
+    },
+    crates: {
+      name: 'Krates z Teb',
+      note: 'Oddał majątek, by żyć jak cynik',
+      about: 'Bogaty Tebańczyk, który oddał majątek, by żyć jako cynik, łagodniej niż Diogenes: przyjmowano go w domach jako rozjemcę kłótni. Ożenił się z filozofką Hipparchią, która dzieliła jego życie na ulicy. Jego uczniem był Zenon z Kition, założyciel stoicyzmu.',
+    },
+    pyrrho: {
+      name: 'Pirron',
+      note: 'Nic nie można poznać; wstrzymaj sąd i znajdź spokój',
+      about: 'Podróżował do Indii z Aleksandrem i Anaksarchosem. Skoro nie możemy poznać rzeczy takimi, jakie są naprawdę, powinniśmy wstrzymać się od sądu, a spokój ducha przyjdzie sam. Podobno przyjaciele musieli odciągać go od krawędzi urwisk. Niczego nie napisał; jego myśli spisał uczeń Tymon.',
+    },
+    stilpo: {
+      name: 'Stilpon',
+      note: 'Słynny dyskutant; samowystarczalność',
+      about: 'Przywódca szkoły megarejskiej i znakomity dyskutant, który odciągał uczniów od wszystkich innych szkół. Nauczał, że mędrzec niczego nie potrzebuje spoza siebie: gdy jego miasto zdobyto i zapytano go, co stracił, odpowiedział, że wciąż ma swoją wiedzę.',
+    },
+    polemon: {
+      name: 'Polemon',
+      note: 'Kierował Akademią; etyka życia zgodnego z naturą',
+      about: 'Rozpustny młodzieniec, który według opowieści wpadł pijany na wykład Ksenokratesa i nawrócił się na miejscu. Jako scholarcha Akademii nauczał praktycznej etyki życia zgodnego z naturą; uczył się u niego Zenon z Kition.',
+    },
+    epicurus: {
+      name: 'Epikur',
+      note: 'Dobrem jest spokojna przyjemność, wolna od lęku',
+      about: 'Założył w Atenach wspólnotę w swoim ogrodzie, do której przyjmowano kobiety i niewolników. Celem życia jest przyjemność rozumiana jako brak bólu w ciele i niepokoju w duszy; najlepsze są proste przyjemności i przyjaźń. Skoro jesteśmy tylko atomami, śmierć nic dla nas nie znaczy: gdy jest śmierć, nas nie ma.',
+    },
+    strato: {
+      name: 'Straton z Lampsakos',
+      note: 'Wyjaśniał przyrodę bez bogów',
+      about: 'Trzeci scholarcha Likejonu, zwany Fizykiem. Tłumaczył świat siłami przyrody, jak ciepło i zimno, bez potrzeby bogów i celów, i podobno badał próżnię za pomocą doświadczeń.',
+    },
+    'zeno-citium': {
+      name: 'Zenon z Kition',
+      note: 'Cnota jest jedynym dobrem; żyj zgodnie z rozumem',
+      about: 'Kupiec z Cypru, który rozbił się pod Atenami, uczył się u cynika Kratesa i innych, zanim zaczął nauczać w Malowanym Portyku, czyli Stoi. Cnota jest jedynym dobrem; wszystko inne, nawet zdrowie i bogactwo, jest obojętne. Światem rządzi boski rozum i powinniśmy żyć w zgodzie z nim.',
+    },
+    cleanthes: {
+      name: 'Kleantes',
+      note: 'Hymn do Zeusa; kierował Stoą po Zenonie',
+      about: 'Były bokser, który nocami nosił wodę, by opłacić lekcje, i został następcą Zenona na czele Stoi. Powolny, ale wytrwały, przezywany był Osłem. Jego Hymn do Zeusa, sławiący rozum rządzący wszystkim, to jeden z niewielu zachowanych w całości wczesnych tekstów stoickich.',
+    },
+    timon: {
+      name: 'Tymon z Fliuntu',
+      note: 'Satyryk i rzecznik Pirrona',
+      about: 'Uczeń i propagator Pirrona. W satyrycznych poematach, Sillach, kpił z pewnych siebie filozofów wszystkich szkół i wychwalał spokój Pirrona.',
+    },
+    arcesilaus: {
+      name: 'Arkezylaos',
+      note: 'Uczynił Akademię sceptyczną',
+      about: 'Jako scholarcha Akademii nadał jej charakter sceptyczny, przywracając sokratejski zwyczaj argumentowania przeciw każdemu poglądowi. Niczego nie można wiedzieć na pewno, więc mędrzec wstrzymuje sąd. Niczego nie napisał, a podziwiano go za dowcip i hojność.',
+    },
+    chrysippus: {
+      name: 'Chryzyp',
+      note: 'Usystematyzował logikę i fizykę stoicką',
+      about: 'Trzeci scholarcha Stoi i jej wielki systematyk; starożytni mawiali, że bez Chryzypa nie byłoby Stoi. Zbudował stoicką logikę zdań i bronił losu oraz opatrzności. Podobno napisał ponad siedemset ksiąg, z których żadna nie przetrwała.',
+    },
+    carneades: {
+      name: 'Karneades',
+      note: 'Brak pewności, tylko stopnie prawdopodobieństwa',
+      about: 'Scholarcha Akademii w jej okresie sceptycznym. Podczas poselstwa w Rzymie jednego dnia przemawiał za sprawiedliwością, a następnego przeciw niej, gorszą Katona. Pewność jest niemożliwa, nauczał, ale możemy działać według tego, co prawdopodobne.',
+    },
+    panaetius: {
+      name: 'Panajtios',
+      note: 'Dostosował stoicyzm do Rzymian',
+      about: 'Stoik z Rodos, który żył w Rzymie w kręgu Scypiona, a później kierował Stoą. Ukształtował stoicyzm jako praktyczną etykę obowiązku i życia publicznego; O powinnościach Cycerona opiera się na jego dziele.',
+    },
+    'philo-larissa': {
+      name: 'Filon z Larissy',
+      note: 'Ostatni scholarcha Akademii',
+      about: 'Ostatni niekwestionowany scholarcha Akademii Platona. Uciekając z Aten w czasie wojny z Mitrydatesem, nauczał w Rzymie, gdzie słuchał go młody Cyceron. Złagodził sceptycyzm Akademii i dowodził, że zawsze była jedną szkołą.',
+    },
+    posidonius: {
+      name: 'Posejdonios',
+      note: 'Stoicki erudyta; nauczyciel Cycerona',
+      about: 'Stoicki erudyta z Rodos, który oszacował rozmiary Ziemi, badał pływy i dotarł na wybrzeże Atlantyku. Uczył się u niego Cyceron, a jego szkołę odwiedził Pompejusz. Przywrócił Platona i Arystotelesa do stoicyzmu.',
+    },
+    antiochus: {
+      name: 'Antioch z Askalonu',
+      note: 'Odciągnął Akademię od sceptycyzmu',
+      about: 'Uczeń Filona, który zerwał z nim, twierdząc, że Akademia porzuciła Platona. Nauczał, że Platon, Arystoteles i stoicy w istocie się zgadzali, i wrócił do pewnego siebie platonizmu. Jego wykładów w Atenach słuchał Cyceron.',
+    },
+    philodemus: {
+      name: 'Filodemos',
+      note: 'Epikurejczyk, którego biblioteka przetrwała w Herkulanum',
+      about: 'Epikurejczyk z Gadary, który nauczał w willi w Herkulanum koło Neapolu. Erupcja Wezuwiusza w 79 r. n.e. pogrzebała jej bibliotekę; zwęglone zwoje, wśród nich wiele jego dzieł o muzyce, poezji i emocjach, są wciąż odczytywane za pomocą nowoczesnych technik obrazowania.',
+    },
+    cicero: {
+      name: 'Cyceron',
+      note: 'Przeniósł filozofię grecką na grunt łaciny',
+      about: 'Największy mówca Rzymu i czołowy mąż stanu, który studiował filozofię w Atenach i na Rodos. W ostatnich latach życia pisał dialogi przedstawiające Rzymianom filozofię grecką, tworząc znaczną część jej łacińskiego słownictwa. Skłaniał się ku umiarkowanemu sceptycyzmowi Akademii i został zabity na rozkaz Marka Antoniusza.',
+    },
+    andronicus: {
+      name: 'Andronikos z Rodos',
+      note: 'Wydał dzieła Arystotelesa w znanej nam postaci',
+      about: 'Perypatetyk z Rodos, który zredagował i uporządkował długo zaniedbane dzieła Arystotelesa w zbiór, z którego korzystamy do dziś. Podział pism Arystotelesa, a prawdopodobnie nawet słowo metafizyka, sięgają jego wydania.',
+    },
+    aenesidemus: {
+      name: 'Ainezydem',
+      note: 'Wskrzesił pirronizm po dwóch wiekach',
+      about: 'Odłączył się od Akademii, którą uznał za zbyt dogmatyczną, i wskrzesił sceptycyzm Pirrona. Zebrał dziesięć tropów, standardowych argumentów pokazujących, że zjawiska zależą od obserwatora i okoliczności, więc należy wstrzymać się od sądu.',
+    },
+    lucretius: {
+      name: 'Lukrecjusz',
+      note: 'Epikureizm w łacińskich wersach',
+      about: 'Rzymski poeta, którego długi poemat O naturze rzeczy przedstawia filozofię Epikura łacińskim wierszem: atomy i próżnię, śmiertelność duszy i wolność od lęku przed bogami. Odkryty na nowo w 1417 r., wpłynął na naukę renesansu.',
+    },
+    seneca: {
+      name: 'Seneka',
+      note: 'Listy o dobrym życiu; doradca Nerona',
+      about: 'Rzymski stoik, dramaturg i niezmiernie bogaty polityk, który uczył, a potem doradzał cesarzowi Neronowi. Jego Listy do Lucyliusza dają praktyczne rady dotyczące gniewu, żałoby, czasu i śmierci. Oskarżony o spisek, otrzymał od Nerona rozkaz odebrania sobie życia.',
+    },
+    musonius: {
+      name: 'Musoniusz Rufus',
+      note: 'Stoicyzm jako codzienna praktyka',
+      about: 'Rzymski Sokrates, stoicki nauczyciel, który uczył filozofii jako sposobu życia: prostego jedzenia, ciężkiej pracy i takiego samego wykształcenia dla kobiet jak dla mężczyzn. Cesarze wielokrotnie zsyłali go na wygnanie. Jego uczniem był Epiktet.',
+    },
+    plutarch: {
+      name: 'Plutarch',
+      note: 'Biograf i kapłan w Delfach',
+      about: 'Grek z Cheronei, kapłan wyroczni delfickiej i platonik. Jego Żywoty równoległe, sparowane biografie Greków i Rzymian, ukształtowały to, jak Europa wyobrażała sobie starożytność, a eseje, Moralia, obejmują etykę, religię i duszę.',
+    },
+    epictetus: {
+      name: 'Epiktet',
+      note: 'Skup się tylko na tym, co zależy od ciebie',
+      about: 'Urodzony jako niewolnik, uczył się u Musoniusza Rufusa i został później wyzwolony. Jedne rzeczy zależą od nas, nasze sądy i wybory, a inne nie; wolność płynie z troski jedynie o te pierwsze. Jego uczeń Arrian spisał jego naukę w Diatrybach i Encheiridionie.',
+    },
+    marcus: {
+      name: 'Marek Aureliusz',
+      note: 'Cesarz; autor Rozmyślań',
+      about: 'Cesarz rzymski i stoik, który większość panowania spędził na wojnie na granicy naddunajskiej. Jego Rozmyślania, prywatne notatki do samego siebie, wzywają do spokoju, obowiązku i akceptacji tego, co się dzieje, i przypominają, że wszystko przemija.',
+    },
+    alexander: {
+      name: 'Aleksander z Afrodyzji',
+      note: 'Największy starożytny komentator Arystotelesa',
+      about: 'Piastun oficjalnej katedry filozofii arystotelesowskiej w Atenach i największy starożytny komentator Arystotelesa. Bronił wolnej woli przeciw stoickiemu losowi i interpretował Arystotelesa tak, że dusza nie przeżywa ciała.',
+    },
+    sextus: {
+      name: 'Sekstus Empiryk',
+      note: 'Zarysy pirronizmu, nasze główne źródło o sceptykach',
+      about: 'Lekarz i sceptyk, którego księgi są naszym głównym źródłem wiedzy o sceptycyzmie starożytnym. Jego Zarysy pirrońskie przedstawiają drogę sceptyka: przeciwstawiać każdemu argumentowi równy mu argument, wstrzymać sąd, a spokój przyjdzie. Odkryty na nowo w XVI wieku, wpłynął na Montaigne’a i Descartes’a.',
+    },
+    ammonius: {
+      name: 'Ammoniusz Sakkas',
+      note: 'Nauczyciel Plotyna; nic nie napisał',
+      about: 'Tajemniczy nauczyciel platonizmu w Aleksandrii, zwany Sakkasem, być może od noszenia worków, czyli dawnego zajęcia. Niczego nie napisał, ale Plotyn uczył się u niego jedenaście lat, a jego uczniowie zobowiązali się zachować jego naukę w tajemnicy.',
+    },
+    plotinus: {
+      name: 'Plotyn',
+      note: 'Cała rzeczywistość wypływa z Jedni',
+      about: 'Uczył się u Ammoniusza w Aleksandrii, potem nauczał w Rzymie. Cała rzeczywistość wypływa z Jedni, ponad bytem i myślą, przez Intelekt i Duszę aż do materii; dusza może zwrócić się ku sobie i wznieść z powrotem do jedności z nią. Jego uczeń Porfiriusz zredagował jego pisma jako Enneady.',
+    },
+  },
+} satisfies Translation;

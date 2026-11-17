@@ -118,7 +118,7 @@ const data = {
   <body>
     <header>
       <p class="overline">{ui.overline}</p>
-      <h1>{ui.titleA} <em>{ui.titleB}</em></h1>
+      <h1>{ui.titleA}{L.unspaced ? '' : ' '}<em>{ui.titleB}</em></h1>
       <p class="subtitle">{ui.subtitle}</p>
       {available.length > 1 && (
         <nav class="langs" aria-label={ui.language}>

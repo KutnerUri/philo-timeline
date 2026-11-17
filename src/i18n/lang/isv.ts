@@ -1,0 +1,417 @@
+import type { Translation } from '../core';
+
+export default {
+  ui: {
+    siteName: 'Grečske filozofy',
+    title: 'Hronologija grečskyh filozofov: kto koho učil, od Talesa do Plotina',
+    description: 'Hronologija grečskyh filozofov v pravdivom měrilu, od Talesa do Plotina: kto koho učil, koje školy izšli iz kojih i kto na koho vplyval.',
+    overline: 'Hronologija · ok. 600 pr. n. e. – 270 n. e.',
+    titleA: 'Grečske',
+    titleB: 'filozofy',
+    subtitle: 'Kto koho učil i koje školy izšli iz kojih, od Talesa do Plotina.',
+    ogAlt: 'Hronologija okolo Sokrata i Platona: vetvi škol na levo, filozofy na pravo.',
+    listName: 'Grečske filozofy, po redu vremeni',
+    language: 'Jezyk',
+    overview: 'Pregled hronologije',
+    bce: '{n} pr. n. e.',
+    ce: '{n} n. e.',
+    spanBce: 'ok. {a}–{b} pr. n. e.',
+    spanCe: 'ok. {a}–{b} n. e.',
+    spanCross: 'ok. {a} pr. n. e. – {b} n. e.',
+    active: 'aktivny ok. {year}',
+    founded: 'Osnovana',
+    foundedBy: '{year}, osnovatelj {name}',
+    school: 'Škola',
+    none: 'Nijedna',
+    studentOf: 'Učenik',
+    teacherOf: 'Učitelj',
+    influencedBy: 'Pod vplyvom',
+    influenced: 'Vplyvał na',
+    members: 'Členy',
+    close: 'Zavrěti',
+    select: 'Izbrati',
+    done: 'Gotovo',
+    selectAll: 'Izbrati vse',
+    deselectAll: 'Odznačiti vse',
+  },
+  eras: {
+    'Pre-Socratics': 'Presokratiki',
+    'Classical Athens': 'Klasične Atiny',
+    'Hellenistic': 'Helenizm',
+    'Roman': 'Rimska doba',
+  },
+  schools: {
+    milesian: {
+      name: 'Miletska škola',
+      philosophy: 'Jedino materialno iskonje vsego',
+      note: 'Prvi grečski filozofy v Miletu iskali jedinu materiju, iz koje je vse sdělano: vodu u Talesa, apeiron u Anaksimandra, vzduh u Anaksimena.',
+    },
+    pythagorean: {
+      name: 'Pitagorejci',
+      philosophy: 'Čislo i harmonija',
+      note: 'Bratstvo, koje Pitagor osnoval v Krotonu, napoly religijno i napoly filozofsko. Čislo i harmonija urjadjajut svět, a duša se rodi znova v novyh telah.',
+    },
+    eleatic: {
+      name: 'Eleatska škola',
+      philosophy: 'Bytje je jedino i neměnjajuče',
+      note: 'Iz Elei v južnoj Italiji. Razum pokazuje, že to, što jest, mora byti jedino, cělo i neměnjajuče, tomu měna i množnost sut iluzije; Zenonove paradoksy branjut tu tvrdnju.',
+    },
+    pluralist: {
+      name: 'Pluralisti',
+      philosophy: 'Pozdnějša nazva, ne istinna škola',
+      note: 'Pozdnějša nazva za myslitelev, koji odgovorili Parmenidu s několiko neměnjajučimi elementami: četyri korenje Empedokla, dvigane Ljubovju i Sporom, i bezčislene semena Anaksagora, urjadjene Umom.',
+    },
+    atomist: {
+      name: 'Atomisti',
+      philosophy: 'Atomizm: atomy i pustota',
+      note: 'Vse je sdělano iz malyh, nedělimyh atomov, koji se dvigajut v pustom prostoru. Měna je soedinjanje i razdělanje atomov, bez potrěby bogov ili cěli.',
+    },
+    sophist: {
+      name: 'Sofisti',
+      philosophy: 'Dviženje platnyh učiteljev, ne škola',
+      note: 'Putujuči učitelji, koji za platu učili retoriku i kako uspěti v javnom žitju. Pytali se, ať istina i pravda sut něčto više než ljudska konvencija.',
+    },
+    academy: {
+      name: 'Akademija',
+      philosophy: 'Platonizm',
+      note: 'Platonova škola v gaju Akadema pred Atinami. Učila teoriju idej, pozdnje stala skeptična pod Arkesilajem i Karneadom i trvala skoro tri stoletja.',
+    },
+    lyceum: {
+      name: 'Likej',
+      philosophy: 'Aristotelizm (peripatetiki)',
+      note: 'Aristotelova škola v gimnaziju Likej; členy se zvali peripatetiki po pokrytoj hodniki. Izsledovali logiku, prirodu, etiku i politiku, a pozdnje izdavali i tolmačili Aristotela.',
+    },
+    cynic: {
+      name: 'Kinici',
+      philosophy: 'Kinizm: žiti po prirodě, odvergti konvenciju',
+      note: 'Žiti prosto i v soglasju s prirodoju, a prezirati bogatstvo, položenje i konvencije. Diogen to prěměnil v javnu provokaciju, i to oblikovalo stoikov.',
+    },
+    cyrenaic: {
+      name: 'Kirenaiki',
+      philosophy: 'Hedonizm: telesna radost je dobro',
+      note: 'Iz Kirene v sěvernoj Afrike. Radost nynějšnjego momenta je jedino dobro, i mi možemo byti uvěrjeni samo o svojih čuvstvah.',
+    },
+    megarian: {
+      name: 'Megarska škola',
+      philosophy: 'Logika i dialektika',
+      note: 'Euklid iz Megary soedinil Sokratovu etiku s eleatskoju idejeju Jedinogo: Dobro je jedino, pod mnogymi imenami. Znana po dialektiky i logičnyh zagadkah.',
+    },
+    pyrrhonist: {
+      name: 'Pironisti',
+      philosophy: 'Pironska skepsa',
+      note: 'Odložiti sud: na vsaky argument možno odgovoriti ravnym protivnym argumentom, a ne verjenje dava duševen mir (ataraksija).',
+    },
+    garden: {
+      name: 'Vrt',
+      philosophy: 'Epikurejstvo',
+      note: 'Epikurova obščina v ego vrtu v Atinah. Cěl žitja je radost, razuměna kako svoboda od bolji i straha; ni bogov ni smrti ne treba se bojati.',
+    },
+    stoa: {
+      name: 'Stoja',
+      philosophy: 'Stoicizm',
+      note: 'Nazvana po Raskrašenoj stoji v Atinah, gde učil Zenon. Dobrodětelj je jedino dobro: žiti v soglasju s razumnoju prirodoju i spokojno prijimati to, što ne jest v tvojej vlasti.',
+    },
+    platonist: {
+      name: 'Srědnji platonisti',
+      philosophy: 'Pozdnějša nazva: platonizm po zakrytju Akademije',
+      note: 'Pozdnějša nazva za platonistov po zakrytju Akademije. Čitali Platona kako učitelja o transcendentnom bogu i črpali iz Aristotela i stoikov.',
+    },
+    neoplatonist: {
+      name: 'Neoplatonizm',
+      philosophy: 'Plotinova škola v Rimu',
+      note: 'Plotinova škola v Rimu. Vsa realnost istěkaje iz Jedinogo črěz Um i Dušu, a duša se může obrnuti nazad i vzdvignuti k nemu. Oblikovalo je srědnjevěkovu hristijansku i islamsku myslj.',
+    },
+  },
+  people: {
+    thales: {
+      name: 'Tales',
+      note: 'Vse je voda',
+      about: 'Aristotel ga račal za prvogo filozofa. Trgovec i inžener iz Mileta, kto jakoby predvidel solnečno zatmeńje 585 g. pr. n. e., iskal je prirodno objasnjenje světa město mita i predložil, že vse proishodi iz vody. Ničto, što napisal, ne ostalo.',
+    },
+    anaximander: {
+      name: 'Anaksimandr',
+      note: 'Bezkrajno (apeiron) je iskonje vsego',
+      about: 'Talesov naslědnik v Mileta. Město znanoj substancije on postavil za iskonje apeiron, bezkrajno i neopredělěno, iz kojego se razděljajut protivnosti kako toplo i hladno. Narisal jednu iz prvyh kart světa i predstavil Zemju, kako visi bez opory v srědině vsego.',
+    },
+    pythagoras: {
+      name: 'Pitagor',
+      note: 'Čislo i harmonija sut osnova realnosti',
+      about: 'Osnoval obščinu v Krotonu v južnoj Italiji, napoly školu i napoly religijny red, s obščim imenjem i strogimi pravilami. Učil, že duša je neumirajuča i rodi se znova, a ego sledovniki našli, že muzične harmonije sledujut prostym razměram čisel. Mnogo, što mu pripisuje, vključno s slavnoju teoremoju, može byti delo pozdnějših pitagorejcev.',
+    },
+    xenophanes: {
+      name: 'Ksenofan',
+      note: 'Jedin bog, neprijaten ljudem; kritik mita',
+      about: 'Skitajuči pěvec, koji se smějal bogam Homera i Hesioda, že se vedut kako ljudi: aky by konje mogli risovati, rekal je, risovali by bogov kako konje. Predložil jednogo boga, neprijatnogo na nas, koji dviže vse samoju myslju, i byl oprezny glede togo, koliko ljudi mogut kogda znati.',
+    },
+    anaximenes: {
+      name: 'Anaksimen',
+      note: 'Vse je vzduh',
+      about: 'Tretji miletčan. Vzel vzduh za osnovnu materiju i dal mehanizm měny: vzduh se rědči v ogenj i gusti v větr, oblak, vodu, zemju i kamen. Ideja, že razlika vida je razlika gustoty, ostala dolgo.',
+    },
+    heraclitus: {
+      name: 'Heraklit',
+      note: 'Vse teče; Logos urjadja měnu',
+      about: 'Iz Efesa, slavny po zagadkovyh izrěkah. Vse je v tečenju i ne možno dvaždy vstupiti v istu rěku, ale měna sledi skrytoj měri, Logosu. Protivnosti sut vměste: put gore i put dolu sut jedin i ist. Starodavni ga zvali Temnym.',
+    },
+    parmenides: {
+      name: 'Parmenid',
+      note: 'To, što jest, jest; měna je nemožna',
+      about: 'V svojej poěmě bogynja mu pokazuje put istiny: što jest, jest, a što ne jest, ne može byti ni myšljeno. Iz togo dokazal, že istinno bytje je jedino, cělo, věčno i neměnjajuče, a měnjajuči svět čuvstv je prosto mněnje. Vsaky pozdnějši filozof prirody mor mu odgovoriti.',
+    },
+    anaxagoras: {
+      name: 'Anaksagor',
+      note: 'Um (nus) urjadja materiju',
+      about: 'Prvy filozof, koji se poselil v Atinah, gde byl prijatelj Perikla. Vse imaje čast vsego, a Um (nus) zavrtěl smes i dal ji urjadjati sebe. Nazval solnce rozžarjenym kamenem, byl sudjen za bezbožnost i ostavil grad.',
+    },
+    empedocles: {
+      name: 'Empedokl',
+      note: 'Četyri elementy, dvigane Ljubovju i Sporom',
+      about: 'Pěvec, lěkar i čudotvorec iz Sicilije. Vse je smes četyrěh korenij, zemje, vody, vzduha i ognja, sbližanyh Ljubovju i razděljanyh Sporom v beskrajnom krugu. Legenda kaže, že skočil v Etnu, da dokaže, že je bog.',
+    },
+    'zeno-elea': {
+      name: 'Zenon iz Elei',
+      note: 'Paradoksy protiv dviženja (Ahil i želva)',
+      about: 'Učenik Parmenida, koji ga branil pokazuvajuči, že dviženje i množnost vedut k absurdam. Bystry Ahil nikogda ne dogoni želvu, a letjuča strěla stoji v každom momentu. Ego zagadki o beskonečnom ne byli cělo rěšeny do sovremennoj matematiky.',
+    },
+    protagoras: {
+      name: 'Protagor',
+      note: 'Čovek je měra vsih věčij',
+      about: 'Prvy i najslavnějši sofist, koji brał visoke platy za učenje mladyh ljudij, kako uspěvati. Čovek je měra vsih věčij: što se zdaje istinno každomu, to jest istinno za nego. Takože rekal, že ne može znati, ať bogi jestvujut. Platon nazval po nim dialog.',
+    },
+    gorgias: {
+      name: 'Gorgij',
+      note: 'Ničto ne jestvuje; aky by jestvovalo, ne možno by znati',
+      about: 'Poslanik iz Sicilije i mastor retoriky, koji oslěpil Atiny svojimi govorami. V provokativnom traktatu dokazyval, že ničto ne jestvuje; aky by jestvovalo, ne možno by to znati; a aky by se znalo, ne možno by to kazati nikomu. Žil črěz sto lět.',
+    },
+    leucippus: {
+      name: 'Leukip',
+      note: 'Prvy predložil atomy i pustotu',
+      about: 'Malo se znaje o ego žitju; někoji starodavni sumnjali, že jestvoval. Odgovarjajuči eleatam, predložil, že svět je sdělany iz bezčislenyh nedělimyh teles, koja se dvigajut v pustom prostoru, tomu měna je prosto preurjadjenje atomov. Ego učenik Demokrit razvil tu teoriju.',
+    },
+    melissus: {
+      name: 'Melis',
+      note: 'Bytje je beskonečno i neměnjajuče',
+      about: 'Eleat iz Samosa, koji byl takože admiral i pobědil atinsku floti. Ponovil Parmenida v prostoj prozě, dokazyvajuči, že bytje je jedino, neměnjajuče i neograničeno. Aristotel našel ego razum grubym, ale on oblikoval, kako pozdnějši mysliteli čitali eleatov.',
+    },
+    philolaus: {
+      name: 'Filolaj',
+      note: 'Zemja se dviže okolo centralnogo ognja',
+      about: 'Pitagorejec i jedin iz prvyh, koji napisal pitagorejske idei. Kosmos je sdělany iz ograničajučih i neograničenyh věčij, soedinjenyh v harmoniji, a Zemja ne jest ego centr: obhodi centralny ogenj, vměste s solncem i planetami. Kopernik ga spominaje.',
+    },
+    socrates: {
+      name: 'Sokrat',
+      note: 'Pytati vse; dobrodětelj je znanje',
+      about: 'Ničto ne napisal i znaje se črěz svojih učenikov, najprěd Platona. Pytal svojih sograždanov na trgu, pokazyvajuči, že ljudi, koji tvrdili, že znajut, što je hrabrost ili pravda, ne znali; ego jedina mudrost bylo znanje, že ne znaje. Neprěgledano žitje, rekal je, ne stoji žiti. Atiny ga sudili za bezbožnost i kvarjenje mladyh, i on vypil kukutu.',
+    },
+    democritus: {
+      name: 'Demokrit',
+      note: 'Vse je atomy v pustoti',
+      about: 'Smějuči se filozof iz Abdery, koji prěměnil ideju Leukipa v cělu sistemu. Samo atomy i pustota sut realne; sladko, gorko, toplo i hladno jestvujut samo po konvenciji. Pisal široko, takože o etiky, gde cěl je vesělost. Skoro ničto iz ego mnogih knig ne ostalo.',
+    },
+    antisthenes: {
+      name: 'Antisten',
+      note: 'Dobrodětelj sama dosta za srěču',
+      about: 'Učenik Gorgija, potom predany sledovnik Sokrata, prisutny pri ego smrti. Učil, že dobrodětelj možno naučiti i je dosta za srěču, a radost i bogatstvo je treba prezirati. Učil v gimnaziju Kinosarg, što može byti dalo kinikam ime.',
+    },
+    aristippus: {
+      name: 'Aristip',
+      note: 'Radost momenta je dobro',
+      about: 'Sledovnik Sokrata iz Kirene i prvy iz nih, koji brał platu. Užival luksus ne byvajuči pod ego vlastiju: ja imam, rekal je, ne imaje mene. Ego škola učila, že radost nynějšnjego momenta je jedino dobro.',
+    },
+    'euclid-megara': {
+      name: 'Euklid iz Megary',
+      note: 'Dobro je jedino, pod mnogymi imenami',
+      about: 'Blizky sledovnik Sokrata, koji soedinil ego etiku s Parmenidovym jedinym neměnjajučim bytjem: Dobro je jedna věč, nazyvana mudrost, bog ili um. Po Sokratovoj smrti Platon našel u nego pribežišče v Megare. Ne je matematik Euklid.',
+    },
+    archytas: {
+      name: 'Arhit',
+      note: 'Matematik i državnik; prijatelj Platona',
+      about: 'Pitagorejski matematik i vodeči državnik Tarenta, mnogokrat izbran za generala. Rěšil staru zadaču udvojenja kuba i osnoval matematičnu mehaniku. Prijatelj Platona, poslal korabj, da ga spase od tirana Sirakuz.',
+    },
+    plato: {
+      name: 'Platon',
+      note: 'Idei sut istinna realnost',
+      about: 'Učenik Sokrata, koji pisal filozofiju kako dialogy s Sokratom kako geroj. Věči, koje vidimo, sut nesavršene kopije věčnyh idej, koje samo razum može obrěsti; duša je neumirajuča; a pravedny grad upravljajut filozofy. Osnoval Akademiju, a sovremenny filozof nazval cělu zapadnu tradiciju serijoju primětok k nemu.',
+    },
+    diogenes: {
+      name: 'Diogen iz Sinopa',
+      note: 'Žil v bačvě i smějal se vsakoj konvenciji',
+      about: 'Izgnany iz Sinopa, žil v Atinah v velikoj bačvě, imajuči skoro ničto. Žil kako pes, bez sramy i po prirodě, i smějal se konvenciji javnymi štukami, na priměr iskal s lampoju v denj poštenogo čověka. Kogda Aleksandr Veliky mu ponudil vse, što hoče, poprosil ga, da ne stoji v ego solnci.',
+    },
+    speusippus: {
+      name: 'Speusip',
+      note: 'Platonov synovec; vodil Akademiju po nem',
+      about: 'Platonov synovec, koji vodil Akademiju po nem. Odložil Platonove idei i postavil matematične objekty za prvye realnosti, i opisal rastenja i životne po ih podobnosti.',
+    },
+    xenocrates: {
+      name: 'Ksenokrat',
+      note: 'Sistematizoval Platonovo učenje',
+      about: 'Tretji vodja Akademije, znany po ozbiljnosti. Uredil Platonovo učenje v sistemu i razdělil filozofiju na fiziku, etiku i logiku, šemu, koju stoiki pozdnje prijeli.',
+    },
+    aristotle: {
+      name: 'Aristotel',
+      note: 'Logika, četyri pričiny, dobrodětelj kako srědina',
+      about: 'Učenik Platona dvadeset lět, potom učitelj mladogo Aleksandra Velikogo, potom osnovatelj Likeja. Izmyslil formalnu logiku i pisal o skoro vsem: fizika, biologija, duša, etika, politika i poezija. Protiv Platona, formy věčij jestvujut v samyh věčah. Srědnjevěkovym mysliteljam on byl prosto Filozof.',
+    },
+    anaxarchus: {
+      name: 'Anaksarh',
+      note: 'Putoval s Aleksandrom do Indije',
+      about: 'Atomist, koji šel s Aleksandrom Velikym do Indije, gde on i ego učenik Pirron srěli indijskyh mudrecov. Byl znany po ravnodušnosti k boli i laskanju Aleksandra, i prozvan Srěčnym Čovekom.',
+    },
+    theophrastus: {
+      name: 'Teofrast',
+      note: 'Vodil Likej; osnovatelj botaniky',
+      about: 'Aristotelov kolega i naslědnik v Likeju, koji cvělo pod nim s okolo dvěma tisjačami učenikov. Napisal prve sistematične dela o rastenjah i duhovitu knigu Karaktery, kratke skici ljudskyh tipov.',
+    },
+    crates: {
+      name: 'Krates iz Teb',
+      note: 'Rozdal bogatstvo, da žive kako kinik',
+      about: 'Bogaty tebec, koji rozdal bogatstvo, da žive kako kinik, mjagčje než Diogen: byl privitan v domah kako izceljitelj sporov. Ožėnil se s filozofkoju Hiparhijoju, koja děljila ego žitje na ulici. Zenon iz Kitiona, osnovatelj stoicizma, byl ego učenik.',
+    },
+    pyrrho: {
+      name: 'Pirron',
+      note: 'Ničto ne možno znati; odložiti sud i najti pokoj',
+      about: 'Putoval do Indije s Aleksandrom i Anaksarhom. Ponevaž ne možemo znati věči tak, kako sut v istině, mi trebajemo odložiti sud, i duševen mir sleduje. Rasskazy kažut, že ego prijatelji mor ga zaderživati od hodženja s skal. Ničto ne napisal; ego učenik Timon zapisal ego idei.',
+    },
+    stilpo: {
+      name: 'Stilpon',
+      note: 'Slavny debatant; samodostatočnost',
+      about: 'Vodja Megarskoj školy i slavny debatant, koji odtegal učenikov od vsih drugyh škol. Učil, že mudry ne trěbuje ničto izvně sebe: kogda ego grad byl razoren i ego prašali, što izgubil, odgovoril, že ima še svoje znanje.',
+    },
+    polemon: {
+      name: 'Polemon',
+      note: 'Vodil Akademiju; etika žitja po prirodě',
+      about: 'Rasputny mladec, koji, kako se rasskazuje, vlomil se p’jany v predavanje Ksenokrata i byl obraćeny na městě. Kako vodja Akademije učil praktičnu etiku žitja po prirodě, i Zenon iz Kitiona učil se u nego.',
+    },
+    epicurus: {
+      name: 'Epikur',
+      note: 'Dobro je mirna radost, svobodna od straha',
+      about: 'Osnoval obščinu v svojem vrtu v Atinah, koja prijimala žen i robov. Cěl žitja je radost, razuměna kako ne boleti v těle i ne bojati se v duhu; prosti radosti i prijateljstvo sut najlěpše. Ponevaž smo samo atomy, smrt je ničto za nas: kogda smrt jest, nas ne jest.',
+    },
+    strato: {
+      name: 'Straton iz Lampsaka',
+      note: 'Objasnjal prirodu bez bogov',
+      about: 'Tretji vodja Likeja, znany kako Fizik. Objasnjal svět črěz prirodne sily kako toplo i hladno, bez potrěby bogov ili cěli, i jakoby izučal pustotu s opytami.',
+    },
+    'zeno-citium': {
+      name: 'Zenon iz Kitiona',
+      note: 'Dobrodětelj je jedino dobro; žiti po razumu',
+      about: 'Trgovec s Kipra, korabokrušeny pri Atinah, koji učil se u kinika Kratesa i drugih prěd učenjem v Raskrašenoj stoji. Dobrodětelj je jedino dobro; vse drugo, takože zdravje i bogatstvo, je ravnodušno. Svět je urjadjeny božskym razumom, i mi trěbujemo žiti v soglasju s nim.',
+    },
+    cleanthes: {
+      name: 'Kleant',
+      note: 'Himna Zevsu; vodil Stoju po Zenonu',
+      about: 'Byvši boksěr, koji nosil vodu v noči, da plati za uroky, i naslědil Zenona kako vodja Stoje. Medlen ale stalny, byl prozvan Oslom. Ego Himna Zevsu, hvaljuča razum, koji vladaje vsemi věčami, je jedin iz malo cělyh rannih stoičnyh tekstov.',
+    },
+    timon: {
+      name: 'Timon iz Flijunta',
+      note: 'Satirik i glasnik Pirrona',
+      about: 'Učenik i propagator Pirrona. V satiričnyh poemah, Silloj, smějal se samouvěrjenym filozofam vsih škol i hvalil Pirronov mir.',
+    },
+    arcesilaus: {
+      name: 'Arkesilaj',
+      note: 'Sdělal Akademiju skeptičnoju',
+      about: 'Kako vodja Akademije sdělal ju skeptičnoju, obnoviv Sokratovu navyku sporiti protiv vsakoj stanovišče. Ničto ne možno znati uvěrjeno, tomu mudry odlaga sud. Ničto ne napisal i byl občudovany za duhovitost i velikodušnost.',
+    },
+    chrysippus: {
+      name: 'Hrisip',
+      note: 'Sistematizoval stoičnu logiku i fiziku',
+      about: 'Tretji vodja Stoje i ee velika sistematizator; starodavni rekli, že bez Hrisipa ne by bylo Stoje. Postroil stoičnu logiku propozicij i branil sudbu i providenje. Napisal jakoby črěz sedem sto knig, nijedna ne ostalo.',
+    },
+    carneades: {
+      name: 'Karnead',
+      note: 'Nikaka uvěrjenost, samo stepeni verojatnosti',
+      about: 'Vodja Akademije v ee skeptičnoj fazě. Na poslanstvě v Rim govoril za pravdu jedin denj i protiv nej drugy, skandalizujuči Katona. Uvěrjenost ne je možna, učil je, ale možemo dějati po tom, što je verojatno.',
+    },
+    panaetius: {
+      name: 'Panecij',
+      note: 'Prilagodil stoicizm za Rimljan',
+      about: 'Stoik iz Roda, koji žil v Rimu v krugu Scipiona i pozdnje vodil Stoju. Oblikoval stoicizm v praktičnu etiku dolga i javnogo žitja; Ciceronovo O dolgah je osnovano na ego delě.',
+    },
+    'philo-larissa': {
+      name: 'Filon iz Larisy',
+      note: 'Poslědnji vodja Akademije',
+      about: 'Poslědnji nesporny vodja Platonovoj Akademije. Bežeči iz Atin v času vojny s Mitridatom, učil v Rimu, gde ga slušal mladi Cicero. Omekčal skepticizm Akademije i dokazyval, že vsegda byla jedna škola.',
+    },
+    posidonius: {
+      name: 'Posidonij',
+      note: 'Stoik i polimat; učil Cicerona',
+      about: 'Stoik i polimat iz Roda, koji ocěnil veličinu Zemje, izučal prilivy i putoval do atlantskogo brega. Cicero učil se u nego, a Pompej posětil ego školu. Vrnul Platona i Aristotela v stoicizm.',
+    },
+    antiochus: {
+      name: 'Antioh iz Askalona',
+      note: 'Vrnul Akademiju od skepticizma',
+      about: 'Učenik Filona, koji se s nim razdělil, tvrdeči, že Akademija ostavila Platona. Učil, že Platon, Aristotel i stoiki v osnově se soglašali, i vrnul se k uvěrjenomu platonizmu. Cicero slušal ego predavanja v Atinah.',
+    },
+    philodemus: {
+      name: 'Filodem',
+      note: 'Epikurejec, čija biblioteka ostala v Herkulanumu',
+      about: 'Epikurejec iz Gadary, koji učil v vilě v Herkulanumu blizu Neapolja. Erupcija Vezuvija v 79 g. n. e. zakopala ego biblioteku; ogorěle svitki, mnogo iz nih ego dela o muzyke, poezije i emocijah, se još čitajut sovremennymi metodami.',
+    },
+    cicero: {
+      name: 'Ciceron',
+      note: 'Prinesl grečsku filozofiju v latinski jezyk',
+      about: 'Največji govoritelj Rima i vodeči državnik, koji izučal filozofiju v Atinah i Rodu. V poslědnih lětah napisal dialogy, koji predstavjali grečsku filozofiju Rimljanam, tvorječi mnogo ee latinskogo slovnika. Naklonjal se umerenomu skepticizmu Akademije i byl ubity po prikazu Marka Antonija.',
+    },
+    andronicus: {
+      name: 'Andronik iz Roda',
+      note: 'Izdal Aristotelovy dela v formě, koju mamo',
+      about: 'Peripatetik iz Roda, koji izdal i uredil Aristotelovy dela, dolgo zabyta, v zbirku, koju još uživamo. Grupovanje Aristotelovyh spisov, i verojatno daže slovo metafizika, sěgajut do ego izdanja.',
+    },
+    aenesidemus: {
+      name: 'Ainesidem',
+      note: 'Obnovil pironizm po dvěh stoletjah',
+      about: 'Odlomil se od Akademije, koju našel preveć dogmatičnoju, i obnovil Pirronov skepticizm. Sobral deset modusov, standardnyh argumentov, koji pokazyvajut, že pojavy se měnjajut po nabljudatelju i okolnostih, tomu sud treba odložiti.',
+    },
+    lucretius: {
+      name: 'Lukrecij',
+      note: 'Epikurejstvo v latinskom stihu',
+      about: 'Rimsky pěvec, čija dolga poema O prirodě věčij izlaga Epikurovu filozofiju v latinskom stihu: atomy i pustota, smrtnost duše i svoboda od straha pred bogami. Najdena znova v 1417, ona vplyvala na nauku Renesansa.',
+    },
+    seneca: {
+      name: 'Seneka',
+      note: 'Pisma o dobrom žitju; Neronov světnik',
+      about: 'Rimsky stoik, dramatik i nezvyčajno bogaty politik, koji učil a potom světoval imperatora Nerona. Ego Pisma Luciliju dajut praktične světy o gněvu, žalosti, vremeni i smrti. Obvinjeny v zagovoru, dobil od Nerona prikaz, da si vzeme žitje.',
+    },
+    musonius: {
+      name: 'Musonij Ruf',
+      note: 'Stoicizm kako dnevna praksa',
+      about: 'Rimsky Sokrat, stoičny učitelj, koji učil filozofiju kako način žitja: prosta jeda, težka rabota i ista obrazovanja za žen kako za mužev. Imperatory ga izgnali večkrat. Epiktet byl ego učenik.',
+    },
+    plutarch: {
+      name: 'Plutarh',
+      note: 'Biograf i žrec v Delfah',
+      about: 'Grek iz Heroneje, žrec v orakuli v Delfah i platonik. Ego Paralelne žitja, parne biografije Grekov i Rimljan, oblikovali, kako Evropa predstavjala starinu, a ego eseji, Moralia, obhodjat etiku, religiju i dušu.',
+    },
+    epictetus: {
+      name: 'Epiktet',
+      note: 'Skoncentruj se samo na to, što zavisi od tebe',
+      about: 'Rodjen kako rob, učil se u Musonija Rufa i pozdnje byl osvobođeny. Něktore věči zavisjat od nas, naši sudy i izbory, a ostale ne; svoboda prihodi iz skrbi samo o prvyh. Ego učenik Arrian zapisal ego učenje v Razgovorah i Priručniku.',
+    },
+    marcus: {
+      name: 'Marko Avrelij',
+      note: 'Imperator; napisal Razmyšljenja',
+      about: 'Rimsky imperator i stoik, koji prověl mnogo svojego vladanja v vojně na dunajskoj granici. Ego Razmyšljenja, privatne zapisky sebi, vzyvajut k spokoju, dolgu i prijimanju togo, što se děje, i napominajut sebi, že vse prohodi.',
+    },
+    alexander: {
+      name: 'Aleksandr iz Afrodizije',
+      note: 'Največi starodavny komentator Aristotela',
+      about: 'Držitelj oficialnoj katedry aristotelovskoj filozofije v Atinah i najvěči starodavny komentator Aristotela. Branil svobodnu volju protiv stoičnoj sudby i čital Aristotela tak, že duša ne preživaje těla.',
+    },
+    sextus: {
+      name: 'Sekst Empirik',
+      note: 'Osnovy pironizma, naš glavny skeptičny izvor',
+      about: 'Lěkar i skeptik, čije knigy sut naš glavny izvor o starodavnom skepticizmu. Ego Osnovy pironizma izlagajut skeptičny put: protiviti vsakomu argumentu ravny, odložiti sud, i spokoj sleduje. Najdeny znova v 16. stoletju, vplyval na Montaigna i Descartesa.',
+    },
+    ammonius: {
+      name: 'Ammonij Sakkas',
+      note: 'Učitelj Plotina; ničto ne napisal',
+      about: 'Zagadočny platonični učitelj v Aleksandriji, zvany Sakkas, može byti nosič měškov, po svojem prědašnjem remesle. Ničto ne napisal, ale Plotin učil se u nego jedenadeset lět, a ego učeniki soglasili se deržati ego učenje v tajně.',
+    },
+    plotinus: {
+      name: 'Plotin',
+      note: 'Vsa realnost istěkaje iz Jedinogo',
+      about: 'Učil se u Ammonija v Aleksandriji, potom učil v Rimu. Vsa realnost istěkaje iz Jedinogo, za bytjem i myšljenjem, črěz Um i Dušu do materije; duša se može obrnuti vnutr i vzdvignuti nazad k jedinstvu s nim. Ego učenik Porfirij izdal ego spisy kako Enneady.',
+    },
+  },
+} satisfies Translation;

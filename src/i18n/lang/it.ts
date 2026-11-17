@@ -1,0 +1,417 @@
+import type { Translation } from '../core';
+
+export default {
+  ui: {
+    siteName: 'Filosofi greci',
+    title: 'Linea del tempo dei filosofi greci: chi insegnò a chi, da Talete a Plotino',
+    description: 'Una linea del tempo in scala dei filosofi greci, da Talete a Plotino: chi fu maestro di chi, quali scuole nacquero da quali e chi influenzò chi.',
+    overline: 'Una linea del tempo · c. 600 a.C. – 270 d.C.',
+    titleA: 'Filosofi',
+    titleB: 'greci',
+    subtitle: 'Chi insegnò a chi e quali scuole nacquero da quali, da Talete a Plotino.',
+    ogAlt: 'La linea del tempo attorno a Socrate e Platone: i rami delle scuole a sinistra, i filosofi a destra.',
+    listName: 'Filosofi greci, in ordine cronologico',
+    language: 'Lingua',
+    overview: 'Panoramica della linea del tempo',
+    bce: '{n} a.C.',
+    ce: '{n} d.C.',
+    spanBce: 'c. {a}–{b} a.C.',
+    spanCe: 'c. {a}–{b} d.C.',
+    spanCross: 'c. {a} a.C. – {b} d.C.',
+    active: 'attivo c. {year}',
+    founded: 'Fondata',
+    foundedBy: '{year} da {name}',
+    school: 'Scuola',
+    none: 'Nessuna',
+    studentOf: 'Allievo di',
+    teacherOf: 'Maestro di',
+    influencedBy: 'Influenzato da',
+    influenced: 'Ha influenzato',
+    members: 'Membri',
+    close: 'Chiudi',
+    select: 'Seleziona',
+    done: 'Fatto',
+    selectAll: 'Seleziona tutto',
+    deselectAll: 'Deseleziona tutto',
+  },
+  eras: {
+    'Pre-Socratics': 'Presocratici',
+    'Classical Athens': 'Atene classica',
+    'Hellenistic': 'Età ellenistica',
+    'Roman': 'Età romana',
+  },
+  schools: {
+    milesian: {
+      name: 'Scuola di Mileto',
+      philosophy: 'Un’unica sostanza materiale all’origine di tutto',
+      note: 'I primi filosofi greci, a Mileto, cercarono l’unica materia di cui tutto è fatto: l’acqua per Talete, l’illimitato per Anassimandro, l’aria per Anassimene.',
+    },
+    pythagorean: {
+      name: 'Pitagorici',
+      philosophy: 'Numero e armonia',
+      note: 'Una confraternita fondata da Pitagora a Crotone, in parte religiosa e in parte filosofica. Numero e armonia ordinano il mondo, e l’anima rinasce in nuovi corpi.',
+    },
+    eleatic: {
+      name: 'Scuola eleatica',
+      philosophy: 'L’essere è uno e immutabile',
+      note: 'Da Elea, nell’Italia meridionale. La ragione mostra che ciò che è deve essere uno, intero e immutabile, quindi il cambiamento e la molteplicità sono illusioni; i paradossi di Zenone difendono questa tesi.',
+    },
+    pluralist: {
+      name: 'Pluralisti',
+      philosophy: 'Un’etichetta tarda, non una vera scuola',
+      note: 'Un’etichetta tarda per i pensatori che risposero a Parmenide con più elementi immutabili: le quattro radici di Empedocle mosse da Amore e Odio, gli infiniti semi di Anassagora ordinati dalla Mente.',
+    },
+    atomist: {
+      name: 'Atomisti',
+      philosophy: 'Atomismo: atomi e vuoto',
+      note: 'Tutto è fatto di minuscoli atomi indivisibili che si muovono nello spazio vuoto. Il cambiamento è un unirsi e separarsi di atomi, senza bisogno di dèi né di scopi.',
+    },
+    sophist: {
+      name: 'Sofisti',
+      philosophy: 'Un movimento di maestri a pagamento, non una scuola',
+      note: 'Maestri itineranti che si facevano pagare per insegnare la retorica e come riuscire nella vita pubblica. Si chiesero se verità e giustizia siano qualcosa di più di una convenzione umana.',
+    },
+    academy: {
+      name: 'L’Accademia',
+      philosophy: 'Platonismo',
+      note: 'La scuola di Platone, nel boschetto di Academo fuori Atene. Insegnò la teoria delle Idee, poi si volse allo scetticismo con Arcesilao e Carneade, e durò quasi tre secoli.',
+    },
+    lyceum: {
+      name: 'Il Liceo',
+      philosophy: 'Aristotelismo (peripatetici)',
+      note: 'La scuola di Aristotele nel ginnasio del Liceo; i suoi membri furono detti peripatetici, dal portico coperto in cui si passeggiava. Studiarono logica, natura, etica e politica, e in seguito curarono e commentarono Aristotele.',
+    },
+    cynic: {
+      name: 'Cinici',
+      philosophy: 'Cinismo: vivere secondo natura, rifiutare le convenzioni',
+      note: 'Vivere con semplicità e in accordo con la natura, e disprezzare ricchezza, rango e convenzioni. Diogene ne fece una provocazione pubblica, e influenzò gli stoici.',
+    },
+    cyrenaic: {
+      name: 'Cirenaici',
+      philosophy: 'Edonismo: il piacere del corpo è il bene',
+      note: 'Da Cirene, in Nordafrica. Il piacere del momento presente è l’unico bene, e delle nostre sole sensazioni possiamo essere certi.',
+    },
+    megarian: {
+      name: 'Scuola megarica',
+      philosophy: 'Logica e dialettica',
+      note: 'Euclide di Megara unì l’etica di Socrate all’idea eleatica dell’Uno: il Bene è uno, sotto molti nomi. Nota per la dialettica e i rompicapi logici.',
+    },
+    pyrrhonist: {
+      name: 'Pirroniani',
+      philosophy: 'Scetticismo pirroniano',
+      note: 'Sospendere il giudizio: a ogni argomento se ne può opporre uno di pari forza, e trattenersi dal credere porta serenità (atarassia).',
+    },
+    garden: {
+      name: 'Il Giardino',
+      philosophy: 'Epicureismo',
+      note: 'La comunità di Epicuro nel suo giardino ad Atene. Lo scopo della vita è il piacere, inteso come assenza di dolore e di paura; non si devono temere né gli dèi né la morte.',
+    },
+    stoa: {
+      name: 'La Stoa',
+      philosophy: 'Stoicismo',
+      note: 'Prende il nome dal Portico dipinto di Atene, dove insegnava Zenone. La virtù è l’unico bene: vivere in accordo con una natura razionale e accettare con calma ciò che non dipende da noi.',
+    },
+    platonist: {
+      name: 'Medioplatonici',
+      philosophy: 'Un’etichetta tarda: il platonismo dopo la chiusura dell’Accademia',
+      note: 'Un’etichetta tarda per i platonici dopo la chiusura dell’Accademia. Lessero Platone come maestro di un dio trascendente, attingendo ad Aristotele e agli stoici.',
+    },
+    neoplatonist: {
+      name: 'Neoplatonismo',
+      philosophy: 'La scuola di Plotino a Roma',
+      note: 'La scuola di Plotino a Roma. Tutta la realtà scaturisce dall’Uno attraverso l’Intelletto e l’Anima, e l’anima può volgersi indietro e risalire fino a Lui. Influenzò il pensiero medievale cristiano e islamico.',
+    },
+  },
+  people: {
+    thales: {
+      name: 'Talete',
+      note: 'Tutto è acqua',
+      about: 'Aristotele lo considerava il primo filosofo. Mercante e ingegnere di Mileto, si dice abbia previsto l’eclissi solare del 585 a.C.; cercò una spiegazione naturale del mondo al posto del mito e propose che tutto derivi dall’acqua. Di ciò che scrisse non resta nulla.',
+    },
+    anaximander: {
+      name: 'Anassimandro',
+      note: 'L’illimitato (apeiron) è all’origine di tutto',
+      about: 'Successore di Talete a Mileto. Invece di una sostanza familiare, fece dell’apeiron, illimitato e indefinito, l’origine delle cose: da esso si separano i contrari, come il caldo e il freddo. Disegnò una delle prime mappe del mondo e immaginò la Terra sospesa senza sostegno al centro di tutto.',
+    },
+    pythagoras: {
+      name: 'Pitagora',
+      note: 'Numero e armonia sono alla base della realtà',
+      about: 'Fondò a Crotone, nell’Italia meridionale, una comunità in parte scuola e in parte ordine religioso, con beni in comune e regole severe. Insegnò che l’anima è immortale e rinasce, e i suoi seguaci scoprirono che le armonie musicali seguono semplici rapporti numerici. Molto di ciò che gli si attribuisce, compreso il celebre teorema, può essere opera di pitagorici successivi.',
+    },
+    xenophanes: {
+      name: 'Senofane',
+      note: 'Un solo dio, diverso dagli uomini; critico del mito',
+      about: 'Poeta errante che derideva gli dèi di Omero ed Esiodo perché si comportavano come gli uomini: se i cavalli sapessero disegnare, diceva, disegnerebbero dèi simili a cavalli. Propose un unico dio, diverso da noi, che muove ogni cosa col solo pensiero, e fu cauto su quanto gli esseri umani possano davvero sapere.',
+    },
+    anaximenes: {
+      name: 'Anassimene',
+      note: 'Tutto è aria',
+      about: 'Il terzo milesio. Assunse l’aria come materia di base e indicò un meccanismo del cambiamento: l’aria, rarefacendosi, diventa fuoco; condensandosi, vento, nuvola, acqua, terra e pietra. Spiegare le differenze di qualità come differenze di densità fu un’idea destinata a durare.',
+    },
+    heraclitus: {
+      name: 'Eraclito',
+      note: 'Tutto scorre; il Logos governa il mutamento',
+      about: 'Di Efeso, famoso per i suoi detti enigmatici. Tutto è in flusso e non ci si può bagnare due volte nello stesso fiume, eppure il mutamento segue una misura nascosta, il Logos. I contrari stanno insieme: la strada in su e la strada in giù sono una sola e la stessa. Gli antichi lo chiamavano l’Oscuro.',
+    },
+    parmenides: {
+      name: 'Parmenide',
+      note: 'Ciò che è, è; il cambiamento è impossibile',
+      about: 'Nel suo poema una dea gli mostra la via della verità: ciò che è, è, e ciò che non è non può nemmeno essere pensato. Ne dedusse che l’essere vero è uno, intero, eterno e immutabile, e che il mondo mutevole dei sensi è mera opinione. Ogni filosofo della natura successivo dovette rispondergli.',
+    },
+    anaxagoras: {
+      name: 'Anassagora',
+      note: 'La Mente (nous) ordina la materia',
+      about: 'Il primo filosofo a stabilirsi ad Atene, dove fu amico di Pericle. Ogni cosa contiene una parte di ogni altra, e la Mente (nous) mise in rotazione la mescolanza, che prese a ordinarsi da sé. Disse che il sole era una pietra incandescente, fu processato per empietà e lasciò la città.',
+    },
+    empedocles: {
+      name: 'Empedocle',
+      note: 'Quattro elementi mossi da Amore e Odio',
+      about: 'Poeta, medico e taumaturgo siciliano. Ogni cosa è un miscuglio di quattro radici, terra, acqua, aria e fuoco, riunite dall’Amore e separate dall’Odio in un ciclo senza fine. Secondo la leggenda si gettò nell’Etna per dimostrare di essere un dio.',
+    },
+    'zeno-elea': {
+      name: 'Zenone di Elea',
+      note: 'Paradossi contro il movimento (Achille e la tartaruga)',
+      about: 'Allievo di Parmenide, lo difese mostrando che movimento e molteplicità portano ad assurdi. Il veloce Achille non raggiungerà mai la tartaruga, e una freccia in volo è ferma in ogni istante. I suoi enigmi sull’infinito trovarono una risposta completa solo con la matematica moderna.',
+    },
+    protagoras: {
+      name: 'Protagora',
+      note: 'L’uomo è misura di tutte le cose',
+      about: 'Il primo e più celebre dei sofisti, che si faceva pagare molto per insegnare ai giovani come riuscire nella vita. L’uomo è misura di tutte le cose: ciò che appare vero a ciascuno è vero per lui. Disse anche di non poter sapere se gli dèi esistano. Platone gli intitolò un dialogo.',
+    },
+    gorgias: {
+      name: 'Gorgia',
+      note: 'Nulla esiste; se esistesse, non potrebbe essere conosciuto',
+      about: 'Ambasciatore siciliano e maestro di retorica, che stupì Atene con i suoi discorsi. In un trattato provocatorio sostenne che nulla esiste; che, se esistesse, non si potrebbe conoscere; e che, se si conoscesse, non si potrebbe comunicare a nessuno. Visse più di cent’anni.',
+    },
+    leucippus: {
+      name: 'Leucippo',
+      note: 'Il primo a proporre atomi e vuoto',
+      about: 'Della sua vita si sa poco; alcuni antichi dubitavano persino che fosse esistito. Rispondendo agli eleati, propose che il mondo sia fatto di innumerevoli corpi indivisibili in moto nello spazio vuoto, così che il cambiamento è solo un riordinarsi di atomi. Il suo allievo Democrito sviluppò la teoria.',
+    },
+    melissus: {
+      name: 'Melisso',
+      note: 'L’essere è infinito e immutabile',
+      about: 'Eleate di Samo, fu anche ammiraglio e sconfisse la flotta ateniese. Riformulò Parmenide in semplice prosa, sostenendo che l’essere è uno, immutabile e illimitato. Aristotele trovò rozzo il suo ragionamento, ma esso influenzò il modo in cui i pensatori successivi lessero gli eleati.',
+    },
+    philolaus: {
+      name: 'Filolao',
+      note: 'La Terra si muove attorno a un fuoco centrale',
+      about: 'Pitagorico, tra i primi a mettere per iscritto le idee pitagoriche. Il cosmo è fatto di elementi limitanti e illimitati composti in armonia, e la Terra non ne è il centro: gira attorno a un fuoco centrale, insieme al sole e ai pianeti. Copernico lo cita.',
+    },
+    socrates: {
+      name: 'Socrate',
+      note: 'Mettere tutto in discussione; la virtù è conoscenza',
+      about: 'Non scrisse nulla ed è noto attraverso i suoi allievi, soprattutto Platone. Interrogava i suoi concittadini nell’agorà, mostrando che chi sosteneva di sapere cosa siano il coraggio o la giustizia non lo sapeva; la sua unica saggezza era sapere di non sapere. Una vita senza ricerca, diceva, non è degna di essere vissuta. Atene lo processò per empietà e corruzione dei giovani, e lui bevve la cicuta.',
+    },
+    democritus: {
+      name: 'Democrito',
+      note: 'Tutto è atomi in moto nel vuoto',
+      about: 'Il filosofo che ride, di Abdera, che trasformò l’idea di Leucippo in un sistema completo. Solo gli atomi e il vuoto sono reali; dolce, amaro, caldo e freddo esistono solo per convenzione. Scrisse su molti temi, anche di etica, dove lo scopo è la serenità. Dei suoi numerosi libri non resta quasi nulla.',
+    },
+    antisthenes: {
+      name: 'Antistene',
+      note: 'La sola virtù basta alla felicità',
+      about: 'Allievo di Gorgia, poi fedele seguace di Socrate, fu presente alla sua morte. Insegnò che la virtù si può apprendere e basta alla felicità, e che piacere e ricchezza vanno disprezzati. Insegnava nel ginnasio del Cinosarge, che potrebbe aver dato il nome ai cinici.',
+    },
+    aristippus: {
+      name: 'Aristippo',
+      note: 'Il piacere del momento è il bene',
+      about: 'Seguace di Socrate originario di Cirene, il primo di loro a farsi pagare. Godeva del lusso senza farsene dominare: io possiedo, diceva, non sono posseduto. La sua scuola sosteneva che il piacere del momento presente è l’unico bene.',
+    },
+    'euclid-megara': {
+      name: 'Euclide di Megara',
+      note: 'Il Bene è uno, sotto molti nomi',
+      about: 'Stretto seguace di Socrate, unì la sua etica all’essere uno e immutabile di Parmenide: il Bene è una cosa sola, che lo si chiami saggezza, dio o mente. Dopo la morte di Socrate, Platone si rifugiò presso di lui a Megara. Non va confuso con il matematico Euclide.',
+    },
+    archytas: {
+      name: 'Archita',
+      note: 'Matematico e statista; amico di Platone',
+      about: 'Matematico pitagorico e principale uomo di stato di Taranto, eletto stratego più volte di seguito. Risolse l’antico problema della duplicazione del cubo e fondò la meccanica matematica. Amico di Platone, mandò una nave a salvarlo dal tiranno di Siracusa.',
+    },
+    plato: {
+      name: 'Platone',
+      note: 'Le Idee sono la vera realtà',
+      about: 'Allievo di Socrate, scrisse la filosofia in forma di dialoghi con Socrate come protagonista. Le cose che vediamo sono copie imperfette di Idee eterne, che solo la ragione può cogliere; l’anima è immortale; e la città giusta è governata dai filosofi. Fondò l’Accademia, e un filosofo moderno disse che tutta la tradizione occidentale è una serie di note a piè di pagina a lui.',
+    },
+    diogenes: {
+      name: 'Diogene di Sinope',
+      note: 'Visse in una giara e derise ogni convenzione',
+      about: 'Esiliato da Sinope, visse ad Atene in un grande orcio, quasi senza possedere nulla. Viveva come un cane, senza vergogna e secondo natura, e derideva le convenzioni con gesti pubblici, come cercare un uomo onesto con la lanterna in pieno giorno. Quando Alessandro Magno gli offrì qualunque cosa desiderasse, gli chiese di togliersi dal suo sole.',
+    },
+    speusippus: {
+      name: 'Speusippo',
+      note: 'Nipote di Platone; guidò l’Accademia dopo di lui',
+      about: 'Nipote di Platone, guidò l’Accademia dopo di lui. Mise da parte le Idee di Platone e fece degli oggetti matematici le prime realtà; classificò inoltre piante e animali in base alle loro somiglianze.',
+    },
+    xenocrates: {
+      name: 'Senocrate',
+      note: 'Sistematizzò l’insegnamento di Platone',
+      about: 'Terzo scolarca dell’Accademia, noto per la sua serietà. Organizzò l’insegnamento di Platone in un sistema e divise la filosofia in fisica, etica e logica, una partizione che gli stoici adottarono poi.',
+    },
+    aristotle: {
+      name: 'Aristotele',
+      note: 'La logica, le quattro cause, la virtù come giusto mezzo',
+      about: 'Allievo di Platone per vent’anni, poi precettore del giovane Alessandro Magno, poi fondatore del Liceo. Inventò la logica formale e scrisse su quasi tutto: fisica, biologia, anima, etica, politica e poetica. Contro Platone, le forme delle cose esistono nelle cose stesse. Per i pensatori medievali fu semplicemente il Filosofo.',
+    },
+    anaxarchus: {
+      name: 'Anassarco',
+      note: 'Viaggiò con Alessandro fino in India',
+      about: 'Atomista che accompagnò Alessandro Magno in India, dove lui e il suo allievo Pirrone incontrarono i saggi indiani. Era noto per la sua indifferenza al dolore e per l’adulazione verso Alessandro, e fu soprannominato l’Uomo Felice.',
+    },
+    theophrastus: {
+      name: 'Teofrasto',
+      note: 'Guidò il Liceo; fondatore della botanica',
+      about: 'Collega e successore di Aristotele al Liceo, che sotto di lui fiorì con circa duemila allievi. Scrisse le prime opere sistematiche sulle piante e un libro arguto, i Caratteri, brevi ritratti di tipi umani.',
+    },
+    crates: {
+      name: 'Cratete di Tebe',
+      note: 'Regalò la sua fortuna per vivere da cinico',
+      about: 'Ricco tebano che regalò la sua fortuna per vivere da cinico, in modo più mite di Diogene: era accolto nelle case come paciere delle liti. Sposò la filosofa Ipparchia, che condivise la sua vita di strada. Zenone di Cizio, fondatore dello stoicismo, fu suo allievo.',
+    },
+    pyrrho: {
+      name: 'Pirrone',
+      note: 'Nulla si può conoscere; sospendere il giudizio e trovare la calma',
+      about: 'Viaggiò in India con Alessandro e Anassarco. Poiché non possiamo conoscere le cose come sono davvero, dobbiamo sospendere il giudizio, e ne segue la pace dell’animo. Si racconta che gli amici dovessero impedirgli di cadere dai precipizi. Non scrisse nulla; il suo allievo Timone ne registrò le idee.',
+    },
+    stilpo: {
+      name: 'Stilpone',
+      note: 'Celebre dialettico; autosufficienza',
+      about: 'Capo della scuola megarica e celebre dialettico, tolse allievi a ogni altra scuola. Insegnava che il saggio non ha bisogno di nulla fuori di sé: quando la sua città fu saccheggiata e gli chiesero cosa avesse perso, rispose di avere ancora il suo sapere.',
+    },
+    polemon: {
+      name: 'Polemone',
+      note: 'Guidò l’Accademia; etica del vivere secondo natura',
+      about: 'Giovane dissoluto che, si racconta, irruppe ubriaco in una lezione di Senocrate e ne uscì convertito all’istante. Come scolarca dell’Accademia insegnò un’etica pratica del vivere secondo natura, e Zenone di Cizio studiò con lui.',
+    },
+    epicurus: {
+      name: 'Epicuro',
+      note: 'Il bene è il piacere calmo, libero dalla paura',
+      about: 'Fondò nel suo giardino ad Atene una comunità che accoglieva donne e schiavi. Lo scopo della vita è il piacere, inteso come assenza di dolore nel corpo e di turbamento nell’animo; i piaceri semplici e l’amicizia sono i migliori. Poiché siamo solo atomi, la morte non è nulla per noi: quando c’è lei, non ci siamo noi.',
+    },
+    strato: {
+      name: 'Stratone di Lampsaco',
+      note: 'Spiegò la natura senza gli dèi',
+      about: 'Terzo scolarca del Liceo, detto il Fisico. Spiegò il mondo con forze naturali come il caldo e il freddo, senza bisogno di dèi né di scopi, e si dice abbia studiato il vuoto con esperimenti.',
+    },
+    'zeno-citium': {
+      name: 'Zenone di Cizio',
+      note: 'La virtù è l’unico bene; vivere secondo ragione',
+      about: 'Mercante cipriota naufragato ad Atene, studiò con il cinico Cratete e altri prima di insegnare al Portico dipinto, la Stoa. La virtù è l’unico bene; tutto il resto, perfino salute e ricchezza, è indifferente. Il mondo è ordinato da una ragione divina, e dobbiamo vivere in accordo con essa.',
+    },
+    cleanthes: {
+      name: 'Cleante',
+      note: 'Inno a Zeus; guidò la Stoa dopo Zenone',
+      about: 'Ex pugile che di notte portava acqua per pagarsi le lezioni, e successe a Zenone alla guida della Stoa. Lento ma tenace, fu soprannominato l’Asino. Il suo Inno a Zeus, che celebra la ragione che governa ogni cosa, è uno dei pochi testi stoici antichi giunti completi.',
+    },
+    timon: {
+      name: 'Timone di Fliunte',
+      note: 'Autore di satire e portavoce di Pirrone',
+      about: 'Allievo e propagandista di Pirrone. Nei poemi satirici, i Silli, derise i filosofi sicuri di sé di ogni scuola ed elogiò la calma di Pirrone.',
+    },
+    arcesilaus: {
+      name: 'Arcesilao',
+      note: 'Rese scettica l’Accademia',
+      about: 'Da scolarca dell’Accademia la rese scettica, riprendendo l’abitudine di Socrate di argomentare contro ogni tesi. Nulla si può conoscere con certezza, quindi il saggio sospende il giudizio. Non scrisse nulla e fu ammirato per l’arguzia e la generosità.',
+    },
+    chrysippus: {
+      name: 'Crisippo',
+      note: 'Sistematizzò la logica e la fisica stoiche',
+      about: 'Terzo scolarca della Stoa e suo grande sistematizzatore; gli antichi dicevano che senza Crisippo non ci sarebbe stata la Stoa. Costruì la logica proposizionale degli stoici e difese il fato e la provvidenza. Si dice abbia scritto oltre settecento libri, di cui nessuno è sopravvissuto.',
+    },
+    carneades: {
+      name: 'Carneade',
+      note: 'Nessuna certezza, solo gradi di probabilità',
+      about: 'Scolarca dell’Accademia nella sua fase scettica. In un’ambasceria a Roma argomentò un giorno a favore della giustizia e il giorno dopo contro, scandalizzando Catone. Nessuna certezza è possibile, insegnava, ma possiamo agire in base a ciò che è probabile.',
+    },
+    panaetius: {
+      name: 'Panezio',
+      note: 'Adattò lo stoicismo ai Romani',
+      about: 'Stoico di Rodi che visse a Roma nella cerchia degli Scipioni e in seguito guidò la Stoa. Plasmò lo stoicismo in un’etica pratica del dovere e della vita pubblica; il De officiis di Cicerone si basa sulla sua opera.',
+    },
+    'philo-larissa': {
+      name: 'Filone di Larissa',
+      note: 'Ultimo scolarca dell’Accademia',
+      about: 'L’ultimo scolarca indiscusso dell’Accademia di Platone. Fuggito da Atene durante la guerra contro Mitridate, insegnò a Roma, dove lo ascoltò il giovane Cicerone. Attenuò lo scetticismo dell’Accademia e sostenne che essa era sempre stata una sola scuola.',
+    },
+    posidonius: {
+      name: 'Posidonio',
+      note: 'Erudito stoico; maestro di Cicerone',
+      about: 'Erudito stoico di Rodi che stimò le dimensioni della Terra, studiò le maree e viaggiò fino alla costa atlantica. Cicerone studiò con lui e Pompeo visitò la sua scuola. Riportò Platone e Aristotele nello stoicismo.',
+    },
+    antiochus: {
+      name: 'Antioco di Ascalona',
+      note: 'Riportò l’Accademia lontano dallo scetticismo',
+      about: 'Allievo di Filone che ruppe con lui, sostenendo che l’Accademia aveva abbandonato Platone. Insegnò che Platone, Aristotele e gli stoici concordavano nella sostanza, e tornò a un platonismo sicuro di sé. Cicerone ascoltò le sue lezioni ad Atene.',
+    },
+    philodemus: {
+      name: 'Filodemo',
+      note: 'Epicureo la cui biblioteca si salvò a Ercolano',
+      about: 'Epicureo di Gadara che insegnò in una villa a Ercolano, vicino a Napoli. L’eruzione del Vesuvio del 79 d.C. ne seppellì la biblioteca; i rotoli carbonizzati, molti dei quali con le sue opere su musica, poesia e passioni, sono ancora oggi decifrati con tecniche moderne di imaging.',
+    },
+    cicero: {
+      name: 'Cicerone',
+      note: 'Portò la filosofia greca in latino',
+      about: 'Il più grande oratore di Roma e uomo di stato di primo piano, studiò filosofia ad Atene e a Rodi. Negli ultimi anni scrisse dialoghi che presentavano ai Romani la filosofia greca, coniandone gran parte del vocabolario latino. Propendeva per lo scetticismo moderato dell’Accademia, e fu ucciso per ordine di Marco Antonio.',
+    },
+    andronicus: {
+      name: 'Andronico di Rodi',
+      note: 'Curò le opere di Aristotele nella forma che conosciamo',
+      about: 'Peripatetico di Rodi che curò e ordinò le opere di Aristotele, a lungo trascurate, nella raccolta che usiamo ancora oggi. La suddivisione degli scritti di Aristotele, e probabilmente perfino la parola metafisica, risalgono alla sua edizione.',
+    },
+    aenesidemus: {
+      name: 'Enesidemo',
+      note: 'Rilanciò il pirronismo dopo due secoli',
+      about: 'Si staccò dall’Accademia, che trovava troppo dogmatica, e fece rivivere lo scetticismo di Pirrone. Raccolse dieci modi, argomenti canonici che mostrano come le apparenze varino con l’osservatore e le circostanze, così che il giudizio va sospeso.',
+    },
+    lucretius: {
+      name: 'Lucrezio',
+      note: 'L’epicureismo in versi latini',
+      about: 'Poeta romano il cui lungo poema De rerum natura espone la filosofia di Epicuro in versi latini: gli atomi e il vuoto, la mortalità dell’anima, la liberazione dalla paura degli dèi. Riscoperto nel 1417, alimentò la scienza del Rinascimento.',
+    },
+    seneca: {
+      name: 'Seneca',
+      note: 'Lettere sul vivere bene; consigliere di Nerone',
+      about: 'Stoico romano, drammaturgo e politico ricchissimo, fu precettore e poi consigliere dell’imperatore Nerone. Le sue Lettere a Lucilio offrono consigli pratici su ira, lutto, tempo e morte. Accusato di congiura, ricevette da Nerone l’ordine di togliersi la vita.',
+    },
+    musonius: {
+      name: 'Musonio Rufo',
+      note: 'Lo stoicismo come pratica quotidiana',
+      about: 'Il Socrate romano, maestro stoico che insegnava la filosofia come stile di vita: cibo semplice, duro lavoro e la stessa istruzione per le donne e per gli uomini. Gli imperatori lo esiliarono più di una volta. Epitteto fu suo allievo.',
+    },
+    plutarch: {
+      name: 'Plutarco',
+      note: 'Biografo e sacerdote a Delfi',
+      about: 'Greco di Cheronea, sacerdote dell’oracolo di Delfi e platonico. Le sue Vite parallele, biografie in coppia di Greci e Romani, hanno plasmato l’immagine che l’Europa ebbe dell’antichità, e i suoi saggi, i Moralia, spaziano da etica e religione all’anima.',
+    },
+    epictetus: {
+      name: 'Epitteto',
+      note: 'Concentrarsi solo su ciò che dipende da te',
+      about: 'Nato schiavo, studiò con Musonio Rufo e in seguito fu liberato. Alcune cose dipendono da noi, i nostri giudizi e le nostre scelte, e le altre no; la libertà viene dal curarsi solo delle prime. Il suo allievo Arriano mise per iscritto il suo insegnamento nelle Diatribe e nel Manuale.',
+    },
+    marcus: {
+      name: 'Marco Aurelio',
+      note: 'Imperatore; autore dei Pensieri',
+      about: 'Imperatore romano e stoico, trascorse gran parte del suo regno in guerra sul confine del Danubio. I suoi Pensieri, appunti privati scritti per sé, esortano alla calma, al dovere e all’accettazione di ciò che accade, e gli ricordano che tutto passa.',
+    },
+    alexander: {
+      name: 'Alessandro di Afrodisia',
+      note: 'Il più grande commentatore antico di Aristotele',
+      about: 'Titolare della cattedra ufficiale di filosofia aristotelica ad Atene e il più grande commentatore antico di Aristotele. Difese il libero arbitrio contro il fato degli stoici e interpretò Aristotele in modo che l’anima non sopravviva al corpo.',
+    },
+    sextus: {
+      name: 'Sesto Empirico',
+      note: 'Lineamenti pirroniani, la nostra fonte principale sugli scettici',
+      about: 'Medico e scettico, i cui libri sono la nostra principale fonte sullo scetticismo antico. I suoi Lineamenti pirroniani espongono la via dello scettico: opporre a ogni argomento uno di pari forza, sospendere il giudizio, e la calma segue. Riscoperto nel Cinquecento, influenzò Montaigne e Descartes.',
+    },
+    ammonius: {
+      name: 'Ammonio Sacca',
+      note: 'Maestro di Plotino; non scrisse nulla',
+      about: 'Misterioso maestro platonico di Alessandria, detto Sacca, forse «portatore di sacchi», dal suo antico mestiere. Non scrisse nulla, ma Plotino studiò con lui per undici anni, e i suoi allievi si impegnarono a mantenere segreto il suo insegnamento.',
+    },
+    plotinus: {
+      name: 'Plotino',
+      note: 'Tutta la realtà scaturisce dall’Uno',
+      about: 'Studiò con Ammonio ad Alessandria, poi insegnò a Roma. Tutta la realtà scaturisce dall’Uno, oltre l’essere e il pensiero, attraverso l’Intelletto e l’Anima fino alla materia; l’anima può volgersi verso l’interno e risalire all’unità con esso. Il suo allievo Porfirio ne curò gli scritti come Enneadi.',
+    },
+  },
+} satisfies Translation;
