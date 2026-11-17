@@ -101,6 +101,19 @@ const data = {
     <meta name="twitter:description" content={ui.description} />
     <meta name="twitter:image" content={`${SITE}/og.png`} />
     <script type="application/ld+json" set:html={jsonLd}></script>
+    <!-- Analytics: GoatCounter (no cookies). Paths are prefixed with the hostname, since the
+         account is shared with other sites. -->
+    <script is:inline>
+      window.goatcounter = {
+        path: p => location.hostname + p
+      };
+    </script>
+    <script
+      is:inline
+      data-goatcounter="https://kutnerism.goatcounter.com/count"
+      async
+      src="https://gc.zgo.at/count.js">
+    </script>
   </head>
   <body>
     <header>
