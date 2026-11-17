@@ -1,24 +1,17 @@
 // All geometry is computed at build time, so the browser never measures or re-lays out.
 import { people, schools, eras, type Person, type SchoolId } from '../data/philosophers';
 
-export const PX_PER_YEAR = 7;
-export const START = -632;
-export const END = 280;
+const PX_PER_YEAR = 7;
+const START = -632;
+const END = 280;
 export const ROW_H = 40;
-export const ROW_GAP = 4;
-export const DOT_Y = 12; // dot centre, relative to row top
+const ROW_GAP = 4;
+const DOT_Y = 12; // dot centre, relative to row top
 
-// Left visual area (SVG viewBox units; stretched horizontally on small screens).
-// One shared time axis; everyone's leader points to their active year on it.
-// Lifespans are drawn only on select: on the axis itself for one person, in
-// coloured side-by-side lanes when comparing a few, and in packed lanes (fixed
-// per person, computed below) when more are selected, up to everyone.
+// Left visual area: the branch graph (SVG viewBox units; stretched horizontally on small screens).
 export const SVG_W = 200;
-export const AXIS_X = 10;
-export const LANE_W = 8; // compare lanes
-export const MAX_COMPARE = 5;
-const PACK_W = 7; // packed lanes
-const PACK_X0 = AXIS_X + 8;
+export const GRAPH_X0 = 10; // the leftmost branch column
+export const MAX_COMPARE = 5; // people compared at once, each in their own colour
 
 export const yOf = (year: number) => Math.round((year - START) * PX_PER_YEAR);
 
@@ -27,50 +20,27 @@ export const yOf = (year: number) => Math.round((year - START) * PX_PER_YEAR);
 const founded = new Map<string, number>();
 for (const s of Object.values(schools)) if ('founder' in s && 'founded' in s) founded.set(s.founder, s.founded);
 export const anchorOf = (p: Person) => p.active ?? founded.get(p.id) ?? Math.min(p.born + 40, p.died);
+const anchorY = (p: Person) => yOf(anchorOf(p));
 
 export const sorted = [...people].sort((a, b) => anchorOf(a) - anchorOf(b));
 
-// 1. Rows: at their birth year, nudged down only when they would overlap.
+// 1. Rows: at their active year, nudged down only when they would overlap.
 export const rowY = new Map<string, number>();
 {
   let prevBottom = -Infinity;
   for (const p of sorted) {
-    const y = Math.max(yOf(anchorOf(p)) - DOT_Y, prevBottom + ROW_GAP);
+    const y = Math.max(anchorY(p) - DOT_Y, prevBottom + ROW_GAP);
     rowY.set(p.id, y);
     prevBottom = y + ROW_H;
   }
 }
 
-// Packed lanes: everyone's lifespan in the fewest lanes without overlap.
-export const packX = new Map<string, number>();
-const laneEnds: number[] = [];
-for (const p of [...people].sort((a, b) => a.born - b.born)) {
-  let lane = laneEnds.findIndex((end) => end + 4 < p.born);
-  if (lane === -1) lane = laneEnds.length;
-  laneEnds[lane] = p.died;
-  packX.set(p.id, PACK_X0 + lane * PACK_W);
-}
-
-const gutterX0 = Math.max(AXIS_X + (MAX_COMPARE + 1) * LANE_W, PACK_X0 + laneEnds.length * PACK_W) + 4;
-const gutterW = SVG_W - gutterX0;
-
 const dotY = (id: string) => rowY.get(id)! + DOT_Y;
 
 export const height = Math.max(yOf(END), ...[...rowY.values()].map((y) => y + ROW_H)) + 40;
 
-// Lifespan geometry, drawn by the client on select.
-export const spans = sorted.map((p) => ({
-  id: p.id,
-  x: packX.get(p.id)!,
-  y1: yOf(p.born),
-  y2: yOf(p.died),
-  ya: yOf(anchorOf(p)),
-}));
-
-export const leaders = sorted.map((p) => {
-  const y = yOf(anchorOf(p));
-  return { id: p.id, d: `M${AXIS_X},${y} L${gutterX0 - 2},${y} L${SVG_W},${dotY(p.id)}` };
-});
+// Lifespans (birth and death heights), for the year labels and "alive at the same time".
+export const spans = sorted.map((p) => ({ id: p.id, y1: yOf(p.born), y2: yOf(p.died) }));
 
 // Minimap: dots at the active year, packed into a few columns so close ones don't overlap.
 export const miniCol = new Map<string, number>();
@@ -85,21 +55,7 @@ export const miniCol = new Map<string, number>();
   }
 }
 
-const arc = (from: string, to: string) => {
-  const a = dotY(from);
-  const b = dotY(to);
-  const bulge = Math.min(10 + Math.abs(b - a) * 0.08, gutterW - 4);
-  const x = SVG_W;
-  return `M${x},${a} C${x - bulge},${a} ${x - bulge},${b} ${x},${b}`;
-};
-
-export type Link = { from: string; to: string; type: 'student' | 'influence'; d: string };
-export const links: Link[] = people.flatMap((p) => [
-  ...(p.studentOf ?? []).map((t) => ({ from: t, to: p.id, type: 'student' as const, d: arc(t, p.id) })),
-  ...(p.influence ?? []).map((t) => ({ from: t, to: p.id, type: 'influence' as const, d: arc(t, p.id) })),
-]);
-
-// 3. Schools: shown once, on the founder's row (or first member for founder-less labels).
+// 2. Schools: shown once, on the founder's row (or first member for founder-less labels).
 export const schoolHome = new Map<SchoolId, string>();
 for (const [id, s] of Object.entries(schools) as [SchoolId, (typeof schools)[SchoolId]][]) {
   const home = 'founder' in s ? s.founder : sorted.find((p) => p.school === id)?.id;
@@ -117,11 +73,11 @@ for (let y = -600; y <= 200; y += 100) ticks.push(y === 0 ? 1 : y);
 
 export const eraMarks = eras.map((e) => ({ ...e, y: yOf(e.from) }));
 
-// 4. Branches (the alternative view): every school is a branch. A person with no school
+// 3. Branches: every school is a branch. A person with no school
 // is a single dot (Socrates, Heraclitus), not a line. A branch forks from the branch of
 // its founder's first direct teacher, just before it starts; the founder's other teachers
 // and influences flow in as merges.
-const BR_X0 = AXIS_X;
+const BR_X0 = GRAPH_X0;
 const BR_GAP = 10;
 const laneOfPerson = (p: Person) => p.school ?? `solo:${p.id}`;
 const byId = new Map(people.map((p) => [p.id, p]));
@@ -133,7 +89,7 @@ type Branch = {
 const branchMap = new Map<string, Branch>();
 for (const p of sorted) {
   const id = laneOfPerson(p);
-  const y = yOf(anchorOf(p));
+  const y = anchorY(p);
   const b = branchMap.get(id);
   if (b) { b.members.push(p); b.bottom = Math.max(b.bottom, y); }
   else branchMap.set(id, { id, members: [p], top: y, bottom: y, parent: null, solo: !p.school, col: 0, lineTop: y, forkY: null, forkD: '' });
@@ -190,25 +146,26 @@ const allBranches = [...branchMap.values()];
     b.forkD = `M${px},${y0}L${x},${y0 + dx}`;
   }
 }
-export const branchCols = Math.max(...allBranches.map((b) => b.col)) + 1;
+const branchCols = Math.max(...allBranches.map((b) => b.col)) + 1;
 const brX = (b: Branch) => BR_X0 + b.col * BR_GAP;
 const brBendX = BR_X0 + branchCols * BR_GAP;
 
-const lineD = (b: Branch, to: number) => (to > b.lineTop ? `M${brX(b)},${b.lineTop}V${to}` : '');
-export const branches = allBranches.map((b) => ({
-  id: b.id, parent: b.parent, x: brX(b), lineTop: b.lineTop, forkY: b.forkY, forkD: b.forkD, bottom: b.bottom,
-  teacher: b.parent ? b.members[0].studentOf![0] : null, // whose disciple started it
-  d: b.forkD + lineD(b, b.bottom),
-  members: b.members.map((m) => m.id),
+const branchOf = (p: Person) => branchMap.get(laneOfPerson(p))!;
+const segment = (b: Branch, from: number, to: number) => (to > from ? `M${brX(b)},${from}V${to}` : '');
+
+export const branches = allBranches.map((b) => ({ id: b.id, d: b.forkD + segment(b, b.lineTop, b.bottom) }));
+export const branchDots = sorted.map((p) => ({ id: p.id, x: brX(branchOf(p)), y: anchorY(p) }));
+export const branchLeaders = branchDots.map((t) => ({
+  id: t.id,
+  d: `M${t.x},${t.y} L${brBendX},${t.y} L${SVG_W},${dotY(t.id)}`,
 }));
 
-const dotsAt = sorted.map((p) => ({ x: brX(branchMap.get(laneOfPerson(p))!), y: yOf(anchorOf(p)) }));
 // Merges: teachers and influences on another branch, for anyone (not only founders).
 // A founder's first teacher is already shown by the fork, so it is skipped. Each merge
 // starts at the influencer's own dot, rides their branch (the solid `along` part) until it
 // has to leave, then runs as a dashed line to the person.
 export const merges = sorted.flatMap((f) => {
-  const b = branchMap.get(laneOfPerson(f))!;
+  const b = branchOf(f);
   const founder = b.members[0] === f;
   const bySource = new Map<string, string[]>(); // source branch → the people in it
   for (const q of [...(f.studentOf ?? []), ...(f.influence ?? [])].map((id) => byId.get(id)!)) {
@@ -218,8 +175,8 @@ export const merges = sorted.flatMap((f) => {
   return [...bySource].flatMap(([sid, fromIds]) => {
     const s = branchMap.get(sid)!;
     const sx = brX(s), tx = brX(b), dx = Math.abs(tx - sx);
-    const ty = yOf(anchorOf(f));
-    const iy = Math.min(...fromIds.map((id) => yOf(anchorOf(byId.get(id)!))));
+    const ty = anchorY(f);
+    const iy = Math.min(...fromIds.map((id) => anchorY(byId.get(id)!)));
     if (iy >= ty) return [];
     const y0 = Math.max(iy, Math.min(s.bottom, ty - dx));
     const along = y0 > iy ? `M${sx},${iy}V${y0}` : '';
@@ -227,7 +184,7 @@ export const merges = sorted.flatMap((f) => {
     // The long vertical stretch runs down the source column (bevel at the end) or the
     // target column (bevel first), whichever has nobody in the way.
     const blocked = (x: number, a: number, z: number) =>
-      dotsAt.filter((t) => t.x === x && t.y > a + 1 && t.y < z - 1).length;
+      branchDots.filter((t) => t.x === x && t.y > a + 1 && t.y < z - 1).length;
     const viaSource = `M${sx},${y0}V${y1}L${tx},${ty}`;
     const viaTarget = `M${sx},${y0}L${tx},${y0 + dx}V${ty}`;
     // If both have people in the way, run between two columns, where there are no dots.
@@ -239,37 +196,28 @@ export const merges = sorted.flatMap((f) => {
   });
 });
 
-export const branchOf = new Map(people.map((p) => [p.id, laneOfPerson(p)]));
-export const branchDots = sorted.map((p) => ({ id: p.id, x: brX(branchMap.get(laneOfPerson(p))!), y: yOf(anchorOf(p)) }));
-export const branchLeaders = branchDots.map((t) => ({
-  id: t.id,
-  d: `M${t.x},${t.y} L${brBendX},${t.y} L${SVG_W},${dotY(t.id)}`,
-}));
-
-// 5. Branch highlight, per person: the lines to draw when they are selected, and how
+// 4. Branch highlight, per person: the lines to draw when they are selected, and how
 // everyone else relates to them. The browser only turns relations into looks.
-export type Relation = 'self' | 'teacher' | 'pupil' | 'influencer' | 'influenced' | 'lineage' | 'successor' | 'none';
-const segment = (b: Branch, from: number, to: number) => (to > from ? `M${brX(b)},${from}V${to}` : '');
-const yOfPerson = (p: Person) => yOf(anchorOf(p));
+type Relation = 'self' | 'teacher' | 'pupil' | 'influencer' | 'influenced' | 'lineage' | 'successor' | 'none';
 
 export const branchHL = Object.fromEntries(people.map((p) => {
-  const y = yOfPerson(p);
-  const own = branchMap.get(laneOfPerson(p))!;
+  const y = anchorY(p);
+  const own = branchOf(p);
   // Path: their branch down to them, then each parent branch down to its fork, to a root.
   let path = '';
   const onPath = new Set<string>();
   let to = y;
   for (let b: Branch | undefined = own; b; b = b.parent ? branchMap.get(b.parent) : undefined) {
     path += b.forkD + segment(b, b.lineTop, to);
-    for (const m of b.members) if (yOfPerson(m) <= to) onPath.add(m.id);
+    for (const m of b.members) if (anchorY(m) <= to) onPath.add(m.id);
     to = b.forkY ?? to;
   }
   // After: their own line below them, and the branches their disciples started.
   let after = own.solo ? '' : segment(own, y, own.bottom);
-  const successors = new Set(own.solo ? [] : own.members.filter((m) => yOfPerson(m) > y).map((m) => m.id));
+  const successors = new Set(own.solo ? [] : own.members.filter((m) => anchorY(m) > y).map((m) => m.id));
   for (const c of allBranches) {
     if (!c.parent || c.members[0].studentOf?.[0] !== p.id) continue;
-    after += c.forkD + segment(c, c.lineTop, yOfPerson(c.members[0]));
+    after += c.forkD + segment(c, c.lineTop, anchorY(c.members[0]));
     successors.add(c.members[0].id);
   }
   // Influences in and out: the part riding a branch (`along`) and the dashed part.
