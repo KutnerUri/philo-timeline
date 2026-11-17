@@ -9,11 +9,16 @@ const ROW_GAP = 4;
 const DOT_Y = 12; // dot centre, relative to row top
 
 // Left visual area: the branch graph (SVG viewBox units; stretched horizontally on small screens).
-export const SVG_W = 200;
+export const SVG_W = 260;
+const TAG_W = 110; // the school-tag column at the right end of the graph, just before the names
 export const GRAPH_X0 = 10; // the leftmost branch column
 export const MAX_COMPARE = 5; // people compared at once, each in their own colour
 
 export const yOf = (year: number) => Math.round((year - START) * PX_PER_YEAR);
+export const fmtYear = (y: number) => (y < 0 ? `${-y} BCE` : `${y} CE`);
+export const fmtSpan = (p: Person) =>
+  p.born < 0 && p.died > 0 ? `c. ${-p.born} BCE – ${p.died} CE` : `c. ${Math.abs(p.born)}–${fmtYear(p.died)}`;
+
 
 // Anchor = floruit: when the person was active. Ancient chronologers dated people by
 // their akmē (~age 40); many birth dates are back-calculated from it.
@@ -55,18 +60,12 @@ export const miniCol = new Map<string, number>();
   }
 }
 
-// 2. Schools: shown once, on the founder's row (or first member for founder-less labels).
+// 2. Schools: each has a home row, its founder's (or its first member's, for founder-less labels).
 export const schoolHome = new Map<SchoolId, string>();
 for (const [id, s] of Object.entries(schools) as [SchoolId, (typeof schools)[SchoolId]][]) {
   const home = 'founder' in s ? s.founder : sorted.find((p) => p.school === id)?.id;
   if (home) schoolHome.set(id, home);
 }
-
-export const spines = [...schoolHome.entries()].map(([id, home]) => {
-  const members = sorted.filter((p) => p.school === id && p.id !== home);
-  const ys = [home, ...members.map((m) => m.id)].map(dotY);
-  return { id, top: Math.min(...ys), bottom: Math.max(...ys) };
-});
 
 export const ticks: number[] = [];
 for (let y = -600; y <= 200; y += 100) ticks.push(y === 0 ? 1 : y);
@@ -154,10 +153,38 @@ const branchOf = (p: Person) => branchMap.get(laneOfPerson(p))!;
 const segment = (b: Branch, from: number, to: number) => (to > from ? `M${brX(b)},${from}V${to}` : '');
 
 export const branches = allBranches.map((b) => ({ id: b.id, d: b.forkD + segment(b, b.lineTop, b.bottom) }));
+// School tags, like branch names in a git graph, in one column just before the names: each on
+// its founder's row, where the founder's leader line runs through it. Rows never overlap,
+// so neither do the tags.
+const tagX0 = SVG_W - TAG_W;
+export const schoolTags = allBranches.filter((b) => !b.solo).map((b) => ({
+  id: b.id as SchoolId,
+  name: schools[b.id as SchoolId].name,
+  founder: b.members[0].id,
+  xf: tagX0 / SVG_W, // as a fraction of the graph width, for the HTML tag
+  y: dotY(b.members[0].id),
+}));
+
+// School focus: the school's whole line, and its span from its founding (or its first member's
+// active year, for later labels) to its last member's death, on its own branch.
+export const schoolHL = Object.fromEntries(allBranches.filter((b) => !b.solo).map((b) => {
+  const s = schools[b.id as SchoolId];
+  const start = 'founded' in s ? s.founded : Math.min(...b.members.map(anchorOf));
+  const end = Math.max(...b.members.map((m) => m.died));
+  const x = brX(b);
+  return [b.id, {
+    path: b.forkD + segment(b, b.lineTop, b.bottom),
+    life: `M${x},${yOf(start)}V${yOf(end)}`,
+    xf: x / SVG_W, y1: yOf(start), y2: yOf(end), from: fmtYear(start), to: fmtYear(end),
+    members: b.members.map((m) => m.id),
+  }];
+}));
+
 export const branchDots = sorted.map((p) => ({ id: p.id, x: brX(branchOf(p)), y: anchorY(p) }));
 export const branchLeaders = branchDots.map((t) => ({
   id: t.id,
-  d: `M${t.x},${t.y} L${brBendX},${t.y} L${SVG_W},${dotY(t.id)}`,
+  // Flat out of the dot, angled across to the person's row, then flat through the tag column.
+  d: `M${t.x},${t.y} L${brBendX},${t.y} L${tagX0},${dotY(t.id)} L${SVG_W},${dotY(t.id)}`,
 }));
 
 // Merges: teachers and influences on another branch, for anyone (not only founders).
@@ -246,7 +273,3 @@ export const branchHL = Object.fromEntries(people.map((p) => {
     rel,
   }];
 }));
-
-export const fmtYear = (y: number) => (y < 0 ? `${-y} BCE` : `${y} CE`);
-export const fmtSpan = (p: Person) =>
-  p.born < 0 && p.died > 0 ? `c. ${-p.born} BCE – ${p.died} CE` : `c. ${Math.abs(p.born)}–${fmtYear(p.died)}`;

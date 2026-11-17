@@ -3,28 +3,30 @@
 export type School = {
   name: string;
   philosophy: string;
+  /** A short description, shown when the school is focused. */
+  note: string;
   /** Person who founded it. Omit for later labels/movements with no founder. */
   founder?: string;
   founded?: number;
 };
 
 export const schools = {
-  milesian: { name: 'Milesian school', philosophy: 'One material source of everything', founder: 'thales', founded: -585 },
-  pythagorean: { name: 'Pythagoreans', philosophy: 'Number and harmony', founder: 'pythagoras', founded: -530 },
-  eleatic: { name: 'Eleatic school', philosophy: 'Being is one and unchanging', founder: 'parmenides', founded: -475 },
-  pluralist: { name: 'Pluralists', philosophy: 'A later label, not a real school' },
-  atomist: { name: 'Atomists', philosophy: 'Atomism: atoms and the void', founder: 'leucippus', founded: -440 },
-  sophist: { name: 'Sophists', philosophy: 'A movement of paid teachers, not a school' },
-  academy: { name: 'The Academy', philosophy: 'Platonism', founder: 'plato', founded: -387 },
-  lyceum: { name: 'The Lyceum', philosophy: 'Aristotelianism (Peripatetics)', founder: 'aristotle', founded: -335 },
-  cynic: { name: 'Cynics', philosophy: 'Cynicism: live by nature, reject convention', founder: 'antisthenes', founded: -399 },
-  cyrenaic: { name: 'Cyrenaics', philosophy: 'Hedonism: bodily pleasure is the good', founder: 'aristippus', founded: -400 },
-  megarian: { name: 'Megarian school', philosophy: 'Logic and dialectic', founder: 'euclid-megara', founded: -399 },
-  pyrrhonist: { name: 'Pyrrhonists', philosophy: 'Pyrrhonian skepticism', founder: 'pyrrho', founded: -320 },
-  garden: { name: 'The Garden', philosophy: 'Epicureanism', founder: 'epicurus', founded: -306 },
-  stoa: { name: 'The Stoa', philosophy: 'Stoicism', founder: 'zeno-citium', founded: -300 },
-  platonist: { name: 'Middle Platonists', philosophy: 'A later label: Platonism after the Academy closed' },
-  neoplatonist: { name: 'Neoplatonism', philosophy: 'Plotinus\'s school in Rome', founder: 'plotinus', founded: 244 },
+  milesian: { name: 'Milesian school', philosophy: 'One material source of everything', note: 'The first Greek philosophers, in Miletus, looked for the one stuff everything is made of: water for Thales, the boundless for Anaximander, air for Anaximenes.', founder: 'thales', founded: -585 },
+  pythagorean: { name: 'Pythagoreans', philosophy: 'Number and harmony', note: 'A brotherhood Pythagoras founded in Croton, part religious and part philosophical. Number and harmony order the world, and the soul is reborn in new bodies.', founder: 'pythagoras', founded: -530 },
+  eleatic: { name: 'Eleatic school', philosophy: 'Being is one and unchanging', note: 'From Elea in southern Italy. Reason shows that what is must be one, whole and unchanging, so change and plurality are illusions; Zeno\'s paradoxes defend the claim.', founder: 'parmenides', founded: -475 },
+  pluralist: { name: 'Pluralists', philosophy: 'A later label, not a real school', note: 'A later label for thinkers who answered Parmenides with several unchanging elements: Empedocles\' four roots moved by Love and Strife, Anaxagoras\' countless seeds set in order by Mind.' },
+  atomist: { name: 'Atomists', philosophy: 'Atomism: atoms and the void', note: 'Everything is made of tiny, indivisible atoms moving through empty space. Change is atoms combining and separating, with no gods or purpose needed.', founder: 'leucippus', founded: -440 },
+  sophist: { name: 'Sophists', philosophy: 'A movement of paid teachers, not a school', note: 'Travelling teachers who took fees to teach rhetoric and how to succeed in public life. They asked whether truth and justice are more than human convention.' },
+  academy: { name: 'The Academy', philosophy: 'Platonism', note: 'Plato\'s school, in the grove of Akademos outside Athens. It taught the theory of Forms, later turned skeptical under Arcesilaus and Carneades, and lasted nearly three centuries.', founder: 'plato', founded: -387 },
+  lyceum: { name: 'The Lyceum', philosophy: 'Aristotelianism (Peripatetics)', note: 'Aristotle\'s school at the Lyceum gymnasium; its members were called Peripatetics, after its covered walkway. They researched logic, nature, ethics and politics, and later edited and explained Aristotle.', founder: 'aristotle', founded: -335 },
+  cynic: { name: 'Cynics', philosophy: 'Cynicism: live by nature, reject convention', note: 'Live simply and in line with nature, and scorn wealth, status and convention. Diogenes turned it into public provocation, and it shaped the Stoics.', founder: 'antisthenes', founded: -399 },
+  cyrenaic: { name: 'Cyrenaics', philosophy: 'Hedonism: bodily pleasure is the good', note: 'From Cyrene in North Africa. The pleasure of the present moment is the only good, and we can be sure only of our own sensations.', founder: 'aristippus', founded: -400 },
+  megarian: { name: 'Megarian school', philosophy: 'Logic and dialectic', note: 'Euclid of Megara joined Socrates\' ethics to the Eleatic idea of the One: the Good is one, under many names. Known for dialectic and logical puzzles.', founder: 'euclid-megara', founded: -399 },
+  pyrrhonist: { name: 'Pyrrhonists', philosophy: 'Pyrrhonian skepticism', note: 'Suspend judgement: every argument can be met by an equal one against it, and withholding belief brings peace of mind (ataraxia).', founder: 'pyrrho', founded: -320 },
+  garden: { name: 'The Garden', philosophy: 'Epicureanism', note: 'Epicurus\' community in his garden in Athens. The goal of life is pleasure, understood as freedom from pain and fear; neither the gods nor death should be feared.', founder: 'epicurus', founded: -306 },
+  stoa: { name: 'The Stoa', philosophy: 'Stoicism', note: 'Named for the Painted Porch in Athens where Zeno taught. Virtue is the only good: live in agreement with a rational nature, and accept calmly what is not in your control.', founder: 'zeno-citium', founded: -300 },
+  platonist: { name: 'Middle Platonists', philosophy: 'A later label: Platonism after the Academy closed', note: 'A later label for Platonists after the Academy closed. They read Plato as teaching a transcendent god, and drew on Aristotle and the Stoics.' },
+  neoplatonist: { name: 'Neoplatonism', philosophy: 'Plotinus\'s school in Rome', note: 'Plotinus\' school in Rome. All of reality flows from the One through Intellect and Soul, and the soul can turn back and rise to it. It shaped medieval Christian and Islamic thought.', founder: 'plotinus', founded: 244 },
 } satisfies Record<string, School>;
 
 export type SchoolId = keyof typeof schools;

@@ -1,9 +1,9 @@
 ---
 import { people, schools } from '../data/philosophers';
 import {
-  sorted, rowY, spans, spines, schoolHome, ticks, eraMarks,
+  sorted, rowY, spans, schoolHome, ticks, eraMarks,
   height, yOf, SVG_W, ROW_H, fmtYear, fmtSpan, anchorOf, miniCol,
-  GRAPH_X0, MAX_COMPARE, branches, merges, branchDots, branchLeaders, branchHL,
+  GRAPH_X0, MAX_COMPARE, branches, merges, branchDots, branchLeaders, branchHL, schoolTags, schoolHL,
 } from '../lib/layout';
 
 // Minimap: periods as bands, people as dots at their active year
@@ -13,8 +13,6 @@ const eraBands = eraMarks.map((e, i) => ({
   top: pct(e.y),
   h: pct((eraMarks[i + 1]?.y ?? height) - e.y),
 }));
-
-const homeOf = new Map([...schoolHome.entries()].map(([s, p]) => [p, s]));
 
 // Compact data for the client: per-person info and the highlight for each person.
 const data = {
@@ -28,7 +26,7 @@ const data = {
   ),
   schools: Object.fromEntries(
     Object.entries(schools).map(([id, s]) => [id, {
-      name: s.name, philosophy: s.philosophy, home: schoolHome.get(id as any),
+      name: s.name, philosophy: s.philosophy, note: s.note, home: schoolHome.get(id as any),
       founded: 'founded' in s ? fmtYear(s.founded) : null,
       members: sorted.filter((p) => p.school === id).map((p) => p.id),
     }]),
@@ -36,6 +34,7 @@ const data = {
   spans: Object.fromEntries(spans.map((b) => [b.id, b])),
   maxCompare: MAX_COMPARE,
   branchHL,
+  schoolHL,
 };
 ---
 
@@ -91,35 +90,20 @@ const data = {
           </g>
         </g>
       </svg>
+      {schoolTags.map((t) => (
+        <button type="button" class="btag" data-school={t.id} style={`top:${t.y}px;--xf:${t.xf}`}>{t.name}</button>
+      ))}
       {['from', 'to'].map((end) => (
         <div class="spanlabel" id={`span-${end}`} hidden></div>
       ))}
 
-      {spines.map((s) => (
-        <div class="spine" data-school={s.id} style={`top:${s.top}px;height:${s.bottom - s.top}px`}></div>
+      {sorted.map((p) => (
+        <div class:list={['row', p.priority === 'grand' && 'grand', !p.priority && 'minor']} id={p.id} data-id={p.id} style={`top:${rowY.get(p.id)}px;height:${ROW_H}px`}>
+          <span class="dot"></span>
+          <div class="l1"><b>{p.name}</b></div>
+          <div class="note">{p.note}</div>
+        </div>
       ))}
-
-      {sorted.map((p) => {
-        const founds = homeOf.get(p.id);
-        const s = founds && schools[founds];
-        return (
-          <div class:list={['row', p.priority === 'grand' && 'grand', !p.priority && 'minor']} id={p.id} data-id={p.id} style={`top:${rowY.get(p.id)}px;height:${ROW_H}px`}>
-            <span class="dot"></span>
-            <div class="person">
-              <div class="l1"><b>{p.name}</b></div>
-              <div class="note">{p.note}</div>
-            </div>
-            <div class="school">
-              {s && (
-                <>
-                  <div class="sname">{s.name}{'founded' in s && <span class="founded"> · {fmtYear(s.founded)}</span>}</div>
-                  <div class="sphil">{s.philosophy}</div>
-                </>
-              )}
-            </div>
-          </div>
-        );
-      })}
     </main>
 
     <aside id="panel" hidden></aside>
@@ -146,7 +130,7 @@ const data = {
       const view = document.getElementById('view');
       const mdots = Object.fromEntries([...mini.querySelectorAll('.mdot')].map((d) => [d.dataset.id, d]));
       const rows = Object.fromEntries([...document.querySelectorAll('.row')].map((r) => [r.dataset.id, r]));
-      const spines = Object.fromEntries([...document.querySelectorAll('.spine')].map((s) => [s.dataset.school, s]));
+      const tags = Object.fromEntries([...document.querySelectorAll('.btag')].map((t) => [t.dataset.school, t]));
       const allIds = Object.keys(data.spans);
       const slots = Array.from({ length: data.maxCompare }, (_, i) => `s${i}`);
 
@@ -158,20 +142,25 @@ const data = {
       let selected = [];
       let selectMode = false;
       let hovered = null;
+      let school = null; // a focused school (its tag was clicked), instead of people
 
       function render() {
-        for (const el of marked) el.classList.remove('on', 'mate', 'rel', 'founds', ...slots);
+        for (const el of marked) el.classList.remove('on', 'mate', 'rel', ...slots);
         marked = [];
-        const ids = selected.length ? selected : hovered ? [hovered] : [];
-        tl.classList.toggle('focusing', ids.length > 0);
-        labelSpan(ids.length === 1 ? ids[0] : null);
-        if (ids.length === 1) markOne(ids[0]);
+        const ids = school ? [] : selected.length ? selected : hovered ? [hovered] : [];
+        const state = school || selected.length ? 'selected' : hovered ? 'hovered' : 'none';
+        tl.classList.toggle('focusing', ids.length > 0 || !!school);
+        tl.classList.toggle('school-focus', !!school); // the accent switches to the school colour
+        labelSpan(school ? data.schoolHL[school] : ids.length === 1 ? personRange(ids[0]) : null);
+        if (school) markSchool(school);
+        else if (ids.length === 1) markOne(ids[0]);
         else ids.forEach((id, i) => {
           const slot = i < data.maxCompare ? [slots[i]] : []; // beyond that, no colour of their own
           mark(rows[id], 'on', ...slot); mark(mdots[id], 'on', ...slot);
         });
-        drawBranches(ids, selected.length ? 'selected' : hovered ? 'hovered' : 'none');
-        showPanel(selected.length === 1 && !selectMode ? selected[0] : null);
+        drawBranches(ids, state, school);
+        if (school) showSchool(school);
+        else showPanel(selected.length === 1 && !selectMode ? selected[0] : null);
         allBtn.textContent = selected.length === allIds.length ? 'Deselect all' : 'Select all';
       }
 
@@ -187,20 +176,25 @@ const data = {
           const s = data.schools[p.school];
           for (const m of s.members) mark(rows[m], 'mate');
           if (s.home) mark(rows[s.home], 'mate');
-          if (s.home && s.founded) mark(rows[s.home], 'founds'); // line from founder to the school's name
-          if (spines[p.school]) mark(spines[p.school], 'on');
+          if (tags[p.school]) mark(tags[p.school], 'on');
         }
       }
 
-      // Birth and death years beside the ends of the selected person's lifespan, on their branch.
+      // A school: its members' rows and its tag.
+      function markSchool(id) {
+        for (const m of data.schoolHL[id].members) { mark(rows[m], 'rel'); mark(mdots[m], 'rel'); }
+        mark(tags[id], 'on');
+      }
+
+      // The years at both ends of a span (a person's life, or a school's), beside their branch.
       const spanFrom = document.getElementById('span-from');
       const spanTo = document.getElementById('span-to');
-      function labelSpan(id) {
-        spanFrom.hidden = spanTo.hidden = !id;
-        if (!id) return;
-        const p = data.people[id], b = data.spans[id];
-        const left = `calc(var(--tick-w) + var(--svg-w) * ${data.branchHL[id].xf} + 6px)`;
-        for (const [el, text, y] of [[spanFrom, p.from, b.y1], [spanTo, p.to, b.y2]]) {
+      const personRange = (id) => ({ ...data.spans[id], from: data.people[id].from, to: data.people[id].to, xf: data.branchHL[id].xf });
+      function labelSpan(r) {
+        spanFrom.hidden = spanTo.hidden = !r;
+        if (!r) return;
+        const left = `calc(var(--tick-w) + var(--svg-w) * ${r.xf} + 6px)`;
+        for (const [el, text, y] of [[spanFrom, r.from, r.y1], [spanTo, r.to, r.y2]]) {
           el.textContent = text; el.style.top = y + 'px'; el.style.left = left;
         }
       }
@@ -214,12 +208,14 @@ const data = {
       const bDots = Object.fromEntries([...document.querySelectorAll('#branch .bd')].map((e) => [e.dataset.id, e]));
 
       const relationOf = (p, q) => data.branchHL[p].rel[q] ?? 'none';
-      function lifespanOf(p, q) {
-        const a = data.spans[p], b = data.spans[q];
+      // q's lifespan relative to a span (a person's life, or a school's): before, shared or after.
+      function lifespanOf(a, q) {
+        const b = data.spans[q];
         return b.y2 < a.y1 ? 'before' : b.y1 > a.y2 ? 'after' : 'shared';
       }
 
-      // Inputs: { relation, lifespan, state }. state is 'none' (nobody highlighted), 'hovered'
+      // Inputs: { relation, lifespan, state }. relation is to the selected person, or 'member'
+      // when a school is focused. state is 'none' (nobody highlighted), 'hovered'
       // or 'selected'; hovered and selected look the same for now.
       function leaderProfile({ relation, state }) {
         if (state === 'none') return { priority: 'subtle', accent: 'neutral' };
@@ -238,19 +234,22 @@ const data = {
         el.setAttribute('class', `${base} p-${profile.priority} a-${profile.accent}${profile.empty ? ' empty' : ''}`);
       }
 
-      function drawBranches(ids, state) {
-        const one = ids.length === 1 ? data.branchHL[ids[0]] : null;
+      function drawBranches(ids, state, school) {
+        // One focus (a person or a school) draws its lines; a school has only its path and span.
+        const one = school ? data.schoolHL[school] : ids.length === 1 ? data.branchHL[ids[0]] : null;
+        const span = school ? data.schoolHL[school] : ids.length === 1 ? data.spans[ids[0]] : null;
         const few = ids.length > 1 && ids.length <= data.maxCompare;
-        for (const k in bLine) bLine[k].setAttribute('d', one ? one[k] : '');
+        for (const k in bLine) bLine[k].setAttribute('d', one?.[k] ?? '');
         bSlotLines.forEach((el, i) => el.setAttribute('d', few && ids[i] ? data.branchHL[ids[i]].path : ''));
         for (const q of allIds) {
-          if (!ids.length) {
+          if (!one && !ids.length) {
             setLook(bLeaders[q], 'leader', leaderProfile({ state }));
             setLook(bDots[q], 'bd', dotProfile({ state }));
             continue;
           }
           if (one) {
-            const input = { relation: relationOf(ids[0], q), lifespan: lifespanOf(ids[0], q), state };
+            const relation = school ? (one.members.includes(q) ? 'member' : 'none') : relationOf(ids[0], q);
+            const input = { relation, lifespan: lifespanOf(span, q), state };
             setLook(bLeaders[q], 'leader', leaderProfile(input));
             setLook(bDots[q], 'bd', dotProfile(input));
             if (input.relation !== 'none' && input.relation !== 'self') { mark(rows[q], 'rel'); mark(mdots[q], 'rel'); }
@@ -272,8 +271,8 @@ const data = {
         const s = p.school && data.schools[p.school];
         const lines = [
           s && (s.home === id
-            ? `<dt>Founded</dt><dd>${s.name}${s.founded ? ` (${s.founded})` : ''}<br><small>${s.philosophy}</small></dd>`
-            : `<dt>School</dt><dd>${s.name}<br><small>${s.philosophy}</small></dd>`),
+            ? `<dt>Founded</dt><dd>${schoolLink(p.school)}${s.founded ? ` (${s.founded})` : ''}<br><small>${s.philosophy}</small></dd>`
+            : `<dt>School</dt><dd>${schoolLink(p.school)}<br><small>${s.philosophy}</small></dd>`),
           !p.school && `<dt>School</dt><dd>None</dd>`,
           p.studentOf.length && `<dt>Student of</dt><dd>${link(p.studentOf)}</dd>`,
           p.students.length && `<dt>Teacher of</dt><dd>${link(p.students)}</dd>`,
@@ -284,8 +283,20 @@ const data = {
         panel.hidden = false;
       }
 
+      const schoolLink = (id) => `<a href="#school:${id}">${data.schools[id].name}</a>`;
+      function showSchool(id) {
+        const s = data.schools[id], h = data.schoolHL[id];
+        const lines = [
+          s.home && s.founded && `<dt>Founded</dt><dd>${s.founded} by ${link([s.home])}</dd>`,
+          `<dt>Members</dt><dd>${link(h.members)}</dd>`,
+        ].filter(Boolean).join('');
+        panel.innerHTML = `<button class="x" aria-label="Close">×</button><h2>${s.name}</h2><div class="dates">${h.from} – ${h.to} · ${s.philosophy}</div><p>${s.note}</p><dl>${lines}</dl>`;
+        panel.hidden = false;
+      }
+
       // Plain click: select just this one (or clear it). Shift+click or Select mode: add/remove.
       function choose(id, multi) {
+        school = null;
         if (!id) selected = [];
         else if (multi) {
           if (selected.includes(id)) selected = selected.filter((s) => s !== id);
@@ -312,10 +323,16 @@ const data = {
 
       tl.addEventListener('mouseover', (e) => {
         const id = e.target.closest('.row')?.dataset.id ?? null;
-        if (id !== hovered) { hovered = id; if (!selected.length) render(); }
+        if (id !== hovered) { hovered = id; if (!selected.length && !school) render(); }
       });
-      tl.addEventListener('mouseleave', () => { hovered = null; if (!selected.length) render(); });
+      tl.addEventListener('mouseleave', () => { hovered = null; if (!selected.length && !school) render(); });
       tl.addEventListener('click', (e) => {
+        const tag = e.target.closest('.btag');
+        if (tag) { // focus the school (click again to clear)
+          selected = [];
+          school = school === tag.dataset.school ? null : tag.dataset.school;
+          return render();
+        }
         const id = e.target.closest('.row')?.dataset.id ?? null;
         const multi = e.shiftKey || selectMode;
         if (!id && multi) return; // a stray tap shouldn't wipe a comparison
@@ -328,8 +345,9 @@ const data = {
         if (!a) return;
         e.preventDefault();
         const id = a.getAttribute('href').slice(1);
+        if (id.startsWith('school:')) { selected = []; school = id.slice(7); return render(); }
         rows[id].scrollIntoView({ behavior: 'smooth', block: 'center' });
-        selected = [id]; render();
+        school = null; selected = [id]; render();
       });
       document.addEventListener('keydown', (e) => {
         if (e.key !== 'Escape') return;
@@ -375,8 +393,8 @@ const data = {
 
     <style is:global>
       :root {
-        --fg: #1d1d1b; --muted: #7a776f; --faint: #e4e0d7; --bg: #faf9f6; --accent: #2f5d8a; --lifespan: #3d8a5f;
-        --tick-w: 64px; --svg-w: 200px; --school-w: 250px;
+        --fg: #1d1d1b; --muted: #7a776f; --faint: #e4e0d7; --bg: #faf9f6; --accent: #2f5d8a; --lifespan: #3d8a5f; --school: #b5850f;
+        --tick-w: 64px; --svg-w: 260px;
       }
       * { box-sizing: border-box; }
       body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.35 ui-serif, Georgia, serif; }
@@ -408,6 +426,7 @@ const data = {
       .p-normal { --w: var(--w-normal); } .p-high { --w: var(--w-high); } .p-max { --w: var(--w-max); }
       .a-neutral { --hue: var(--fg); }
       .a-accent { --hue: var(--c, var(--accent)); } /* --c: a compare slot's colour */
+      .school-focus { --c: var(--school); --lifespan: var(--school); } /* a focused school: its own accent, an ochre yellow, for its span too */
       .a-lifespan { --hue: var(--lifespan); } /* time alive, as opposed to lineage: a cool green, so it sits behind the blue */
       .p-faint, .p-subtle, .p-weak, .p-low, .p-normal, .p-high, .p-max { --tone: color-mix(in oklch, var(--hue) var(--w), var(--bg)); }
 
@@ -430,11 +449,10 @@ const data = {
       /* Compare colours, one per selected person (slot order). */
       .s0 { --c: #2f5d8a; } .s1 { --c: #b5562c; } .s2 { --c: #3f7d4e; } .s3 { --c: #7a4a8c; } .s4 { --c: #b08a1e; }
 
-      .row { position: absolute; left: calc(var(--tick-w) + var(--svg-w)); right: 16px; display: grid; grid-template-columns: 1fr var(--school-w); gap: 16px; padding-left: 14px; cursor: pointer; }
+      .row { position: absolute; left: calc(var(--tick-w) + var(--svg-w)); right: 16px; padding-left: 14px; cursor: pointer; }
       .dot { position: absolute; left: -5px; top: 7px; width: 10px; height: 10px; border-radius: 50%; background: var(--bg); border: 2px solid var(--fg); }
-      .person, .school { min-width: 0; }
-      .note, .sphil, .sname { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-      /* Always flex, so adding the founder line on highlight doesn't move the name. */
+      .note { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      /* The name on one line, cut off with … when too long. */
       .l1 { display: flex; align-items: center; white-space: nowrap; }
       .l1 b { font-size: 16px; font-weight: 600; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
       /* Three tiers: grand (Socrates, Plato, Aristotle) larger, main figures as is, everyone else at 0.85 in regular weight. */
@@ -443,10 +461,8 @@ const data = {
       .row.minor .l1 b { font-size: 13.6px; font-weight: 400; }
       .row.minor .note { font-size: 10.6px; }
       .row.minor .dot { width: 8px; height: 8px; left: -4px; top: 8px; } /* whole pixels keep it round */
-      .dates, .note, .sphil, .founded { font: 12.5px system-ui, sans-serif; color: var(--muted); }
+      .dates, .note { font: 12.5px system-ui, sans-serif; color: var(--muted); }
       .spanlabel { position: absolute; transform: translateY(-50%); font: 600 11px system-ui, sans-serif; color: color-mix(in oklch, var(--lifespan) var(--w-high), var(--bg)); background: var(--bg); padding: 0 3px; white-space: nowrap; pointer-events: none; z-index: 1; }
-      .sname { font-weight: 600; color: var(--accent); }
-      .spine { position: absolute; right: calc(16px + var(--school-w) + 7px); width: 2px; background: var(--accent); opacity: .5; display: none; pointer-events: none; }
 
       .focusing .row { opacity: .3; }
       .focusing .row.mate { opacity: .6; }
@@ -454,8 +470,15 @@ const data = {
       .focusing .row.on { opacity: 1; }
       .row.on .dot { border-color: var(--c, var(--accent)); background: var(--c, var(--accent)); }
       .row.on[class*=" s"] b { color: var(--c); }
-      .spine.on { display: block; }
-      .row.founds .l1::after { content: ''; flex: 1; margin-left: 10px; border-top: 1.5px solid var(--muted); opacity: .6; }
+      /* School tags, like branch names in a git graph: one column just before the names, on the founder's row. */
+      .btag { position: absolute; left: calc(var(--tick-w) + var(--svg-w) * var(--xf) + 2px); transform: translateY(-50%);
+        max-width: calc(var(--svg-w) * (1 - var(--xf)) - 10px); overflow: hidden; text-overflow: ellipsis;
+        font: 600 10px/14px system-ui, sans-serif; color: color-mix(in oklch, var(--fg) var(--w-normal), var(--bg));
+        background: var(--bg); border: 1px solid color-mix(in oklch, var(--fg) var(--w-weak), var(--bg)); border-radius: 3px;
+        padding: 0 5px; white-space: nowrap; cursor: pointer; z-index: 2; }
+      .btag:hover { border-color: color-mix(in oklch, var(--accent) var(--w-normal), var(--bg)); }
+      .focusing .btag { color: color-mix(in oklch, var(--fg) var(--w-low), var(--bg)); border-color: color-mix(in oklch, var(--fg) var(--w-subtle), var(--bg)); }
+      .focusing .btag.on { color: color-mix(in oklch, var(--c, var(--accent)) var(--w-high), var(--bg)); border-color: color-mix(in oklch, var(--c, var(--accent)) var(--w-normal), var(--bg)); }
 
       #panel { position: fixed; right: 16px; bottom: 16px; width: 300px; max-height: 70vh; overflow: auto; background: #fff; border: 1px solid var(--faint); box-shadow: 0 6px 24px rgba(0,0,0,.08); padding: 14px 16px; font: 13px/1.45 system-ui, sans-serif; z-index: 10; }
       #panel h2 { font: 600 19px ui-serif, Georgia, serif; margin: 0; }
@@ -487,13 +510,12 @@ const data = {
         #mini { left: 4px; width: 24px; top: 8px; bottom: 8px; }
         .band span { display: none; }
         .mdot { left: 4px !important; }
-        :root { --tick-w: 0px; --svg-w: 110px; --school-w: 0px; }
+        :root { --tick-w: 0px; --svg-w: 110px; }
+        .btag { display: none; } /* no room for the tag column on a phone; the info card names the school */
         header { padding: 20px 14px 16px; }
         .tick span { left: 2px; font-size: 9.5px; }
         .era span { font-size: 9.5px; }
-        .school, .spine { display: none !important; }
-        .row.founds .l1::after { display: none; }
-        .row { grid-template-columns: 1fr; right: 8px; }
+        .row { right: 8px; }
         .l1 { white-space: normal; line-height: 1.15; }
         .note { display: none; }
         #panel { left: 34px; right: 8px; bottom: 8px; width: auto; max-height: 45vh; }
