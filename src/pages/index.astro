@@ -1,0 +1,212 @@
+---
+import { people, schools, eras, type Person } from '../data/philosophers';
+
+const sorted = [...people].sort((a, b) => a.born - b.born);
+const byId = new Map(people.map((p) => [p.id, p]));
+
+const year = (y: number) => (y < 0 ? `${-y} BCE` : `${y} CE`);
+const span = (p: Person) =>
+  p.born < 0 && p.died > 0 ? `c. ${-p.born} BCE – ${p.died} CE` : `c. ${Math.abs(p.born)} – ${year(p.died)}`;
+
+// Interleave era headers with people
+type Row = { kind: 'era'; name: string } | { kind: 'person'; p: Person };
+const rows: Row[] = [];
+let eraIdx = -1;
+for (const p of sorted) {
+  while (eraIdx + 1 < eras.length && p.born >= eras[eraIdx + 1].from) {
+    eraIdx++;
+    rows.push({ kind: 'era', name: eras[eraIdx].name });
+  }
+  rows.push({ kind: 'person', p });
+}
+
+const links = people.flatMap((p) => [
+  ...(p.studentOf ?? []).map((t) => ({ from: t, to: p.id, type: 'student' })),
+  ...(p.influence ?? []).map((t) => ({ from: t, to: p.id, type: 'influence' })),
+]);
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Greek Philosophers — Timeline</title>
+    <link rel="icon" href="data:," />
+  </head>
+  <body>
+    <header>
+      <h1>Greek Philosophers</h1>
+      <p class="legend">
+        <span><svg width="28" height="8"><line x1="0" y1="4" x2="28" y2="4" class="l-student" /></svg> student of</span>
+        <span><svg width="28" height="8"><line x1="0" y1="4" x2="28" y2="4" class="l-influence" /></svg> main influence</span>
+        <span class="hint">Hover or tap a name to highlight its links.</span>
+      </p>
+    </header>
+
+    <main id="timeline">
+      <svg id="arcs" aria-hidden="true"></svg>
+      <div class="cols head">
+        <div></div><div>Born</div><div>Person</div><div>School · Philosophy</div>
+      </div>
+      {rows.map((r) =>
+        r.kind === 'era' ? (
+          <div class="era"><span>{r.name}</span></div>
+        ) : (
+          <div class="cols row" id={r.p.id} data-id={r.p.id}>
+            <div class="gutter"><span class="dot"></span></div>
+            <div class="year">{year(r.p.born)}</div>
+            <div class="person">
+              <div class="name">{r.p.name}</div>
+              <div class="dates">{span(r.p)}</div>
+              {r.p.studentOf && (
+                <div class="rel">
+                  student of{' '}
+                  {r.p.studentOf.map((t, i) => (
+                    <>{i > 0 && ', '}<a href={`#${t}`}>{byId.get(t)?.name}</a></>
+                  ))}
+                </div>
+              )}
+              {r.p.influence && (
+                <div class="rel infl">
+                  influenced by{' '}
+                  {r.p.influence.map((t, i) => (
+                    <>{i > 0 && ', '}<a href={`#${t}`}>{byId.get(t)?.name}</a></>
+                  ))}
+                </div>
+              )}
+            </div>
+            <div class="school">
+              <div class="school-name">{schools[r.p.school].name}</div>
+              {(r.p.philosophy ?? schools[r.p.school].philosophy) && (
+                <div class="philosophy">{r.p.philosophy ?? schools[r.p.school].philosophy}</div>
+              )}
+            </div>
+          </div>
+        )
+      )}
+    </main>
+
+    <script is:inline define:vars={{ links }}>
+      const main = document.getElementById('timeline');
+      const svg = document.getElementById('arcs');
+      const NS = 'http://www.w3.org/2000/svg';
+      let paths = [];
+
+      function draw() {
+        svg.innerHTML = '';
+        paths = [];
+        const box = main.getBoundingClientRect();
+        svg.setAttribute('width', box.width);
+        svg.setAttribute('height', main.scrollHeight);
+        const pos = (id) => {
+          const dot = document.querySelector(`#${CSS.escape(id)} .dot`);
+          if (!dot) return null;
+          const r = dot.getBoundingClientRect();
+          return { x: r.left + r.width / 2 - box.left, y: r.top + r.height / 2 - box.top };
+        };
+        for (const l of links) {
+          const a = pos(l.from), b = pos(l.to);
+          if (!a || !b) continue;
+          const bulge = Math.min(14 + Math.abs(b.y - a.y) * 0.12, a.x - 4);
+          const path = document.createElementNS(NS, 'path');
+          path.setAttribute('d', `M${a.x},${a.y} C${a.x - bulge},${a.y} ${b.x - bulge},${b.y} ${b.x},${b.y}`);
+          path.setAttribute('class', `l-${l.type}`);
+          path.dataset.from = l.from;
+          path.dataset.to = l.to;
+          svg.appendChild(path);
+          paths.push(path);
+        }
+      }
+
+      function focus(id) {
+        main.classList.toggle('focusing', !!id);
+        const related = new Set(id ? [id] : []);
+        for (const p of paths) {
+          const on = id && (p.dataset.from === id || p.dataset.to === id);
+          p.classList.toggle('on', !!on);
+          if (on) { related.add(p.dataset.from); related.add(p.dataset.to); }
+        }
+        document.querySelectorAll('.row').forEach((r) => r.classList.toggle('on', related.has(r.dataset.id)));
+      }
+
+      let pinned = null;
+      document.querySelectorAll('.row').forEach((row) => {
+        row.addEventListener('mouseenter', () => !pinned && focus(row.dataset.id));
+        row.addEventListener('mouseleave', () => !pinned && focus(null));
+        row.querySelector('.name').addEventListener('click', () => {
+          pinned = pinned === row.dataset.id ? null : row.dataset.id;
+          focus(pinned);
+        });
+      });
+      window.addEventListener('hashchange', () => {
+        const id = location.hash.slice(1);
+        if (document.getElementById(id)) { pinned = id; focus(id); }
+      });
+
+      draw();
+      window.addEventListener('resize', draw);
+      document.fonts?.ready.then(draw);
+    </script>
+
+    <style is:global>
+      :root {
+        --fg: #1d1d1b;
+        --muted: #77746d;
+        --line: #d8d4cb;
+        --bg: #faf9f6;
+        --accent: #2f5d8a;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--fg);
+        font: 15px/1.4 ui-serif, Georgia, serif;
+      }
+      header { max-width: 960px; margin: 0 auto; padding: 32px 16px 8px; }
+      h1 { font-size: 28px; margin: 0 0 8px; font-weight: 600; }
+      .legend { display: flex; flex-wrap: wrap; gap: 18px; color: var(--muted); font: 13px system-ui, sans-serif; margin: 0; align-items: center; }
+      .legend svg { vertical-align: middle; margin-right: 4px; }
+
+      #timeline { position: relative; max-width: 960px; margin: 0 auto; padding: 0 16px 80px; }
+      #arcs { position: absolute; inset: 0; pointer-events: none; overflow: visible; }
+
+      .cols { display: grid; grid-template-columns: 110px 80px 1fr 1fr; gap: 0 16px; }
+      .head { font: 12px system-ui, sans-serif; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); padding: 16px 0 8px; border-bottom: 1px solid var(--line); }
+
+      .row { position: relative; padding: 10px 0; border-bottom: 1px solid #efece5; transition: opacity .15s; }
+      .gutter { position: relative; }
+      .gutter::before { content: ''; position: absolute; right: 0; top: -10px; bottom: -11px; width: 2px; background: var(--line); }
+      .dot { position: absolute; right: -4px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--bg); border: 2px solid var(--fg); }
+      .year { font: 13px system-ui, sans-serif; color: var(--muted); padding-top: 3px; white-space: nowrap; }
+      .name { font-weight: 600; font-size: 17px; cursor: pointer; }
+      .dates, .rel, .philosophy { font: 13px system-ui, sans-serif; color: var(--muted); }
+      .rel a { color: var(--accent); text-decoration: none; }
+      .rel a:hover { text-decoration: underline; }
+      .school-name { font-weight: 500; }
+
+      .era { position: relative; margin-left: 108px; padding: 22px 0 6px 16px; font: 600 12px system-ui, sans-serif; text-transform: uppercase; letter-spacing: .08em; color: var(--accent); border-left: 2px solid var(--line); }
+
+      #arcs path { fill: none; stroke-width: 1.4; transition: opacity .15s; }
+      .l-student { stroke: var(--fg); stroke-width: 1.4; }
+      .l-influence { stroke: var(--muted); stroke-dasharray: 4 3; stroke-width: 1.2; }
+      #arcs path.l-student { stroke: #8a867d; }
+      #arcs path.l-influence { stroke: #b9b4a9; opacity: .6; }
+
+      .focusing #arcs path { opacity: .12; }
+      .focusing #arcs path.on { opacity: 1; stroke: var(--accent); stroke-width: 2; }
+      .focusing .row { opacity: .35; }
+      .focusing .row.on { opacity: 1; }
+      .row.on .dot { border-color: var(--accent); background: var(--accent); }
+      .row:target { background: #f0ece2; }
+
+      @media (max-width: 640px) {
+        .cols { grid-template-columns: 56px 1fr; }
+        .head, .year { display: none; }
+        .school { grid-column: 2; padding-top: 4px; }
+        .era { margin-left: 54px; }
+        .gutter { grid-row: span 2; }
+      }
+    </style>
+  </body>
+</html>
