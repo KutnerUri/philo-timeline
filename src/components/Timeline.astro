@@ -120,13 +120,6 @@ const data = {
       <p class="overline">{ui.overline}</p>
       <h1>{ui.titleA}{L.unspaced ? '' : ' '}<em>{ui.titleB}</em></h1>
       <p class="subtitle">{ui.subtitle}</p>
-      {available.length > 1 && (
-        <nav class="langs" aria-label={ui.language}>
-          {available.map((l) => (
-            <a href={pathOf(l.code)} hreflang={l.hreflang} lang={l.htmlLang} aria-current={l.code === lang ? 'page' : undefined}>{l.name}</a>
-          ))}
-        </nav>
-      )}
     </header>
 
     <main id="tl" style={`height:${height}px;--graph-f:${GRAPH_X0 / SVG_W}`}>
@@ -183,6 +176,16 @@ const data = {
 
     <aside id="panel" hidden></aside>
     <div id="tools">
+      {available.length > 1 && (
+        <details id="langmenu">
+          <summary aria-label={ui.language} title={ui.language}>文A</summary>
+          <nav aria-label={ui.language}>
+            {available.map((l) => (
+              <a href={pathOf(l.code)} hreflang={l.hreflang} lang={l.htmlLang} aria-current={l.code === lang ? 'page' : undefined}>{l.name}</a>
+            ))}
+          </nav>
+        </details>
+      )}
       <button id="all" type="button" hidden>{ui.selectAll}</button>
       <button id="select" type="button" aria-pressed="false">{ui.select}</button>
     </div>
@@ -357,10 +360,12 @@ const data = {
           p.influence.length && `<dt>${u.influencedBy}</dt><dd>${link(p.influence)}</dd>`,
           p.influenced.length && `<dt>${u.influenced}</dt><dd>${link(p.influenced)}</dd>`,
         ].filter(Boolean).join('');
-        panel.innerHTML = `<button class="x" aria-label="${u.close}">×</button><h2>${p.name}</h2><div class="dates">${p.span} · ${fill(u.active, { year: p.active })}</div><p class="lead">${p.note}</p><p>${p.about}</p><dl>${lines}</dl>`;
+        panel.innerHTML = `<button class="x" aria-label="${u.close}">×</button><h2>${p.name}</h2><div class="dates">${p.span} · ${fill(u.active, { year: p.active })}</div><p class="lead">${p.note}</p><p>${p.about}</p>${wikiLink(p.wiki)}<dl>${lines}</dl>`;
         panel.hidden = false;
       }
 
+      // Attribution for paragraphs taken from Wikipedia (CC BY-SA 4.0).
+      const wikiLink = (url) => url ? `<p class="source"><a href="${url}" target="_blank" rel="noopener">Wikipedia</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA</a></p>` : '';
       const schoolLink = (id) => `<a href="#school:${id}">${data.schools[id].name}</a>`;
       function showSchool(id) {
         const s = data.schools[id], h = data.schoolHL[id];
@@ -368,7 +373,7 @@ const data = {
           s.home && s.founded && `<dt>${u.founded}</dt><dd>${fill(u.foundedBy, { year: s.founded, name: link([s.home]) })}</dd>`,
           `<dt>${u.members}</dt><dd>${link(h.members)}</dd>`,
         ].filter(Boolean).join('');
-        panel.innerHTML = `<button class="x" aria-label="${u.close}">×</button><h2>${s.name}</h2><div class="dates">${h.from} – ${h.to} · ${s.philosophy}</div><p>${s.note}</p><dl>${lines}</dl>`;
+        panel.innerHTML = `<button class="x" aria-label="${u.close}">×</button><h2>${s.name}</h2><div class="dates">${h.from} – ${h.to} · ${s.philosophy}</div><p>${s.note}</p>${wikiLink(s.wiki)}<dl>${lines}</dl>`;
         panel.hidden = false;
       }
 
@@ -398,6 +403,9 @@ const data = {
         render();
       }
       selectBtn.addEventListener('click', () => setSelectMode(!selectMode));
+      // The language menu closes on any click outside it.
+      const langmenu = document.getElementById('langmenu');
+      if (langmenu) document.addEventListener('click', (e) => { if (!langmenu.contains(e.target)) langmenu.open = false; });
 
       tl.addEventListener('mouseover', (e) => {
         const id = e.target.closest('.row')?.dataset.id ?? null;
@@ -419,7 +427,7 @@ const data = {
       });
       panel.addEventListener('click', (e) => {
         if (e.target.closest('.x')) return choose(null);
-        const a = e.target.closest('a');
+        const a = e.target.closest('a[href^="#"]'); // people and schools; outside links open normally
         if (!a) return;
         e.preventDefault();
         const id = a.getAttribute('href').slice(1);
@@ -493,10 +501,9 @@ const data = {
       .overline { margin: 0 0 10px; font: 600 11px system-ui, sans-serif; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
       h1 { margin: 0; font: 700 48px/1 ui-serif, Georgia, serif; letter-spacing: -.02em; }
       h1 em { font-weight: 400; font-style: italic; color: color-mix(in oklch, var(--fg) var(--w-high), var(--bg)); }
-      .langs { display: flex; flex-wrap: wrap; gap: 4px 14px; margin-top: 18px; font: 13px system-ui, sans-serif; }
-      .langs a { color: var(--muted); text-decoration: none; }
-      .langs a:hover { color: var(--accent); }
-      .langs a[aria-current] { color: var(--fg); font-weight: 600; }
+      /* Hebrew and Arabic: a sans-serif system font (the serif fallback reads poorly), and no italics. */
+      html:is([lang="he"], [lang="ar"]) :is(body, h1, #panel h2, #panel .lead, .subtitle) { font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; }
+      html:is([lang="he"], [lang="ar"]) :is(em, .subtitle, #panel .lead) { font-style: normal; }
       /* Right-to-left languages, phase 1: the header and info card read right to left; the
          timeline keeps its left-to-right geometry, with each text running in its own direction. */
       [dir="rtl"] #tl { direction: ltr; }
@@ -581,17 +588,27 @@ const data = {
       .focusing :is(.btag, .rtag).on { color: color-mix(in oklch, var(--c, var(--accent)) var(--w-high), var(--bg)); border-color: color-mix(in oklch, var(--c, var(--accent)) var(--w-normal), var(--bg)); }
 
       #panel { position: fixed; right: 16px; bottom: 16px; width: 300px; max-height: 70vh; overflow: auto; background: var(--surface); border: 1px solid var(--faint); box-shadow: 0 6px 24px var(--shadow); padding: 14px 16px; font: 13px/1.45 system-ui, sans-serif; z-index: 10; }
-      #panel h2 { font: 600 19px ui-serif, Georgia, serif; margin: 0; }
+      #panel h2 { font: 600 19px ui-serif, Georgia, serif; margin: 0; padding-inline-end: 22px; } /* room for the close button */
       #panel p { margin: 6px 0 10px; }
+      #panel .source { margin: -6px 0 10px; font-size: 11px; color: var(--muted); }
+      #panel .source a { color: var(--muted); }
       #panel .lead { font: italic 15px/1.35 ui-serif, Georgia, serif; margin-bottom: 6px; } /* the punchline, then the paragraph */
       #panel dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 4px 10px; }
       #panel dt { color: var(--muted); }
       #panel dd { margin: 0; }
       #panel small { color: var(--muted); }
       #panel a { color: var(--accent); text-decoration: none; }
-      #panel .x { position: absolute; top: 6px; right: 8px; border: 0; background: none; font-size: 20px; color: var(--muted); cursor: pointer; }
+      #panel .x { position: absolute; top: 6px; inset-inline-end: 8px; /* left in right-to-left languages */ border: 0; background: none; font-size: 20px; color: var(--muted); cursor: pointer; }
 
-      #tools { position: fixed; top: 12px; right: 12px; z-index: 11; display: flex; gap: 6px; }
+      #tools { position: fixed; top: 12px; right: 12px; z-index: 11; display: flex; gap: 6px; direction: ltr; }
+      #langmenu { position: relative; }
+      #langmenu summary { list-style: none; font: 600 13px system-ui, sans-serif; color: var(--accent); background: var(--surface); border: 1px solid var(--faint); border-radius: 999px; padding: 6px 12px; cursor: pointer; box-shadow: 0 2px 8px var(--shadow); }
+      #langmenu summary::-webkit-details-marker { display: none; }
+      #langmenu[open] summary { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+      #langmenu nav { position: absolute; top: calc(100% + 6px); right: 0; display: flex; flex-direction: column; min-width: 150px; padding: 6px; background: var(--surface); border: 1px solid var(--faint); border-radius: 8px; box-shadow: 0 6px 24px var(--shadow); }
+      #langmenu a { padding: 5px 10px; border-radius: 4px; font: 14px system-ui, sans-serif; color: var(--fg); text-decoration: none; }
+      #langmenu a:hover { background: color-mix(in oklch, var(--accent) 10%, transparent); }
+      #langmenu a[aria-current] { color: var(--accent); font-weight: 600; }
       #tools button { font: 600 13px system-ui, sans-serif; color: var(--accent); background: var(--surface); border: 1px solid var(--faint); border-radius: 999px; padding: 6px 14px; cursor: pointer; box-shadow: 0 2px 8px var(--shadow); }
       #tools [aria-pressed="true"] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
       .selecting .row:not(.on) .dot { border-style: dashed; }

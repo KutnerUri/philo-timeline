@@ -72,8 +72,9 @@ export type Ui = typeof enUi;
 export type Translation = {
   ui: Ui;
   eras: Record<string, string>; // keyed by the English era name
-  schools: Record<SchoolId, { name: string; philosophy: string; note: string }>;
-  people: Record<string, { name: string; note: string; about: string }>;
+  // `wiki`: set when the paragraph comes from Wikipedia (CC BY-SA); the page links to it.
+  schools: Record<SchoolId, { name: string; philosophy: string; note: string; wiki?: string }>;
+  people: Record<string, { name: string; note: string; about: string; wiki?: string }>;
 };
 
 export const en: Translation = {
