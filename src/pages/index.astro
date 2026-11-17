@@ -57,7 +57,7 @@ const data = {
       </p>
     </header>
 
-    <main id="tl" style={`height:${height}px`}>
+    <main id="tl" style={`height:${height}px;--axis-f:${AXIS_X / SVG_W}`}>
       {ticks.map((t) => (
         <div class="tick" style={`top:${yOf(t)}px`}><span>{t === 1 ? '1 CE' : fmtYear(t)}</span></div>
       ))}
@@ -75,7 +75,7 @@ const data = {
         <g id="hl"></g>
       </svg>
       {['from', 'to'].map((end) => (
-        <div class="spanlabel" id={`span-${end}`} style={`--axis-f:${AXIS_X / SVG_W}`} hidden></div>
+        <div class="spanlabel" id={`span-${end}`} hidden></div>
       ))}
 
       {spines.map((s) => (
@@ -346,13 +346,15 @@ const data = {
       .k-student { stroke: #8a867d; stroke-width: 1.4; }
       .k-influence { stroke: var(--accent); stroke-width: 1.4; stroke-dasharray: 4 3; }
 
+      /* Era and span labels sit just right of the axis, so the axis never runs through them. */
+      #tl { --axis-left: calc(var(--tick-w) + var(--svg-w) * var(--axis-f) + 6px); }
       #tl { position: relative; max-width: 1000px; margin: 0 auto 120px; }
 
       .tick, .era { position: absolute; left: 0; right: 0; height: 0; pointer-events: none; }
       .tick { border-top: 1px solid #efece5; }
       .tick span { position: absolute; left: 16px; top: -8px; font: 11px system-ui, sans-serif; color: var(--muted); background: var(--bg); padding-right: 4px; }
       .era { border-top: 1px solid #c8d5e2; width: calc(var(--tick-w) + var(--svg-w)); }
-      .era span { position: absolute; left: 16px; top: 2px; font: 600 10px system-ui, sans-serif; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); background: var(--bg); padding-right: 4px; white-space: nowrap; }
+      .era span { position: absolute; left: var(--axis-left); top: 2px; font: 600 10px system-ui, sans-serif; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); background: var(--bg); padding-right: 4px; white-space: nowrap; }
 
       #lines { position: absolute; top: 0; left: var(--tick-w); width: var(--svg-w); height: 100%; overflow: visible; pointer-events: none; }
       #lines path { fill: none; vector-effect: non-scaling-stroke; }
@@ -385,7 +387,7 @@ const data = {
       .l1, .note, .sphil, .member, .sname { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
       .l1 b { font-size: 16px; font-weight: 600; }
       .dates, .note, .sphil, .member, .founded { font: 12.5px system-ui, sans-serif; color: var(--muted); }
-      .spanlabel { position: absolute; left: calc(var(--tick-w) + var(--svg-w) * var(--axis-f) + 6px); transform: translateY(-50%); font: 600 11px system-ui, sans-serif; color: var(--accent); background: var(--bg); padding: 0 3px; white-space: nowrap; pointer-events: none; z-index: 1; }
+      .spanlabel { position: absolute; left: var(--axis-left); transform: translateY(-50%); font: 600 11px system-ui, sans-serif; color: var(--accent); background: var(--bg); padding: 0 3px; white-space: nowrap; pointer-events: none; z-index: 1; }
       .sname { font-weight: 600; color: var(--accent); }
       .member { display: none; padding-left: 10px; }
       .spine { position: absolute; right: calc(16px + var(--school-w) + 2px); width: 2px; background: var(--accent); opacity: .5; display: none; pointer-events: none; }
@@ -433,7 +435,8 @@ const data = {
         .mdot { left: 4px !important; }
         :root { --tick-w: 0px; --svg-w: 110px; --school-w: 0px; }
         header { padding: 20px 14px 16px; }
-        .tick span, .era span { left: 2px; font-size: 9.5px; }
+        .tick span { left: 2px; font-size: 9.5px; }
+        .era span { font-size: 9.5px; }
         .school, .spine { display: none !important; }
         .row { grid-template-columns: 1fr; right: 8px; }
         .l1 { white-space: normal; line-height: 1.15; }
