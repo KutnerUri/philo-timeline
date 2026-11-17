@@ -93,14 +93,12 @@ const data = {
               <div class="note">{p.note}</div>
             </div>
             <div class="school">
-              {s ? (
+              {s && (
                 <>
                   <div class="sname">{s.name}{'founded' in s && <span class="founded"> · {fmtYear(s.founded)}</span>}</div>
                   <div class="sphil">{s.philosophy}</div>
                 </>
-              ) : p.school ? (
-                <div class="member">{schools[p.school].name}</div>
-              ) : null}
+              )}
             </div>
           </div>
         );
@@ -384,12 +382,11 @@ const data = {
       .row { position: absolute; left: calc(var(--tick-w) + var(--svg-w)); right: 16px; display: grid; grid-template-columns: 1fr var(--school-w); gap: 16px; padding-left: 14px; cursor: pointer; }
       .dot { position: absolute; left: -5px; top: 7px; width: 10px; height: 10px; border-radius: 50%; background: var(--bg); border: 2px solid var(--fg); }
       .person, .school { min-width: 0; }
-      .l1, .note, .sphil, .member, .sname { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .l1, .note, .sphil, .sname { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
       .l1 b { font-size: 16px; font-weight: 600; }
-      .dates, .note, .sphil, .member, .founded { font: 12.5px system-ui, sans-serif; color: var(--muted); }
+      .dates, .note, .sphil, .founded { font: 12.5px system-ui, sans-serif; color: var(--muted); }
       .spanlabel { position: absolute; left: var(--axis-left); transform: translateY(-50%); font: 600 11px system-ui, sans-serif; color: var(--accent); background: var(--bg); padding: 0 3px; white-space: nowrap; pointer-events: none; z-index: 1; }
       .sname { font-weight: 600; color: var(--accent); }
-      .member { display: none; padding-left: 10px; }
       .spine { position: absolute; right: calc(16px + var(--school-w) + 2px); width: 2px; background: var(--accent); opacity: .5; display: none; pointer-events: none; }
 
       .focusing .row { opacity: .3; }
@@ -401,7 +398,7 @@ const data = {
       .focusing .row.on { opacity: 1; }
       .row.on .dot { border-color: var(--c, var(--accent)); background: var(--c, var(--accent)); }
       .row.on[class*=" s"] b { color: var(--c); }
-      .row.mate .member, .spine.on { display: block; }
+      .spine.on { display: block; }
 
       #panel { position: fixed; right: 16px; bottom: 16px; width: 300px; max-height: 70vh; overflow: auto; background: #fff; border: 1px solid var(--faint); box-shadow: 0 6px 24px rgba(0,0,0,.08); padding: 14px 16px; font: 13px/1.45 system-ui, sans-serif; z-index: 10; }
       #panel h2 { font: 600 19px ui-serif, Georgia, serif; margin: 0; }
