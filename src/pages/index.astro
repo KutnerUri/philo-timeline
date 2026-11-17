@@ -14,6 +14,9 @@ const eraBands = eraMarks.map((e, i) => ({
   h: pct((eraMarks[i + 1]?.y ?? height) - e.y),
 }));
 
+// On a phone the school tag sits after its founder's name instead of in the graph.
+const tagOf = new Map(schoolTags.map((t) => [t.founder, t]));
+
 // Compact data for the client: per-person info and the highlight for each person.
 const data = {
   people: Object.fromEntries(
@@ -100,7 +103,9 @@ const data = {
       {sorted.map((p) => (
         <div class:list={['row', p.priority === 'grand' && 'grand', !p.priority && 'minor']} id={p.id} data-id={p.id} style={`top:${rowY.get(p.id)}px;height:${ROW_H}px`}>
           <span class="dot"></span>
-          <div class="l1"><b>{p.name}</b></div>
+          <div class="l1"><b>{p.name}</b>{tagOf.has(p.id) && (
+            <button type="button" class="rtag" data-school={tagOf.get(p.id)!.id}>{tagOf.get(p.id)!.name}</button>
+          )}</div>
           <div class="note">{p.note}</div>
         </div>
       ))}
@@ -130,7 +135,8 @@ const data = {
       const view = document.getElementById('view');
       const mdots = Object.fromEntries([...mini.querySelectorAll('.mdot')].map((d) => [d.dataset.id, d]));
       const rows = Object.fromEntries([...document.querySelectorAll('.row')].map((r) => [r.dataset.id, r]));
-      const tags = Object.fromEntries([...document.querySelectorAll('.btag')].map((t) => [t.dataset.school, t]));
+      const tags = {}; // school → its tags (in the graph, and after the founder's name on a phone)
+      for (const t of document.querySelectorAll('.btag, .rtag')) (tags[t.dataset.school] ??= []).push(t);
       const allIds = Object.keys(data.spans);
       const slots = Array.from({ length: data.maxCompare }, (_, i) => `s${i}`);
 
@@ -176,14 +182,14 @@ const data = {
           const s = data.schools[p.school];
           for (const m of s.members) mark(rows[m], 'mate');
           if (s.home) mark(rows[s.home], 'mate');
-          if (tags[p.school]) mark(tags[p.school], 'on');
+          for (const t of tags[p.school] ?? []) mark(t, 'on');
         }
       }
 
       // A school: its members' rows and its tag.
       function markSchool(id) {
         for (const m of data.schoolHL[id].members) { mark(rows[m], 'rel'); mark(mdots[m], 'rel'); }
-        mark(tags[id], 'on');
+        for (const t of tags[id]) mark(t, 'on');
       }
 
       // The years at both ends of a span (a person's life, or a school's), beside their branch.
@@ -327,7 +333,7 @@ const data = {
       });
       tl.addEventListener('mouseleave', () => { hovered = null; if (!selected.length && !school) render(); });
       tl.addEventListener('click', (e) => {
-        const tag = e.target.closest('.btag');
+        const tag = e.target.closest('.btag, .rtag');
         if (tag) { // focus the school (click again to clear)
           selected = [];
           school = school === tag.dataset.school ? null : tag.dataset.school;
@@ -473,14 +479,16 @@ const data = {
       .row.on .dot { border-color: var(--c, var(--accent)); background: var(--c, var(--accent)); }
       .row.on[class*=" s"] b { color: var(--c); }
       /* School tags, like branch names in a git graph: one column just before the names, on the founder's row. */
-      .btag { position: absolute; left: calc(var(--tick-w) + var(--svg-w) * var(--xf) + 2px); transform: translateY(-50%);
-        max-width: calc(var(--svg-w) * (1 - var(--xf)) - 10px); overflow: hidden; text-overflow: ellipsis;
-        font: 600 10px/14px system-ui, sans-serif; color: color-mix(in oklch, var(--fg) var(--w-normal), var(--bg));
+      .btag, .rtag { font: 600 10px/14px system-ui, sans-serif; color: color-mix(in oklch, var(--fg) var(--w-normal), var(--bg));
         background: var(--bg); border: 1px solid color-mix(in oklch, var(--fg) var(--w-weak), var(--bg)); border-radius: 3px;
-        padding: 0 5px; white-space: nowrap; cursor: pointer; z-index: 2; }
-      .btag:hover { border-color: color-mix(in oklch, var(--accent) var(--w-normal), var(--bg)); }
-      .focusing .btag { color: color-mix(in oklch, var(--fg) var(--w-low), var(--bg)); border-color: color-mix(in oklch, var(--fg) var(--w-subtle), var(--bg)); }
-      .focusing .btag.on { color: color-mix(in oklch, var(--c, var(--accent)) var(--w-high), var(--bg)); border-color: color-mix(in oklch, var(--c, var(--accent)) var(--w-normal), var(--bg)); }
+        padding: 0 5px; white-space: nowrap; cursor: pointer; }
+      .btag { position: absolute; left: calc(var(--tick-w) + var(--svg-w) * var(--xf) + 2px); transform: translateY(-50%);
+        max-width: calc(var(--svg-w) * (1 - var(--xf)) - 10px); overflow: hidden; text-overflow: ellipsis; z-index: 2; }
+      /* The phone placement, after the founder's name. When space runs out the tag gives way first. */
+      .rtag { display: none; margin-left: 8px; flex: 0 100 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+      :is(.btag, .rtag):hover { border-color: color-mix(in oklch, var(--accent) var(--w-normal), var(--bg)); }
+      .focusing :is(.btag, .rtag) { color: color-mix(in oklch, var(--fg) var(--w-low), var(--bg)); border-color: color-mix(in oklch, var(--fg) var(--w-subtle), var(--bg)); }
+      .focusing :is(.btag, .rtag).on { color: color-mix(in oklch, var(--c, var(--accent)) var(--w-high), var(--bg)); border-color: color-mix(in oklch, var(--c, var(--accent)) var(--w-normal), var(--bg)); }
 
       #panel { position: fixed; right: 16px; bottom: 16px; width: 300px; max-height: 70vh; overflow: auto; background: #fff; border: 1px solid var(--faint); box-shadow: 0 6px 24px rgba(0,0,0,.08); padding: 14px 16px; font: 13px/1.45 system-ui, sans-serif; z-index: 10; }
       #panel h2 { font: 600 19px ui-serif, Georgia, serif; margin: 0; }
@@ -512,14 +520,14 @@ const data = {
         #mini { left: 4px; width: 24px; top: 8px; bottom: 8px; }
         .band span { display: none; }
         .mdot { left: 4px !important; }
-        :root { --tick-w: 0px; --svg-w: 110px; }
-        .btag { display: none; } /* no room for the tag column on a phone; the info card names the school */
+        :root { --tick-w: 0px; --svg-w: 140px; }
+        .btag { display: none; } /* no room for the tag column on a phone: */
+        .rtag { display: inline-block; } /* the tag sits after the founder's name instead */
         header { padding: 20px 14px 16px; }
         .tick span { left: 2px; font-size: 9.5px; }
         .era span { font-size: 9.5px; }
         .row { right: 8px; }
-        .l1 { white-space: normal; line-height: 1.15; }
-        .note { display: none; }
+        .note { font-size: 11px; }
         #panel { left: 34px; right: 8px; bottom: 8px; width: auto; max-height: 45vh; }
       }
     </style>
