@@ -243,6 +243,55 @@ export const branchLeaders = branchDots.map((t) => ({
   d: `M${t.x},${t.y} L${brBendX},${t.y} L${SVG_W},${dotY(t.id)}`,
 }));
 
+// 5. Branch highlight, per person: the lines to draw when they are selected, and how
+// everyone else relates to them. The browser only turns relations into looks.
+export type Relation = 'self' | 'teacher' | 'pupil' | 'influencer' | 'influenced' | 'lineage' | 'successor' | 'none';
+const segment = (b: Branch, from: number, to: number) => (to > from ? `M${brX(b)},${from}V${to}` : '');
+const yOfPerson = (p: Person) => yOf(anchorOf(p));
+
+export const branchHL = Object.fromEntries(people.map((p) => {
+  const y = yOfPerson(p);
+  const own = branchMap.get(laneOfPerson(p))!;
+  // Path: their branch down to them, then each parent branch down to its fork, to a root.
+  let path = '';
+  const onPath = new Set<string>();
+  let to = y;
+  for (let b: Branch | undefined = own; b; b = b.parent ? branchMap.get(b.parent) : undefined) {
+    path += b.forkD + segment(b, b.lineTop, to);
+    for (const m of b.members) if (yOfPerson(m) <= to) onPath.add(m.id);
+    to = b.forkY ?? to;
+  }
+  // After: their own line below them, and the branches their disciples started.
+  let after = own.solo ? '' : segment(own, y, own.bottom);
+  const successors = new Set(own.solo ? [] : own.members.filter((m) => yOfPerson(m) > y).map((m) => m.id));
+  for (const c of allBranches) {
+    if (!c.parent || c.members[0].studentOf?.[0] !== p.id) continue;
+    after += c.forkD + segment(c, c.lineTop, yOfPerson(c.members[0]));
+    successors.add(c.members[0].id);
+  }
+  // Influences in and out: the part riding a branch (`along`) and the dashed part.
+  const mine = merges.filter((m) => m.to === p.id || m.fromIds.includes(p.id));
+
+  const relationTo = (q: Person): Relation => {
+    if (q.id === p.id) return 'self';
+    if (p.studentOf?.includes(q.id)) return 'teacher';
+    if (q.studentOf?.includes(p.id)) return 'pupil';
+    if (p.influence?.includes(q.id)) return 'influencer';
+    if (q.influence?.includes(p.id)) return 'influenced';
+    if (onPath.has(q.id)) return 'lineage';
+    if (successors.has(q.id)) return 'successor';
+    return 'none';
+  };
+  const rel = Object.fromEntries(people.map((q) => [q.id, relationTo(q)]).filter(([, r]) => r !== 'none'));
+  return [p.id, {
+    path, after,
+    influence: mine.map((m) => m.d).join(''),
+    along: mine.map((m) => m.along).join(''),
+    onPath: [...onPath],
+    rel,
+  }];
+}));
+
 export const fmtYear = (y: number) => (y < 0 ? `${-y} BCE` : `${y} CE`);
 export const fmtSpan = (p: Person) =>
   p.born < 0 && p.died > 0 ? `c. ${-p.born} BCE – ${p.died} CE` : `c. ${Math.abs(p.born)}–${fmtYear(p.died)}`;
