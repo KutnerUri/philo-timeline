@@ -454,7 +454,7 @@ const data = {
       .tick, .era { position: absolute; left: 0; right: 0; height: 0; pointer-events: none; }
       .tick { border-top: 1px solid #efece5; }
       .tick span { position: absolute; left: 16px; top: -8px; font: 11px system-ui, sans-serif; color: var(--muted); background: var(--bg); padding-right: 4px; }
-      .era { border-top: 1px solid #c8d5e2; width: calc(var(--tick-w) + var(--svg-w)); }
+      .era { z-index: 1; /* above the graph lines, below the year labels and panels */ border-top: 1px solid #c8d5e2; width: calc(var(--tick-w) + var(--svg-w)); }
       .era span { position: absolute; left: var(--axis-left); top: 2px; font: 600 10px system-ui, sans-serif; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); background: var(--bg); padding-right: 4px; white-space: nowrap; }
 
       #lines { position: absolute; top: 0; left: var(--tick-w); width: var(--svg-w); height: 100%; overflow: visible; pointer-events: none; }
