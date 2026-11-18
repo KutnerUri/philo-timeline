@@ -580,14 +580,14 @@ const data = {
         background: var(--bg); border: 1px solid color-mix(in oklch, var(--fg) var(--w-weak), var(--bg)); border-radius: 3px;
         padding: 0 5px; white-space: nowrap; cursor: pointer; }
       .btag { position: absolute; left: calc(var(--tick-w) + var(--svg-w) * var(--xf) + 2px); transform: translateY(-50%);
-        max-width: calc(var(--svg-w) * (1 - var(--xf)) - 10px); overflow: hidden; text-overflow: ellipsis; z-index: 2; }
+        max-width: calc(var(--svg-w) * (1 - var(--xf)) - 10px); white-space: normal; overflow-wrap: anywhere; z-index: 2; }
       /* The phone placement, after the founder's name. When space runs out the tag gives way first. */
       .rtag { display: none; margin-left: 8px; flex: 0 100 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
       :is(.btag, .rtag):hover { border-color: color-mix(in oklch, var(--accent) var(--w-normal), var(--bg)); }
       .focusing :is(.btag, .rtag) { color: color-mix(in oklch, var(--fg) var(--w-low), var(--bg)); border-color: color-mix(in oklch, var(--fg) var(--w-subtle), var(--bg)); }
       .focusing :is(.btag, .rtag).on { color: color-mix(in oklch, var(--c, var(--accent)) var(--w-high), var(--bg)); border-color: color-mix(in oklch, var(--c, var(--accent)) var(--w-normal), var(--bg)); }
 
-      #panel { position: fixed; right: 16px; bottom: 16px; width: 300px; max-height: 70vh; overflow: auto; background: var(--surface); border: 1px solid var(--faint); box-shadow: 0 6px 24px var(--shadow); padding: 14px 16px; font: 13px/1.45 system-ui, sans-serif; z-index: 10; }
+      #panel { position: fixed; right: 16px; bottom: 16px; width: 420px; max-height: 70vh; overflow: auto; background: var(--surface); border: 1px solid var(--faint); box-shadow: 0 6px 24px var(--shadow); padding: 14px 16px; font: 13px/1.45 system-ui, sans-serif; z-index: 10; }
       #panel h2 { font: 600 19px ui-serif, Georgia, serif; margin: 0; padding-inline-end: 22px; } /* room for the close button */
       #panel p { margin: 6px 0 10px; }
       #panel .source { margin: -6px 0 10px; font-size: 11px; color: var(--muted); }
