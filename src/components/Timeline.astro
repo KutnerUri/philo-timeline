@@ -287,6 +287,20 @@ const data = {
       const bSlotLines = [...document.querySelectorAll('#branch [data-slot]')];
       const bLeaders = Object.fromEntries([...document.querySelectorAll('#branch .leader')].map((e) => [e.dataset.id, e]));
       const bDots = Object.fromEntries([...document.querySelectorAll('#branch .bd')].map((e) => [e.dataset.id, e]));
+      // Keep each leader's place so only previously active lines need restoring.
+      const bLeaderHomes = new Map(Object.values(bLeaders).map((leader) => {
+        const home = document.createComment('');
+        leader.before(home);
+        return [leader, home];
+      }));
+      let raisedLeaders = [];
+      function raiseLeaders(ids) {
+        const next = ids.map((id) => bLeaders[id]);
+        if (next.length === raisedLeaders.length && next.every((leader, i) => leader === raisedLeaders[i])) return;
+        for (const leader of raisedLeaders) bLeaderHomes.get(leader).after(leader);
+        for (const leader of next) leader.parentNode.appendChild(leader);
+        raisedLeaders = next;
+      }
 
       const relationOf = (p, q) => data.branchHL[p].rel[q] ?? 'none';
       // q's lifespan relative to a span (a person's life, or a school's): before, shared or after.
@@ -343,6 +357,8 @@ const data = {
           setLook(bLeaders[q], 'leader' + slot, leaderProfile({ relation, state }));
           setLook(bDots[q], 'bd' + slot, dotProfile({ relation, lifespan: 'shared', state }));
         }
+        // SVG paints later siblings on top; the dots remain in the layer above.
+        raiseLeaders(ids);
       }
 
       const link = (ids) => ids.map((i) => `<a href="#${i}">${data.people[i].name}</a>`).join(', ');
