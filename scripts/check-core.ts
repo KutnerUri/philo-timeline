@@ -3,6 +3,7 @@
 // For .cache/wiki/<code>/<kind>--<id>/:
 //   core-paragraph.md must appear verbatim in article.txt (whitespace aside);
 //   core-slim.md, if present, must be core-paragraph.md with words omitted only (same words, same order).
+// The same checks apply to optional context-paragraph.md / context-slim.md extracts.
 import { readdirSync, existsSync, readFileSync } from 'node:fs';
 
 const lang = process.argv[2];
@@ -21,19 +22,30 @@ const omissionsOnly = (small: string[], big: string[]) => {
   return null;
 };
 
-let ok = 0, todo = 0;
-const bad: string[] = [];
-for (const entry of readdirSync(dir).filter((d) => existsSync(`${dir}/${d}/article.txt`)).sort()) {
-  const read = (f: string) => (existsSync(`${dir}/${entry}/${f}`) ? readFileSync(`${dir}/${entry}/${f}`, 'utf8').trim() : null);
-  const article = read('article.txt')!, para = read('core-paragraph.md'), slim = read('core-slim.md');
-  if (!para) { todo++; continue; }
-  if (!flat(article).includes(flat(para))) { bad.push(`${entry}: core-paragraph.md is not verbatim from the article`); continue; }
-  if (slim) {
-    const off = omissionsOnly(words(slim), words(para));
-    if (off) { bad.push(`${entry}: core-slim.md changes the text (at "${off}")`); continue; }
+function checkExtracts(prefix: 'core' | 'context') {
+  let ok = 0, todo = 0;
+  const bad: string[] = [];
+  const paraFile = `${prefix}-paragraph.md`, slimFile = `${prefix}-slim.md`;
+  for (const entry of readdirSync(dir).filter((d) => existsSync(`${dir}/${d}/article.txt`)).sort()) {
+    const read = (f: string) => (existsSync(`${dir}/${entry}/${f}`) ? readFileSync(`${dir}/${entry}/${f}`, 'utf8').trim() : null);
+    const article = read('article.txt')!, para = read(paraFile), slim = read(slimFile);
+    if (!para) {
+      if (existsSync(`${dir}/${entry}/${slimFile}`)) bad.push(`${entry}: ${slimFile} has no source ${paraFile}`);
+      else todo++;
+      continue;
+    }
+    if (!flat(article).includes(flat(para))) { bad.push(`${entry}: ${paraFile} is not verbatim from the article`); continue; }
+    if (slim !== null) {
+      if (!slim) { bad.push(`${entry}: ${slimFile} is empty`); continue; }
+      const off = omissionsOnly(words(slim), words(para));
+      if (off) { bad.push(`${entry}: ${slimFile} changes the text (at "${off}")`); continue; }
+    }
+    ok++;
   }
-  ok++;
+  console.log(`${lang}${prefix === 'context' ? ' context' : ''}: ${ok} ok, ${bad.length} failing, ${todo} without ${paraFile}`);
+  for (const b of bad) console.log(`  ✗ ${b}`);
+  return bad.length;
 }
-console.log(`${lang}: ${ok} ok, ${bad.length} failing, ${todo} without core-paragraph.md`);
-for (const b of bad) console.log(`  ✗ ${b}`);
-process.exit(bad.length ? 1 : 0);
+
+const failures = checkExtracts('core') + checkExtracts('context');
+process.exit(failures ? 1 : 0);

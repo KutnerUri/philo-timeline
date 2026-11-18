@@ -39,7 +39,7 @@ const jsonLd = JSON.stringify({
         '@type': 'ListItem', position: i + 1,
         item: {
           '@type': 'Person', name: T.people[p.id].name, url: `${url}#${p.id}`,
-          description: `${T.people[p.id].note}. ${T.people[p.id].about}`,
+          description: [T.people[p.id].note, T.people[p.id].context, T.people[p.id].about].filter(Boolean).join('. '),
           ...(p.school ? { memberOf: { '@type': 'Organization', name: T.schools[p.school].name } } : {}),
         },
       })),
@@ -362,6 +362,7 @@ const data = {
       }
 
       const link = (ids) => ids.map((i) => `<a href="#${i}">${data.people[i].name}</a>`).join(', ');
+      const contextParagraph = (text) => text ? `<p>${text.replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' })[c])}</p>` : '';
       function showPanel(id) {
         if (!id) { panel.hidden = true; return; }
         const p = data.people[id];
@@ -376,7 +377,7 @@ const data = {
           p.influence.length && `<dt>${u.influencedBy}</dt><dd>${link(p.influence)}</dd>`,
           p.influenced.length && `<dt>${u.influenced}</dt><dd>${link(p.influenced)}</dd>`,
         ].filter(Boolean).join('');
-        panel.innerHTML = `<button class="x" aria-label="${u.close}">×</button><h2>${p.name}</h2><div class="dates">${p.span} · ${fill(u.active, { year: p.active })}</div><p class="lead">${p.note}</p><p>${p.about}</p>${wikiLink(p.wiki)}<dl>${lines}</dl>`;
+        panel.innerHTML = `<button class="x" aria-label="${u.close}">×</button><h2>${p.name}</h2><div class="dates">${p.span} · ${fill(u.active, { year: p.active })}</div><p class="lead">${p.note}</p>${contextParagraph(p.context)}<p>${p.about}</p>${wikiLink(p.wiki)}<dl>${lines}</dl>`;
         panel.hidden = false;
       }
 
@@ -389,7 +390,7 @@ const data = {
           s.home && s.founded && `<dt>${u.founded}</dt><dd>${fill(u.foundedBy, { year: s.founded, name: link([s.home]) })}</dd>`,
           `<dt>${u.members}</dt><dd>${link(h.members)}</dd>`,
         ].filter(Boolean).join('');
-        panel.innerHTML = `<button class="x" aria-label="${u.close}">×</button><h2>${s.name}</h2><div class="dates">${h.from} – ${h.to} · ${s.philosophy}</div><p>${s.note}</p>${wikiLink(s.wiki)}<dl>${lines}</dl>`;
+        panel.innerHTML = `<button class="x" aria-label="${u.close}">×</button><h2>${s.name}</h2><div class="dates">${h.from} – ${h.to} · ${s.philosophy}</div>${contextParagraph(s.context)}<p>${s.note}</p>${wikiLink(s.wiki)}<dl>${lines}</dl>`;
         panel.hidden = false;
       }
 
