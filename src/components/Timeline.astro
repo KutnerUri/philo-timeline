@@ -84,6 +84,9 @@ const data = {
     {available.filter((l) => l.hreflang).map((l) => <link rel="alternate" hreflang={l.hreflang} href={`${SITE}${pathOf(l.code)}`} />)}
     <link rel="alternate" hreflang="x-default" href={`${SITE}/`} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    {lang === 'he' && (
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@400..700&display=swap" />
+    )}
     <meta name="theme-color" content="#faf9f6" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#191917" media="(prefers-color-scheme: dark)" />
     <meta property="og:type" content="website" />
@@ -502,6 +505,12 @@ const data = {
         --fg: #1d1d1b; --muted: #7a776f; --faint: #e4e0d7; --bg: #faf9f6; --surface: #fff; --on-accent: #fff;
         --accent: #2f5d8a; --lifespan: #3d8a5f; --school: #b5850f; --shadow: rgba(0, 0, 0, .08);
         --tick-w: 64px; --svg-w: 260px;
+        --font-serif: ui-serif, Georgia, serif;
+        --font-sans: system-ui, sans-serif;
+      }
+      html[lang="he"] {
+        --font-sans: "Assistant", system-ui, sans-serif;
+        --font-serif: var(--font-sans);
       }
       /* Dark mode, following the system. Only the base colours change: everything else is
          mixed from them, so priorities and accents keep their meaning. */
@@ -513,15 +522,17 @@ const data = {
         .s0 { --c: #8db2dc; } .s1 { --c: #e08a66; } .s2 { --c: #7cbf8c; } .s3 { --c: #b892cc; } .s4 { --c: #d6b45a; }
       }
       * { box-sizing: border-box; }
-      body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.35 ui-serif, Georgia, serif; }
+      body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.35 var(--font-serif); }
       header { max-width: 1000px; margin: 0 auto; padding: 40px 16px 36px; }
-      .overline { margin: 0 0 10px; font: 600 11px system-ui, sans-serif; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
-      h1 { margin: 0; font: 700 48px/1 ui-serif, Georgia, serif; letter-spacing: -.02em; }
+      .overline { margin: 0 0 10px; font: 600 11px var(--font-sans); letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+      h1 { margin: 0; font: 700 48px/1 var(--font-serif); letter-spacing: -.02em; }
       h1 em { font-weight: 400; font-style: italic; color: color-mix(in oklch, var(--fg) var(--w-high), var(--bg)); }
-      /* Hebrew and Arabic: a sans-serif system font (the serif fallback reads poorly), and no italics. */
-      html:is([lang="he"], [lang="ar"]) :is(body, h1, #panel h2, #panel .lead, .subtitle) { font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; }
+      /* Use a system sans-serif for Arabic display text and keep both RTL scripts upright. */
+      html[lang="ar"] :is(body, h1, #panel h2, #panel .lead, .subtitle) { font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; }
       html:is([lang="he"], [lang="ar"]) :is(em, .subtitle, #panel .lead) { font-style: normal; }
-      .subtitle { margin: 12px 0 0; max-width: 42em; font: italic 17px/1.4 ui-serif, Georgia, serif; color: var(--muted); }
+      html[lang="he"] h1 em { font-weight: inherit; }
+      html[lang="he"] #panel .x { font-family: inherit; }
+      .subtitle { margin: 12px 0 0; max-width: 42em; font: italic 17px/1.4 var(--font-serif); color: var(--muted); }
 
       #tl {
         /* Era labels sit just past the graph's first column. */
@@ -531,9 +542,9 @@ const data = {
 
       .tick, .era { position: absolute; inset-inline-start: 0; height: 0; pointer-events: none; }
       .tick { inset-inline-end: 0; border-top: 1px solid color-mix(in oklch, var(--fg) 6%, var(--bg)); }
-      .tick span { position: absolute; inset-inline-start: 16px; top: -8px; font: 11px system-ui, sans-serif; color: var(--muted); background: var(--bg); padding-inline-end: 4px; }
+      .tick span { position: absolute; inset-inline-start: 16px; top: -8px; font: 11px var(--font-sans); color: var(--muted); background: var(--bg); padding-inline-end: 4px; }
       .era { z-index: 1; /* above the graph lines, below the year labels and panels */ border-top: 1px solid color-mix(in oklch, var(--accent) var(--w-weak), var(--bg)); width: calc(var(--tick-w) + var(--svg-w)); }
-      .era span { position: absolute; inset-inline-start: var(--era-offset); top: 0; padding-top: 2px; /* flush under the rule, so no line shows through */ font: 600 10px system-ui, sans-serif; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); background: var(--bg); padding-inline-end: 4px; white-space: nowrap; }
+      .era span { position: absolute; inset-inline-start: var(--era-offset); top: 0; padding-top: 2px; /* flush under the rule, so no line shows through */ font: 600 10px var(--font-sans); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); background: var(--bg); padding-inline-end: 4px; white-space: nowrap; }
 
       #lines { position: absolute; top: 0; inset-inline-start: var(--tick-w); width: var(--svg-w); height: 100%; overflow: visible; pointer-events: none; }
       #lines path { fill: none; vector-effect: non-scaling-stroke; }
@@ -580,8 +591,8 @@ const data = {
       .row.minor .l1 b { font-size: 13.6px; font-weight: 400; }
       .row.minor .note { font-size: 10.6px; }
       .row.minor .dot { width: 8px; height: 8px; inset-inline-start: -4px; top: 8px; } /* whole pixels keep it round */
-      .dates, .note { font: 12.5px system-ui, sans-serif; color: var(--muted); }
-      .spanlabel { position: absolute; transform: translateY(-50%); font: 600 11px system-ui, sans-serif; color: color-mix(in oklch, var(--lifespan) var(--w-high), var(--bg)); background: var(--bg); padding: 0 3px; white-space: nowrap; pointer-events: none; z-index: 1; }
+      .dates, .note { font: 12.5px var(--font-sans); color: var(--muted); }
+      .spanlabel { position: absolute; transform: translateY(-50%); font: 600 11px var(--font-sans); color: color-mix(in oklch, var(--lifespan) var(--w-high), var(--bg)); background: var(--bg); padding: 0 3px; white-space: nowrap; pointer-events: none; z-index: 1; }
 
       .focusing .row { opacity: .3; }
       .focusing .row.mate { opacity: .6; }
@@ -590,7 +601,7 @@ const data = {
       .row.on .dot { border-color: var(--c, var(--accent)); background: var(--c, var(--accent)); }
       .row.on[class*=" s"] b { color: var(--c); }
       /* School tags, like branch names in a git graph: one column just before the names, on the founder's row. */
-      .btag, .rtag { font: 600 10px/14px system-ui, sans-serif; color: color-mix(in oklch, var(--fg) var(--w-normal), var(--bg));
+      .btag, .rtag { font: 600 10px/14px var(--font-sans); color: color-mix(in oklch, var(--fg) var(--w-normal), var(--bg));
         background: var(--bg); border: 1px solid color-mix(in oklch, var(--fg) var(--w-weak), var(--bg)); border-radius: 3px;
         padding: 0 5px; white-space: nowrap; cursor: pointer; }
       .btag { position: absolute; inset-inline-start: calc(var(--tick-w) + var(--svg-w) * var(--xf) + 2px); transform: translateY(-50%);
@@ -601,12 +612,12 @@ const data = {
       .focusing :is(.btag, .rtag) { color: color-mix(in oklch, var(--fg) var(--w-low), var(--bg)); border-color: color-mix(in oklch, var(--fg) var(--w-subtle), var(--bg)); }
       .focusing :is(.btag, .rtag).on { color: color-mix(in oklch, var(--c, var(--accent)) var(--w-high), var(--bg)); border-color: color-mix(in oklch, var(--c, var(--accent)) var(--w-normal), var(--bg)); }
 
-      #panel { position: fixed; inset-inline-end: 16px; bottom: 16px; width: 420px; max-height: 70vh; overflow: auto; background: var(--surface); border: 1px solid var(--faint); box-shadow: 0 6px 24px var(--shadow); padding: 14px 16px; font: 13px/1.45 system-ui, sans-serif; z-index: 10; }
-      #panel h2 { font: 600 19px ui-serif, Georgia, serif; margin: 0; padding-inline-end: 22px; } /* room for the close button */
+      #panel { position: fixed; inset-inline-end: 16px; bottom: 16px; width: 420px; max-height: 70vh; overflow: auto; background: var(--surface); border: 1px solid var(--faint); box-shadow: 0 6px 24px var(--shadow); padding: 14px 16px; font: 13px/1.45 var(--font-sans); z-index: 10; }
+      #panel h2 { font: 600 19px var(--font-serif); margin: 0; padding-inline-end: 22px; } /* room for the close button */
       #panel p { margin: 6px 0 10px; }
       #panel .source { margin: -6px 0 10px; font-size: 11px; color: var(--muted); }
       #panel .source a { color: var(--muted); }
-      #panel .lead { font: italic 15px/1.35 ui-serif, Georgia, serif; margin-bottom: 6px; } /* the punchline, then the paragraph */
+      #panel .lead { font: italic 15px/1.35 var(--font-serif); margin-bottom: 6px; } /* the punchline, then the paragraph */
       #panel dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 4px 10px; }
       #panel dt { color: var(--muted); }
       #panel dd { margin: 0; }
@@ -616,21 +627,21 @@ const data = {
 
       #tools { position: fixed; top: 12px; inset-inline-end: 12px; z-index: 11; display: flex; gap: 6px; }
       #langmenu { position: relative; }
-      #langmenu summary { list-style: none; font: 600 13px system-ui, sans-serif; color: var(--accent); background: var(--surface); border: 1px solid var(--faint); border-radius: 999px; padding: 6px 12px; cursor: pointer; box-shadow: 0 2px 8px var(--shadow); }
+      #langmenu summary { list-style: none; font: 600 13px var(--font-sans); color: var(--accent); background: var(--surface); border: 1px solid var(--faint); border-radius: 999px; padding: 6px 12px; cursor: pointer; box-shadow: 0 2px 8px var(--shadow); }
       #langmenu summary::-webkit-details-marker { display: none; }
       #langmenu[open] summary { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
       #langmenu nav { position: absolute; top: calc(100% + 6px); inset-inline-end: 0; display: flex; flex-direction: column; min-width: 150px; padding: 6px; background: var(--surface); border: 1px solid var(--faint); border-radius: 8px; box-shadow: 0 6px 24px var(--shadow); }
-      #langmenu a { padding: 5px 10px; border-radius: 4px; font: 14px system-ui, sans-serif; color: var(--fg); text-decoration: none; }
+      #langmenu a { padding: 5px 10px; border-radius: 4px; font: 14px var(--font-sans); color: var(--fg); text-decoration: none; }
       #langmenu a:hover { background: color-mix(in oklch, var(--accent) 10%, transparent); }
       #langmenu a[aria-current] { color: var(--accent); font-weight: 600; }
-      #tools button { font: 600 13px system-ui, sans-serif; color: var(--accent); background: var(--surface); border: 1px solid var(--faint); border-radius: 999px; padding: 6px 14px; cursor: pointer; box-shadow: 0 2px 8px var(--shadow); }
+      #tools button { font: 600 13px var(--font-sans); color: var(--accent); background: var(--surface); border: 1px solid var(--faint); border-radius: 999px; padding: 6px 14px; cursor: pointer; box-shadow: 0 2px 8px var(--shadow); }
       #tools [aria-pressed="true"] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
       .selecting .row:not(.on) .dot { border-style: dashed; }
 
       #mini { position: fixed; top: 16px; bottom: 16px; inset-inline-start: 12px; width: 48px; background: color-mix(in oklch, var(--fg) 4%, var(--bg)); border: 1px solid var(--faint); border-radius: 4px; cursor: pointer; touch-action: none; user-select: none; z-index: 5; }
       .band { position: absolute; inset-inline: 0; border-top: 1px solid color-mix(in oklch, var(--accent) var(--w-weak), var(--bg)); }
       .band:nth-of-type(even) { background: color-mix(in oklch, var(--fg) 9%, var(--bg)); }
-      .band span { position: absolute; left: 1px; top: 4px; writing-mode: vertical-rl; font: 600 8.5px system-ui, sans-serif; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); white-space: nowrap; pointer-events: none; }
+      .band span { position: absolute; left: 1px; top: 4px; writing-mode: vertical-rl; font: 600 8.5px var(--font-sans); letter-spacing: .06em; text-transform: uppercase; color: var(--accent); white-space: nowrap; pointer-events: none; }
       html[dir="rtl"] .band span { left: auto; right: 1px; }
       .mdot { position: absolute; inset-inline-start: var(--mini-offset); width: 4px; height: 4px; margin-block-start: -2px; margin-inline-start: -2px; border-radius: 50%; background: color-mix(in oklch, var(--fg) 50%, var(--bg)); }
       .mdot.rel { background: var(--accent); opacity: .55; }
