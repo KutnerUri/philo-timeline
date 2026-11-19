@@ -504,7 +504,6 @@ const data = {
         color-scheme: light dark;
         --fg: #1d1d1b; --muted: #7a776f; --faint: #e4e0d7; --bg: #faf9f6; --surface: #fff; --on-accent: #fff;
         --accent: #2f5d8a; --lifespan: #3d8a5f; --school: #b5850f; --shadow: rgba(0, 0, 0, .08);
-        --tick-w: 64px; --svg-w: 260px;
         --font-serif: ui-serif, Georgia, serif;
         --font-sans: system-ui, sans-serif;
       }
@@ -535,16 +534,25 @@ const data = {
       .subtitle { margin: 12px 0 0; max-width: 42em; font: italic 17px/1.4 var(--font-serif); color: var(--muted); }
 
       #tl {
+        --rail-w: 38%;
+        --tick-w: 64px;
+        --tick-inset: 8px;
+        --svg-w: calc(var(--rail-w) - var(--tick-w));
+        --row-gap: 13px;
         /* Era labels sit just past the graph's first column. */
         --era-offset: calc(var(--tick-w) + var(--svg-w) * var(--graph-f) + 6px);
         position: relative; max-width: 1000px; margin: 0 auto 120px;
       }
 
-      .tick, .era { position: absolute; inset-inline-start: 0; height: 0; pointer-events: none; }
-      .tick { inset-inline-end: 0; border-top: 1px solid color-mix(in oklch, var(--fg) 6%, var(--bg)); }
-      .tick span { position: absolute; inset-inline-start: 16px; top: -8px; font: 11px var(--font-sans); color: var(--muted); background: var(--bg); padding-inline-end: 4px; }
-      .era { z-index: 1; /* above the graph lines, below the year labels and panels */ border-top: 1px solid color-mix(in oklch, var(--accent) var(--w-weak), var(--bg)); width: calc(var(--tick-w) + var(--svg-w)); }
-      .era span { position: absolute; inset-inline-start: var(--era-offset); top: 0; padding-top: 2px; /* flush under the rule, so no line shows through */ font: 600 10px var(--font-sans); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); background: var(--bg); padding-inline-end: 4px; white-space: nowrap; }
+      .tick, .era { position: absolute; inset-inline: 0; height: 0; pointer-events: none; }
+      .tick { border-top: 1px solid color-mix(in oklch, var(--fg) 6%, var(--bg)); }
+      .tick span { position: absolute; inset-inline-start: var(--tick-inset); top: 0; transform: translateY(-50%);
+        max-width: calc(var(--tick-w) - var(--tick-inset) - 2px); overflow-wrap: anywhere;
+        font: 11px var(--font-sans); color: var(--muted); background: var(--bg); padding-inline-end: 4px; }
+      .era { z-index: 1; /* above the graph lines, below the year labels and panels */ }
+      /* The full-width era marker shares the timeline's percentage basis. Only its rule is shorter. */
+      .era::before { content: ''; position: absolute; inset-inline-start: 0; top: 0; width: var(--rail-w); border-top: 1px solid color-mix(in oklch, var(--accent) var(--w-weak), var(--bg)); }
+      .era span { position: absolute; inset-inline-start: var(--era-offset); top: 1px; padding-top: 2px; /* flush under the rule, so no line shows through */ font: 600 10px var(--font-sans); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); background: var(--bg); padding-inline-end: 4px; white-space: nowrap; }
 
       #lines { position: absolute; top: 0; inset-inline-start: var(--tick-w); width: var(--svg-w); height: 100%; overflow: visible; pointer-events: none; }
       #lines path { fill: none; vector-effect: non-scaling-stroke; }
@@ -579,7 +587,7 @@ const data = {
       /* Compare colours, one per selected person (slot order). */
       .s0 { --c: #2f5d8a; } .s1 { --c: #b5562c; } .s2 { --c: #3f7d4e; } .s3 { --c: #7a4a8c; } .s4 { --c: #b08a1e; }
 
-      .row { position: absolute; inset-inline: calc(var(--tick-w) + var(--svg-w)) 16px; padding-inline-start: 14px; cursor: pointer; }
+      .row { position: absolute; inset-inline: var(--rail-w) var(--row-gap); padding-inline-start: var(--row-gap); cursor: pointer; }
       .dot { position: absolute; inset-inline-start: -5px; top: 7px; width: 10px; height: 10px; border-radius: 50%; background: var(--bg); border: 2px solid var(--fg); }
       .note { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
       /* The name on one line, cut off with … when too long. */
@@ -649,20 +657,22 @@ const data = {
       #view { position: absolute; inset-inline: -1px; border: 1.5px solid var(--accent); background: color-mix(in oklch, var(--accent) 8%, transparent); border-radius: 3px; pointer-events: none; }
       @media (max-width: 1160px) { body { padding-inline-start: 64px; } }
 
+      @media (max-width: 850px) {
+        .btag { display: none; }
+        .rtag { display: inline-block; } /* the tag sits after the founder's name instead */
+      }
+
       @media (max-width: 700px) {
         body { padding-inline-start: 30px; }
         #mini { inset-inline-start: 4px; width: 24px; top: 8px; bottom: 8px; }
         .band span { display: none; }
         .mdot { inset-inline-start: 4px; }
-        :root { --tick-w: 0px; --svg-w: 140px; }
-        .btag { display: none; } /* no room for the tag column on a phone: */
-        .rtag { display: inline-block; } /* the tag sits after the founder's name instead */
+        #tl { --tick-w: 52px; --tick-inset: 2px; --row-gap: 8px; }
         header { padding: 52px 14px 22px; } /* clear of the floating Select button */
         h1 { font-size: 34px; }
         .subtitle { font-size: 15px; }
-        .tick span { inset-inline-start: 2px; font-size: 9.5px; }
+        .tick span { font-size: 9.5px; }
         .era span { font-size: 9.5px; }
-        .row { inset-inline-end: 8px; }
         .note { font-size: 11px; }
         #panel { inset-inline: 34px 8px; bottom: 8px; width: auto; max-height: 45vh; }
       }
