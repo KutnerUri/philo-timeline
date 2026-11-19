@@ -5,7 +5,7 @@ import { LANGS, available, translation, fill, fmtYear, fmtSpan, pathOf } from '.
 import {
   sorted, rowY, spans, schoolHome, ticks, eraMarks,
   height, yOf, SVG_W, ROW_H, anchorOf, miniCol,
-  GRAPH_X0, MAX_COMPARE, branches, merges, branchDots, branchLeaders, branchHL, schoolTags, schoolHL,
+  BRANCH_END, MAX_COMPARE, branches, merges, branchDots, branchLeaders, branchHL, schoolTags, schoolHL,
 } from '../lib/layout';
 
 const { lang } = Astro.props as { lang: string };
@@ -16,6 +16,7 @@ const year = (y: number) => fmtYear(y, ui);
 
 // Minimap: periods as bands, people as dots at their active year
 const pct = (y: number) => ((y / height) * 100).toFixed(2);
+const lastMiniLane = Math.max(1, ...miniCol.values());
 const eraBands = eraMarks.map((e, i) => ({
   name: T.eras[e.name],
   top: pct(e.y),
@@ -125,7 +126,7 @@ const data = {
       <p class="subtitle">{ui.subtitle}</p>
     </header>
 
-    <main id="tl" style={`height:${height}px;--graph-f:${GRAPH_X0 / SVG_W}`}>
+    <main id="tl" style={`height:${height}px`}>
       {ticks.map((t) => (
         <div class="tick" style={`top:${yOf(t)}px`}><span>{year(t)}</span></div>
       ))}
@@ -148,7 +149,11 @@ const data = {
             <path id="bh-path" class="gl trail p-high a-accent" />
             {Array.from({ length: MAX_COMPARE }, (_, i) => <path class={`gl trail p-high a-accent s${i}`} data-slot={i} />)}
           </g>
-          <g>{branchLeaders.map((l) => <path class="leader p-subtle a-neutral" data-id={l.id} d={l.d} />)}</g>
+          <g>
+            {branchLeaders.map((l) => (
+              <path class="leader p-subtle a-neutral" data-id={l.id} data-from={`${l.x},${l.y}`} data-row-y={l.rowY} d={l.d} />
+            ))}
+          </g>
           <g>
             {branchDots.map((t) => (
               <g class="bd p-max a-neutral" data-id={t.id}>
@@ -159,9 +164,11 @@ const data = {
           </g>
         </g>
       </svg>
-      {schoolTags.map((t) => (
-        <button type="button" class="btag" data-school={t.id} style={`top:${t.y}px;--xf:${t.xf}`}>{T.schools[t.id].name}</button>
-      ))}
+      <div class="school-tags">
+        {schoolTags.map((t) => (
+          <button type="button" class="btag" data-school={t.id} style={`top:${t.y}px`} title={T.schools[t.id].name}>{T.schools[t.id].name}</button>
+        ))}
+      </div>
       {['from', 'to'].map((end) => (
         <div class="spanlabel" id={`span-${end}`} hidden></div>
       ))}
@@ -195,16 +202,16 @@ const data = {
 
     <nav id="mini" aria-label={ui.overview}>
       {eraBands.map((b) => (
-        <div class="band" style={`top:${b.top}%;height:${b.h}%`} title={b.name}><span>{b.name}</span></div>
+        <div class="band" style={`top:${b.top}%;height:${b.h}%`} title={b.name}></div>
       ))}
       {sorted.map((p) => (
         <i class="mdot" data-id={p.id} title={T.people[p.id].name}
-          style={`top:${pct(yOf(anchorOf(p)))}%;--mini-offset:${14 + miniCol.get(p.id)! * 4}px`}></i>
+          style={`top:${pct(yOf(anchorOf(p)))}%;--mini-f:${miniCol.get(p.id)! / lastMiniLane}`}></i>
       ))}
       <div id="view"></div>
     </nav>
 
-    <script is:inline define:vars={{ data }}>
+    <script is:inline define:vars={{ data, branchEnd: BRANCH_END }}>
       const u = data.ui; // this language's strings
       const fill = (s, v) => s.replace(/\{(\w+)\}/g, (_, k) => v[k] ?? `{${k}}`);
       const tl = document.getElementById('tl');
@@ -277,7 +284,7 @@ const data = {
       function labelSpan(r) {
         spanFrom.hidden = spanTo.hidden = !r;
         if (!r) return;
-        const offset = `calc(var(--tick-w) + var(--svg-w) * ${r.xf} + 6px)`;
+        const offset = `calc(var(--graph-start) + var(--branch-w) * ${r.xf} + 6px)`;
         for (const [el, text, y] of [[spanFrom, r.from, r.y1], [spanTo, r.to, r.y2]]) {
           el.textContent = text; el.style.top = y + 'px'; el.style.insetInlineStart = offset;
         }
@@ -290,6 +297,32 @@ const data = {
       const bSlotLines = [...document.querySelectorAll('#branch [data-slot]')];
       const bLeaders = Object.fromEntries([...document.querySelectorAll('#branch .leader')].map((e) => [e.dataset.id, e]));
       const bDots = Object.fromEntries([...document.querySelectorAll('#branch .bd')].map((e) => [e.dataset.id, e]));
+      const lines = document.getElementById('lines');
+      const branch = document.getElementById('branch');
+      const schoolStrip = tl.querySelector('.school-tags');
+      const rtl = document.documentElement.dir === 'rtl';
+      function fitGraph() {
+        const graphWidth = lines.getBoundingClientRect().width;
+        if (!graphWidth) return;
+        const styles = getComputedStyle(tl);
+        const schoolWidth = schoolStrip.getBoundingClientRect().width;
+        const branchWidth = schoolWidth
+          ? tl.getBoundingClientRect().width * Number(styles.getPropertyValue('--branch-share'))
+          : graphWidth * Number(styles.getPropertyValue('--mobile-branch-share'));
+        const unitsPerPixel = branchEnd / branchWidth;
+        const end = graphWidth * unitsPerPixel;
+        const dotDepth = parseFloat(styles.getPropertyValue('--dot-depth'));
+        const dot = end - dotDepth * unitsPerPixel;
+        // A short flat section on phones keeps even steep lines centered on the row dots.
+        const landing = Math.max(branchEnd, end - (schoolWidth || dotDepth + 5) * unitsPerPixel);
+        lines.viewBox.baseVal.width = end;
+        if (rtl) branch.setAttribute('transform', `translate(${end} 0) scale(-1 1)`);
+        for (const leader of Object.values(bLeaders)) {
+          const { from, rowY } = leader.dataset;
+          leader.setAttribute('d', `M${from}H${branchEnd}L${landing},${rowY}H${dot}`);
+        }
+      }
+
       // Keep each leader's place so only previously active lines need restoring.
       const bLeaderHomes = new Map(Object.values(bLeaders).map((leader) => {
         const home = document.createComment('');
@@ -464,7 +497,12 @@ const data = {
       // Minimap: viewport box follows scroll; click or drag to jump; click a dot to select.
       let tlTop = 0, tlH = 1, ticking = false;
       const clamp = (v) => Math.max(0, Math.min(1, v));
-      function measure() { tlTop = tl.getBoundingClientRect().top + scrollY; tlH = tl.offsetHeight; syncView(); }
+      function measure() {
+        tlTop = tl.getBoundingClientRect().top + scrollY;
+        tlH = tl.offsetHeight;
+        fitGraph();
+        syncView();
+      }
       function syncView() {
         ticking = false;
         const a = clamp((scrollY - tlTop) / tlH);
@@ -506,6 +544,9 @@ const data = {
         --accent: #2f5d8a; --lifespan: #3d8a5f; --school: #b5850f; --shadow: rgba(0, 0, 0, .08);
         --font-serif: ui-serif, Georgia, serif;
         --font-sans: system-ui, sans-serif;
+        --timeline-max: 54rem;
+        --mini-share: .0213;
+        --mini-w: calc(min(100%, var(--timeline-max)) * var(--mini-share));
       }
       html[lang="he"] {
         --font-sans: "Assistant", system-ui, sans-serif;
@@ -522,7 +563,7 @@ const data = {
       }
       * { box-sizing: border-box; }
       body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.35 var(--font-serif); }
-      header { max-width: 1000px; margin: 0 auto; padding: 40px 16px 36px; }
+      header { max-width: var(--timeline-max); margin: 0 auto; padding: 40px 16px 36px; padding-inline-start: calc(var(--mini-w) + 16px); }
       .overline { margin: 0 0 10px; font: 600 11px var(--font-sans); letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
       h1 { margin: 0; font: 700 48px/1 var(--font-serif); letter-spacing: -.02em; }
       h1 em { font-weight: 400; font-style: italic; color: color-mix(in oklch, var(--fg) var(--w-high), var(--bg)); }
@@ -534,27 +575,29 @@ const data = {
       .subtitle { margin: 12px 0 0; max-width: 42em; font: italic 17px/1.4 var(--font-serif); color: var(--muted); }
 
       #tl {
-        --rail-w: 38%;
-        --tick-w: 64px;
-        --tick-inset: 8px;
-        --svg-w: calc(var(--rail-w) - var(--tick-w));
-        --row-gap: 13px;
-        /* Era labels sit just past the graph's first column. */
-        --era-offset: calc(var(--tick-w) + var(--svg-w) * var(--graph-f) + 6px);
-        position: relative; max-width: 1000px; margin: 0 auto 120px;
+        --tick-w: 9.02%;
+        --branch-share: .0902;
+        --branch-w: calc(100% * var(--branch-share));
+        --leader-w: 3.44%;
+        --school-w: 14.59%;
+        --graph-start: calc(var(--mini-w) + var(--tick-w));
+        --svg-w: calc(var(--branch-w) + var(--leader-w) + var(--school-w));
+        --rail-w: calc(var(--graph-start) + var(--svg-w));
+        --dot-depth: 7px;
+        position: relative; max-width: var(--timeline-max); margin: 0 auto 120px;
       }
 
       .tick, .era { position: absolute; inset-inline: 0; height: 0; pointer-events: none; }
       .tick { border-top: 1px solid color-mix(in oklch, var(--fg) 6%, var(--bg)); }
-      .tick span { position: absolute; inset-inline-start: var(--tick-inset); top: 0; transform: translateY(-50%);
-        max-width: calc(var(--tick-w) - var(--tick-inset) - 2px); overflow-wrap: anywhere;
-        font: 11px var(--font-sans); color: var(--muted); background: var(--bg); padding-inline-end: 4px; }
+      :is(.tick, .era) span { position: absolute; inset-inline-start: var(--mini-w); background: var(--bg);
+        padding-inline: 4px; white-space: nowrap; }
+      .tick span { top: 0; transform: translateY(-50%); font: 11px var(--font-sans); color: var(--muted); }
       .era { z-index: 1; /* above the graph lines, below the year labels and panels */ }
       /* The full-width era marker shares the timeline's percentage basis. Only its rule is shorter. */
       .era::before { content: ''; position: absolute; inset-inline-start: 0; top: 0; width: var(--rail-w); border-top: 1px solid color-mix(in oklch, var(--accent) var(--w-weak), var(--bg)); }
-      .era span { position: absolute; inset-inline-start: var(--era-offset); top: 1px; padding-top: 2px; /* flush under the rule, so no line shows through */ font: 600 10px var(--font-sans); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); background: var(--bg); padding-inline-end: 4px; white-space: nowrap; }
+      .era span { top: 1px; padding-top: 2px; font: 600 10px var(--font-sans); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
 
-      #lines { position: absolute; top: 0; inset-inline-start: var(--tick-w); width: var(--svg-w); height: 100%; overflow: visible; pointer-events: none; }
+      #lines { position: absolute; top: 0; inset-inline-start: var(--graph-start); width: var(--svg-w); height: 100%; overflow: visible; pointer-events: none; }
       #lines path { fill: none; vector-effect: non-scaling-stroke; }
 
       /* Priority × accent: the accent mixed into the background by the priority's
@@ -587,18 +630,19 @@ const data = {
       /* Compare colours, one per selected person (slot order). */
       .s0 { --c: #2f5d8a; } .s1 { --c: #b5562c; } .s2 { --c: #3f7d4e; } .s3 { --c: #7a4a8c; } .s4 { --c: #b08a1e; }
 
-      .row { position: absolute; inset-inline: var(--rail-w) var(--row-gap); padding-inline-start: var(--row-gap); cursor: pointer; }
-      .dot { position: absolute; inset-inline-start: -5px; top: 7px; width: 10px; height: 10px; border-radius: 50%; background: var(--bg); border: 2px solid var(--fg); }
+      .row { position: absolute; inset-inline: var(--rail-w) 0; cursor: pointer; }
+      .dot { --dot-size: 10px; position: absolute; inset-inline-start: calc(-1 * var(--dot-depth) - var(--dot-size) / 2);
+        top: calc(12px - var(--dot-size) / 2); width: var(--dot-size); height: var(--dot-size); border-radius: 50%; background: var(--bg); border: 2px solid var(--fg); }
       .note { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
       /* The name on one line, cut off with … when too long. */
       .l1 { display: flex; align-items: center; white-space: nowrap; }
       .l1 b { font-size: 16px; font-weight: 600; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
       /* Three tiers: grand (Socrates, Plato, Aristotle) larger, main figures as is, everyone else at 0.85 in regular weight. */
       .row.grand .l1 b { font-size: 18px; }
-      .row.grand .dot { width: 12px; height: 12px; inset-inline-start: -6px; top: 6px; }
+      .row.grand .dot { --dot-size: 12px; }
       .row.minor .l1 b { font-size: 13.6px; font-weight: 400; }
       .row.minor .note { font-size: 10.6px; }
-      .row.minor .dot { width: 8px; height: 8px; inset-inline-start: -4px; top: 8px; } /* whole pixels keep it round */
+      .row.minor .dot { --dot-size: 8px; }
       .dates, .note { font: 12.5px var(--font-sans); color: var(--muted); }
       .spanlabel { position: absolute; transform: translateY(-50%); font: 600 11px var(--font-sans); color: color-mix(in oklch, var(--lifespan) var(--w-high), var(--bg)); background: var(--bg); padding: 0 3px; white-space: nowrap; pointer-events: none; z-index: 1; }
 
@@ -612,8 +656,11 @@ const data = {
       .btag, .rtag { font: 600 10px/14px var(--font-sans); color: color-mix(in oklch, var(--fg) var(--w-normal), var(--bg));
         background: var(--bg); border: 1px solid color-mix(in oklch, var(--fg) var(--w-weak), var(--bg)); border-radius: 3px;
         padding: 0 5px; white-space: nowrap; cursor: pointer; }
-      .btag { position: absolute; inset-inline-start: calc(var(--tick-w) + var(--svg-w) * var(--xf) + 2px); transform: translateY(-50%);
-        max-width: calc(var(--svg-w) * (1 - var(--xf)) - 10px); white-space: normal; overflow-wrap: anywhere; z-index: 2; }
+      .school-tags { position: absolute; inset-inline-start: calc(var(--rail-w) - var(--school-w)); top: 0; width: var(--school-w);
+        height: 100%; z-index: 2; pointer-events: none; }
+      .btag { position: absolute; inset-inline: 2px calc(var(--dot-depth) + 6px); width: max-content; margin-inline: auto;
+        max-width: calc(100% - var(--dot-depth) - 8px); transform: translateY(-50%);
+        overflow: hidden; text-overflow: ellipsis; pointer-events: auto; }
       /* The phone placement, after the founder's name. When space runs out the tag gives way first. */
       .rtag { display: none; margin-inline-start: 8px; flex: 0 100 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
       :is(.btag, .rtag):hover { border-color: color-mix(in oklch, var(--accent) var(--w-normal), var(--bg)); }
@@ -646,35 +693,33 @@ const data = {
       #tools [aria-pressed="true"] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
       .selecting .row:not(.on) .dot { border-style: dashed; }
 
-      #mini { position: fixed; top: 16px; bottom: 16px; inset-inline-start: 12px; width: 48px; background: color-mix(in oklch, var(--fg) 4%, var(--bg)); border: 1px solid var(--faint); border-radius: 4px; cursor: pointer; touch-action: none; user-select: none; z-index: 5; }
+      #mini { position: fixed; top: 16px; bottom: 16px; inset-inline-start: max(0px, (100% - var(--timeline-max)) / 2);
+        width: var(--mini-w); background: color-mix(in oklch, var(--fg) 4%, var(--bg)); border: 1px solid var(--faint); border-radius: 4px; cursor: pointer; touch-action: none; user-select: none; z-index: 5; }
       .band { position: absolute; inset-inline: 0; border-top: 1px solid color-mix(in oklch, var(--accent) var(--w-weak), var(--bg)); }
       .band:nth-of-type(even) { background: color-mix(in oklch, var(--fg) 9%, var(--bg)); }
-      .band span { position: absolute; left: 1px; top: 4px; writing-mode: vertical-rl; font: 600 8.5px var(--font-sans); letter-spacing: .06em; text-transform: uppercase; color: var(--accent); white-space: nowrap; pointer-events: none; }
-      html[dir="rtl"] .band span { left: auto; right: 1px; }
-      .mdot { position: absolute; inset-inline-start: var(--mini-offset); width: 4px; height: 4px; margin-block-start: -2px; margin-inline-start: -2px; border-radius: 50%; background: color-mix(in oklch, var(--fg) 50%, var(--bg)); }
+      .mdot { position: absolute; inset-inline-start: calc(4px + (100% - 8px) * var(--mini-f)); width: 4px; height: 4px; margin-block-start: -2px; margin-inline-start: -2px; border-radius: 50%; background: color-mix(in oklch, var(--fg) 50%, var(--bg)); }
       .mdot.rel { background: var(--accent); opacity: .55; }
       .mdot.on { background: var(--c, var(--accent)); width: 7px; height: 7px; margin-block-start: -3.5px; margin-inline-start: -3.5px; z-index: 1; }
       #view { position: absolute; inset-inline: -1px; border: 1.5px solid var(--accent); background: color-mix(in oklch, var(--accent) 8%, transparent); border-radius: 3px; pointer-events: none; }
-      @media (max-width: 1160px) { body { padding-inline-start: 64px; } }
-
-      @media (max-width: 850px) {
-        .btag { display: none; }
-        .rtag { display: inline-block; } /* the tag sits after the founder's name instead */
-      }
-
       @media (max-width: 700px) {
-        body { padding-inline-start: 30px; }
-        #mini { inset-inline-start: 4px; width: 24px; top: 8px; bottom: 8px; }
-        .band span { display: none; }
-        .mdot { inset-inline-start: 4px; }
-        #tl { --tick-w: 52px; --tick-inset: 2px; --row-gap: 8px; }
-        header { padding: 52px 14px 22px; } /* clear of the floating Select button */
+        :root { --mini-w: 24px; }
+        #mini { top: 8px; bottom: 8px; }
+        #tl {
+          --tick-w: 52px;
+          --rail-w: 38.20%;
+          --svg-w: calc(var(--rail-w) - var(--graph-start));
+          --mobile-branch-share: .618;
+          --branch-w: calc(var(--svg-w) * var(--mobile-branch-share));
+        }
+        .school-tags { display: none; }
+        .rtag { display: inline-block; } /* the tag sits after the founder's name instead */
+        header { padding: 52px 14px 22px; padding-inline-start: calc(var(--mini-w) + 14px); } /* clear of the floating Select button */
         h1 { font-size: 34px; }
         .subtitle { font-size: 15px; }
         .tick span { font-size: 9.5px; }
         .era span { font-size: 9.5px; }
         .note { font-size: 11px; }
-        #panel { inset-inline: 34px 8px; bottom: 8px; width: auto; max-height: 45vh; }
+        #panel { inset-inline: calc(var(--mini-w) + 8px) 8px; bottom: 8px; width: auto; max-height: 45vh; }
       }
     </style>
   </body>

@@ -1,4 +1,4 @@
-// All geometry is computed at build time, so the browser never measures or re-lays out.
+// Dates and branch lanes are laid out at build time. The browser fits the leader lines to the columns.
 import { people, schools, eras, type Person, type SchoolId } from '../data/philosophers';
 
 const PX_PER_YEAR = 7;
@@ -11,7 +11,6 @@ const DOT_Y = 12; // dot centre, relative to row top
 // Left visual area: the branch graph (SVG viewBox units; stretched horizontally on small screens).
 export const SVG_W = 260;
 const TAG_W = 110; // the school-tag column at the right end of the graph, just before the names
-export const GRAPH_X0 = 10; // the leftmost branch column
 export const MAX_COMPARE = 5; // people compared at once, each in their own colour
 
 export const yOf = (year: number) => Math.round((year - START) * PX_PER_YEAR);
@@ -72,7 +71,7 @@ export const eraMarks = eras.map((e) => ({ ...e, y: yOf(e.from) }));
 // is a single dot (Socrates, Heraclitus), not a line. A branch forks from the branch of
 // its founder's first direct teacher, just before it starts; the founder's other teachers
 // and influences flow in as merges.
-const BR_X0 = GRAPH_X0;
+const BR_X0 = 10;
 const BR_GAP = 10;
 const laneOfPerson = (p: Person) => p.school ?? `solo:${p.id}`;
 const byId = new Map(people.map((p) => [p.id, p]));
@@ -143,7 +142,7 @@ const allBranches = [...branchMap.values()];
 }
 const branchCols = Math.max(...allBranches.map((b) => b.col)) + 1;
 const brX = (b: Branch) => BR_X0 + b.col * BR_GAP;
-const brBendX = BR_X0 + branchCols * BR_GAP;
+export const BRANCH_END = BR_X0 + branchCols * BR_GAP;
 
 const branchOf = (p: Person) => branchMap.get(laneOfPerson(p))!;
 const segment = (b: Branch, from: number, to: number) => (to > from ? `M${brX(b)},${from}V${to}` : '');
@@ -157,7 +156,6 @@ export const schoolTags = allBranches.filter((b) => !b.solo).map((b) => ({
   id: b.id as SchoolId,
   name: schools[b.id as SchoolId].name,
   founder: b.members[0].id,
-  xf: tagX0 / SVG_W, // as a fraction of the graph width, for the HTML tag
   y: dotY(b.members[0].id),
 }));
 
@@ -171,16 +169,17 @@ export const schoolHL = Object.fromEntries(allBranches.filter((b) => !b.solo).ma
   return [b.id, {
     path: b.forkD + segment(b, b.lineTop, b.bottom),
     life: `M${x},${yOf(start)}V${yOf(end)}`,
-    xf: x / SVG_W, y1: yOf(start), y2: yOf(end), start, end, // years; the page formats them per language
+    xf: x / BRANCH_END, y1: yOf(start), y2: yOf(end), start, end,
     members: b.members.map((m) => m.id),
   }];
 }));
 
 export const branchDots = sorted.map((p) => ({ id: p.id, x: brX(branchOf(p)), y: anchorY(p) }));
 export const branchLeaders = branchDots.map((t) => ({
-  id: t.id,
+  ...t,
+  rowY: dotY(t.id),
   // Flat out of the dot, angled across to the person's row, then flat through the tag column.
-  d: `M${t.x},${t.y} L${brBendX},${t.y} L${tagX0},${dotY(t.id)} L${SVG_W},${dotY(t.id)}`,
+  d: `M${t.x},${t.y}H${BRANCH_END}L${tagX0},${dotY(t.id)}H${SVG_W}`,
 }));
 
 // Merges: teachers and influences on another branch, for anyone (not only founders).
@@ -262,7 +261,7 @@ export const branchHL = Object.fromEntries(people.map((p) => {
   return [p.id, {
     path, after,
     life: `M${x},${yOf(p.born)}V${yOf(p.died)}`,
-    xf: x / SVG_W, // branch position as a fraction of the graph width, for the HTML labels
+    xf: x / BRANCH_END, // branch position as a fraction of the branch column, for the HTML labels
     influence: mine.map((m) => m.d).join(''),
     along: mine.map((m) => m.along).join(''),
     onPath: [...onPath],
