@@ -131,7 +131,7 @@ const data = {
       ))}
 
       <svg id="lines" viewBox={`0 0 ${SVG_W} ${height}`} preserveAspectRatio="none" aria-hidden="true">
-        <g id="branch">
+        <g id="branch" transform={L.dir === 'rtl' ? `translate(${SVG_W} 0) scale(-1 1)` : undefined}>
           {/* Layers: graph lines, then the highlight's lines, then leader lines, then dots. */}
           <g>
             {branches.map((b) => <path class="branch" d={b.d} />)}
@@ -181,7 +181,7 @@ const data = {
           <summary aria-label={ui.language} title={ui.language}>文A</summary>
           <nav aria-label={ui.language}>
             {available.map((l) => (
-              <a href={pathOf(l.code)} hreflang={l.hreflang} lang={l.htmlLang} aria-current={l.code === lang ? 'page' : undefined}>{l.name}</a>
+              <a href={pathOf(l.code)} hreflang={l.hreflang} lang={l.htmlLang} aria-current={l.code === lang ? 'page' : undefined}><bdi dir={l.dir}>{l.name}</bdi></a>
             ))}
           </nav>
         </details>
@@ -196,7 +196,7 @@ const data = {
       ))}
       {sorted.map((p) => (
         <i class="mdot" data-id={p.id} title={T.people[p.id].name}
-          style={`top:${pct(yOf(anchorOf(p)))}%;left:${14 + miniCol.get(p.id)! * 4}px`}></i>
+          style={`top:${pct(yOf(anchorOf(p)))}%;--mini-offset:${14 + miniCol.get(p.id)! * 4}px`}></i>
       ))}
       <div id="view"></div>
     </nav>
@@ -274,9 +274,9 @@ const data = {
       function labelSpan(r) {
         spanFrom.hidden = spanTo.hidden = !r;
         if (!r) return;
-        const left = `calc(var(--tick-w) + var(--svg-w) * ${r.xf} + 6px)`;
+        const offset = `calc(var(--tick-w) + var(--svg-w) * ${r.xf} + 6px)`;
         for (const [el, text, y] of [[spanFrom, r.from, r.y1], [spanTo, r.to, r.y2]]) {
-          el.textContent = text; el.style.top = y + 'px'; el.style.left = left;
+          el.textContent = text; el.style.top = y + 'px'; el.style.insetInlineStart = offset;
         }
       }
 
@@ -521,24 +521,21 @@ const data = {
       /* Hebrew and Arabic: a sans-serif system font (the serif fallback reads poorly), and no italics. */
       html:is([lang="he"], [lang="ar"]) :is(body, h1, #panel h2, #panel .lead, .subtitle) { font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; }
       html:is([lang="he"], [lang="ar"]) :is(em, .subtitle, #panel .lead) { font-style: normal; }
-      /* Right-to-left languages, phase 1: the header and info card read right to left; the
-         timeline keeps its left-to-right geometry, with each text running in its own direction. */
-      [dir="rtl"] #tl { direction: ltr; }
-      [dir="rtl"] #tl :is(.l1 b, .note, .btag, .rtag, .era span, .spanlabel) { unicode-bidi: plaintext; }
-      [dir="rtl"] .note { text-align: left; }
       .subtitle { margin: 12px 0 0; max-width: 42em; font: italic 17px/1.4 ui-serif, Georgia, serif; color: var(--muted); }
 
-      /* Era labels sit just right of the graph's first column. */
-      #tl { --graph-left: calc(var(--tick-w) + var(--svg-w) * var(--graph-f) + 6px); }
-      #tl { position: relative; max-width: 1000px; margin: 0 auto 120px; }
+      #tl {
+        /* Era labels sit just past the graph's first column. */
+        --era-offset: calc(var(--tick-w) + var(--svg-w) * var(--graph-f) + 6px);
+        position: relative; max-width: 1000px; margin: 0 auto 120px;
+      }
 
-      .tick, .era { position: absolute; left: 0; right: 0; height: 0; pointer-events: none; }
-      .tick { border-top: 1px solid color-mix(in oklch, var(--fg) 6%, var(--bg)); }
-      .tick span { position: absolute; left: 16px; top: -8px; font: 11px system-ui, sans-serif; color: var(--muted); background: var(--bg); padding-right: 4px; }
+      .tick, .era { position: absolute; inset-inline-start: 0; height: 0; pointer-events: none; }
+      .tick { inset-inline-end: 0; border-top: 1px solid color-mix(in oklch, var(--fg) 6%, var(--bg)); }
+      .tick span { position: absolute; inset-inline-start: 16px; top: -8px; font: 11px system-ui, sans-serif; color: var(--muted); background: var(--bg); padding-inline-end: 4px; }
       .era { z-index: 1; /* above the graph lines, below the year labels and panels */ border-top: 1px solid color-mix(in oklch, var(--accent) var(--w-weak), var(--bg)); width: calc(var(--tick-w) + var(--svg-w)); }
-      .era span { position: absolute; left: var(--graph-left); top: 0; padding-top: 2px; /* flush under the rule, so no line shows through */ font: 600 10px system-ui, sans-serif; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); background: var(--bg); padding-right: 4px; white-space: nowrap; }
+      .era span { position: absolute; inset-inline-start: var(--era-offset); top: 0; padding-top: 2px; /* flush under the rule, so no line shows through */ font: 600 10px system-ui, sans-serif; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); background: var(--bg); padding-inline-end: 4px; white-space: nowrap; }
 
-      #lines { position: absolute; top: 0; left: var(--tick-w); width: var(--svg-w); height: 100%; overflow: visible; pointer-events: none; }
+      #lines { position: absolute; top: 0; inset-inline-start: var(--tick-w); width: var(--svg-w); height: 100%; overflow: visible; pointer-events: none; }
       #lines path { fill: none; vector-effect: non-scaling-stroke; }
 
       /* Priority × accent: the accent mixed into the background by the priority's
@@ -571,18 +568,18 @@ const data = {
       /* Compare colours, one per selected person (slot order). */
       .s0 { --c: #2f5d8a; } .s1 { --c: #b5562c; } .s2 { --c: #3f7d4e; } .s3 { --c: #7a4a8c; } .s4 { --c: #b08a1e; }
 
-      .row { position: absolute; left: calc(var(--tick-w) + var(--svg-w)); right: 16px; padding-left: 14px; cursor: pointer; }
-      .dot { position: absolute; left: -5px; top: 7px; width: 10px; height: 10px; border-radius: 50%; background: var(--bg); border: 2px solid var(--fg); }
+      .row { position: absolute; inset-inline: calc(var(--tick-w) + var(--svg-w)) 16px; padding-inline-start: 14px; cursor: pointer; }
+      .dot { position: absolute; inset-inline-start: -5px; top: 7px; width: 10px; height: 10px; border-radius: 50%; background: var(--bg); border: 2px solid var(--fg); }
       .note { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
       /* The name on one line, cut off with … when too long. */
       .l1 { display: flex; align-items: center; white-space: nowrap; }
       .l1 b { font-size: 16px; font-weight: 600; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
       /* Three tiers: grand (Socrates, Plato, Aristotle) larger, main figures as is, everyone else at 0.85 in regular weight. */
       .row.grand .l1 b { font-size: 18px; }
-      .row.grand .dot { width: 12px; height: 12px; left: -6px; top: 6px; }
+      .row.grand .dot { width: 12px; height: 12px; inset-inline-start: -6px; top: 6px; }
       .row.minor .l1 b { font-size: 13.6px; font-weight: 400; }
       .row.minor .note { font-size: 10.6px; }
-      .row.minor .dot { width: 8px; height: 8px; left: -4px; top: 8px; } /* whole pixels keep it round */
+      .row.minor .dot { width: 8px; height: 8px; inset-inline-start: -4px; top: 8px; } /* whole pixels keep it round */
       .dates, .note { font: 12.5px system-ui, sans-serif; color: var(--muted); }
       .spanlabel { position: absolute; transform: translateY(-50%); font: 600 11px system-ui, sans-serif; color: color-mix(in oklch, var(--lifespan) var(--w-high), var(--bg)); background: var(--bg); padding: 0 3px; white-space: nowrap; pointer-events: none; z-index: 1; }
 
@@ -596,15 +593,15 @@ const data = {
       .btag, .rtag { font: 600 10px/14px system-ui, sans-serif; color: color-mix(in oklch, var(--fg) var(--w-normal), var(--bg));
         background: var(--bg); border: 1px solid color-mix(in oklch, var(--fg) var(--w-weak), var(--bg)); border-radius: 3px;
         padding: 0 5px; white-space: nowrap; cursor: pointer; }
-      .btag { position: absolute; left: calc(var(--tick-w) + var(--svg-w) * var(--xf) + 2px); transform: translateY(-50%);
+      .btag { position: absolute; inset-inline-start: calc(var(--tick-w) + var(--svg-w) * var(--xf) + 2px); transform: translateY(-50%);
         max-width: calc(var(--svg-w) * (1 - var(--xf)) - 10px); white-space: normal; overflow-wrap: anywhere; z-index: 2; }
       /* The phone placement, after the founder's name. When space runs out the tag gives way first. */
-      .rtag { display: none; margin-left: 8px; flex: 0 100 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+      .rtag { display: none; margin-inline-start: 8px; flex: 0 100 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
       :is(.btag, .rtag):hover { border-color: color-mix(in oklch, var(--accent) var(--w-normal), var(--bg)); }
       .focusing :is(.btag, .rtag) { color: color-mix(in oklch, var(--fg) var(--w-low), var(--bg)); border-color: color-mix(in oklch, var(--fg) var(--w-subtle), var(--bg)); }
       .focusing :is(.btag, .rtag).on { color: color-mix(in oklch, var(--c, var(--accent)) var(--w-high), var(--bg)); border-color: color-mix(in oklch, var(--c, var(--accent)) var(--w-normal), var(--bg)); }
 
-      #panel { position: fixed; right: 16px; bottom: 16px; width: 420px; max-height: 70vh; overflow: auto; background: var(--surface); border: 1px solid var(--faint); box-shadow: 0 6px 24px var(--shadow); padding: 14px 16px; font: 13px/1.45 system-ui, sans-serif; z-index: 10; }
+      #panel { position: fixed; inset-inline-end: 16px; bottom: 16px; width: 420px; max-height: 70vh; overflow: auto; background: var(--surface); border: 1px solid var(--faint); box-shadow: 0 6px 24px var(--shadow); padding: 14px 16px; font: 13px/1.45 system-ui, sans-serif; z-index: 10; }
       #panel h2 { font: 600 19px ui-serif, Georgia, serif; margin: 0; padding-inline-end: 22px; } /* room for the close button */
       #panel p { margin: 6px 0 10px; }
       #panel .source { margin: -6px 0 10px; font-size: 11px; color: var(--muted); }
@@ -617,12 +614,12 @@ const data = {
       #panel a { color: var(--accent); text-decoration: none; }
       #panel .x { position: absolute; top: 6px; inset-inline-end: 8px; /* left in right-to-left languages */ border: 0; background: none; font-size: 20px; color: var(--muted); cursor: pointer; }
 
-      #tools { position: fixed; top: 12px; right: 12px; z-index: 11; display: flex; gap: 6px; direction: ltr; }
+      #tools { position: fixed; top: 12px; inset-inline-end: 12px; z-index: 11; display: flex; gap: 6px; }
       #langmenu { position: relative; }
       #langmenu summary { list-style: none; font: 600 13px system-ui, sans-serif; color: var(--accent); background: var(--surface); border: 1px solid var(--faint); border-radius: 999px; padding: 6px 12px; cursor: pointer; box-shadow: 0 2px 8px var(--shadow); }
       #langmenu summary::-webkit-details-marker { display: none; }
       #langmenu[open] summary { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
-      #langmenu nav { position: absolute; top: calc(100% + 6px); right: 0; display: flex; flex-direction: column; min-width: 150px; padding: 6px; background: var(--surface); border: 1px solid var(--faint); border-radius: 8px; box-shadow: 0 6px 24px var(--shadow); }
+      #langmenu nav { position: absolute; top: calc(100% + 6px); inset-inline-end: 0; display: flex; flex-direction: column; min-width: 150px; padding: 6px; background: var(--surface); border: 1px solid var(--faint); border-radius: 8px; box-shadow: 0 6px 24px var(--shadow); }
       #langmenu a { padding: 5px 10px; border-radius: 4px; font: 14px system-ui, sans-serif; color: var(--fg); text-decoration: none; }
       #langmenu a:hover { background: color-mix(in oklch, var(--accent) 10%, transparent); }
       #langmenu a[aria-current] { color: var(--accent); font-weight: 600; }
@@ -630,32 +627,33 @@ const data = {
       #tools [aria-pressed="true"] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
       .selecting .row:not(.on) .dot { border-style: dashed; }
 
-      #mini { position: fixed; top: 16px; bottom: 16px; left: 12px; width: 48px; background: color-mix(in oklch, var(--fg) 4%, var(--bg)); border: 1px solid var(--faint); border-radius: 4px; cursor: pointer; touch-action: none; user-select: none; z-index: 5; }
-      .band { position: absolute; left: 0; right: 0; border-top: 1px solid color-mix(in oklch, var(--accent) var(--w-weak), var(--bg)); }
+      #mini { position: fixed; top: 16px; bottom: 16px; inset-inline-start: 12px; width: 48px; background: color-mix(in oklch, var(--fg) 4%, var(--bg)); border: 1px solid var(--faint); border-radius: 4px; cursor: pointer; touch-action: none; user-select: none; z-index: 5; }
+      .band { position: absolute; inset-inline: 0; border-top: 1px solid color-mix(in oklch, var(--accent) var(--w-weak), var(--bg)); }
       .band:nth-of-type(even) { background: color-mix(in oklch, var(--fg) 9%, var(--bg)); }
       .band span { position: absolute; left: 1px; top: 4px; writing-mode: vertical-rl; font: 600 8.5px system-ui, sans-serif; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); white-space: nowrap; pointer-events: none; }
-      .mdot { position: absolute; width: 4px; height: 4px; margin: -2px 0 0 -2px; border-radius: 50%; background: color-mix(in oklch, var(--fg) 50%, var(--bg)); }
+      html[dir="rtl"] .band span { left: auto; right: 1px; }
+      .mdot { position: absolute; inset-inline-start: var(--mini-offset); width: 4px; height: 4px; margin-block-start: -2px; margin-inline-start: -2px; border-radius: 50%; background: color-mix(in oklch, var(--fg) 50%, var(--bg)); }
       .mdot.rel { background: var(--accent); opacity: .55; }
-      .mdot.on { background: var(--c, var(--accent)); width: 7px; height: 7px; margin: -3.5px 0 0 -3.5px; z-index: 1; }
-      #view { position: absolute; left: -1px; right: -1px; border: 1.5px solid var(--accent); background: color-mix(in oklch, var(--accent) 8%, transparent); border-radius: 3px; pointer-events: none; }
-      @media (max-width: 1160px) { body { padding-left: 64px; } }
+      .mdot.on { background: var(--c, var(--accent)); width: 7px; height: 7px; margin-block-start: -3.5px; margin-inline-start: -3.5px; z-index: 1; }
+      #view { position: absolute; inset-inline: -1px; border: 1.5px solid var(--accent); background: color-mix(in oklch, var(--accent) 8%, transparent); border-radius: 3px; pointer-events: none; }
+      @media (max-width: 1160px) { body { padding-inline-start: 64px; } }
 
       @media (max-width: 700px) {
-        body { padding-left: 30px; }
-        #mini { left: 4px; width: 24px; top: 8px; bottom: 8px; }
+        body { padding-inline-start: 30px; }
+        #mini { inset-inline-start: 4px; width: 24px; top: 8px; bottom: 8px; }
         .band span { display: none; }
-        .mdot { left: 4px !important; }
+        .mdot { inset-inline-start: 4px; }
         :root { --tick-w: 0px; --svg-w: 140px; }
         .btag { display: none; } /* no room for the tag column on a phone: */
         .rtag { display: inline-block; } /* the tag sits after the founder's name instead */
         header { padding: 52px 14px 22px; } /* clear of the floating Select button */
         h1 { font-size: 34px; }
         .subtitle { font-size: 15px; }
-        .tick span { left: 2px; font-size: 9.5px; }
+        .tick span { inset-inline-start: 2px; font-size: 9.5px; }
         .era span { font-size: 9.5px; }
-        .row { right: 8px; }
+        .row { inset-inline-end: 8px; }
         .note { font-size: 11px; }
-        #panel { left: 34px; right: 8px; bottom: 8px; width: auto; max-height: 45vh; }
+        #panel { inset-inline: 34px 8px; bottom: 8px; width: auto; max-height: 45vh; }
       }
     </style>
   </body>
