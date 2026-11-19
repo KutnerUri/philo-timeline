@@ -84,7 +84,9 @@ const data = {
     <link rel="canonical" href={url} />
     {available.filter((l) => l.hreflang).map((l) => <link rel="alternate" hreflang={l.hreflang} href={`${SITE}${pathOf(l.code)}`} />)}
     <link rel="alternate" hreflang="x-default" href={`${SITE}/`} />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     {lang === 'he' && (
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@400..700&display=swap" />
     )}
